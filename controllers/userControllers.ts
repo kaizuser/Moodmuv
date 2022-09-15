@@ -131,7 +131,7 @@ const userControllers = {
 
 				} else {
 					await newUser.save();
-					await sendEmail(email, newUser.uniqueString);
+					await sendEmail(email, newUser.uniqueString, 'verifyUser');
 
 					res.json({
 						success: true,

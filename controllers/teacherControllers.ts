@@ -134,7 +134,7 @@ const teacherControllers = {
 				} else {
 
 					await newTeacher.save();
-					await sendEmail(email, newTeacher.uniqueString);
+					await sendEmail(email, newTeacher.uniqueString, 'verifyTeacher');
 
 					res.json({
 						success: true,

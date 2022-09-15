@@ -1,13 +1,13 @@
 const nodemailer = require("nodemailer");
 
-const sendEmail = async (email:string, uniqueString:string) => {
+const sendEmail = async (email:string, uniqueString:string, verify:string) => {
 	const transporter = nodemailer.createTransport({
 		host: "smtp.gmail.com",
 		port: 465,
 		secure: true,
 		auth: {
 		user: "thiagochiesa444@gmail.com",
-		pass: "flamigera123",
+		pass: "ctgpiwkypiuchwsl",
 		},
 	});
 
@@ -16,7 +16,7 @@ const sendEmail = async (email:string, uniqueString:string) => {
 		from: sender,
 		to: email,
 		subject: "Hello, friend! Let's verify your email!",
-		html: `<a href='${uniqueString}'></a>`
+		html: `<a href='http://localhost:4000/api/auth/${verify}/${uniqueString}'>asd</a>`
 	}
 
 	await transporter.sendMail(mailOptions, function (error:Error, response:Response) {
