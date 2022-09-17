@@ -10,12 +10,18 @@ const jwt = require("jsonwebtoken");
 import sendEmail from './sendEmail'
 
 interface userDTO{
+	type:string,
         name:string,
-	pass:string,
+	pass:Array<string>,
         img:string,
         ubi:string,
 	email:string,
+	inj:string,
 	bornDate:number,
+	verifEmail:boolean,
+	from:string,
+	uniqueString:string,
+	num:number
 }
 
 const userControllers = {
@@ -34,16 +40,23 @@ const userControllers = {
         },
 
         set_user: async(req:Request, res:Response) => {
-                let {name, pass, img, ubi, email, bornDate} = req.body
+                let {name, pass, img, ubi, email, inj, bornDate, verifEmail, from, uniqueString, num} = req.body
+
+		const hashPass = bcryptjs.hashSync(pass, 10);
 
                 let user:userDTO = {
-                        name:name,
-			pass:pass,
-                        img:img,
-                        ubi:ubi,
-			email:email, 
-			bornDate:bornDate
-
+			type:'user',
+			name:name,
+			pass:[hashPass],
+			img:img,
+			ubi:ubi,
+			email:email,
+			inj:inj,
+			bornDate:bornDate,
+			verifEmail:verifEmail,
+			from:from,
+			uniqueString:uniqueString,
+			num:num
                 }
 
                 new User(user).save().then(ans => res.json({ans}))
@@ -62,15 +75,23 @@ const userControllers = {
         modify_user: async(req:Request, res:Response) => {
                 let id:string = req.params.id
 
-                let {name, pass, img, ubi, email, bornDate} = req.body
+                let {name, pass, img, ubi, email, inj, bornDate, verifEmail, from, uniqueString, num} = req.body
+
+		const hashPass = bcryptjs.hashSync(pass, 10);
 
                 let newUser:userDTO = {
-                        name:name,
-			pass:pass,
-                        img:img,
-                        ubi:ubi,
-			email:email, 
-			bornDate:bornDate
+			type:'user',
+			name:name,
+			pass:[hashPass],
+			img:img,
+			ubi:ubi,
+			email:email,
+			inj:inj,
+			bornDate:bornDate,
+			verifEmail:verifEmail,
+			from:from,
+			uniqueString:uniqueString,
+			num:num
                 }
 
                 await User.findOneAndUpdate({_id:id},newUser).then(ans => res.json({ans}))

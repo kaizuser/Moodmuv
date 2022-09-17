@@ -10,13 +10,18 @@ const jwt = require("jsonwebtoken");
 import sendEmail from './sendEmail'
 
 interface teacherDTO{
+	type:string,
         name:string,
-	pass:string,
+	pass:Array<string>,
         img:string,
         ubi:string,
 	email:string,
+	disciples:Array<string>,
 	bornDate:number,
-	disciples:Array<string>
+	verifEmail:boolean,
+	from:string,
+	uniqueString:string,
+	num:number
 }
 
 const teacherControllers = {
@@ -35,16 +40,22 @@ const teacherControllers = {
         },
 
         set_teacher: async(req:Request, res:Response) => {
-                let {name, pass, img, ubi, email, bornDate, disciples} = req.body
+                let {name, pass, img, ubi, email, disciples, bornDate, verifEmail, from, uniqueString, num} = req.body
+		const hashPass = bcryptjs.hashSync(pass, 10);
 
                 let teacher:teacherDTO = {
-                        name:name,
-			pass:pass,
-                        img:img,
-                        ubi:ubi,
-			email:email, 
+			type:'user',
+			name:name,
+			pass:[hashPass],
+			img:img,
+			ubi:ubi,
+			email:email,
+			disciples:disciples,
 			bornDate:bornDate,
-			disciples:disciples
+			verifEmail:verifEmail,
+			from:from,
+			uniqueString:uniqueString,
+			num:num
                 }
 
                 new Teacher(teacher).save().then(ans => res.json({ans}))
@@ -63,21 +74,25 @@ const teacherControllers = {
         modify_teacher: async(req:Request, res:Response) => {
                 let id:string = req.params.id
 
-                let {name, pass, img, ubi, email, bornDate, disciples} = req.body
+                let {name, pass, img, ubi, email, disciples, bornDate, verifEmail, from, uniqueString, num} = req.body
+		const hashPass = bcryptjs.hashSync(pass, 10);
 
                 let newTeacher:teacherDTO = {
-                        name:name,
-			pass:pass,
-                        img:img,
-                        ubi:ubi,
-			email:email, 
-			bornDate:bornDate, 
-			disciples
+			type:'user',
+			name:name,
+			pass:[hashPass],
+			img:img,
+			ubi:ubi,
+			email:email,
+			disciples:disciples,
+			bornDate:bornDate,
+			verifEmail:verifEmail,
+			from:from,
+			uniqueString:uniqueString,
+			num:num
                 }
 
                 await Teacher.findOneAndUpdate({_id:id},newTeacher).then(ans => res.json({ans}))
-
-
         },
 
 	//ACCOUNT
