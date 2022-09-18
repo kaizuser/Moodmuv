@@ -2,7 +2,8 @@ import React from "react";
 import BotonPrimario from "../generales/BotonPrimario";
 import BotonSecundario from "../generales/BotonSecundario";
 import imagenInicio from "../../assets/home-img.png";
-import Porque from '../Porque'
+import Why from '../Why'
+
 const Home = () => {
   return (
     <>
@@ -26,7 +27,7 @@ const Home = () => {
       </div>
       {/* 200vh */}
     </div>
-      <Porque/>
+      <Why/>
     </>
   );
 };

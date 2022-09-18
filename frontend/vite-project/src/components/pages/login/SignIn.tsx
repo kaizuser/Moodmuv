@@ -1,3 +1,7 @@
+
+//UTILITIES
+import {Link} from 'react-router-dom'
+
 const SignIn = () => {
   return (
     <div className="h-screen md:flex ">
@@ -6,8 +10,11 @@ const SignIn = () => {
         <div>
           <h1 className="text-white font-semibold text-5xl font-sans">Iniciar sesión en </h1>
           <p className="text-white mt-1 text-3xl font-semibold">MoodMuv</p>
-          <p className="text-white mt-1 w-52">Si todavía no tienes una cuenta puedes hacerla aqui <a className="font-bold text-[#5FAABF]">Registrate ya</a></p>
+          <p className="text-white mt-1 w-52">Si todavía no tienes una cuenta puedes hacerla aqui</p>
+          <Link to={'/signUp'}>
+	  <a className="font-bold text-[#5FAABF] cursor-pointer">Registrate ya</a>
 
+	  </Link>
         </div>
         <div className="absolute -bottom-32 -left-40 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
         <div className="absolute -bottom-40 -left-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
@@ -18,7 +25,7 @@ const SignIn = () => {
         <form className="bg-white">
           <h1 className="text-gray-800 font-semibold text-2xl mb-1">Iniciar sesión</h1>
           <p className="text-sm font-normal text-gray-600 mb-7 sm:mb-2">Bienvenido otra vez!</p>
-          <a className="registrarme font-semibold text-[#5FAABF]">Quiero registrarme</a>
+	  <a className="registrarme font-semibold text-[#5FAABF] cursor-pointer">Quiero registrarme</a>
               <div className="flex items-center border-2 py-2 px-3 rounded mb-4 bg-[#F0EFFF]">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400 " fill="none"
                   viewBox="0 0 24 24" stroke="currentColor">
@@ -37,7 +44,9 @@ const SignIn = () => {
                   <input className="pl-2 outline-none border-none bg-[#F0EFFF] placeholder-[#A7A3FF]" type="text" name="" id="" placeholder="Password" />
           </div>
                   <button type="submit" className="block w-full bg-indigo-600 mt-4 py-2 rounded bg-[#4D47C3] text-white font-semibold mb-2">Login</button>
-                  <span className="text-sm ml-2 hover:text-blue-500 cursor-pointer">Te olvidaste la contraseña?</span>
+		  <Link to={'/forgotPass'}>
+			  <span className="text-sm ml-2 hover:text-blue-500 cursor-pointer">Te olvidaste la contraseña?</span>
+		  </Link>
         </form>
       </div>
     </div>

@@ -4,6 +4,9 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Logo from '../../assets/logoDegrade.png'
 
+//UTILITIES
+import {Link} from 'react-router-dom'
+
 const navigation = [
   { name: 'Explorar', href: '#', current: false },
   { name: 'Planes', href: '#', current: false },
@@ -11,6 +14,8 @@ const navigation = [
   { name: 'Iniciar sesión', href: '#', current: false },
   { name: 'Activa tu prueba', href: '#', current: true }
 ]
+
+const link = ['/explore', '/payments', '/howTo', '/signIn', '/activateAccount']
 
 function classNames(...classes:any) {
   return classes.filter(Boolean).join(' ')
@@ -37,31 +42,36 @@ export default function Example() {
               <div className="flex flex-1 items-center sm:justify-between justify-end h-full">
 {/* logos */}
                 <div className="flex flex-shrink-0 items-center h-full">
-                  <img
-                    className="hidden sm:block h-full p-2 w-20 object-contain"
-                    src={Logo}
-                    alt="Your Company"
-                  />
-                  <img
-                    className="self-end block sm:hidden h-full p-2 w-20 object-contain"
-                    src={Logo}
-                    alt="Your Company"
-                  />
+			<Link to={'/home'}>
+				  <img
+				    className="hidden sm:block h-full p-2 w-20 object-contain"
+				    src={Logo}
+				    alt="Your Company"
+				  />
+				  <img
+				    className="self-end block sm:hidden h-full p-2 w-20 object-contain"
+				    src={Logo}
+				    alt="Your Company"
+				  />
+
+			</Link>
                 </div>
                 <div className="hidden sm:block sm:ml-6 ">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current ? 'hover:bg-gradient-to-r hover:from-[#443166] hover:to-[#59457B] bg-gradient-to-r from-[#563D81] to-[#6E5E8B] text-white' : 'text-[#2C2C2C]',
-                          'px-3 py-2 rounded-md text-sm font-medium'
-                        )}
-                        aria-current={item.current ? 'page' : undefined}
-                      >
-                        {item.name}
-                      </a>
+			    <Link to={link[navigation.indexOf(item)]}>
+			      <a
+				key={item.name}
+				href={item.href}
+				className={classNames(
+				  item.current ? 'hover:bg-gradient-to-r hover:from-[#443166] hover:to-[#59457B] bg-gradient-to-r from-[#563D81] to-[#6E5E8B] text-white' : 'text-[#2C2C2C]',
+				  'px-3 py-2 rounded-md text-sm font-medium'
+				)}
+				aria-current={item.current ? 'page' : undefined}
+			      >
+				{item.name}
+			      </a>
+			    </Link>
                     ))}
                   </div>
                 </div>

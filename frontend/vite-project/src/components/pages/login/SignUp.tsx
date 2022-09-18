@@ -1,3 +1,7 @@
+
+//UTILITIES
+import {Link} from 'react-router-dom'
+
 const SignUp = () => {
   return (
     <div className="h-screen md:flex ">
@@ -6,7 +10,11 @@ const SignUp = () => {
         <div>
           <h1 className="text-white font-semibold text-5xl font-sans">Registrate en </h1>
           <p className="text-white mt-1 text-3xl font-semibold">MoodMuv</p>
-          <p className="text-white mt-1 w-52">Si ya tienes una cuenta puedes loguearte aqui <a className="font-bold text-[#5FAABF]">Iniciar sesión</a></p>
+          <p className="text-white mt-1 w-52">Si ya tienes una cuenta puedes loguearte aqui</p>
+
+          <Link to={'/signIn'}>
+		 <a className="font-bold text-[#5FAABF] cursor-pointer">Iniciar sesión</a>
+	  </Link>
 
         </div>
         <div className="absolute -bottom-32 -left-40 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
@@ -37,7 +45,9 @@ const SignUp = () => {
                   <input className="pl-2 outline-none border-none bg-[#F0EFFF] placeholder-[#A7A3FF]" type="text" name="" id="" placeholder="Password" />
           </div>
           <button type="submit" className="block w-full bg-indigo-600 mt-4 py-2 rounded bg-[#4D47C3] text-white font-semibold mb-2">Login</button>
-          <span className="text-sm ml-2 hover:text-blue-500 cursor-pointer">Ya tienes cuenta?</span>
+	  <Link to={'/signIn'}>
+		  <span className="text-sm ml-2 hover:text-blue-500 cursor-pointer">Ya tienes cuenta?</span>
+	  </Link>
         </form>
       </div>
     </div>

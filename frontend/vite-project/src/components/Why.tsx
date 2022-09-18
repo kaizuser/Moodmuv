@@ -1,7 +1,7 @@
 import React from 'react'
 import bkgPresencial from '../assets/imagePresencial.jpg'
 import bkgOnline from '../assets/imageOnline.jpg'
-const Porque = () => {
+const Why = () => {
   return (
     <div className="flex flex-col w-full items-center min-h-screen">
         <h2 className="p-4 text-center text-5xl sm:w-[25rem] lg:w-[32rem] font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B]">¿Porque Moodmuv?</h2>
@@ -36,4 +36,4 @@ const Porque = () => {
   )
 }
 
-export default Porque
+export default Why

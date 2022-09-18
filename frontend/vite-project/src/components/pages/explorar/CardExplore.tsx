@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const CardExplorar = () => {
+const CardExplore = () => {
     const [open, setOpen] = useState(false);
     function setearOpen() {
       setOpen(!open);
@@ -50,4 +50,4 @@ const CardExplorar = () => {
   )
 }
 
-export default CardExplorar
+export default CardExplore

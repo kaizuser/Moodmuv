@@ -1,6 +1,6 @@
 import React from 'react'
 
-const OlvideContraseña = () => {
+const ForgotPassword = () => {
   return (
     <div className="h-screen md:flex ">
     <div className="flex w-full :h-full formulario justify-center py-10 items-center bg-white">
@@ -23,4 +23,4 @@ const OlvideContraseña = () => {
   )
 }
 
-export default OlvideContraseña
+export default ForgotPassword
