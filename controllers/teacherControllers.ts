@@ -1,5 +1,5 @@
 //BASICS
-import {Teacher} from '../models/teachers'
+import {Teacher} from '../models/teacher'
 import {Request, Response} from 'express'
 
 //UTILITIES

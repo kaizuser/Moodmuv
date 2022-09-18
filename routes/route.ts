@@ -11,6 +11,8 @@ import teacherControllers from '../controllers/teacherControllers'
 let {get_users, get_user, set_user, delete_user, modify_user, verify_email_user, sign_up_user, log_in_user, verify_token_user} = userControllers
 let {get_teachers, get_teacher, set_teacher, delete_teacher, modify_teacher, verify_email_teacher, sign_up_teacher, log_in_teacher, verify_token_teacher} = teacherControllers
 
+
+
 //USERS ---------------------------
 Router.route('/user')
 .get(get_users)
@@ -34,7 +36,11 @@ Router.route('/auth/verifyTokenUser')
 Router.route('/auth/verifyUser/:uniqueString')
 .get(verify_email_user)
 
+
+
 //----------------------------------
+
+
 
 //TEACHERS
 Router.route('/teacher')
@@ -58,5 +64,7 @@ Router.route('/auth/verifyTokenTeacher')
 
 Router.route('/auth/verifyTeacher/:uniqueString')
 .get(verify_email_teacher)
+
+
 
 export default Router

@@ -7,8 +7,8 @@ const passport = require('passport')
 const jwtStrategy = require('passport-jwt').Strategy
 const extractJwt = require('passport-jwt').ExtractJwt
 
-import {User} from '../models/users'
-import {Teacher} from '../models/teachers'
+import {User} from '../models/user'
+import {Teacher} from '../models/teacher'
  
 export default passport.use(new jwtStrategy({
 	jwtFromRequest: extractJwt.fromAuthHeaderAsBearerToken(),
