@@ -11,11 +11,24 @@ import './styles.css'
 
 //UTILITIES
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import {useEffect} from 'react'
+import {connect} from 'react-redux'
+import userActions from './redux/actions/userActions'
+import type {RootState, AppDispatch} from './main'
 
-function App() {
+function App(props:any) {
 
-  return (
-      <>
+	useEffect(() => {
+	if(!props.currentUser?.id){
+		if(localStorage.getItem('token')!== null){
+		const token = localStorage.getItem("token")
+		props.verifyTokenUser(token)
+		}
+	}
+	},[props.currentUser])
+
+	return (
+	      <>
 	      <Router>
 		      <Nav/>
 		      <Routes>
@@ -29,8 +42,20 @@ function App() {
 		      </Routes>
 		      <Footer/>
 	      </Router>
-      </>
+	      </>
   )
 }
 
-export default App
+const mapDispatch = {
+	verifyTokenUser:userActions.verifyTokenUser
+}
+
+const mapState = (state:RootState) => {
+	return {
+		currentUser:state.userReducer.currentUser
+	}
+}
+
+const connector = connect(mapState, mapDispatch)
+
+export default connector(App)

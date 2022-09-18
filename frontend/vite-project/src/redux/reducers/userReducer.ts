@@ -3,6 +3,7 @@ import {Action} from 'redux'
 const initialState = {
     user: null,
     users:null,
+    currentUser:null
 }
 
 const userReducer = (state = initialState, action:any) => {
@@ -17,6 +18,13 @@ const userReducer = (state = initialState, action:any) => {
 		return{
 			...state,
 			users:action.payload
+		}
+
+	case 'currentUser':
+		console.log(action.payload)
+		return {
+			...state,
+			currentUser:action.payload
 		}
 
         default:

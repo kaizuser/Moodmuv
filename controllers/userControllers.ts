@@ -190,6 +190,7 @@ const userControllers = {
 
 					if (passMatches.length > 0) {
 						const userData = {
+							id: user._id,
 							email: user.email,
 							pass: user.pass
 						};
@@ -234,8 +235,8 @@ const userControllers = {
 			res.json({
 				success: true,
 				response: {
-					name:req.name,
-					email:req.email,
+					id:req.user._id,
+					email:req.user.email,
 				},
 			});
 

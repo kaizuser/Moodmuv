@@ -18,14 +18,14 @@ export default passport.use(new jwtStrategy({
 
 		.then(user => {
 			if (user) {
-			    return done(null, {name: user.name, email: user.email})
+			    return done(null, user)
 			}
 
-			else{
+			else {
 				Teacher.findOne({_id:jwt_payload.id})
 				.then(teacher => {
 						if (teacher) {
-							return done(null, {name:teacher.name,email:teacher.email})
+							return done(null, teacher)
 						}
 
 						else {
