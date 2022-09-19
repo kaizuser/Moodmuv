@@ -1,7 +1,9 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import App from './App'
 import './index.css'
+
+//UTILITIES
+import * as ReactDOM from 'react-dom/client';
 
 // REDUX CONFIG 
 import { Provider } from 'react-redux'
@@ -12,14 +14,17 @@ const Reduxstore = configureStore({
 	reducer: mainReducer,
 })
 
+const container:any = document.getElementById('root')
+const root = ReactDOM.createRoot(container)
 
-ReactDOM.render(
+root.render(
+	<React.StrictMode>
 	<Provider store={Reduxstore}>
 		<App/>
-	</Provider>,
-
-	document.getElementById('root')
+	</Provider>
+	</React.StrictMode>
 )
+
 
 
 export type RootState = ReturnType<typeof Reduxstore.getState>

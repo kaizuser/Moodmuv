@@ -1,11 +1,10 @@
-
 //UTILITIES
 import {Link} from 'react-router-dom'
 import {useState} from 'react'
 import {connect} from 'react-redux'
 import userActions from '../../../redux/actions/userActions'
 import {useNavigate} from 'react-router-dom'
-
+import GoogleLogIn from './GoogleLogIn'
 
 const SignIn = (props:any) => {
   let [emailValue, setEmailValue] = useState('')
@@ -29,7 +28,7 @@ const SignIn = (props:any) => {
           <p className="text-white mt-1 text-3xl font-semibold">MoodMuv</p>
           <p className="text-white mt-1 w-52">Si todavía no tienes una cuenta puedes hacerla aqui</p>
           <Link to={'/signUp'}>
-	  <a className="font-bold text-[#5FAABF] cursor-pointer">Registrate ya</a>
+	  <span className="font-bold text-[#5FAABF] cursor-pointer">Registrate ya</span>
 
 	  </Link>
         </div>
@@ -61,9 +60,12 @@ const SignIn = (props:any) => {
 			<input className="pl-2 outline-none border-none bg-[#F0EFFF] placeholder-[#A7A3FF]" type="text" name="" id="" placeholder="Password" onChange={(event) => setPassValue(event.target.value)}/>
           </div>
 		<button type="button" className="block w-full bg-indigo-600 mt-4 py-2 rounded bg-[#4D47C3] text-white font-semibold mb-2" onClick={() => signIn()}>Login</button>
+		<div className='flex items-center justift-center flex-col'>
 		  <Link to={'/forgotPass'}>
 			  <span className="text-sm ml-2 hover:text-blue-500 cursor-pointer">Te olvidaste la contraseña?</span>
 		  </Link>
+		  <GoogleLogIn/>
+		</div>
         </form>
       </div>
     </div>

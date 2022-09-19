@@ -59,10 +59,8 @@ export default function Example() {
                 <div className="hidden sm:block sm:ml-6 ">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-			    <Link to={link[navigation.indexOf(item)]}>
-			      <a
-				key={item.name}
-				href={item.href}
+			    <Link to={link[navigation.indexOf(item)]} key={item.name}>
+			      <span
 				className={classNames(
 				  item.current ? 'hover:bg-gradient-to-r hover:from-[#443166] hover:to-[#59457B] bg-gradient-to-r from-[#563D81] to-[#6E5E8B] text-white' : 'text-[#2C2C2C]',
 				  'px-3 py-2 rounded-md text-sm font-medium'
@@ -70,7 +68,7 @@ export default function Example() {
 				aria-current={item.current ? 'page' : undefined}
 			      >
 				{item.name}
-			      </a>
+			      </span>
 			    </Link>
                     ))}
                   </div>
