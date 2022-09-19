@@ -11,7 +11,7 @@ const Explore = () => {
             <Select />
             <Select />
         </div>
-        <div className="flex w-100  overflow-scroll">
+        <div className="flex w-100  ">
             <div className="w-4/6 px-4 h-screen bg-[#F3F3F3] flex flex-col overflow-scroll">
             {
                 array.map(e=><CardExplore/>)
