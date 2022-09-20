@@ -10,8 +10,13 @@ const SignUp = (props:any) => {
 	let [passValue, setPassValue] = useState('')
 
 	let signUp = () => {
-		let from = 'form-signUp'
-		props.signUpUser(emailValue, passValue, from)
+		const userData = {
+		  email:emailValue,
+		  pass:passValue,
+		  from:'form-signUp'
+		}
+
+		props.signUpUser(userData.email, userData.pass, userData.from)
 	}
 
 	return (

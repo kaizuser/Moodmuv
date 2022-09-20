@@ -12,7 +12,12 @@ const SignIn = (props:any) => {
   let navigate = useNavigate()
 
   let signIn = () => {
-	  let navigateFlag = props.signInUser(emailValue, passValue)
+	  const userData = {
+		  email:emailValue,
+		  pass:passValue,
+	  }
+
+	  let navigateFlag = props.signInUser(userData.email, userData.pass)
 
 	  if (navigateFlag){
 		  navigate('/home')

@@ -2,30 +2,53 @@
 import React from 'react'
 
 //UTILITIES
+import { Buffer } from 'buffer'
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { connect } from 'react-redux'
 import userActions from '../../../redux/actions/userActions'
-import GoogleLogin from 'react-google-login'
+import {useNavigate} from 'react-router-dom'
 
 let GoogleLogIn = (props:any) => {
+	let navigate = useNavigate()
 
-	const responseGoogle = async (response:any) => {
+	function base64urlDecode(str:string) {
+		return Buffer.from(base64urlUnescape(str), 'base64').toString();
+	};
+
+	function base64urlUnescape(str:string) {
+		str += Array(5 - str.length % 4).join('=');
+		return str.replace(/\-/g, '+').replace(/_/g, '/');
+	}
+
+	const decodeCredential = (credential:string) => {
+		let segments = credential.split('.')
+
+		let payload = JSON.parse(base64urlDecode(segments[1]))
+
+		return payload
+	}
+
+	const responseGoogle = async (res:any) => {
+	    let credentials = decodeCredential(res.credential)
+
 	    const userData = {
-		    email:response.profileObj.email,
-		    pass:response.profileObj.googleId,
+		    email:credentials.email,
+		    pass:'Google-no-password'
 	    }
-	    await props.signInUser(userData)
+
+	    let navigateFlag = await props.signInUser(userData.email, userData.pass)
+
+	    if (navigateFlag){
+		    navigate('/home')
+	    }
 	}
 
 	return (
 		<>
-			<GoogleLogin
-				className="group relative w-40 flex justify-center py-2 px-4 my-5 border border-transparent text-sm font-medium rounded-md text-black"
-				clientId="710252764146-n3hvn9i3t5fk752tdoakjufutg1aegqp.apps.googleusercontent.com"
-				buttonText="Login with Google"
-				onSuccess={responseGoogle}
-				onFailure={responseGoogle}
-				cookiePolicy={'single_host_origin'}
-			/>
+			<GoogleOAuthProvider clientId='710252764146-3lmd7pfbhlatt3oa6t7ah2jgqklua8i1.apps.googleusercontent.com'>
+				<GoogleLogin onSuccess={responseGoogle} onError={() => console.log('login failed')}/>
+
+			</GoogleOAuthProvider>
 		</>
 	);
 }

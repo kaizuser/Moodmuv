@@ -4,77 +4,115 @@ import type {RootState, AppDispatch} from '../../main'
 
 const teacherActions = {
     
-    fetchTeachers: () => {
-	return async(dispatch:AppDispatch, getState:RootState) => {
-
-		const ans = await axios({
-			method:'get',
-			url:'http://localhost:4000/api/teacher',
-		})
-
-		dispatch({type:'fetchTeachers', payload:ans.data})
-       }
-    },
-
-    fetchTeacher: (id:string) => {
-	return async(dispatch:AppDispatch, getState:RootState) => {
-
-		const ans = await axios({
-			method:'get',
-			url:'http://localhost:4000/api/teacher' + id,
-		})
-
-		dispatch({type:'fetchTeacher', payload:ans.data})
-	    }
-
-    },
-
-    modifyTeacher: (id:string, teacherObject:[number, string]) => {
-	return async(dispatch:AppDispatch, getState:RootState) => {
-
-		const ans = await axios({
-			method:'put',
-			url:'http://localhost:4000/api/teacher' + id,
-			data:teacherObject,
-		})
-
-		dispatch({type:'modifyTeacher', payload:ans.data})
-	    }
-
-    },
-
-    deleteTeacher: (id:string)=>{
-	return async(dispatch:AppDispatch, getState:RootState) => {
-
-		try {
+	fetchTeachers: () => {
+		return async(dispatch:AppDispatch, getState:RootState) => {
 
 			const ans = await axios({
-				method:'delete',
+				method:'get',
+				url:'http://localhost:4000/api/teacher',
+			})
+
+			dispatch({type:'fetchTeachers', payload:ans.data})
+		}
+	},
+
+	fetchTeacher: (id:string) => {
+		return async(dispatch:AppDispatch, getState:RootState) => {
+
+			const ans = await axios({
+				method:'get',
 				url:'http://localhost:4000/api/teacher' + id,
 			})
 
-			dispatch({type:'delTeacher', payload:ans.data})
-
-		} catch(err){
-			console.log(err)
+			dispatch({type:'fetchTeacher', payload:ans.data})
 		}
-	}
-    },
 
-    setTeacher: (teacherObject:[number, string]) => {
-	return async(dispatch:AppDispatch,getState:RootState)=>{
+	},
 
-		const ans = await axios({
-			method:'post',
-			url:'http://localhost:4000/api/teacher',
-			data:teacherObject
-		})
+	modifyTeacher: (id:string, teacherObject:[number, string]) => {
+		return async(dispatch:AppDispatch, getState:RootState) => {
 
-		dispatch({type:'setTeacher', payload:ans.data})
+			const ans = await axios({
+				method:'put',
+				url:'http://localhost:4000/api/teacher' + id,
+				data:teacherObject,
+			})
 
-        }
-    }
+			dispatch({type:'modifyTeacher', payload:ans.data})
+		}
 
+	},
+
+	deleteTeacher: (id:string)=>{
+		return async(dispatch:AppDispatch, getState:RootState) => {
+
+			try {
+
+				const ans = await axios({
+					method:'delete',
+					url:'http://localhost:4000/api/teacher' + id,
+				})
+
+				dispatch({type:'delTeacher', payload:ans.data})
+
+			} catch(err){
+				console.log(err)
+			}
+		}
+	},
+
+	setTeacher: (teacherObject:[number, string]) => {
+		return async(dispatch:AppDispatch,getState:RootState)=>{
+
+			const ans = await axios({
+				method:'post',
+				url:'http://localhost:4000/api/teacher',
+				data:teacherObject
+			})
+
+			dispatch({type:'setTeacher', payload:ans.data})
+
+		}
+	},
+
+	signInTeacher: (email:string, pass:string) => {
+		return async (dispatch:AppDispatch, getState:RootState) => {
+
+			const ans = await axios({
+				method:'post',
+				url:'http://localhost:4000/api/auth/logInTeacher',
+				data:{email, pass}
+			})
+
+			if (ans.data.success){
+				localStorage.setItem('token', ans.data.response.token)
+				dispatch({type:'currentUser', payload:ans.data.response.userData.email})
+
+				return true
+			} else {
+				return false
+			}
+
+		}
+	},
+
+	signUpTeacher: (email:string, pass:string, from:string) => {
+		return async (dispatch:AppDispatch, getState:RootState) => {
+
+			const ans = await axios({
+				method:'post',
+				url:'http://localhost:4000/api/auth/signUpTeacher',
+				data:{email, pass, from}
+			})
+
+			if(ans.data.success){
+
+			} else {
+
+			}
+
+		}
+	},
 }
 
 export default teacherActions;

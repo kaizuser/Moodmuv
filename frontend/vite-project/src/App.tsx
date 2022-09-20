@@ -13,7 +13,7 @@ import './styles.css'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import {useEffect} from 'react'
 import {connect} from 'react-redux'
-import userActions from './redux/actions/userActions'
+import verifyActions from './redux/actions/verifyActions'
 import type {RootState, AppDispatch} from './main'
 
 function App(props:any) {
@@ -22,10 +22,12 @@ function App(props:any) {
 	if(!props.currentUser?.id){
 		if(localStorage.getItem('token')!== null){
 		const token = localStorage.getItem("token")
-		props.verifyTokenUser(token)
+		props.verifyToken(token)
 		}
 	}
 	},[props.currentUser])
+
+	console.log(props.currentUser)
 
 	return (
 	      <>
@@ -34,7 +36,7 @@ function App(props:any) {
 		      <Routes>
 			      <Route path='/' element={<Home/>}></Route>
 			      <Route path='/home' element={<Home/>}></Route>
-			      <Route path='/profile/:id' element={<Profile/>}></Route>
+			      <Route path='/profile' element={<Profile/>}></Route>
 			      <Route path='/explore' element={<Explore/>}></Route>
 			      <Route path='/signIn' element={<SignIn/>} ></Route>
 			      <Route path='/signUp' element={<SignUp/>}></Route>
@@ -47,7 +49,7 @@ function App(props:any) {
 }
 
 const mapDispatch = {
-	verifyTokenUser:userActions.verifyTokenUser
+	verifyToken:verifyActions.verifyToken
 }
 
 const mapState = (state:RootState) => {

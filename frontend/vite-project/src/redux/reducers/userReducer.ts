@@ -21,7 +21,6 @@ const userReducer = (state = initialState, action:any) => {
 		}
 
 	case 'currentUser':
-		console.log(action.payload)
 		return {
 			...state,
 			currentUser:action.payload
