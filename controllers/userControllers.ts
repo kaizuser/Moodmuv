@@ -147,7 +147,7 @@ const userControllers = {
 
 					res.json({
 					success: true,
-					message: "Your account was created with succesfully"
+					message: "Your account was created succesfully"
 				});
 
 				} else {
@@ -229,22 +229,6 @@ const userControllers = {
 		}
 
 	},
-
-	verify_token_user: async(req:any, res:Response) => {
-		if (!req.err) {
-			res.json({
-				success: true,
-				response: {
-					id:req.user._id,
-					email:req.user.email,
-				},
-			});
-
-		} else {
-			res.json({ success: false, message: "Please try logging in again." });
-		}
-	},
-		
 }
 
 export default userControllers
