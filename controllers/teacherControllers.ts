@@ -228,20 +228,7 @@ const teacherControllers = {
 
 	},
 
-	verify_token_teacher: async(req:any, res:Response) => {
-		if (!req.err) {
-			res.json({
-				success: true,
-				response: {
-					name:req.name,
-					email:req.email,
-				},
-			});
 
-		} else {
-			res.json({ success: false, message: "Please try logging in again." });
-		}
-	},
 	
 
 }
