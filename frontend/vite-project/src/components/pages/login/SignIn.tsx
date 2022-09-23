@@ -17,11 +17,11 @@ const SignIn = (props:any) => {
 		  pass:passValue,
 	  }
 
-	  let navigateFlag = props.signInUser(userData.email, userData.pass)
-
-	  if (navigateFlag){
-		  navigate('/home')
-	  }
+	  let navigateFlag = props.signInUser(userData.email, userData.pass).then((res:any) => {
+		  if(res){
+			  navigate('/home')
+		  }
+	  })
   }
 
   return (

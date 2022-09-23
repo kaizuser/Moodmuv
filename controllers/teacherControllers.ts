@@ -41,6 +41,7 @@ const teacherControllers = {
 
         set_teacher: async(req:Request, res:Response) => {
                 let {name, pass, img, ubi, email, disciples, bornDate, verifEmail, from, uniqueString, num} = req.body
+
 		const hashPass = bcryptjs.hashSync(pass, 10);
 
                 let teacher:teacherDTO = {
@@ -75,6 +76,7 @@ const teacherControllers = {
                 let id:string = req.params.id
 
                 let {name, pass, img, ubi, email, disciples, bornDate, verifEmail, from, uniqueString, num} = req.body
+
 		const hashPass = bcryptjs.hashSync(pass, 10);
 
                 let newTeacher:teacherDTO = {
