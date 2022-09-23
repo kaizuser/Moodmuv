@@ -10,18 +10,20 @@ const jwt = require("jsonwebtoken");
 import sendEmail from './sendEmail'
 
 interface userDTO{
-	type:string,
-        name:string,
-	pass:Array<string>,
-        img:string,
-        ubi:string,
-	email:string,
-	inj:string,
-	bornDate:number,
-	verifEmail:boolean,
-	from:string,
-	uniqueString:string,
-	num:number
+	type?:string,
+        name?:string,
+	pass?:Array<string>,
+        img?:string,
+	backImg?:string,
+	desc?:string,
+        ubi?:string,
+	email?:string,
+	inj?:string,
+	bornDate?:number,
+	verifEmail?:boolean,
+	from?:string,
+	uniqueString?:string,
+	num?:number
 }
 
 const userControllers = {
@@ -40,27 +42,12 @@ const userControllers = {
         },
 
         set_user: async(req:Request, res:Response) => {
-                let {name, pass, img, ubi, email, inj, bornDate, verifEmail, from, uniqueString, num} = req.body
+                let {userData} = req.body
+		userData.pass = [bcryptjs.hashSync(userData.pass, 10)]
 
-		const hashPass = bcryptjs.hashSync(pass, 10);
-
-                let user:userDTO = {
-			type:'user',
-			name:name,
-			pass:[hashPass],
-			img:img,
-			ubi:ubi,
-			email:email,
-			inj:inj,
-			bornDate:bornDate,
-			verifEmail:verifEmail,
-			from:from,
-			uniqueString:uniqueString,
-			num:num
-                }
+		let user:userDTO = userData
 
                 new User(user).save().then(ans => res.json({ans}))
-
 
         },
 
@@ -69,37 +56,21 @@ const userControllers = {
 
                 await User.findOneAndDelete({_id:id}).then(ans => res.json({ans}))
 
-
         },
 
         modify_user: async(req:Request, res:Response) => {
                 let id:string = req.params.id
 
-                let {name, pass, img, ubi, email, inj, bornDate, verifEmail, from, uniqueString, num} = req.body
+                let {userData} = req.body
+		userData.pass = [bcryptjs.hashSync(userData.pass, 10)]
 
-		const hashPass = bcryptjs.hashSync(pass, 10);
-
-                let newUser:userDTO = {
-			type:'user',
-			name:name,
-			pass:[hashPass],
-			img:img,
-			ubi:ubi,
-			email:email,
-			inj:inj,
-			bornDate:bornDate,
-			verifEmail:verifEmail,
-			from:from,
-			uniqueString:uniqueString,
-			num:num
-                }
+		let newUser:userDTO = userData
 
                 await User.findOneAndUpdate({_id:id},newUser).then(ans => res.json({ans}))
 
-
         },
 
-	//ACCOUNT CONTROLLERS
+	//ACCOUNT 
 	
 	verify_email_user: async (req:Request, res:Response) => {
 		const { uniqueString } = req.params;
@@ -109,7 +80,7 @@ const userControllers = {
 		if (user) {
 			user.verifEmail = true;
 			await user.save();
-			res.redirect("http://localhost:4000/");
+			res.redirect("http://localhost:5173/");
 
 		} else {
 			res.json({ success: false, response: "Unverified email." });

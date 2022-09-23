@@ -10,18 +10,20 @@ const jwt = require("jsonwebtoken");
 import sendEmail from './sendEmail'
 
 interface teacherDTO{
-	type:string,
-        name:string,
-	pass:Array<string>,
-        img:string,
-        ubi:string,
-	email:string,
-	disciples:Array<string>,
-	bornDate:number,
-	verifEmail:boolean,
-	from:string,
-	uniqueString:string,
-	num:number
+	type?:string,
+        name?:string,
+	pass?:Array<string>,
+        img?:string,
+	backImg?:string,
+	desc?:string,
+        ubi?:string,
+	email?:string,
+	disciples?:Array<string>,
+	bornDate?:number,
+	verifEmail?:boolean,
+	from?:string,
+	uniqueString?:string,
+	num?:number
 }
 
 const teacherControllers = {
@@ -40,27 +42,12 @@ const teacherControllers = {
         },
 
         set_teacher: async(req:Request, res:Response) => {
-                let {name, pass, img, ubi, email, disciples, bornDate, verifEmail, from, uniqueString, num} = req.body
+                let {teacherData} = req.body
+		teacherData.pass = [bcryptjs.hashSync(teacherData.pass, 10)]
 
-		const hashPass = bcryptjs.hashSync(pass, 10);
-
-                let teacher:teacherDTO = {
-			type:'user',
-			name:name,
-			pass:[hashPass],
-			img:img,
-			ubi:ubi,
-			email:email,
-			disciples:disciples,
-			bornDate:bornDate,
-			verifEmail:verifEmail,
-			from:from,
-			uniqueString:uniqueString,
-			num:num
-                }
+		let teacher:teacherDTO = teacherData
 
                 new Teacher(teacher).save().then(ans => res.json({ans}))
-
 
         },
 
@@ -75,24 +62,10 @@ const teacherControllers = {
         modify_teacher: async(req:Request, res:Response) => {
                 let id:string = req.params.id
 
-                let {name, pass, img, ubi, email, disciples, bornDate, verifEmail, from, uniqueString, num} = req.body
+                let {teacherData} = req.body
+		teacherData.pass = [bcryptjs.hashSync(teacherData.pass, 10)]
 
-		const hashPass = bcryptjs.hashSync(pass, 10);
-
-                let newTeacher:teacherDTO = {
-			type:'user',
-			name:name,
-			pass:[hashPass],
-			img:img,
-			ubi:ubi,
-			email:email,
-			disciples:disciples,
-			bornDate:bornDate,
-			verifEmail:verifEmail,
-			from:from,
-			uniqueString:uniqueString,
-			num:num
-                }
+		let newTeacher:teacherDTO = teacherData
 
                 await Teacher.findOneAndUpdate({_id:id},newTeacher).then(ans => res.json({ans}))
         },
@@ -102,12 +75,12 @@ const teacherControllers = {
 	verify_email_teacher: async (req:Request, res:Response) => {
 		const { uniqueString } = req.params;
 
-		const user = await Teacher.findOne({ uniqueString: uniqueString })
+		const teacher = await Teacher.findOne({ uniqueString: uniqueString })
 
-		if (user) {
-			user.verifEmail = true;
-			await user.save();
-			res.redirect("http://localhost:4000/");
+		if (teacher) {
+			teacher.verifEmail = true;
+			await teacher.save();
+			res.redirect("http://localhost:5173/");
 
 		} else {
 			res.json({ success: false, response: "Unverified email." });
@@ -174,33 +147,33 @@ const teacherControllers = {
 		const { email, pass} = req.body;
 
 		try {
-			const user = await Teacher.findOne({ email });
+			const teacher = await Teacher.findOne({ email });
 
-			if (!user) {
+			if (!teacher) {
 				res.json({
 				success: false,
 				message: "Teacher doesn't exist, try signing up.",
 				});
 			} 
 			else {
-				if (user.verifEmail) {
-					let passMatches = user.pass.filter((password) =>
+				if (teacher.verifEmail) {
+					let passMatches = teacher.pass.filter((password) =>
 					bcryptjs.compareSync(pass, password)
 					);
 
 					if (passMatches.length > 0) {
-						const userData = {
-							email: user.email,
-							pass: user.pass
+						const teacherData = {
+							email: teacher.email,
+							pass: teacher.pass
 						};
 
-						const token = jwt.sign({ ...userData }, process.env.KEY, {
+						const token = jwt.sign({ ...teacherData }, process.env.KEY, {
 						expiresIn: 60 * 60 * 24,
 						});
 
 						res.json({
 							success: true,
-							response: { token, userData },
+							response: { token, teacherData },
 						});
 
 					} else {
