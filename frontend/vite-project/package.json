@@ -12,6 +12,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.1",
     "@heroicons/react": "^2.0.11",
+    "@react-oauth/google": "^0.2.8",
     "jsx-runtime": "^1.2.0",
     "react": "^18.2.0",
     "react-icons": "^4.4.0",

@@ -12,7 +12,7 @@ const Explore = () => {
             <Select />
         </div>
         <div className="flex w-100  ">
-            <div className="w-4/6 px-4 h-screen bg-[#F3F3F3] flex flex-col overflow-scroll">
+            <div className="w-4/6 px-4 h-screen bg-[#F3F3F3] flex flex-wrap gap-4 justify-center overflow-scroll p-4">
             {
                 array.map(e=><CardExplore key={e}/>)
             }

@@ -11,3 +11,6 @@ declare module "*.jpg" {
   declare module "*.css" {
     export default "" as string;
   }
+  declare module "*.mp4" {
+    export default "" as string;
+  }

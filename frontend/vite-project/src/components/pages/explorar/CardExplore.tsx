@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import { Link } from 'react-router-dom'
 const CardExplore = () => {
     const [open, setOpen] = useState(false);
     function setearOpen() {
@@ -7,46 +7,26 @@ const CardExplore = () => {
     }
     
   return (
-    <>
-     <div className="border-b min-h-16 p-4 flex flex-col gap-4">
-            <div className="flex gap-4">
-              <a>
-                <img
-                  className="object-cover rounded w-44  h-36"
-                  src="https://classpass-res.cloudinary.com/image/upload/q_auto,w_320,c_scale,h_160,f_auto/ng6fbwd0pavpz7qfifcw.png"
-                  alt="img"
-                />
-              </a>
-              <section className="">
-                <h6 className="font-bold text-sm text-[#999]">Acroyoga</h6>
-                <p className="font-bold text-[#22222]">Lorem, ipsum dolor.</p>
-                {!open ? (
-                  <p
-                    onClick={() => setearOpen()}
-                    className="cursor-pointer text-[#0055ff]"
-                  >
-                    Mostrar mas información
-                  </p>
-                ) : (
-                  <p
-                    onClick={() => setearOpen()}
-                    className="cursor-pointer text-[#0055ff]"
-                  >
-                    Mostrar menos
-                  </p>
-                )}
-              </section>
-            </div>
-            {open ? (
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Cumque, omnis.
-              </p>
-            ) : (
-              ""
-            )}
-          </div>
-    </>
+    <div className="max-w-xs rounded overflow-hidden shadow-lg">
+    <img className="w-full h-44 object-cover" src="https://algarabia.com/wp-content/uploads/2017/05/El-texto-del-pa%CC%81rrafo-36.jpg" alt="Sunset in the mountains"/>
+    <div className="px-6 py-4">
+      <div className='flex w-full justify-between text-gray-700 text-base text-xs pb-2'>
+        <p>BioMoove Estudio</p>
+        <p>1 week ago</p>
+      </div>
+      <div className="font-bold text-xl mb-2">Acrobacia</div>
+      <p className="text-gray-700 text-base">
+        Como hacer tu propia vertical en 5 minutos
+      </p>
+    </div>
+    <div className='flex justify-between items-center m-4'>
+    <div className='flex gap-2  items-center text-xs text-[#007AE9] font-bold cursor-pointer'>
+      <img className="object-cover rounded-full w-8 h-8" src="https://i.pinimg.com/originals/86/08/70/860870066df05a7a29bcb5bb9ea2e9a7.jpg" alt="imagen" />
+      <Link to={'/profile'}>Camila Domato</Link>
+    </div>
+    <p className='text-[#007AE9] text-xs cursor-pointer'>Ver mas</p>
+    </div>
+  </div>
   )
 }
 
