@@ -7,6 +7,7 @@ import ForgotPassword from './components/pages/ForgotPassword'
 import Explore from './components/pages/explorar/Explore'
 import Footer from './components/generales/Footer'
 import Profile from './components/pages/login/Profile'
+import ProfileSettings from './components/pages/login/settings/ProfileSettings'
 import './styles.css'
 
 //UTILITIES
@@ -41,6 +42,9 @@ function App(props:any) {
 			      <Route path='/signIn' element={<SignIn/>} ></Route>
 			      <Route path='/signUp' element={<SignUp/>}></Route>
 			      <Route path='/forgotPass' element={<ForgotPassword/>}></Route>
+			      <Route path='/profile/settings' element={<ProfileSettings/>}></Route>
+			      <Route path='/profile/settings/password' element={<ProfileSettings/>}></Route>
+			      <Route path='/profile/settings/desactive' element={<ProfileSettings/>}></Route>
 		      </Routes>
 		      <Footer/>
 	      </Router>
