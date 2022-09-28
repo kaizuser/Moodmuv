@@ -25,7 +25,7 @@ const Account = () => {
             <div className="flex justify-center items-center w-full">
               <div className="invisible flex gap-4 items-center">
                 <Link
-                  to={"/profile/settings"}
+                  to={"/account/settings"}
                   className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full flex gap-2 text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
                 >
                   <p>Editar</p>
@@ -51,7 +51,7 @@ const Account = () => {
               />
               <div className="flex gap-4 items-center">
                 <Link
-                  to={"/profile/settings"}
+                  to={"/account/settings"}
                   className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full flex gap-2 text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
                 >
                   <p>Editar</p>
