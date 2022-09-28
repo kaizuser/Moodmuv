@@ -2,14 +2,15 @@ import { useState } from "react";
 import CarouselCards from "./CarouselCards";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom'
-const Profile = () => {
+
+export const Account = () => {
   
   interface userType {
     id: string;
     email: string;
     
   }
-  
+
   let user:userType = useSelector((store:any) => store.userReducer.currentUser)
   
   return (
@@ -28,7 +29,7 @@ const Profile = () => {
             {
               user ? <div className="flex gap-4 items-center">
               <Link
-                to={"/account/settings"}
+                to={"/profile/settings"}
                 className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full flex gap-2 text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
               >
                 <p>Editar</p>
@@ -117,5 +118,3 @@ const Profile = () => {
     </>
   );
 };
-
-export default Profile;

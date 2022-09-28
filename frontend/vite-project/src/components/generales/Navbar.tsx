@@ -6,6 +6,7 @@ import Logo from '../../assets/logoDegrade.png'
 
 //UTILITIES
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
 
 const navigation = [
   { name: 'Explorar', href: '#', current: false },
@@ -62,7 +63,7 @@ export default function Example() {
 			    <Link to={link[navigation.indexOf(item)]} key={item.name}>
 			      <span
 				className={classNames(
-				  item.current ? 'hover:bg-gradient-to-r hover:from-[#443166] hover:to-[#59457B] bg-gradient-to-r from-[#563D81] to-[#6E5E8B] text-white' : 'text-[#2C2C2C]',
+				  item.current ? 'hover:bg-gradient-to-r hover:from-[#443166] hover:to-[#59457B] bg-gradient-to-r from-[#563D81] to-[#6E5E8B] text-white' : 'text-black',
 				  'px-3 py-2 rounded-md text-sm font-medium'
 				)}
 				aria-current={item.current ? 'page' : undefined}

@@ -1,25 +1,33 @@
-import React, { useState,useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 
-const ProfileSettings = () => {
-  const inputEl = useRef(null);
-  console.log(inputEl)
-  const [name, setName] = useState("")
-  const [ubi, setUbi] = useState("")
-  const [type, setType] = useState("")
-  const [num, setNum] = useState("")
-  const [gender, setGender] = useState("")
-  const [desc, setDesc] = useState("")
-  let userObject = {
-    type,
-    name,
-    img: "",
-    ubi,
-    num,
-    gender,
-    desc
+//UTILITIES
+import { Link } from "react-router-dom";
+import userActions from "../../../../redux/actions/userActions"
+import { connect } from "react-redux";
+
+const ProfileSettings = (props:any) => {
+  const [nameValue, setName] = useState("")
+  const [ubiValue, setUbi] = useState("")
+  const [numValue, setNum] = useState(0)
+  const [genreValue, setGenre] = useState("")
+  const [descValue, setDesc] = useState("")
+
+  let saveUser = () => {
+	  let userData = {
+		  id:props.id,
+		  name:nameValue,
+		  ubi:ubiValue,
+		  num:Number(numValue),
+		  genre:genreValue,
+		  desc:descValue
+	  }
+
+	  props.modifyUser(userData)
+
   }
-  console.log(userObject.name)
+
+  console.log(props);
+
   return (
     <div className="w-full h-full bg-[#fafafa] py-4 min-h-4">
       <div className="m-auto border w-3/4 min-h-96 bg-white flex items-start">
@@ -93,30 +101,23 @@ const ProfileSettings = () => {
                 Género
               </label>
             </aside>
-            <select onChange={(e)=>setGender(e.target.value)} defaultValue="Elige una opción" className="text-sm border grow rounded px-2" id="">
+            <select onChange={(e)=>setGenre(e.target.value)} defaultValue="Elige una opción" className="text-sm border grow rounded px-2" id="">
             <option value="Elige una opción" selected disabled hidden>Elige una opción</option>
               <option value="Hombre">Hombre</option>
               <option value="Mujer">Mujer</option>
             </select>
           </fieldset>
-          
-          <fieldset className="flex gap-4 w-full flex-wrap">
-            <aside className="flex justify-end px-6 w-44 min-h-4">
-              <label className="font-bold  text-right self-center" htmlFor="">
-                Rol
-              </label>
-            </aside>
-            <select onChange={(e)=>setType(e.target.value)} defaultValue="Elige una opción" className="text-sm border grow rounded px-2" id="">
-            <option value="Elige una opción" selected disabled hidden>Elige una opción</option>
-              <option value="Hombre">Profesor</option>
-              <option value="Mujer">Alumno</option>
-            </select>
-          </fieldset>
-          <button className="rounded py-3 bg-[#007AE9] text-white mt-3 text-sm">Guardar</button>
+		<button className="rounded py-3 bg-[#007AE9] text-white mt-3 text-sm" type='button' onClick={() => saveUser()}>Guardar</button>
         </form>
       </div>
     </div>
   );
 };
 
-export default ProfileSettings;
+let mapDispatch = {
+	modifyUser:userActions.modifyUser
+}
+
+let connector = connect(null, mapDispatch)
+
+export default connector(ProfileSettings)
