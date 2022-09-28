@@ -19,11 +19,11 @@ let {verify_token} = verifyController
 Router.route('/user')
 .get(get_users)
 .post(set_user)
+.put(modify_user)
 
 Router.route('/user/:id')
 .get(get_user)
 .delete(delete_user)
-.put(modify_user)
 
 Router.route('/auth/signUpUser')
 .post(sign_up_user)
@@ -41,11 +41,11 @@ Router.route('/auth/logInUser')
 Router.route('/teacher')
 .get(get_teachers)
 .post(set_teacher)
+.put(modify_teacher)
 
 Router.route('/teacher/:id')
 .get(get_teacher)
 .delete(delete_teacher)
-.put(modify_teacher)
 
 Router.route('/auth/signUpTeacher')
 .post(sign_up_teacher)

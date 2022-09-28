@@ -31,7 +31,7 @@ function App(props:any) {
 	return (
 	      <>
 	      <Router>
-		      <Nav/>
+		      <Nav currentUser={props.currentUser?.id}/>
 		      <Routes>
 			      <Route path='/' element={<Home/>}></Route>
 			      <Route path='/home' element={<Home/>}></Route>

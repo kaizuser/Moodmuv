@@ -16,6 +16,7 @@ interface userDTO{
         img?:string,
 	backImg?:string,
 	desc?:string,
+	genre?:string,
         ubi?:string,
 	email?:string,
 	inj?:string,
@@ -42,8 +43,9 @@ const userControllers = {
         },
 
         set_user: async(req:Request, res:Response) => {
-                let {userData} = req.body
-		userData.pass = [bcryptjs.hashSync(userData.pass, 10)]
+                let userData = req.body
+
+		userData.pass ?  userData.pass = [bcryptjs.hashSync(userData.pass, 10)] : null
 
 		let user:userDTO = userData
 
@@ -59,10 +61,11 @@ const userControllers = {
         },
 
         modify_user: async(req:Request, res:Response) => {
-                let id:string = req.params.id
+                let userData = req.body
+		
+                let id:string = userData.id
 
-                let {userData} = req.body
-		userData.pass = [bcryptjs.hashSync(userData.pass, 10)]
+		userData.pass ? userData.pass = [bcryptjs.hashSync(userData.pass, 10)] : null
 
 		let newUser:userDTO = userData
 

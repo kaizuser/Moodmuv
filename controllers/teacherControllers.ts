@@ -16,6 +16,7 @@ interface teacherDTO{
         img?:string,
 	backImg?:string,
 	desc?:string,
+	genre?:string,
         ubi?:string,
 	email?:string,
 	disciples?:Array<string>,
@@ -42,8 +43,8 @@ const teacherControllers = {
         },
 
         set_teacher: async(req:Request, res:Response) => {
-                let {teacherData} = req.body
-		teacherData.pass = [bcryptjs.hashSync(teacherData.pass, 10)]
+                let teacherData = req.body
+		teacherData.pass ? teacherData.pass = [bcryptjs.hashSync(teacherData.pass, 10)] : null
 
 		let teacher:teacherDTO = teacherData
 
@@ -55,15 +56,13 @@ const teacherControllers = {
                 const id:string = req.params.id
 
                 await Teacher.findOneAndDelete({_id:id}).then(ans => res.json({ans}))
-
-
         },
 
         modify_teacher: async(req:Request, res:Response) => {
-                let id:string = req.params.id
+                let teacherData = req.body
+                let id:string = teacherData.id
 
-                let {teacherData} = req.body
-		teacherData.pass = [bcryptjs.hashSync(teacherData.pass, 10)]
+		teacherData.pass ? teacherData.pass = [bcryptjs.hashSync(teacherData.pass, 10)] : null
 
 		let newTeacher:teacherDTO = teacherData
 

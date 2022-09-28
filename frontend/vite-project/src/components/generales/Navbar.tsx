@@ -22,7 +22,8 @@ function classNames(...classes:any) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+export default function Example(props:any) {
+
   return (
     <Disclosure as="nav" className=" relative z-10">
       {({ open }) => (
@@ -60,8 +61,17 @@ export default function Example() {
                 <div className="hidden sm:block sm:ml-6 ">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-			    <Link to={link[navigation.indexOf(item)]} key={item.name}>
-			      <span
+			    <>
+			      {item.name == 'Iniciar sesión' ? 
+			      props.currentUser ? 
+			      (<Link to={'/account'} key={item.name}>
+			       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+			      <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+			      </svg>
+			      </Link>)
+			      :
+			      (<Link to={link[navigation.indexOf(item)]} key={item.name}>
+				<span
 				className={classNames(
 				  item.current ? 'hover:bg-gradient-to-r hover:from-[#443166] hover:to-[#59457B] bg-gradient-to-r from-[#563D81] to-[#6E5E8B] text-white' : 'text-black',
 				  'px-3 py-2 rounded-md text-sm font-medium'
@@ -70,7 +80,21 @@ export default function Example() {
 			      >
 				{item.name}
 			      </span>
-			    </Link>
+			      </Link>)
+			      :
+			      (<Link to={link[navigation.indexOf(item)]} key={item.name}>
+			        <span
+				className={classNames(
+				  item.current ? 'hover:bg-gradient-to-r hover:from-[#443166] hover:to-[#59457B] bg-gradient-to-r from-[#563D81] to-[#6E5E8B] text-white' : 'text-black',
+				  'px-3 py-2 rounded-md text-sm font-medium'
+				)}
+				aria-current={item.current ? 'page' : undefined}
+			      >
+				{item.name}
+			      </span>
+			      </Link>)
+			      }
+			      </>
                     ))}
                   </div>
                 </div>
