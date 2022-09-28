@@ -55,13 +55,13 @@ const userActions = {
 		}
 	},
 
-	setUser: (userObject:[number, string]) => {
+	setUser: (userData:any) => {
 		return async(dispatch:AppDispatch,getState:RootState)=>{
 
 			const ans = await axios({
 				method:'post',
 				url:'http://localhost:4000/api/user',
-				data:userObject
+				data:userData
 			})
 
 		}

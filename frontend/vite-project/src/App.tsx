@@ -42,8 +42,6 @@ function App(props:any) {
 			      <Route path='/forgotPass' element={<ForgotPassword/>}></Route>
 			      <Route path='/account' element={<Profile/>}></Route>
 			      <Route path='/account/settings' element={<ProfileSettings id={props.currentUser?.id}/>}></Route>
-			      <Route path='/account/settings/password' element={<ProfileSettings/>}></Route>
-			      <Route path='/account/settings/deactivate' element={<ProfileSettings/>}></Route>
 		      </Routes>
 		      <Footer/>
 	      </Router>
