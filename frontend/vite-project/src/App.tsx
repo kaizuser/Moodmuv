@@ -28,8 +28,6 @@ function App(props:any) {
 	}
 	},[props.currentUser])
 
-	console.log(props.currentUser)
-
 	return (
 	      <>
 	      <Router>
@@ -37,14 +35,15 @@ function App(props:any) {
 		      <Routes>
 			      <Route path='/' element={<Home/>}></Route>
 			      <Route path='/home' element={<Home/>}></Route>
-			      <Route path='/profile' element={<Profile/>}></Route>
+			      <Route path='/profile/:id' element={<Profile/>}></Route>
 			      <Route path='/explore' element={<Explore/>}></Route>
 			      <Route path='/signIn' element={<SignIn/>} ></Route>
 			      <Route path='/signUp' element={<SignUp/>}></Route>
 			      <Route path='/forgotPass' element={<ForgotPassword/>}></Route>
-			      <Route path='/profile/settings' element={<ProfileSettings/>}></Route>
-			      <Route path='/profile/settings/password' element={<ProfileSettings/>}></Route>
-			      <Route path='/profile/settings/desactive' element={<ProfileSettings/>}></Route>
+			      <Route path='/account' element={<Profile/>}></Route>
+			      <Route path='/account/settings' element={<ProfileSettings id={props.currentUser?.id}/>}></Route>
+			      <Route path='/account/settings/password' element={<ProfileSettings/>}></Route>
+			      <Route path='/account/settings/deactivate' element={<ProfileSettings/>}></Route>
 		      </Routes>
 		      <Footer/>
 	      </Router>

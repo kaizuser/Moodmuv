@@ -31,16 +31,14 @@ const teacherActions = {
 
 	},
 
-	modifyTeacher: (id:string, teacherObject:[number, string]) => {
+	modifyTeacher: (teacherData:any) => {
 		return async(dispatch:AppDispatch, getState:RootState) => {
 
 			const ans = await axios({
 				method:'put',
-				url:'http://localhost:4000/api/teacher' + id,
-				data:teacherObject,
+				url:'http://localhost:4000/api/teacher',
+				data:teacherData,
 			})
-
-			dispatch({type:'modifyTeacher', payload:ans.data})
 		}
 
 	},
@@ -63,13 +61,13 @@ const teacherActions = {
 		}
 	},
 
-	setTeacher: (teacherObject:[number, string]) => {
+	setTeacher: (teacherData:any) => {
 		return async(dispatch:AppDispatch,getState:RootState)=>{
 
 			const ans = await axios({
 				method:'post',
 				url:'http://localhost:4000/api/teacher',
-				data:teacherObject
+				data:teacherData
 			})
 
 			dispatch({type:'setTeacher', payload:ans.data})

@@ -27,18 +27,17 @@ const userActions = {
 			})
 
 			dispatch({type:'fetchUser', payload:ans.data})
-
 	        }
 
 	},
 
-	modifyUser: (id:string, userObject:[number, string]) => {
+	modifyUser: (userData:any) => {
 		return async(dispatch:AppDispatch, getState:RootState) => {
 
 			const ans = await axios({
 				method:'put',
-				url:'http://localhost:4000/api/user' + id,
-				data:userObject,
+				url:'http://localhost:4000/api/user',
+				data:userData,
 			})
 
 	        }
