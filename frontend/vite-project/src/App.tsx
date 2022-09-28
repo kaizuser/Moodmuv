@@ -7,6 +7,7 @@ import ForgotPassword from './components/pages/ForgotPassword'
 import Explore from './components/pages/explorar/Explore'
 import Footer from './components/generales/Footer'
 import Profile from './components/pages/login/Profile'
+import Account from './components/pages/login/Account'
 import ProfileSettings from './components/pages/login/settings/ProfileSettings'
 import './styles.css'
 
@@ -40,7 +41,7 @@ function App(props:any) {
 			      <Route path='/signIn' element={<SignIn/>} ></Route>
 			      <Route path='/signUp' element={<SignUp/>}></Route>
 			      <Route path='/forgotPass' element={<ForgotPassword/>}></Route>
-			      <Route path='/account' element={<Profile/>}></Route>
+			      <Route path='/account' element={<Account/>}></Route>
 			      <Route path='/account/settings' element={<ProfileSettings id={props.currentUser?.id}/>}></Route>
 		      </Routes>
 		      <Footer/>

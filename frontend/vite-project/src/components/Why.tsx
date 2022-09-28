@@ -56,17 +56,18 @@ const Why = () => {
           Play Now
         </button>
       </div>
-      <div className="flex flex-col justify-center items-center">
-        <div className="flex flex-col">
-        <h2 className="p-8 font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B] text-5xl">
-          No damos solo clases presencial
-        </h2>
-        <p className="py-2 w-[30rem] text-center text-sm text-[#666]">
-          También brindamos clases en linea. Nos preparamos para poder ofrecerte
-          la mejor experiencia de tus clases desde la comodidad de tu casa
-        </p>
+      <div className="flex flex-col justify-center items-center text-center">
+        <div className="flex flex-col items-center justify-center">
+          <h2 className="p-8 font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B] text-5xl">
+            No damos solo clases presencial
+          </h2>
+          <p className="py-2 w-2/4  text-center text-sm self-center text-[#666]">
+            También brindamos clases en linea. Nos preparamos para poder
+            ofrecerte la mejor experiencia de tus clases desde la comodidad de
+            tu casa
+          </p>
         </div>
-        <img className="w-1/4" src={bkgOnline} alt="background online" />
+        <img className="w-2/4 self-end" src={bkgOnline} alt="background online" />
       </div>
     </div>
   );
