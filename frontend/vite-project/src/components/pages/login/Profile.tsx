@@ -7,9 +7,10 @@ const Profile = () => {
   interface userType {
     id: string;
     email: string;
+    
   }
 
-  let user: userType = useSelector((store) => store.userReducer.currentUser);
+  let user:userType = useSelector((store:any) => store.userReducer.currentUser)
   
   return (
     <>

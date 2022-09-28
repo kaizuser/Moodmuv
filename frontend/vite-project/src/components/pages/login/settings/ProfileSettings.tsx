@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState,useRef } from "react";
 import { Link } from "react-router-dom";
 
 const ProfileSettings = () => {
+  const inputEl = useRef(null);
+  console.log(inputEl)
   const [name, setName] = useState("")
   const [ubi, setUbi] = useState("")
   const [type, setType] = useState("")
@@ -47,7 +49,11 @@ const ProfileSettings = () => {
         <form className="w-full px-28 pb-16 my-4 flex flex-col gap-4 min-h-4">
           <fieldset className="flex flex-col gap-2 justify-center items-center">
             <img className="rounded-full bg-black w-6 h-6" src="https://yt3.ggpht.com/ytc/AMLnZu835wtVeM6vGM_PkbU_Fvbma-sOcDD_aICc9-Ct=s48-c-k-c0x00ffffff-no-rj-mo" alt="" />
-            <p className="text-xs text-[#007AE9]">Cambiar foto de perfil</p>
+            <label htmlFor="file-upload" className="cursor-pointer text-xs text-[#007AE9]">
+              Cambiar foto de perfil
+            </label>
+            <input className="hidden" id="file-upload" type="file"/>
+
           </fieldset>
           <fieldset className="flex gap-4 w-full flex-wrap">
             <aside className="flex justify-end px-6 w-44 min-h-4">
