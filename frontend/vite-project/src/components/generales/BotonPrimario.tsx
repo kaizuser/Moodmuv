@@ -1,5 +1,4 @@
 import React from 'react'
-import { text } from 'stream/consumers'
 
 const BotonPrimario = (props:any):any => {
   return (

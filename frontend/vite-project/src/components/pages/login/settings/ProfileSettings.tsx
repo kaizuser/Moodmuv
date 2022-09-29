@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 const ProfileSettings = (props:any) => {
   const [nameValue, setName] = useState("")
   const [ubiValue, setUbi] = useState("")
-  const [numValue, setNum] = useState(0)
+  const [numValue, setNum] = useState("")
   const [genreValue, setGenre] = useState("")
   const [descValue, setDesc] = useState("")
 
