@@ -23,7 +23,7 @@ const Why = () => {
             Contamos con un seleccionado de profesores listos para poder
             instruirte. Tenemos clases de yoga, danza, partner, acrobatic
           </p>
-          <div className='w-[28rem] h-[16rem] bg-black rounded-2xl relative bg-[url("/assets/imagePresencial.jpg")] bg-cover bg-[center_-9rem]'>
+          <div className='w-[28rem] h-[16rem] bg-black rounded-2xl relative bg-[url("https://user-images.githubusercontent.com/91817152/192928635-0462d44e-a9fc-4566-a446-0b53d374b3c1.jpg")] bg-cover bg-[center_-9rem]'>
             <p className="pointer-events-none bg-white py-1 bg-gradient-to-r from-[#F79AD3] to-[#C86FC9] px-4 font-bold text-sm text-white absolute z-10 rounded-2xl m-4">
               Profesor
             </p>
