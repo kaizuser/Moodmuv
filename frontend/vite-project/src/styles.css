@@ -1,3 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.p-why2{
+    min-height: 5vh;
+}
+@media screen and (max-width: 319px) {
+    nav{
+        background-color: white;
+    }
+    .div-home{
+        justify-content: start;
+        gap: 2rem;
+        top: 5rem;
+    }
+    .text-main{
+        font-size: 3rem;
+        text-align: center;
+        color: #f3f3f3;
+    }
+    .p-why{
+        width: 100%;
+        padding:0 2rem;
+    }
+    .div-background_why{
+        width: 100%;
+        background-position: center;
+    }
+    .buttons{
+        width: 100%;
+        justify-content: center;
+    }
+    button{
+        width:8rem;
+        font-size: .8rem;
+        padding: .7rem;
+
+    }
+}
 @media screen and (min-width: 320px) {
     .xsm{
         display: none;
@@ -8,17 +49,73 @@
     .registrarme{
         display: block;
     }
+    nav{
+        background-color: white;
+    }
+    .div-home{
+        justify-content: start;
+        gap: 2rem;
+    }
+    .text-main{
+        font-size: 3rem;
+        text-align: center;
+        color: #f3f3f3;
+        position: relative;
+        top: 10rem;
+    }
+    .p-why{
+        width: 100%;
+        padding:0 2rem;
+    }
+    .div-background_why{
+        width: 90vw;
+    }
+    .buttons{
+        width: 100%;
+        justify-content: center;
+        position: relative;
+        top: 10rem;
+    }
+    button{
+        width:8rem;
+        font-size: .8rem;
+        padding: .7rem;
+
+    }
+    .img-cp{
+        width: 80%;
+        padding-top: 3rem;
+    }
 }
 @media screen and (min-width:640px) {
     .xsm{
         display: block;
     }
-
+    .div-home{
+        justify-content: start;
+        gap: 2rem;
+        top: 5rem;
+        
+    }
+    .div-background_why {
+        width: 40vw;
+        object-fit: cover;
+        background-position: center;
+    }
+    .p-why2{
+        height: 12vh;
+        align-self: center;
+        text-align: center;
+    }
 
 }
 @media screen and (min-width:767px) {
         .registrarme{
             display: none;
         }
-
+        .p-why2{
+            height: 15vh;
+            align-self: center;
+            text-align: center;
+        }
 }
