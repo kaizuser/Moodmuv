@@ -22,7 +22,7 @@ const SignUp = (props:any) => {
 	return (
 		<div className="h-screen md:flex ">
 		<div
-		className="relative overflow-hidden md:flex w-1/2 bg-[url('/src/assets/bgksignup.jpg')] bg-cover bg-center i justify-around items-center hidden">
+		className="relative overflow-hidden md:flex w-1/2 bg-[url('../../../assets/bgksignup.jpg')] bg-cover bg-center i justify-around items-center hidden">
 		<div>
 		  <h1 className="text-white font-semibold text-5xl font-sans">Registrate en </h1>
 		  <p className="text-white mt-1 text-3xl font-semibold">MoodMuv</p>
