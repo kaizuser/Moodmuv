@@ -27,7 +27,7 @@ const SignIn = (props:any) => {
   return (
     <div className="h-screen md:flex ">
       <div
-        className="relative overflow-hidden md:flex w-1/2 bg-[url(/assets/bkglogin.png)] bg-cover bg-center i justify-around items-center hidden">
+        className="relative overflow-hidden md:flex w-1/2 bg-[url('https://user-images.githubusercontent.com/65744660/192929412-7e9bb4db-cc8a-46d4-ad26-f13b03ae66f9.png')] bg-cover bg-center i justify-around items-center hidden">
         <div>
           <h1 className="text-white font-semibold text-5xl font-sans">Iniciar sesión en </h1>
           <p className="text-white mt-1 text-3xl font-semibold">MoodMuv</p>

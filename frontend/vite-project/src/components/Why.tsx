@@ -38,7 +38,7 @@ const Why = () => {
             Disfruta de las mejores clases online o presencial, contamos con
             multiples actividades para desenvolverte.
           </p>
-          <div className='w-[28rem] h-[16rem] bg-black rounded-2xl relative bg-[url("/assets/imageOnline.jpg")] bg-cover'>
+          <div className='w-[28rem] h-[16rem] bg-black rounded-2xl relative bg-[url("https://user-images.githubusercontent.com/91817152/192928760-1f880cc5-6d0f-404f-9fc8-cd79b90a9085.jpg")] bg-cover'>
             <p className="pointer-events-none bg-white py-1 bg-gradient-to-r from-[#83EAD1] to-[#63A4FF] px-4 font-bold text-sm text-white absolute z-10 rounded-2xl m-4">
               Alumno
             </p>
@@ -48,7 +48,7 @@ const Why = () => {
       <h2 className="p-8 font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B] text-5xl">
         Talleres
       </h2>
-      <div className='flex justify-between p-4 flex w-[42rem] h-[20rem] rounded-2xl  bg-[url("/assets/setumismo.jpg")] bg-top bg-cover mb-8'>
+      <div className='flex justify-between p-4 flex w-[42rem] h-[20rem] rounded-2xl  bg-[url("https://user-images.githubusercontent.com/65744660/192929398-c64c48a9-fa66-4282-9022-95d5f99abd18.jpg")] bg-top bg-cover mb-8'>
         <h3 className="leading-tight pointer-events-none text-white font-black text-6xl w-1/2 uppercase">
           Sé tu mismo sin excusas
         </h3>
