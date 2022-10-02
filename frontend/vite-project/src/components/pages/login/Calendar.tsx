@@ -1,50 +1,114 @@
 //BASICS
 import React from 'react'
 
-//UTILITIES
+//UTILITIES 
+import {connect} from 'react-redux'
+import userActions from '../../../redux/actions/userActions'
+
+//UTILITIES CALENDAR
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar'
 import format from 'date-fns/format'
 import parse from 'date-fns/parse'
 import startOfWeek from 'date-fns/startOfWeek'
 import getDay from 'date-fns/getDay'
-import DatePicker from 'react-date-picker'
+import DatePicker from 'react-datepicker'
 import es_AR from 'date-fns/locale/es'
-import 'react-big-calendar/lib/css/react-big-calendar.css'
 
-export default class Scheduler extends React.Component <any, any>{
+//CSS 
+import 'react-big-calendar/lib/css/react-big-calendar.css'
+import "react-datepicker/dist/react-datepicker.css";
+
+class Scheduler extends React.Component <any, any>{
 	constructor(props:any){
 		super(props)
 		this.state = {
-			events:  [
-				    {
-				      title: 'Lunch',
-				      start: new Date(2022, 9, 1, 10, 0),
-				      end: new Date(2022, 9, 2, 10, 0),
-				    },
-			],
+			storedEvent:{} 
 		}
+	}
+
+	addEvent = () => {
+		//ADD POSSIBLE DATA TYPES SOLUTIONS
+
+		let event = {
+			id:this.props.userAccount._id,
+			events:this.state.storedEvent
+		}
+
+		console.log(event);
+		
+		this.props.modifyUser(event)
 	}
 
 	render(): React.ReactNode {
 		let locales = {
-			'es-AR':es_AR
+			'es':es_AR
 		}
 
 		let localizer = dateFnsLocalizer({format, parse, startOfWeek, getDay, locales})
 
+		console.log(this.props);
+
 		return (
 			<>
-				<Calendar
-					localizer={localizer}
-					events={this.state.event}
-					startAccessor='start'
-					endAccessor='end'
-					style={{height:500, width:'100%'}}
-				/>
+				<div className='w-full h-auto flex justify-center items-center flex-col space-y-12 ml-12 mb-12'>
+					<div className='flex justify-around items-center w-4/5'>
+						<div className='flex space-x-12'>
+							<input 
+								className='w-60 placeholder:text-gray-500 bg-gray-300 p-1 rounded-xl text-center' type='text' 
+								placeholder='Add title' 
+								value={this.state.storedEvent.title}
+								onChange={(event) => this.setState({storedEvent:{...this.state.storedEvent, title:event.target.value}})}
+
+							/>
+
+							<div className='w-auto'>
+								<DatePicker 
+									className='w-60 placeholder:text-gray-500 bg-gray-300 p-1 rounded-xl text-center'
+									placeholderText='Start date'
+									selected={this.state.storedEvent.start}
+									onChange={(event) => this.setState({storedEvent:{...this.state.storedEvent, start:event}})}
+								/>
+							</div>
+
+							<div className='w-auto'>
+								<DatePicker
+								className='w-60 placeholder:text-gray-500 bg-gray-300 p-1 rounded-xl text-center'
+								placeholderText='End date'
+								selected={this.state.storedEvent.end}
+								onChange={(event) => this.setState({storedEvent:{...this.state.storedEvent, end:event}})}
+								/>
+							</div>
+						</div>
+
+
+						<button 
+							className='w-40 h-8 rounded-xl bg-purple-700 text-white p-1 text-center text-base hover:bg-purple-600 transition duration-300 ease-in' 
+							type='button'
+							onClick={() => this.addEvent()}
+
+						>Add event</button>
+
+					</div>
+
+					<Calendar
+						localizer={localizer}
+						events={this.props.userAccount?.events}
+						startAccessor='start'
+						endAccessor='end'
+						style={{height:500, width:'80%'}}
+					/>
+				</div>
+
 			</>
 		)
 
 	}
 }
 
+let mapDispatch = {
+	modifyUser:userActions.modifyUser
+}
 
+let connector = connect(null, mapDispatch)
+
+export default connector(Scheduler)

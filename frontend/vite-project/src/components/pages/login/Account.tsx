@@ -175,10 +175,7 @@ const Account = (props:any) => {
 	    </div>
 	    <CarouselCards />
 	  </div>
-
-	<div className='scheduler-container w-full h-full flex justify-center items-center'>
-		<Scheduler events={userAccount}/>
-	</div>
+	  <Scheduler userAccount={userAccount}/>
 	</div>
 	) : (
 	""

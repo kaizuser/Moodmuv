@@ -26,7 +26,6 @@ export default function Example(props: any) {
   const [openDrop, setOpenDrop] = useState(false);
   const setearOpenDrop = () => {
     setOpenDrop(!openDrop);
-    console.log(openDrop);
   };
   return (
     <Disclosure as="nav" className=" relative z-10">
@@ -67,7 +66,8 @@ export default function Example(props: any) {
                       <>
                         {item.name == "Iniciar sesión" ? (
                           props.currentUser ? (
-                            <>
+			      <div key={item.name}>
+
                               <button onClick={() => setearOpenDrop()}>
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -107,7 +107,8 @@ export default function Example(props: any) {
                                   Log out
                                 </button>
                               </div>
-                            </>
+
+			      </div>
                           ) : (
                             <Link
                               to={link[navigation.indexOf(item)]}

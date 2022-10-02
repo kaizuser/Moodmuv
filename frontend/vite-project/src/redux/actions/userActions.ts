@@ -40,6 +40,8 @@ const userActions = {
 				data:userData,
 			})
 
+			console.log(ans);
+
 	        }
 
 	},
