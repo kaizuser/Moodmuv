@@ -16,6 +16,7 @@ interface usersDTO{
 	from:string,
 	uniqueString:string,
 	num:number,
+	events:Array<{title:string, start:Date, end:Date}>
 }
 
 const userSchema = new Schema<usersDTO>({
@@ -33,7 +34,12 @@ const userSchema = new Schema<usersDTO>({
 	verifEmail:{type:Boolean, required:true},
 	from:{type:String, required:true},
 	uniqueString:{type:String, required:true},
-	num:{type:Number, required:false}
+	num:{type:Number, required:false},
+	events:[{
+		title:{type:String, required:false},
+		start:{type:Date, required:false},
+		end:{type:Date, required:false}
+	}]
 })
 
 export const User = model<usersDTO>('users', userSchema)

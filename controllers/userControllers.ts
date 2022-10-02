@@ -24,7 +24,8 @@ interface userDTO{
 	verifEmail?:boolean,
 	from?:string,
 	uniqueString?:string,
-	num?:number
+	num?:number,
+	events?:Date
 }
 
 const userControllers = {

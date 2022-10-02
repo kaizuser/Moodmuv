@@ -16,7 +16,7 @@ interface teacherDTO{
 	from:string,
         uniqueString:string,
 	num:number,
-	events:Array<{title:string, start:string, end:string}>
+	events:Array<{title:string, start:Date, end:Date}>
 }
 
 const teacherSchema = new Schema<teacherDTO>({
@@ -37,8 +37,8 @@ const teacherSchema = new Schema<teacherDTO>({
 	num:{type:Number, required:false},
 	events:[{
 		title:{type:String, required:false},
-		start:{type:String, required:false},
-		end:{type:String, required:false}
+		start:{type:Date, required:false},
+		end:{type:Date, required:false}
 	}]
 })
 
