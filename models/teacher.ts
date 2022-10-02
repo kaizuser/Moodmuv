@@ -16,6 +16,7 @@ interface teacherDTO{
 	from:string,
         uniqueString:string,
 	num:number,
+	events:Array<{title:string, start:string, end:string}>
 }
 
 const teacherSchema = new Schema<teacherDTO>({
@@ -33,7 +34,12 @@ const teacherSchema = new Schema<teacherDTO>({
 	verifEmail:{type:Boolean, required:true},
 	from:{type:String, required:true},
 	uniqueString:{type:String, required:true},
-	num:{type:Number, required:false}
+	num:{type:Number, required:false},
+	events:[{
+		title:{type:String, required:false},
+		start:{type:String, required:false},
+		end:{type:String, required:false}
+	}]
 })
 
 export const Teacher = model<teacherDTO>('teachers', teacherSchema)

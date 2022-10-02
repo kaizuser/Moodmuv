@@ -23,10 +23,10 @@ const userActions = {
 
 			const ans = await axios({
 				method:'get',
-				url:'http://localhost:4000/api/user' + id,
+				url:'http://localhost:4000/api/user/' + id,
 			})
 
-			dispatch({type:'fetchUser', payload:ans.data})
+			dispatch({type:'fetchUser', payload:ans.data.data})
 	        }
 
 	},
@@ -49,7 +49,7 @@ const userActions = {
 
 			const ans = await axios({
 				method:'delete',
-				url:'http://localhost:4000/api/user' + id,
+				url:'http://localhost:4000/api/user/' + id,
 			})
 
 		}
@@ -99,7 +99,6 @@ const userActions = {
 
 				return false
 			}
-
 		}
 	},
 
@@ -128,12 +127,8 @@ const userActions = {
 					timer:2000
 				})
 			}
-
 		}
 	},
-
-
-
 }
 
 export default userActions;

@@ -24,7 +24,8 @@ interface teacherDTO{
 	verifEmail?:boolean,
 	from?:string,
 	uniqueString?:string,
-	num?:number
+	num?:number,
+	events?:Array<{title:string, start:string, end:string}>
 }
 
 const teacherControllers = {
@@ -48,14 +49,14 @@ const teacherControllers = {
 
 		let teacher:teacherDTO = teacherData
 
-                new Teacher(teacher).save().then(ans => res.json({ans}))
+                new Teacher(teacher).save().then(data => res.json({data}))
 
         },
 
         delete_teacher: async(req:Request, res:Response) => {
                 const id:string = req.params.id
 
-                await Teacher.findOneAndDelete({_id:id}).then(ans => res.json({ans}))
+                await Teacher.findOneAndDelete({_id:id}).then(data => res.json({data}))
         },
 
         modify_teacher: async(req:Request, res:Response) => {
@@ -66,7 +67,8 @@ const teacherControllers = {
 
 		let newTeacher:teacherDTO = teacherData
 
-                await Teacher.findOneAndUpdate({_id:id},newTeacher).then(ans => res.json({ans}))
+                await Teacher.findOneAndUpdate({_id:id},newTeacher).then(data => res.json({data}))
+
         },
 
 	//ACCOUNT
@@ -121,7 +123,6 @@ const teacherControllers = {
 				});
 
 				} else {
-
 					await newTeacher.save();
 					await sendEmail(email, newTeacher.uniqueString, 'verifyTeacher');
 
@@ -154,6 +155,7 @@ const teacherControllers = {
 				message: "Teacher doesn't exist, try signing up.",
 				});
 			} 
+
 			else {
 				if (teacher.verifEmail) {
 					let passMatches = teacher.pass.filter((password) =>

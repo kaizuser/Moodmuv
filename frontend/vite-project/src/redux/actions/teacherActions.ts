@@ -14,7 +14,7 @@ const teacherActions = {
 				url:'http://localhost:4000/api/teacher',
 			})
 
-			dispatch({type:'fetchTeachers', payload:ans.data})
+			dispatch({type:'fetchTeachers', payload:ans.data.data})
 		}
 	},
 
@@ -23,10 +23,10 @@ const teacherActions = {
 
 			const ans = await axios({
 				method:'get',
-				url:'http://localhost:4000/api/teacher' + id,
+				url:'http://localhost:4000/api/teacher/' + id,
 			})
 
-			dispatch({type:'fetchTeacher', payload:ans.data})
+			dispatch({type:'fetchTeacher', payload:ans.data.data})
 		}
 
 	},
@@ -46,19 +46,13 @@ const teacherActions = {
 	deleteTeacher: (id:string)=>{
 		return async(dispatch:AppDispatch, getState:RootState) => {
 
-			try {
 
-				const ans = await axios({
-					method:'delete',
-					url:'http://localhost:4000/api/teacher' + id,
-				})
-
-				dispatch({type:'delTeacher', payload:ans.data})
-
-			} catch(err){
-				console.log(err)
-			}
+			const ans = await axios({
+				method:'delete',
+				url:'http://localhost:4000/api/teacher/' + id,
+			})
 		}
+		
 	},
 
 	setTeacher: (teacherData:any) => {
@@ -69,8 +63,6 @@ const teacherActions = {
 				url:'http://localhost:4000/api/teacher',
 				data:teacherData
 			})
-
-			dispatch({type:'setTeacher', payload:ans.data})
 
 		}
 	},
@@ -96,6 +88,7 @@ const teacherActions = {
 				})
 
 				return true
+
 			} else {
 				Swal.fire({
 					icon:'error',
@@ -106,7 +99,6 @@ const teacherActions = {
 
 				return false
 			}
-
 		}
 	},
 
@@ -134,9 +126,7 @@ const teacherActions = {
 					showConfirmButton:false,
 					timer:2000
 				})
-
 			}
-
 		}
 	},
 }

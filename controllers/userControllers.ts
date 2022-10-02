@@ -44,32 +44,29 @@ const userControllers = {
 
         set_user: async(req:Request, res:Response) => {
                 let userData = req.body
-
 		userData.pass ?  userData.pass = [bcryptjs.hashSync(userData.pass, 10)] : null
 
 		let user:userDTO = userData
 
-                new User(user).save().then(ans => res.json({ans}))
+                new User(user).save().then(data => res.json({data}))
 
         },
 
         delete_user: async(req:Request, res:Response) => {
                 const id:string = req.params.id
 
-                await User.findOneAndDelete({_id:id}).then(ans => res.json({ans}))
+                await User.findOneAndDelete({_id:id}).then(data => res.json({data}))
 
         },
 
         modify_user: async(req:Request, res:Response) => {
                 let userData = req.body
-		
                 let id:string = userData.id
-
 		userData.pass ? userData.pass = [bcryptjs.hashSync(userData.pass, 10)] : null
 
 		let newUser:userDTO = userData
 
-                await User.findOneAndUpdate({_id:id},newUser).then(ans => res.json({ans}))
+                await User.findOneAndUpdate({_id:id},newUser).then(data => res.json({data}))
 
         },
 
@@ -156,7 +153,9 @@ const userControllers = {
 				message: "User doesn't exist, try signing up.",
 				});
 			} 
+
 			else {
+
 				if (user.verifEmail) {
 					let passMatches = user.pass.filter((password) =>
 					bcryptjs.compareSync(pass, password)
