@@ -10,7 +10,7 @@ import "swiper/css/pagination";
 import { FreeMode, Pagination } from "swiper";
 
 export default function App() {
-  let array = [1,2,3,4,5,6]
+  let array = [20,21,22,23,24,26]
   return (
     <div className="w-full min-h-28 p-4">
       <Swiper

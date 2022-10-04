@@ -63,10 +63,10 @@ export default function Example(props: any) {
                 <div className="hidden md:block sm:ml-6 w-full">
                   <div className="flex justify-end items-center">
                     {navigation.map((item, index) => (
-                      <>
+                      <div key={item.name}>
                         {item.name == "Iniciar sesión" ? (
                           props.currentUser ? (
-			      <div key={item.name}>
+			      <div>
 
                               <button onClick={() => setearOpenDrop()}>
                                 <svg
@@ -112,7 +112,6 @@ export default function Example(props: any) {
                           ) : (
                             <Link
                               to={link[navigation.indexOf(item)]}
-                              key={item.name}
                             >
                               <span
                                 className={classNames(
@@ -130,7 +129,6 @@ export default function Example(props: any) {
                         ) : (
                           <Link
                             to={link[navigation.indexOf(item)]}
-                            key={item.name}
                           >
                             <span
                               className={classNames(
@@ -145,7 +143,7 @@ export default function Example(props: any) {
                             </span>
                           </Link>
                         )}
-                      </>
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -156,10 +154,9 @@ export default function Example(props: any) {
           <Disclosure.Panel className="">
             <div className="space-y-1 px-2 pt-2 pb-3">
               {navigation.map((item, index) => (
-                <>
+                <div key={index}>
                 {
                   item.name == "Iniciar sesión" ? (props.currentUser ? (<Disclosure.Button
-                    key={index}
                     as="a"
                     href={"/account"}
                     className={classNames(
@@ -172,7 +169,6 @@ export default function Example(props: any) {
                   >
                     Cuenta
                   </Disclosure.Button>) : (<Disclosure.Button
-                    key={item.name}
                     as="a"
                     href={link[navigation.indexOf(item)]}
                     className={classNames(
@@ -184,8 +180,7 @@ export default function Example(props: any) {
                     aria-current={item.current ? "page" : undefined}
                   >
                     {item.name}
-                  </Disclosure.Button>)) : (                <Disclosure.Button
-                  key={item.name}
+                  </Disclosure.Button>)) : (<Disclosure.Button
                   as="a"
                   href={link[navigation.indexOf(item)]}
                   className={classNames(
@@ -199,10 +194,8 @@ export default function Example(props: any) {
                   {item.name}
                 </Disclosure.Button>)
                 }
-              </>
-              )
-              )
-              }
+              </div>
+              ))}
             </div>
           </Disclosure.Panel>
         </>

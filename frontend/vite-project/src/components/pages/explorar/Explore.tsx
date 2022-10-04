@@ -2,7 +2,7 @@ import React from "react";
 import Select from "./Select";
 import CardExplore from './CardExplore'
 const Explore = () => {
-    let array = [1,2,3,4,5,6,7,8]
+    let array = [10,11,12,13,14,15,16,18]
   return (
     <div className="w-full h-screen">
         <div className="min-h-12 w-full flex gap-4 p-4 px-8 shadow-md">

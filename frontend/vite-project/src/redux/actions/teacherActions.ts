@@ -39,6 +39,23 @@ const teacherActions = {
 				url:'http://localhost:4000/api/teacher',
 				data:teacherData,
 			})
+
+			if(ans.status === 200){
+				Swal.fire({
+					icon:"success",
+					title:'Haz configurado tu información correctamente',
+					showConfirmButton:false,
+					timer:1000
+				})
+
+			} else {
+				Swal.fire({
+					icon:'error',
+					title:'Algo salio mal. Intentalo nuevamente',
+					showConfirmButton:false,
+					timer:2000
+				})
+			}
 		}
 
 	},
