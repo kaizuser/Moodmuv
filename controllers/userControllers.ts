@@ -64,7 +64,6 @@ const userControllers = {
                 let userData = req.body
                 let id:string = userData.id
 		userData.pass ? userData.pass = [bcryptjs.hashSync(userData.pass, 10)] : null
-
 		let newUser:userDTO = userData
 
                 await User.findOneAndUpdate({_id:id},newUser).then(data => res.json({data}))

@@ -61,8 +61,8 @@ export default function Example(props: any) {
                   </Link>
                 </div>
                 <div className="hidden md:block sm:ml-6 w-full">
-                  <div className="flex justify-end">
-                    {navigation.map((item) => (
+                  <div className="flex justify-end items-center">
+                    {navigation.map((item, index) => (
                       <>
                         {item.name == "Iniciar sesión" ? (
                           props.currentUser ? (
@@ -153,13 +153,41 @@ export default function Example(props: any) {
             </div>
           </div>
 
-          <Disclosure.Panel className="sm:hidden">
+          <Disclosure.Panel className="">
             <div className="space-y-1 px-2 pt-2 pb-3">
-              {navigation.map((item) => (
-                <Disclosure.Button
+              {navigation.map((item, index) => (
+                <>
+                {
+                  item.name == "Iniciar sesión" ? (props.currentUser ? (<Disclosure.Button
+                    key={index}
+                    as="a"
+                    href={"/account"}
+                    className={classNames(
+                      item.current
+                        ? "bg-gradient-to-r from-[#563D81] to-[#563D81] text-white"
+                        : "text-[#2C2C2C] hover:text-white",
+                      "block px-3 py-2 rounded-md text-base font-medium"
+                    )}
+                    aria-current={item.current ? "page" : undefined}
+                  >
+                    Cuenta
+                  </Disclosure.Button>) : (<Disclosure.Button
+                    key={item.name}
+                    as="a"
+                    href={link[navigation.indexOf(item)]}
+                    className={classNames(
+                      item.current
+                        ? "bg-gradient-to-r from-[#563D81] to-[#563D81] text-white"
+                        : "text-[#2C2C2C] hover:text-white",
+                      "block px-3 py-2 rounded-md text-base font-medium"
+                    )}
+                    aria-current={item.current ? "page" : undefined}
+                  >
+                    {item.name}
+                  </Disclosure.Button>)) : (                <Disclosure.Button
                   key={item.name}
                   as="a"
-                  href={item.href}
+                  href={link[navigation.indexOf(item)]}
                   className={classNames(
                     item.current
                       ? "bg-gradient-to-r from-[#563D81] to-[#563D81] text-white"
@@ -169,8 +197,12 @@ export default function Example(props: any) {
                   aria-current={item.current ? "page" : undefined}
                 >
                   {item.name}
-                </Disclosure.Button>
-              ))}
+                </Disclosure.Button>)
+                }
+              </>
+              )
+              )
+              }
             </div>
           </Disclosure.Panel>
         </>

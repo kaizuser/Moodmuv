@@ -45,17 +45,6 @@ const Why = () => {
           </div>
         </div>
       </div>
-      <h2 className="p-8 font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B] text-5xl">
-        Talleres
-      </h2>
-      <div className='flex justify-between p-4 flex w-[42rem] h-[20rem] rounded-2xl  bg-[url("https://user-images.githubusercontent.com/65744660/192929398-c64c48a9-fa66-4282-9022-95d5f99abd18.jpg")] bg-top bg-cover mb-8'>
-        <h3 className="leading-tight pointer-events-none text-white font-black text-6xl w-1/2 uppercase">
-          Sé tu mismo sin excusas
-        </h3>
-        <button className="font-black uppercase text-[#222] bg-white self-end py-5 px-8 rounded-[4rem]">
-          Play Now
-        </button>
-      </div>
       <div className="flex flex-col justify-center items-center text-center">
         <div className="flex flex-col items-center justify-center">
           <h2 className="p-8 font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B] text-5xl">

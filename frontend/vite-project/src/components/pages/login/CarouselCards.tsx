@@ -14,8 +14,8 @@ export default function App() {
   return (
     <div className="w-full min-h-28 p-4">
       <Swiper
-        slidesPerView={3}
-        spaceBetween={30}
+        slidesPerView={1}
+        spaceBetween={15}
         freeMode={true}
         pagination={{
           clickable: true,
@@ -26,7 +26,7 @@ export default function App() {
         {
 array.map(item=>{
   return(
-    <SwiperSlide style={{padding:".7rem",width:"20rem",  height:"20rem"}} className="flex flex-col justify-start items-start rounded-3xl bg-[#fefefe] shadow m-4" key={item}>
+    <SwiperSlide style={{padding:".7rem",minWidth:"20rem",  minHeight:"20rem"}} className="flex flex-col justify-start items-start rounded-3xl bg-[#fefefe] shadow m-4" key={item}>
     <img className="h-52 shadow w-full object-cover rounded-3xl" src="https://images.unsplash.com/photo-1603525311500-eb9c62e3173f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=800" alt="img" />
     <div className="p-2 flex justify-between items-center w-full">
     <p className=" uppercase font-bold text-[#999] text-sm py-[.1rem]  px-1">Acroyoga</p>

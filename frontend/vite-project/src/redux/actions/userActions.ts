@@ -25,7 +25,6 @@ const userActions = {
 				method:'get',
 				url:'http://localhost:4000/api/user/' + id,
 			})
-
 			dispatch({type:'fetchUser', payload:ans.data.data})
 	        }
 

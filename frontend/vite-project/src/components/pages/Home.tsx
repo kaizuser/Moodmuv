@@ -3,7 +3,8 @@ import BotonSecundario from "../generales/BotonSecundario";
 import Why from "../Why";
 import sample from "../../assets/video.mp4";
 import GridTalleres from './GridTalleres'
-const Home = () => {
+const Home = ({title}) => {
+  document.title = title
   return (
     <>
       <div

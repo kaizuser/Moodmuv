@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 //UTILITIES
 import CarouselCards from "./CarouselCards";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {connect} from 'react-redux'
 import userActions from "../../../redux/actions/userActions";

@@ -2,7 +2,8 @@ import { useState } from "react";
 import CarouselCards from "./CarouselCards";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom'
-const Profile = () => {
+const Profile = ({title}) => {
+  document.title = title
   
   interface userType {
     id: string;

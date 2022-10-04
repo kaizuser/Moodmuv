@@ -34,15 +34,15 @@ function App(props:any) {
 	      <Router>
 		      <Nav currentUser={props.currentUser?.id}/>
 		      <Routes>
-			      <Route path='/' element={<Home/>}></Route>
-			      <Route path='/home' element={<Home/>}></Route>
-			      <Route path='/profile/:id' element={<Profile/>}></Route>
-			      <Route path='/explore' element={<Explore/>}></Route>
-			      <Route path='/signIn' element={<SignIn/>} ></Route>
-			      <Route path='/signUp' element={<SignUp/>}></Route>
-			      <Route path='/forgotPass' element={<ForgotPassword/>}></Route>
-			      <Route path='/account' element={<Account/>}></Route>
-			      <Route path='/account/settings' element={<ProfileSettings id={props.currentUser?.id}/>}></Route>
+			      <Route path='/' element={<Home title="Home"/>}></Route>
+			      <Route path='/home' element={<Home title="Home"/>}></Route>
+			      <Route path='/profile/:id' element={<Profile title="Perfil"/>}></Route>
+			      <Route path='/explore' element={<Explore title="Explore"/>}></Route>
+			      <Route path='/signIn' element={<SignIn title="Iniciar Sesión"/>} ></Route>
+			      <Route path='/signUp' element={<SignUp title="Registro"/>}></Route>
+			      <Route path='/forgotPass' element={<ForgotPassword title="Recuperar password"/>}></Route>
+			      <Route path='/account' element={<Account title={"Mi cuenta"}/>}></Route>
+			      <Route path='/account/settings' element={<ProfileSettings title="Configuración de perfil" id={props.currentUser?.id}/>}></Route>
 		      </Routes>
 		      <Footer/>
 	      </Router>

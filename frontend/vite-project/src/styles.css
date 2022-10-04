@@ -10,11 +10,7 @@
     nav{
         background-color: white;
     }
-    .div-home{
-        justify-content: start;
-        gap: 2rem;
-        top: 5rem;
-    }
+
     .text-main{
         font-size: 3rem;
         text-align: center;
@@ -91,12 +87,7 @@
     .xsm{
         display: block;
     }
-    .div-home{
-        justify-content: start;
-        gap: 2rem;
-        top: 5rem;
-        
-    }
+
     .div-background_why {
         width: 40vw;
         object-fit: cover;
@@ -106,6 +97,10 @@
         height: 12vh;
         align-self: center;
         text-align: center;
+    }
+    .text-main {
+    }
+    .buttons {
     }
 
 }

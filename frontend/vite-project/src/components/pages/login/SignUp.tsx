@@ -6,6 +6,7 @@ import { useState } from 'react'
 import GoogleSignUp from './GoogleSignUp'
 
 const SignUp = (props:any) => {
+	document.title = props.title
 	let [emailValue, setEmailValue] = useState('')
 	let [passValue, setPassValue] = useState('')
 
