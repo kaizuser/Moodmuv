@@ -2,13 +2,17 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
+}
+body{
+    background-color: #f8f8f9;
 }
 .p-why2{
     min-height: 5vh;
 }
 @media screen and (max-width: 319px) {
     nav{
-        background-color: white;
+        background-color: #f8f8f9;
     }
 
     .text-main{
@@ -46,7 +50,7 @@
         display: block;
     }
     nav{
-        background-color: white;
+        background-color: #f8f8f9;
     }
     .div-home{
         justify-content: start;

@@ -1,0 +1,40 @@
+import React from "react";
+import HowToImage from "../../../assets/vectores/Recurso 1.png";
+import Section from './Section'
+import Faq from './Faq'
+import Vector from '../../../assets/Vector.png'
+const HowTo = () => {
+  return (
+    <div className="min-h-screen w-full break-all flex flex-col items-center gap-28">
+      <div className="flex w-full h-full justify-center items-center flex-wrap">
+        <div className="flex flex-col gap-4 h-full w-1/3 justify-center">
+          <h2 className="outline-4 flex flex-col font-bold text-4xl tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-[#dd941e] to-[#e6b243]">
+            Como usar{" "}
+            <span className="flex flex-col font-bold text-6xl text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B] tracking-tighter">
+              MOODMUV?
+            </span>
+          </h2>
+          <p className="text-gray-500 ">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam
+            qui totam doloribus. Esse unde, id error magni magnam totam eaque!
+          </p>
+        </div>
+        <img
+          className="h-76 object-contain"
+          src={HowToImage}
+          alt="howToImage"
+        />
+      </div>
+      <Section/>
+      <div className="min-h-screen w-full relative flex justify-center items-center">
+        <div className="flex justify-center items-center relative top-14">
+      <h2 className="text-[#fff] px-6 relative z-20 text-6xl w-80 font-bold flex flex-col break-normal">Preguntas <span className="text-4xl font-light text-[#fff]">Frecuentes</span></h2>
+      <Faq/>
+        </div>
+      <img className="min-h-screen w-full absolute z-0 bottom-0"src={Vector}/>
+      </div>
+    </div>
+  );
+};
+
+export default HowTo;

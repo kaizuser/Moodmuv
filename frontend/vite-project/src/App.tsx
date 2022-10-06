@@ -9,6 +9,7 @@ import Footer from './components/generales/Footer'
 import Profile from './components/pages/login/Profile'
 import Account from './components/pages/login/Account'
 import ProfileSettings from './components/pages/login/settings/ProfileSettings'
+import HowTo from './components/pages/howto/HowTo'
 import './styles.css'
 
 //UTILITIES
@@ -43,6 +44,7 @@ function App(props:any) {
 			      <Route path='/forgotPass' element={<ForgotPassword title="Recuperar password"/>}></Route>
 			      <Route path='/account' element={<Account title={"Mi cuenta"}/>}></Route>
 			      <Route path='/account/settings' element={<ProfileSettings title="Configuración de perfil" id={props.currentUser?.id}/>}></Route>
+				  <Route path='/howTo' element={<HowTo/>}></Route>
 		      </Routes>
 		      <Footer/>
 	      </Router>

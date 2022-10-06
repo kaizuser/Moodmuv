@@ -9,7 +9,7 @@ const Home = ({title}) => {
     <>
       <div
         className="div-home relative min-h-screen flex flex-col
-       justify-center items-center sm:flex-wrap md:flex-nowrap bg-transparent gap-8"
+       justify-center items-center sm:flex-wrap md:flex-nowrap bg-transparent gap-8 bg-[#f8f8f9]"
       >
         {/* 100vh */}
         <video

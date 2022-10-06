@@ -12,6 +12,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.1",
     "@heroicons/react": "^2.0.11",
+    "@material-tailwind/react": "^1.2.4",
     "@react-oauth/google": "^0.2.8",
     "@types/react-datepicker": "^4.4.2",
     "jsx-runtime": "^1.2.0",
