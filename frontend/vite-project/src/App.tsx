@@ -31,8 +31,6 @@ function App(props:any) {
 	}
 	},[props.currentUser])
 
-	console.log(props.currentUser);
-
 	return (
 	      <>
 	      <Router>

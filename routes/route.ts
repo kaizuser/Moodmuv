@@ -9,8 +9,8 @@ import studentControllers from '../controllers/studentControllers'
 import teacherControllers from '../controllers/teacherControllers'
 import userControllers from '../controllers/userControllers'
 
-let {get_students, get_student, set_student, delete_student, modify_student, verify_email_student, sign_up_student, log_in_student} = studentControllers
-let {get_teachers, get_teacher, set_teacher, delete_teacher, modify_teacher, verify_email_teacher, sign_up_teacher, log_in_teacher} = teacherControllers
+let {get_students, get_student, set_student, delete_student, modify_student, verify_email_student, sign_up_student, } = studentControllers
+let {get_teachers, get_teacher, set_teacher, delete_teacher, modify_teacher, verify_email_teacher, sign_up_teacher, } = teacherControllers
 let {verify_token, login_both} = userControllers
 
 
@@ -27,9 +27,6 @@ Router.route('/student/:id')
 
 Router.route('/auth/signUpStudent')
 .post(sign_up_student)
-
-Router.route('/auth/logInStudent')
-.post(log_in_student)
 
 
 
@@ -49,9 +46,6 @@ Router.route('/teacher/:id')
 
 Router.route('/auth/signUpTeacher')
 .post(sign_up_teacher)
-
-Router.route('/auth/logInTeacher')
-.post(log_in_teacher)
 
 
 

@@ -3,26 +3,31 @@ import React, { useEffect, useState, useRef } from "react";
 //UTILITIES
 import { Link } from "react-router-dom";
 import studentActions from "../../../../redux/actions/studentActions"
+import teacherActions from "../../../../redux/actions/teacherActions";
 import { connect } from "react-redux";
 import Swal from 'sweetalert2'
 import { RootState } from "../../../../main";
 
 const ProfileSettings = (props:any) => {
-	const [nameValue, setName] = useState(props.student?.name)
-	const [ubiValue, setUbi] = useState(props.student?.ubi)
-	const [numValue, setNum] = useState(props.student?.num)
-	const [genreValue, setGenre] = useState(props.student?.genre)
-	const [descValue, setDesc] = useState(props.student?.desc)
+	const [nameValue, setName] = useState(props.student?.name || props.teacher?.name)
+	const [ubiValue, setUbi] = useState(props.student?.ubi || props.teacher?.ubi)
+	const [numValue, setNum] = useState(props.student?.num || props.teacher?.num)
+	const [genreValue, setGenre] = useState(props.student?.genre || props.teacher?.genre)
+	const [descValue, setDesc] = useState(props.student?.desc || props.teacher?.desc)
 
 	useEffect(() => {
-		if(!props.student && props.id !== undefined){
-		props.fetchStudent(props.id)
+		if(!props.student && !props.teacher && props.id !== undefined){
+			props.fetchStudent(props.id)
+			props.fetchTeacher(props.id)
 		}
 
 	}, [props])
 
 	let saveStudent = () => {
-		let studentData = {
+
+		console.log(genreValue);
+		
+		let userData = {
 			  id:props.id,
 			  name:nameValue,
 			  ubi:ubiValue,
@@ -31,13 +36,23 @@ const ProfileSettings = (props:any) => {
 			  desc:descValue
 		}
 
-		props.modifyStudent(studentData)
+		if(user.type == 'Teacher'){
+			let teacherData = userData
+			props.modifyTeacher(teacherData)
+
+		} else {
+			let studentData = userData
+			props.modifyStudent(studentData)
+		}
+
 	}
+
+	let user = props.student || props.teacher
 
 	return (
 		<>
 		{
-		    props.student && (
+		    user && (
 		<div className="w-full h-full bg-[#fafafa] py-4 min-h-4">
 		<div className="m-auto border w-3/4 min-h-96 bg-white flex items-start">
 		<div className="min-h-full w-52 border-r flex flex-col self-stretch">
@@ -78,7 +93,7 @@ const ProfileSettings = (props:any) => {
 			Nombre
 		      </label>
 		    </aside>
-		    <input onChange={(e)=>setName(e.target.value)} className="name-input border grow rounded px-2" type="text" name="" id="" defaultValue={props.student?.name}/>
+		    <input onChange={(e)=>setName(e.target.value)} className="name-input border grow rounded px-2" type="text" name="" id="" defaultValue={user?.name}/>
 		  </fieldset>
 		  <fieldset className="flex gap-4 w-full flex-wrap">
 		    <aside className="flex justify-end px-6 w-44 min-h-4">
@@ -86,7 +101,7 @@ const ProfileSettings = (props:any) => {
 			Número de telefono
 		      </label>
 		    </aside>
-		    <input onChange={(e)=>setNum(e.target.value)} className="num-input border grow rounded px-2 self-center" type="text" name="" id="" defaultValue={props.student?.num}/>
+		    <input onChange={(e)=>setNum(e.target.value)} className="num-input border grow rounded px-2 self-center" type="text" name="" id="" defaultValue={user?.num}/>
 		  </fieldset>
 		  <fieldset className="flex gap-4 w-full flex-wrap">
 		    <aside className="flex justify-end px-6 w-44 min-h-4">
@@ -94,7 +109,7 @@ const ProfileSettings = (props:any) => {
 			Descripción
 		      </label>
 		    </aside>
-		    <textarea onChange={(e)=> setDesc(e.target.value)} className="desc-input px-2 border grow rounded" name="textarea" defaultValue={props.student?.desc}></textarea>
+		    <textarea onChange={(e)=> setDesc(e.target.value)} className="desc-input px-2 border grow rounded" name="textarea" defaultValue={user?.desc}></textarea>
 		  </fieldset>
 		  <fieldset className="flex gap-4 w-full flex-wrap">
 		    <aside className="flex justify-end px-6 w-44 min-h-4">
@@ -102,7 +117,7 @@ const ProfileSettings = (props:any) => {
 			Ubicación
 		      </label>
 		    </aside>
-		    <input onChange={(e)=>setUbi(e.target.value)} className="ubi-input border grow rounded px-2" type="text" name="" id="" defaultValue={props.student?.ubi}/>
+		    <input onChange={(e)=>setUbi(e.target.value)} className="ubi-input border grow rounded px-2" type="text" name="" id="" defaultValue={user?.ubi}/>
 		  </fieldset>
 		  <fieldset className="flex gap-4 w-full flex-wrap">
 		    <aside className="flex justify-end px-6 w-44 min-h-4">
@@ -110,7 +125,7 @@ const ProfileSettings = (props:any) => {
 			Género
 		      </label>
 		    </aside>
-		    <select onChange={(e)=>setGenre(e.target.value)} defaultValue={props.student?.genre} className="genre-input text-sm border grow rounded px-2" id="">
+		    <select onChange={(e)=>setGenre(e.target.value)} defaultValue={user?.genre} className="genre-input text-sm border grow rounded px-2" id="">
 		    <option value="Elige una opción" defaultValue={'Elige una opción'} disabled hidden></option>
 		      <option value="Hombre">Hombre</option>
 		      <option value="Mujer">Mujer</option>
@@ -130,12 +145,15 @@ const ProfileSettings = (props:any) => {
 
 let mapDispatch = {
 	modifyStudent:studentActions.modifyStudent,
-	fetchStudent:studentActions.fetchStudent
+	modifyTeacher:teacherActions.modifyTeacher,
+	fetchStudent:studentActions.fetchStudent,
+	fetchTeacher:teacherActions.fetchTeacher
 }
 
 let mapState = (state:RootState) => {
 	return {
-		student:state.studentReducer.student
+		student:state.studentReducer.student,
+		teacher:state.teacherReducer.teacher
 	}
 }
 

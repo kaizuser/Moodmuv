@@ -6,6 +6,7 @@ import { Buffer } from 'buffer'
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { connect } from 'react-redux'
 import studentActions from '../../../redux/actions/studentActions'
+import teacherActions from '../../../redux/actions/teacherActions'
 
 let GoogleSignUp = (props:any) => {
 	function base64urlDecode(str:string) {
@@ -28,14 +29,20 @@ let GoogleSignUp = (props:any) => {
 	const responseGoogle = async (res:any) => {
 	    let credentials = decodeCredential(res.credential)
 
-	    const studentData = {
+	    const userData = {
 		    email:credentials.email,
 		    pass:'Google-no-password',
 		    from:'Google'
 
 	    }
 
-	    await props.signUpStudent(studentData.email, studentData.pass, studentData.from)
+	    if (props.rolValue == 'Profesor'){
+		    await props.signUpTeacher(userData.email, userData.pass, userData.from)
+	    } else {
+
+		    await props.signUpStudent(userData.email, userData.pass, userData.from)
+	    }
+
 	}
 
 	return (
@@ -51,6 +58,7 @@ let GoogleSignUp = (props:any) => {
 
 const mapDispatch = {
 	signUpStudent: studentActions.signUpStudent,
+	signUpTeacher: teacherActions.signUpTeacher
 }
 
 const connector = connect(null, mapDispatch)

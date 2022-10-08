@@ -1,5 +1,6 @@
 //BASICS
 import {Student} from '../models/student';
+import {Teacher} from '../models/teacher'
 import {Request, Response} from 'express';
 
 //UTILITIES
@@ -93,11 +94,12 @@ const studentControllers = {
 
 		try {
 			const student = await Student.findOne({ email });
+			const teacher = await Teacher.findOne({ email })
 
-			if (student) {
+			if (student || teacher) {
 				res.json({
 				    success: false,
-				    message: "Try to verify or sign in",
+				    message: "Email already registered. Try to login",
 				});
 
 			} else {
@@ -138,71 +140,10 @@ const studentControllers = {
 			res.json({
 			success: false,
 			message: "Something went wrong, please try again.",
+			error:error
 			});
 		}
 	},
-
-	log_in_student: async (req:Request, res:Response) => {
-		const { email, pass} = req.body;
-
-		try {
-			const student = await Student.findOne({ email });
-
-			if (!student) {
-				res.json({
-				success: false,
-				message: "Student doesn't exist, try signing up.",
-				});
-			} 
-
-			else {
-
-				if (student.verifEmail) {
-					let passMatches = student.pass.filter((password) =>
-					bcryptjs.compareSync(pass, password)
-					);
-
-					if (passMatches.length > 0) {
-						const studentData = {
-							id: student._id,
-							email: student.email,
-							pass: student.pass
-						};
-
-						const token = jwt.sign({ ...studentData }, process.env.KEY, {
-						expiresIn: 60 * 60 * 24,
-						});
-
-						res.json({
-							success: true,
-							response: { token, studentData },
-						});
-
-					} else {
-						res.json({
-						success: false,
-						message: "Email or password do not match. Please try again",
-						});
-					}
-
-				} else {
-						res.json({
-						success: false,
-						message: "You haven't verified your email",
-						});
-					}
-				}
-
-		} catch (error) {
-			console.log(error);
-
-			res.json({
-			success: false,
-			message: "Something went wrong, please try again.",
-			});
-		}
-
-	}
 }
 
 export default studentControllers

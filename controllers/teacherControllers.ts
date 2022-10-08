@@ -1,5 +1,6 @@
 //BASICS
 import {Teacher} from '../models/teacher'
+import {Student} from '../models/student'
 import {Request, Response} from 'express'
 
 //UTILITIES
@@ -62,7 +63,6 @@ const teacherControllers = {
         modify_teacher: async(req:Request, res:Response) => {
                 let teacherData = req.body
                 let id:string = teacherData.id
-
 		teacherData.pass ? teacherData.pass = [bcryptjs.hashSync(teacherData.pass, 10)] : null
 
 		let newTeacher:teacherDTO = teacherData
@@ -93,11 +93,12 @@ const teacherControllers = {
 
 		try {
 			const teacher = await Teacher.findOne({ email });
+			const student = await Student.findOne({ email })
 
-			if (teacher) {
+			if (teacher || student) {
 				res.json({
 				    success: false,
-				    message: "Try to verify or sign in",
+				    message: "Email already registered. Try to Login",
 				});
 
 			} else {
@@ -142,71 +143,6 @@ const teacherControllers = {
 			});
 		}
 	},
-
-	log_in_teacher: async (req:Request, res:Response) => {
-		const { email, pass} = req.body;
-
-		try {
-			const teacher = await Teacher.findOne({ email });
-
-			if (!teacher) {
-				res.json({
-				success: false,
-				message: "Teacher doesn't exist, try signing up.",
-				});
-			} 
-
-			else {
-				if (teacher.verifEmail) {
-					let passMatches = teacher.pass.filter((password) =>
-					bcryptjs.compareSync(pass, password)
-					);
-
-					if (passMatches.length > 0) {
-						const teacherData = {
-							email: teacher.email,
-							pass: teacher.pass
-						};
-
-						const token = jwt.sign({ ...teacherData }, process.env.KEY, {
-						expiresIn: 60 * 60 * 24,
-						});
-
-						res.json({
-							success: true,
-							response: { token, teacherData },
-						});
-
-					} else {
-						res.json({
-						success: false,
-						message: "Email and password do not match. Please try again",
-						});
-					}
-
-				} else {
-						res.json({
-						success: false,
-						message: "You haven't verified your email",
-						});
-					}
-				}
-
-		} catch (error) {
-			console.log(error);
-
-			res.json({
-			success: false,
-			message: "Something went wrong, please try again.",
-			error:error
-			});
-		}
-
-	},
-
-
-	
-
 }
 
 export default teacherControllers
