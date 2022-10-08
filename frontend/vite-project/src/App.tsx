@@ -18,6 +18,7 @@ import {useEffect} from 'react'
 import {connect} from 'react-redux'
 import verifyActions from './redux/actions/verifyActions'
 import type {RootState, AppDispatch} from './main'
+import {current} from '@reduxjs/toolkit'
 
 function App(props:any) {
 
@@ -29,6 +30,8 @@ function App(props:any) {
 		}
 	}
 	},[props.currentUser])
+
+	console.log(props.currentUser);
 
 	return (
 	      <>

@@ -3,7 +3,7 @@ import React from 'react'
 
 //UTILITIES 
 import {connect} from 'react-redux'
-import userActions from '../../../redux/actions/userActions'
+import studentActions from '../../../redux/actions/studentActions'
 
 //UTILITIES CALENDAR
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar'
@@ -36,7 +36,7 @@ class Scheduler extends React.Component <any, any>{
 
 		console.log(event);
 		
-		this.props.modifyUser(event)
+		this.props.modifyStudent(event)
 	}
 
 	render(): React.ReactNode {
@@ -63,7 +63,7 @@ class Scheduler extends React.Component <any, any>{
 
 							<div className='w-auto'>
 								<DatePicker 
-									className='w-60 placeholder:text-gray-500 bg-gray-300 p-1 rounded-xl text-center'
+									className='w-60 placeholder:text-gray-500 bg-gray-300 p-1 rounded-xl text-center z-10'
 									placeholderText='Start date'
 									selected={this.state.storedEvent.start}
 									onChange={(event) => this.setState({storedEvent:{...this.state.storedEvent, start:event}})}
@@ -72,7 +72,7 @@ class Scheduler extends React.Component <any, any>{
 
 							<div className='w-auto'>
 								<DatePicker
-								className='w-60 placeholder:text-gray-500 bg-gray-300 p-1 rounded-xl text-center'
+								className='w-60 placeholder:text-gray-500 bg-gray-300 p-1 rounded-xl text-center z-10 bg-black'
 								placeholderText='End date'
 								selected={this.state.storedEvent.end}
 								onChange={(event) => this.setState({storedEvent:{...this.state.storedEvent, end:event}})}
@@ -106,7 +106,7 @@ class Scheduler extends React.Component <any, any>{
 }
 
 let mapDispatch = {
-	modifyUser:userActions.modifyUser
+	modifyStudent:studentActions.modifyStudent
 }
 
 let connector = connect(null, mapDispatch)

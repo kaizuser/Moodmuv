@@ -1,13 +1,10 @@
-
 const initialState = {
     teacher: null,
     teachers:null,
 }
 
 const teacherReducer = (state = initialState, action:any) => {
-    
     switch (action.type) {
-
 	case 'fetchTeacher':
 		return {
 			...state,

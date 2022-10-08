@@ -4,40 +4,40 @@ import axios from 'axios';
 import type {RootState, AppDispatch} from '../../main'
 import Swal from 'sweetalert2'
 
-const teacherActions = {
+const studentActions = {
     
-	fetchTeachers: () => {
+	fetchStudents: () => {
 		return async(dispatch:AppDispatch, getState:RootState) => {
 
 			const ans = await axios({
 				method:'get',
-				url:'http://localhost:4000/api/teacher',
+				url:'http://localhost:4000/api/student',
 			})
 
-			dispatch({type:'fetchTeachers', payload:ans.data.data})
-		}
+			dispatch({type:'fetchStudents', payload:ans.data.data})
+	       }
 	},
 
-	fetchTeacher: (id:string) => {
+	fetchStudent: (id:string) => {
 		return async(dispatch:AppDispatch, getState:RootState) => {
 
 			const ans = await axios({
 				method:'get',
-				url:'http://localhost:4000/api/teacher/' + id,
+				url:'http://localhost:4000/api/student/' + id,
 			})
 
-			dispatch({type:'fetchTeacher', payload:ans.data.data})
-		}
+			dispatch({type:'fetchStudent', payload:ans.data.data})
+	        }
 
 	},
 
-	modifyTeacher: (teacherData:any) => {
+	modifyStudent: (studentData:any) => {
 		return async(dispatch:AppDispatch, getState:RootState) => {
 
 			const ans = await axios({
 				method:'put',
-				url:'http://localhost:4000/api/teacher',
-				data:teacherData,
+				url:'http://localhost:4000/api/student',
+				data:studentData,
 			})
 
 			if(ans.status === 200){
@@ -56,45 +56,47 @@ const teacherActions = {
 					timer:2000
 				})
 			}
-		}
+
+
+	        }
 
 	},
 
-	deleteTeacher: (id:string)=>{
+	deleteStudent: (id:string)=>{
 		return async(dispatch:AppDispatch, getState:RootState) => {
 
 			const ans = await axios({
 				method:'delete',
-				url:'http://localhost:4000/api/teacher/' + id,
+				url:'http://localhost:4000/api/student/' + id,
 			})
+
 		}
-		
 	},
 
-	setTeacher: (teacherData:any) => {
+	setStudent: (studentData:any) => {
 		return async(dispatch:AppDispatch,getState:RootState)=>{
 
 			const ans = await axios({
 				method:'post',
-				url:'http://localhost:4000/api/teacher',
-				data:teacherData
+				url:'http://localhost:4000/api/student',
+				data:studentData
 			})
 
 		}
 	},
 
-	signInTeacher: (email:string, pass:string) => {
+	signInStudent: (email:string, pass:string) => {
 		return async (dispatch:AppDispatch, getState:RootState) => {
 
 			const ans = await axios({
 				method:'post',
-				url:'http://localhost:4000/api/auth/logInTeacher',
+				url:'http://localhost:4000/api/auth/logInStudent',
 				data:{email, pass}
 			})
 
 			if (ans.data.success){
 				localStorage.setItem('token', ans.data.response.token)
-				dispatch({type:'currentUser', payload:ans.data.response.userData.email})
+				dispatch({type:'currentUser', payload:ans.data.response.studentData.email})
 
 				Swal.fire({
 					icon:"success",
@@ -118,12 +120,12 @@ const teacherActions = {
 		}
 	},
 
-	signUpTeacher: (email:string, pass:string, from:string) => {
+	signUpStudent: (email:string, pass:string, from:string) => {
 		return async (dispatch:AppDispatch, getState:RootState) => {
 
 			const ans = await axios({
 				method:'post',
-				url:'http://localhost:4000/api/auth/signUpTeacher',
+				url:'http://localhost:4000/api/auth/signUpStudent',
 				data:{email, pass, from}
 			})
 
@@ -147,4 +149,4 @@ const teacherActions = {
 	},
 }
 
-export default teacherActions;
+export default studentActions;

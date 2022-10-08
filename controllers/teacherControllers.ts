@@ -24,7 +24,7 @@ interface teacherDTO{
 	verifEmail?:boolean,
 	from?:string,
 	uniqueString?:string,
-	num?:number,
+	num?:string,
 	events?:Array<{title:string, start:string, end:string}>
 }
 
@@ -105,7 +105,7 @@ const teacherControllers = {
 				const hashPass = bcryptjs.hashSync(pass, 10);
 
 				const newTeacher = await new Teacher({
-					type:'teacher',
+					type:'Teacher',
 					email,
 					pass:[hashPass],
 					from,

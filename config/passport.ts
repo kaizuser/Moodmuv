@@ -7,18 +7,18 @@ const passport = require('passport')
 const jwtStrategy = require('passport-jwt').Strategy
 const extractJwt = require('passport-jwt').ExtractJwt
 
-import {User} from '../models/user'
+import {Student} from '../models/student'
 import {Teacher} from '../models/teacher'
  
 export default passport.use(new jwtStrategy({
 	jwtFromRequest: extractJwt.fromAuthHeaderAsBearerToken(),
 	secretOrKey: process.env.KEY
 	},(jwt_payload:any,done:any)=>{
-		User.findOne({_id:jwt_payload.id})
+		Student.findOne({_id:jwt_payload.id})
 
-		.then(user => {
-			if (user) {
-			    return done(null, user)
+		.then(student => {
+			if (student) {
+			    return done(null, student)
 			}
 
 			else {

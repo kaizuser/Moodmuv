@@ -17,7 +17,7 @@ const SignIn = (props:any) => {
 		  pass:passValue,
 	  }
 
-	  let navigateFlag = props.signInUser(userData.email, userData.pass).then((res:any) => {
+	  let navigateFlag = props.login_both(userData.email, userData.pass).then((res:any) => {
 		  if(res){
 			  navigate('/home')
 		  }
@@ -78,7 +78,7 @@ const SignIn = (props:any) => {
 }
 
 const mapDispatch = {
-	signInUser:userActions.signInUser
+	login_both:userActions.login_both
 }
 
 const connector = connect(null, mapDispatch)

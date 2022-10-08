@@ -5,14 +5,14 @@ import CarouselCards from "./CarouselCards";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {connect} from 'react-redux'
-import userActions from "../../../redux/actions/userActions";
+import studentActions from "../../../redux/actions/studentActions";
 import teacherActions from '../../../redux/actions/teacherActions'
 import { RootState } from "../../../main"
 import Scheduler from "./Calendar"
 
 
 const Account = (props:any) => {
-	interface userType {
+	interface studentType {
 	id: string;
 	email: string;
 	}
@@ -40,19 +40,19 @@ const Account = (props:any) => {
 		},
 	];
 
-	let currentUser: userType = useSelector(
+	let currentUser: studentType = useSelector(
 	(store: any) => store.userReducer.currentUser
 	);
 
 	useEffect(() => {
 	  if(currentUser){
-		  props.fetchUser(currentUser.id)
+		  props.fetchStudent(currentUser.id)
 		  props.fetchTeacher(currentUser.id)
 	  }
 
 	}, [currentUser])
 
-	let userAccount = props.teacher || props.user
+	let userAccount = props.teacher || props.student
 
 	return (
 	<>
@@ -185,14 +185,14 @@ const Account = (props:any) => {
 };
 
 let mapDispatch = {
-	fetchUser:userActions.fetchUser,
+	fetchStudent:studentActions.fetchStudent,
 	fetchTeacher:teacherActions.fetchTeacher
 }
 
 let mapState = (state:RootState) => {
 	return {
 		teacher:state.teacherReducer.teacher,
-		user:state.userReducer.user
+		student:state.studentReducer.student
 	}
 }
 

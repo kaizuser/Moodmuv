@@ -15,7 +15,7 @@ interface teacherDTO{
 	verifEmail:boolean,
 	from:string,
         uniqueString:string,
-	num:number,
+	num:string,
 	events:Array<{title:string, start:Date, end:Date}>
 }
 
@@ -34,7 +34,7 @@ const teacherSchema = new Schema<teacherDTO>({
 	verifEmail:{type:Boolean, required:true},
 	from:{type:String, required:true},
 	uniqueString:{type:String, required:true},
-	num:{type:Number, required:false},
+	num:{type:String, required:false},
 	events:[{
 		title:{type:String, required:false},
 		start:{type:Date, required:false},

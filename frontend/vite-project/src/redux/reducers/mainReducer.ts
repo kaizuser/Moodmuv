@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
-import userReducer from './userReducer'
+import studentReducer from './studentReducer'
 import teacherReducer from './teacherReducer'
+import userReducer from './userReducer'
 
 const mainReducer = combineReducers({
-	userReducer,
-	teacherReducer
+	studentReducer,
+	teacherReducer,
+	userReducer
 })
 
 export default mainReducer

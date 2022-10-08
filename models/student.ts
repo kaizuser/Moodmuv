@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-interface usersDTO{
+interface studentDTO{
 	type:string,
         name:string,
 	email:string,
@@ -15,11 +15,10 @@ interface usersDTO{
 	verifEmail:boolean,
 	from:string,
 	uniqueString:string,
-	num:number,
-	events:Array<{title:string, start:Date, end:Date}>
+	num:string,
 }
 
-const userSchema = new Schema<usersDTO>({
+const studentSchema = new Schema<studentDTO>({
 	type:{type:String, required:false},
         name:{type:String, required:false},
 	email:{type:String, required:true},
@@ -34,12 +33,7 @@ const userSchema = new Schema<usersDTO>({
 	verifEmail:{type:Boolean, required:true},
 	from:{type:String, required:true},
 	uniqueString:{type:String, required:true},
-	num:{type:Number, required:false},
-	events:[{
-		title:{type:String, required:false},
-		start:{type:Date, required:false},
-		end:{type:Date, required:false}
-	}]
+	num:{type:String, required:false},
 })
 
-export const User = model<usersDTO>('users', userSchema)
+export const Student = model<studentDTO>('students', studentSchema)

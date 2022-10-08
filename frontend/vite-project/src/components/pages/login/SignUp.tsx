@@ -1,12 +1,14 @@
 //UTILITIES
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import userActions from '../../../redux/actions/userActions'
+import studentActions from '../../../redux/actions/studentActions'
+import teacherActions from '../../../redux/actions/teacherActions'
 import { useState } from 'react'
 import GoogleSignUp from './GoogleSignUp'
 
 const SignUp = (props:any) => {
 	document.title = props.title
+	let [rolValue, setRolValue] = useState('')
 	let [emailValue, setEmailValue] = useState('')
 	let [passValue, setPassValue] = useState('')
 
@@ -17,7 +19,14 @@ const SignUp = (props:any) => {
 		  from:'form-signUp'
 		}
 
-		props.signUpUser(userData.email, userData.pass, userData.from)
+		if(rolValue == 'Alumno'){
+			props.signUpStudent(userData.email, userData.pass, userData.from)
+		} else {
+
+			props.signUpTeacher(userData.email, userData.pass, userData.from)
+		}
+
+
 	}
 
 	return (
@@ -45,7 +54,18 @@ const SignUp = (props:any) => {
 		  <p className="text-sm font-normal text-gray-600 mb-7 sm:mb-2">Bienvenido otra vez!</p>
 		  <a className="registrarme font-semibold text-[#5FAABF]">Quiero registrarme</a>
 		  <div className="flex items-center border-2 py-2 px-3 rounded mb-4 bg-[#F0EFFF]">
-			<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400 " fill="none"
+			 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="h-5 w-5 text-gray-400" viewBox="0 0 16 16">
+			   <path d="M8 9.05a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+			   <path d="M1 1a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h.5a.5.5 0 0 0 .5-.5.5.5 0 0 1 1 0 .5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5.5.5 0 0 1 1 0 .5.5 0 0 0 .5.5h.5a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H6.707L6 1.293A1 1 0 0 0 5.293 1H1Zm0 1h4.293L6 2.707A1 1 0 0 0 6.707 3H15v10h-.085a1.5 1.5 0 0 0-2.4-.63C11.885 11.223 10.554 10 8 10c-2.555 0-3.886 1.224-4.514 2.37a1.5 1.5 0 0 0-2.4.63H1V2Z"/>
+			 </svg>
+			  <select className="pl-2 outline-none border-none bg-[#F0EFFF]" onChange={(event) => setRolValue(event.target.options[event.target.selectedIndex].value)}>
+				  <option className='pl-2 outline-none border-none bg-[#F0EFFF] text-[#A7A3FF]' value='Elige tu rol' hidden>Elige tu rol</option>
+				  <option className='pl-2 outline-none border-none bg-[#F0EFFF] text-[#A7A3FF]' value='Profesor'>Profesor</option>
+				  <option className='pl-2 outline-none border-none bg-[#F0EFFF] text-[#A7A3FF]' value='Alumno'>Alumno</option>
+			  </select>
+		  </div>
+		  <div className="flex items-center border-2 py-2 px-3 rounded mb-4 bg-[#F0EFFF]">
+			<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none"
 			  viewBox="0 0 24 24" stroke="currentColor">
 			  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
 			    d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
@@ -77,7 +97,8 @@ const SignUp = (props:any) => {
 }
 
 const mapDispatch = {
-	signUpUser:userActions.signUpUser
+	signUpStudent:studentActions.signUpStudent,
+	signUpTeacher:teacherActions.signUpTeacher
 }
 
 const connector = connect(null, mapDispatch)

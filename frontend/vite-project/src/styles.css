@@ -10,6 +10,14 @@ body{
 .p-why2{
     min-height: 5vh;
 }
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+}
+
 @media screen and (max-width: 319px) {
     nav{
         background-color: #f8f8f9;

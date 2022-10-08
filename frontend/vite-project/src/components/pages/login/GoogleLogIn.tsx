@@ -5,7 +5,7 @@ import React from 'react'
 import { Buffer } from 'buffer'
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { connect } from 'react-redux'
-import userActions from '../../../redux/actions/userActions'
+import studentActions from '../../../redux/actions/studentActions'
 import {useNavigate} from 'react-router-dom'
 
 let GoogleLogIn = (props:any) => {
@@ -31,12 +31,12 @@ let GoogleLogIn = (props:any) => {
 	const responseGoogle = async (res:any) => {
 	    let credentials = decodeCredential(res.credential)
 
-	    const userData = {
+	    const studentData = {
 		    email:credentials.email,
 		    pass:'Google-no-password'
 	    }
 
-	    let navigateFlag = await props.signInUser(userData.email, userData.pass)
+	    let navigateFlag = await props.signInStudent(studentData.email, studentData.pass)
 
 	    if (navigateFlag){
 		    navigate('/home')
@@ -54,7 +54,7 @@ let GoogleLogIn = (props:any) => {
 }
 
 const mapDispatch = {
-	signInUser: userActions.signInUser,
+	signInStudent: studentActions.signInStudent,
 }
 
 const connector = connect(null, mapDispatch)
