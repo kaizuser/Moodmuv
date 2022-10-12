@@ -16,7 +16,7 @@ const Account = (props:any) => {
 	id: string;
 	email: string;
 	}
-
+	console.log(props.student)
 	//SET-UP
 	
 	const calendars = [{ id: 'cal1', name: 'Personal' }];
@@ -86,9 +86,10 @@ const Account = (props:any) => {
 		  </svg>
 		</Link>
 	      </div>
+		  {/* IMAGEN  DE PERFIL */}
 	      <img
 		className="mx-4 w-40 rounded-full -translate-y-16"
-		src="https://demos.creative-tim.com/notus-js/assets/img/team-2-800x800.jpg"
+		src={props.student?.img || props.teacher?.img}
 	      />
 	      <div className="flex gap-4 items-center">
 		<Link
@@ -113,7 +114,7 @@ const Account = (props:any) => {
 		</Link>
 	      </div>
 	    </div>
-	    <h2 className="font-bold text-4xl text-[#222]">Jenna Stones</h2>
+	    <h2 className="font-bold text-4xl text-[#222]">{props.student?.name || props.teacher?.name}</h2>
 	    {/* Ubicación */}
 	    <div className="p-4 flex">
 	      <svg
@@ -136,11 +137,11 @@ const Account = (props:any) => {
 		/>
 	      </svg>
 	      <p className="font-bold text-[#999] uppercase text-sm">
-		{" "}
-		Los Angeles, California{" "}
+	{props.student?.ubi || props.teacher?.ubi}
 	      </p>
 	    </div>
 	    {/* Oficio */}
+	    { props.teacher &&
 	    <div className="flex p-4">
 	      <svg
 		xmlns="http://www.w3.org/2000/svg"
@@ -156,26 +157,29 @@ const Account = (props:any) => {
 		  d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z"
 		/>
 	      </svg>
-	      <p className="text-[#666]">
+		 <p className="text-[#666]">
 		Solution Manager - Creative Tim Officer
 	      </p>
 	    </div>
+		} 
 	    <hr className="w-[95%]" />
 	    <p className="lg:w-[70%] text-[#999] py-8">
-	      An artist of considerable range, Jenna the name taken by
-	      Melbourne-raised, Brooklyn-based Nick Murphy writes, performs and
-	      records all of his own music, giving it a warm, intimate feel with
-	      a solid groove structure. An artist of considerable range.
+		{props.student?.desc}
 	    </p>
-	    <div className="shadow-md px-20 py-2 rounded-md bg-gradient-to-r from-[#563D81] to-[#6E5E8B]">
+{	    props.teacher &&
+<><div className="shadow-md px-20 py-2 rounded-md bg-gradient-to-r from-[#563D81] to-[#6E5E8B]">
 	      <h3 className="font-bold text-white text-4xl">Cursos</h3>
 	    </div>
 	    <div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-r from-[#563D81] to-[#6E5E8B]">
 	      <h3 className="font-bold text-white text-4xl">Cursos</h3>
 	    </div>
 	    <CarouselCards />
+		</>}
 	  </div>
-	  <Scheduler userAccount={userAccount}/>
+	  {
+		props.teacher && <Scheduler userAccount={userAccount}/>
+	  }
+	  
 	</div>
 	) : (
 	""

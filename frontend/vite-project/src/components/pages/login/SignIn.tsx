@@ -62,9 +62,9 @@ const SignIn = (props:any) => {
                       d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
                       clipRule="evenodd" />
                   </svg>
-			<input className="pl-2 outline-none border-none bg-[#F0EFFF] placeholder-[#A7A3FF]" type="text" name="" id="" placeholder="Password" onChange={(event) => setPassValue(event.target.value)}/>
+			<input className="pl-2 outline-none border-none bg-[#F0EFFF] placeholder-[#A7A3FF]" type="password" name="" id="" placeholder="Password" onChange={(event) => setPassValue(event.target.value)}/>
           </div>
-		<button type="button" className="block w-full bg-indigo-600 mt-4 py-2 rounded bg-[#4D47C3] text-white font-semibold mb-2" onClick={() => signIn()}>Login</button>
+		<button type="button" className="block w-full bg-indigo-600 mt-4 py-2 rounded bg-[#4D47C3] text-white font-semibold mb-2" onClick={() => signIn()}>Iniciar Sesión</button>
 		<div className='flex items-center justift-center flex-col'>
 		  <Link to={'/forgotPass'}>
 			  <span className="text-sm ml-2 hover:text-blue-500 cursor-pointer">Te olvidaste la contraseña?</span>

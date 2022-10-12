@@ -2,7 +2,7 @@ import BotonPrimario from "../generales/BotonPrimario";
 import BotonSecundario from "../generales/BotonSecundario";
 import Why from "../Why";
 import sample from "../../assets/video.mp4";
-import GridTalleres from './GridTalleres'
+import GridTalleres from './talleres/Talleres'
 const Home = ({title}) => {
   document.title = title
   return (
@@ -31,7 +31,9 @@ const Home = ({title}) => {
         {/* 200vh */}
       </div>
       <Why />
+      <div className="p-16">
       <GridTalleres/>
+      </div>
     </>
   );
 };

@@ -14,7 +14,9 @@ const ProfileSettings = (props:any) => {
 	const [numValue, setNum] = useState(props.student?.num || props.teacher?.num)
 	const [genreValue, setGenre] = useState(props.student?.genre || props.teacher?.genre)
 	const [descValue, setDesc] = useState(props.student?.desc || props.teacher?.desc)
-
+	const [avatarFile, setAvatarFile] = useState(undefined);
+	const [urlimage, setUrlimage] = useState("");
+	console.log(props)
 	useEffect(() => {
 		if(!props.student && !props.teacher && props.id !== undefined){
 			props.fetchStudent(props.id)
@@ -33,7 +35,7 @@ const ProfileSettings = (props:any) => {
 			  ubi:ubiValue,
 			  num:numValue,
 			  genre:genreValue,
-			  desc:descValue
+			  desc:descValue,
 		}
 
 		if(user.type == 'Teacher'){
@@ -80,11 +82,11 @@ const ProfileSettings = (props:any) => {
 		</div>
 		<form className="w-full px-28 pb-16 my-4 flex flex-col gap-4 min-h-4">
 		  <fieldset className="flex flex-col gap-2 justify-center items-center">
-		    <img className="rounded-full bg-black w-6 h-6" src="https://yt3.ggpht.com/ytc/AMLnZu835wtVeM6vGM_PkbU_Fvbma-sOcDD_aICc9-Ct=s48-c-k-c0x00ffffff-no-rj-mo" alt="" />
+		    <img className="rounded-full bg-black w-6 h-6" src={user?.img} alt="" />
 		    <label htmlFor="file-upload" className="cursor-pointer text-xs text-[#007AE9]">
 		      Cambiar foto de perfil
 		    </label>
-		    <input className="hidden" id="file-upload" type="file"/>
+		    <input onChange={(e)=> setAvatarFile(e.target.files[0])} className="hidden" id="file-upload" type="file"/>
 
 		  </fieldset>
 		  <fieldset className="flex gap-4 w-full flex-wrap">

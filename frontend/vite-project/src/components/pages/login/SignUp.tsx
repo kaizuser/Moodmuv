@@ -92,7 +92,7 @@ const SignUp = (props:any) => {
 			  </svg>
 				<input className="pl-2 outline-none border-none bg-[#F0EFFF] placeholder-[#A7A3FF]" type="text" name="" id="" placeholder="Password" onChange={(event) => setPassValue(event.target.value)}/>
 		  </div>
-			<button type="button" className="block w-full bg-indigo-600 mt-4 py-2 rounded bg-[#4D47C3] text-white font-semibold mb-2" onClick={() => signUp()}>Login</button>
+			<button type="button" className="block w-full bg-indigo-600 mt-4 py-2 rounded bg-[#4D47C3] text-white font-semibold mb-2" onClick={() => signUp()}>Registrarme</button>
 
 		  <div className='flex justify-center items-center flex-col'>
 			  <Link to={'/signIn'}>
