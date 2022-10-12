@@ -68,7 +68,7 @@ export default function Example(props: any) {
                           props.currentUser ? (
 			      <div>
 
-                              <button onClick={() => setearOpenDrop()}>
+                              <button className="w-auto mr-4" onClick={() => setearOpenDrop()}>
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
                                   fill="none"
@@ -87,23 +87,23 @@ export default function Example(props: any) {
                               <div
                                 className={
                                   openDrop
-                                    ? "flex flex-col gap-1 text-sm text-center border rounded absolute right-32 top-16 px-4 justify-center items-center bg-white text-[#42136] w-24 h-24"
+                                    ? "flex flex-col gap-2 text-xs text-center border rounded absolute right-36 top-16 px-4 justify-center items-center bg-white text-[#42136] w-24 h-24"
                                     : "hidden"
                                 }
                               >
                                 <Link
-                                  className="font-bold text-[#323232]"
+                                  className="text-[#323232]"
                                   to={"/account"}
                                 >
                                   Profile
                                 </Link>
                                 <Link
-                                  className="font-bold text-[#323232]"
+                                  className="text-[#323232]"
                                   to={"/account/settings"}
                                 >
                                   Settings
                                 </Link>
-                                <button className="font-bold text-[#323232]">
+                                <button className="p-[0] text-[#323232]">
                                   Log out
                                 </button>
                               </div>
