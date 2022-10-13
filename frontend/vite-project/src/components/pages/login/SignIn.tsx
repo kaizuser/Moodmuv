@@ -17,7 +17,7 @@ const SignIn = (props:any) => {
 		  pass:passValue,
 	  }
 
-	  let navigateFlag = props.login_both(userData.email, userData.pass).then((res:any) => {
+	  let navigateFlag = props.loginBoth(userData.email, userData.pass).then((res:any) => {
 		  if(res){
 			  navigate('/home')
 			  window.scrollTo(0, 0);
@@ -80,7 +80,7 @@ const SignIn = (props:any) => {
 }
 
 const mapDispatch = {
-	login_both:userActions.login_both
+	loginBoth:userActions.loginBoth
 }
 
 const connector = connect(null, mapDispatch)

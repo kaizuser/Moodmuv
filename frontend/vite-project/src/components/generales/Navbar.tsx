@@ -5,8 +5,9 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Logo from "../../assets/logoDegrade.png";
 
 //UTILITIES
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
+import userActions from "../../redux/actions/userActions";
 
 const navigation = [
   { name: "Explorar", href: "#", current: false },
@@ -22,7 +23,8 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Example(props: any) {
+function Example(props: any) {
+  let navigate = useNavigate()
   const [openDrop, setOpenDrop] = useState(false);
   const setearOpenDrop = () => {
     setOpenDrop(!openDrop);
@@ -103,9 +105,15 @@ export default function Example(props: any) {
                                 >
                                   Settings
                                 </Link>
-                                <button className="p-[0] text-[#323232]">
-                                  Log out
-                                </button>
+
+			      <button className="p-[0] text-[#323232]" onClick={() => {
+				      props.logOut()
+				      navigate('/home')
+				      window.scrollTo(0, 0);
+			      }}>
+			      Log out
+			      </button>
+
                               </div>
 
 			      </div>
@@ -203,3 +211,13 @@ export default function Example(props: any) {
     </Disclosure>
   );
 }
+
+const mapDispatch = {
+	logOut:userActions.logOut
+}
+
+const connector = connect(null, mapDispatch)
+
+export default connector(Example)
+
+

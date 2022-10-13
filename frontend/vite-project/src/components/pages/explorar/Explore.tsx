@@ -5,6 +5,7 @@ import CardExplore from './CardExplore'
 //UTILITIES
 import {connect} from 'react-redux'
 import teacherActions from "../../../redux/actions/teacherActions"
+import workshopActions from "../../../redux/actions/workshopActions";
 import { RootState } from "../../../main";
 import { Link } from "react-router-dom";
 
@@ -12,10 +13,9 @@ const Explore = (props:any) => {
 
 	useEffect(() => {
 		props.fetchTeachers()
+		props.fetchWorkshops()
 	}, [])
 
-	console.log(props);
-  
 	return (
 
 		<div className="w-full h-screen">
@@ -63,12 +63,14 @@ const Explore = (props:any) => {
 };
 
 const mapDispatch = {
-	fetchTeachers:teacherActions.fetchTeachers
+	fetchTeachers:teacherActions.fetchTeachers,
+	fetchWorkshops:workshopActions.fetchWorkshops
 }
 
 const mapState = (state:RootState) => {
 	return {
-		teachers:state.teacherReducer.teachers
+		teachers:state.teacherReducer.teachers,
+		workshops:state.workshopReducer.workshops
 	}
 }
 

@@ -5,7 +5,7 @@ import type {RootState, AppDispatch} from '../../main'
 import Swal from 'sweetalert2'
 
 const userActions = {
-	login_both: (email:string, pass:string) => {
+	loginBoth: (email:string, pass:string) => {
 		return async (dispatch:AppDispatch, getState:RootState) => {
 			const ans = await axios({
 				method:'post',
@@ -37,7 +37,23 @@ const userActions = {
 				return false
 			}
 		}
-	}
+	},
+
+	logOut: () => {
+		return async (dispatch:AppDispatch, getState:RootState) => {
+			localStorage.removeItem('token')
+
+			Swal.fire({
+				icon:"success",
+				title:'You logged out succesfully',
+				showConfirmButton:false,
+				timer:1000
+			})
+
+			dispatch({ type: 'currentUser', payload: null});
+		}
+	} 
+	
 }
 
 export default userActions

@@ -36,10 +36,11 @@ let GoogleLogIn = (props:any) => {
 		    pass:'Google-no-password'
 	    }
 
-	    let navigateFlag = await props.login_both(userData.email, userData.pass)
+	    let navigateFlag = await props.loginBoth(userData.email, userData.pass)
 
 	    if (navigateFlag){
 		    navigate('/home')
+		    window.scrollTo(0, 0);
 	    }
 	}
 
@@ -54,7 +55,7 @@ let GoogleLogIn = (props:any) => {
 }
 
 const mapDispatch = {
-	login_both: userActions.login_both,
+	loginBoth: userActions.loginBoth,
 }
 
 const connector = connect(null, mapDispatch)
