@@ -1,30 +1,30 @@
-import { BoltIcon, ChatBubbleBottomCenterTextIcon, GlobeAltIcon, ScaleIcon } from '@heroicons/react/24/outline'
-
+import { BoltIcon, ChatBubbleBottomCenterTextIcon } from '@heroicons/react/24/outline'
+import { HiUser, HiVideoCamera } from 'react-icons/hi'
 const features = [
 
 
   {
-    name: 'Competitive exchange rates',
+    name: 'Alumnos',
     description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
-    icon: GlobeAltIcon,
+      'Registro por correo electrónico de alumnos, tendrás la información en un solo lugar y siempre disponible. Nombre, Edad, Fecha de Cumpleaños, Pagos, Reservas y mucho más!',
+    icon: HiUser,
   },
   {
-    name: 'No hidden fees',
+    name: 'Clases',
     description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
-    icon: ScaleIcon,
+      'Un cronograma de clases con todas tus actividades. Cada clase tiene cupo, para que nunca haya más alumnos de los que indiques, el sistema controla todo de forma automática.',
+    icon: HiVideoCamera,
   },
   {
-    name: 'Transfers are instant',
+    name: 'Pagos',
     description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+      'Puedes crear las fichas de pagos de tus alumnos para que ellos reserven sus clases. También puedes crear Packs de Clases!',
     icon: BoltIcon,
   },
   {
-    name: 'Mobile notifications',
+    name: 'Reservas y cancelaciones',
     description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+      'Los alumnos podrán cancelar y reagendar sus clases (siempre respetando las condiciones que estén definidas en el sistema).',
     icon: ChatBubbleBottomCenterTextIcon,
   },
 ]
@@ -34,13 +34,12 @@ export default function Example() {
     <div className="mt-12 rounded-3xl border py-12 bg-[#f8fafc] w-11/12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="lg:text-center">
-          <h2 className="text-lg font-semibold text-indigo-600">Transactions</h2>
+          <h2 className="text-lg font-semibold text-indigo-600">Integración</h2>
           <p className="mt-2 text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl">
-            A better way to send money
+          Todo en un solo lugar
           </p>
           <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-            Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in
-            accusamus quisquam.
+          Cronograma de Clases, Alumnos, Reservas, Fichas de Pago, Packs de Clases, Balance, Gráficos de Estadísticas y mucho más!
           </p>
         </div>
 
