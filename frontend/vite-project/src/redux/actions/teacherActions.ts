@@ -83,6 +83,8 @@ const teacherActions = {
 		}
 	},
 
+	//ACCOUNT
+
 	signUpTeacher: (email:string, pass:string, from:string) => {
 		return async (dispatch:AppDispatch, getState:RootState) => {
 
@@ -110,6 +112,36 @@ const teacherActions = {
 			}
 		}
 	},
+
+	//CALENDAR
+	
+	addEventCalendar: (eventData:{id:string, events:{title:string, start:Date, end:Date}}) => {
+		return async(dispatch:AppDispatch, getState:RootState) => {
+
+			const ans = await axios({
+				method:'post',
+				url:'http://localhost:4000/api/teacher/addEventCalendar',
+				data:eventData,
+			})
+
+			if(ans.status === 200){
+				Swal.fire({
+					icon:"success",
+					title:'Haz actualizado tu calendario correctamente',
+					showConfirmButton:false,
+					timer:1000
+				})
+
+			} else {
+				Swal.fire({
+					icon:'error',
+					title:'Algo salio mal. Intentalo nuevamente',
+					showConfirmButton:false,
+					timer:2000
+				})
+			}
+		}
+	}
 }
 
 export default teacherActions;

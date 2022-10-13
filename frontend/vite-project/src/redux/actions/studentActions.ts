@@ -85,6 +85,8 @@ const studentActions = {
 		}
 	},
 
+	//ACCOUNT
+
 	signUpStudent: (email:string, pass:string, from:string) => {
 		return async (dispatch:AppDispatch, getState:RootState) => {
 

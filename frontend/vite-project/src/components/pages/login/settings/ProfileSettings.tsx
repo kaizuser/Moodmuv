@@ -14,9 +14,10 @@ const ProfileSettings = (props:any) => {
 	const [numValue, setNum] = useState(props.student?.num || props.teacher?.num)
 	const [genreValue, setGenre] = useState(props.student?.genre || props.teacher?.genre)
 	const [descValue, setDesc] = useState(props.student?.desc || props.teacher?.desc)
+
 	const [avatarFile, setAvatarFile] = useState(undefined);
 	const [urlimage, setUrlimage] = useState("");
-	console.log(props)
+
 	useEffect(() => {
 		if(!props.student && !props.teacher && props.id !== undefined){
 			props.fetchStudent(props.id)
@@ -27,8 +28,6 @@ const ProfileSettings = (props:any) => {
 
 	let saveStudent = () => {
 
-		console.log(genreValue);
-		
 		let userData = {
 			  id:props.id,
 			  name:nameValue,

@@ -3,7 +3,7 @@ import React from 'react'
 
 //UTILITIES 
 import {connect} from 'react-redux'
-import studentActions from '../../../redux/actions/studentActions'
+import teacherActions from '../../../redux/actions/teacherActions'
 
 //UTILITIES CALENDAR
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar'
@@ -34,9 +34,7 @@ class Scheduler extends React.Component <any, any>{
 			events:this.state.storedEvent
 		}
 
-		console.log(event);
-		
-		this.props.modifyStudent(event)
+		this.props.addEventCalendar(event)
 	}
 
 	render(): React.ReactNode {
@@ -46,7 +44,7 @@ class Scheduler extends React.Component <any, any>{
 
 		let localizer = dateFnsLocalizer({format, parse, startOfWeek, getDay, locales})
 
-		console.log(this.props);
+		console.log(this.props.userAccount.events);
 
 		return (
 			<>
@@ -61,18 +59,18 @@ class Scheduler extends React.Component <any, any>{
 
 							/>
 
-							<div className='w-auto'>
+							<div className='w-auto z-20'>
 								<DatePicker 
-									className='w-60 placeholder:text-gray-500 bg-gray-300 p-1 rounded-xl text-center z-10'
+									className='w-60 placeholder:text-gray-500 bg-gray-300 p-1 rounded-xl text-center'
 									placeholderText='Start date'
 									selected={this.state.storedEvent.start}
 									onChange={(event) => this.setState({storedEvent:{...this.state.storedEvent, start:event}})}
 								/>
 							</div>
 
-							<div className='w-auto'>
+							<div className='w-auto z-20'>
 								<DatePicker
-								className='w-60 placeholder:text-gray-500 bg-gray-300 p-1 rounded-xl text-center z-10 bg-black'
+								className='w-60 placeholder:text-gray-500 bg-gray-300 p-1 rounded-xl text-center'
 								placeholderText='End date'
 								selected={this.state.storedEvent.end}
 								onChange={(event) => this.setState({storedEvent:{...this.state.storedEvent, end:event}})}
@@ -106,7 +104,7 @@ class Scheduler extends React.Component <any, any>{
 }
 
 let mapDispatch = {
-	modifyStudent:studentActions.modifyStudent
+	addEventCalendar:teacherActions.addEventCalendar
 }
 
 let connector = connect(null, mapDispatch)

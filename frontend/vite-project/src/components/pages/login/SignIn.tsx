@@ -20,6 +20,8 @@ const SignIn = (props:any) => {
 	  let navigateFlag = props.login_both(userData.email, userData.pass).then((res:any) => {
 		  if(res){
 			  navigate('/home')
+			  window.scrollTo(0, 0);
+
 		  }
 	  })
   }

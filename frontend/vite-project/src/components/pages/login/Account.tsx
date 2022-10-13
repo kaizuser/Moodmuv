@@ -16,29 +16,6 @@ const Account = (props:any) => {
 	id: string;
 	email: string;
 	}
-	console.log(props.student)
-	//SET-UP
-	
-	const calendars = [{ id: 'cal1', name: 'Personal' }];
-
-	const initialEvents = [
-		{
-			id: '1',
-			calendarId: 'cal1',
-			title: 'Lunch',
-			category: 'time',
-			start: '2022-06-28T12:00:00',
-			end: '2022-06-28T13:30:00',
-		},
-		{
-			id: '2',
-			calendarId: 'cal1',
-			title: 'Coffee Break',
-			category: 'time',
-			start: '2022-06-28T15:00:00',
-			end: '2022-06-28T15:30:00',
-		},
-	];
 
 	let currentUser: studentType = useSelector(
 	(store: any) => store.userReducer.currentUser
@@ -57,7 +34,7 @@ const Account = (props:any) => {
 	return (
 	<>
 	{" "}
-	{currentUser ? (
+	{userAccount ? (
 	<div className="bg-[#F3F3F3] min-h-screen flex flex-col justify-center items-center">
 	  {/* Portada */}
 	  <div className="h-[80vh] w-full bg-[url('https://images.unsplash.com/photo-1663206950304-6ac585f8669d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80')]   bg-center bg-cover"></div>
@@ -89,7 +66,7 @@ const Account = (props:any) => {
 		  {/* IMAGEN  DE PERFIL */}
 	      <img
 		className="mx-4 w-40 rounded-full -translate-y-16"
-		src={props.student?.img || props.teacher?.img}
+		src={userAccount?.img}
 	      />
 	      <div className="flex gap-4 items-center">
 		<Link
@@ -114,7 +91,7 @@ const Account = (props:any) => {
 		</Link>
 	      </div>
 	    </div>
-	    <h2 className="font-bold text-4xl text-[#222]">{props.student?.name || props.teacher?.name}</h2>
+	    <h2 className="font-bold text-4xl text-[#222]">{userAccount?.name}</h2>
 	    {/* Ubicación */}
 	    <div className="p-4 flex">
 	      <svg
@@ -137,7 +114,7 @@ const Account = (props:any) => {
 		/>
 	      </svg>
 	      <p className="font-bold text-[#999] uppercase text-sm">
-	{props.student?.ubi || props.teacher?.ubi}
+	{userAccount?.ubi}
 	      </p>
 	    </div>
 	    {/* Oficio */}
@@ -164,9 +141,9 @@ const Account = (props:any) => {
 		} 
 	    <hr className="w-[95%]" />
 	    <p className="lg:w-[70%] text-[#999] py-8">
-		{props.student?.desc}
+		{userAccount?.desc}
 	    </p>
-{	    props.teacher &&
+	  {props.teacher &&
 <><div className="shadow-md px-20 py-2 rounded-md bg-gradient-to-r from-[#563D81] to-[#6E5E8B]">
 	      <h3 className="font-bold text-white text-4xl">Cursos</h3>
 	    </div>
@@ -176,6 +153,7 @@ const Account = (props:any) => {
 	    <CarouselCards />
 		</>}
 	  </div>
+
 	  {
 		props.teacher && <Scheduler userAccount={userAccount}/>
 	  }

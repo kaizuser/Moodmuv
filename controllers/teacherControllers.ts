@@ -143,6 +143,15 @@ const teacherControllers = {
 			});
 		}
 	},
+
+	//CALENDAR
+	
+	add_event_calendar: async(req:Request, res:Response) => {
+                let eventData = req.body
+                let id:string = eventData.id
+
+		await Teacher.findOneAndUpdate({_id:id}, {$push:{events:{title:eventData.events.title, start:eventData.events.start, end:eventData.events.end}}}, {new:true}).then(data => res.json({data}))
+	}
 }
 
 export default teacherControllers
