@@ -1,4 +1,5 @@
 import BotonPrimario from "../generales/BotonPrimario";
+import { Fade} from "react-awesome-reveal";
 import BotonSecundario from "../generales/BotonSecundario";
 import Why from "../Why";
 import sample from "../../assets/video.mp4";
@@ -20,6 +21,8 @@ const Home = ({title}) => {
         >
           <source src={sample} type="video/mp4" />
         </video>
+        <Fade>
+
         <h1 className="text-main z-10 text-6xl sm:w-[25rem] lg:w-[42rem] font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B]">
           El lugar para impulsar tu creatividad interior
         </h1>
@@ -27,6 +30,7 @@ const Home = ({title}) => {
           <BotonSecundario text="Clases disponibles" />
           <BotonPrimario text="Conocer Plataforma" />
         </div>
+        </Fade>
 
         {/* 200vh */}
       </div>

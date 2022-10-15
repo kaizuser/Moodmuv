@@ -1,7 +1,7 @@
 import React from "react";
 import bkgPresencial from "../assets/imagePresencial.jpg";
 import bkgOnline from "../assets/backgroundOnline.png";
-
+import { Slide } from "react-awesome-reveal";
 const Why = () => {
   return (
     <div className="flex flex-col w-full items-center min-h-screen bg-[#f8f8f9]">
@@ -16,6 +16,7 @@ const Why = () => {
       </h6>
       <div className="flex justify-center gap-16 items-baseline flex-wrap mx-4">
         {/* Profe */}
+<Slide triggerOnce>
         <div className="flex flex-col justify-center items-center">
           <h3 className="text-center font-semibold text-4xl text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B]">
             Profesor/a/Escuela
@@ -30,7 +31,9 @@ const Why = () => {
             </p>
           </div>
         </div>
+</Slide>
         {/* Alumno */}
+<Slide triggerOnce>
         <div className="flex flex-col justify-center items-center">
           <h3 className="text-center font-semibold text-4xl text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B]">
             Alumno/a
@@ -45,7 +48,9 @@ const Why = () => {
             </p>
           </div>
         </div>
+</Slide>
         {/* Terapia */}
+<Slide triggerOnce>
         <div className="flex flex-col justify-center items-center">
           <h3 className="text-center font-semibold text-4xl text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B]">
             Terapia
@@ -59,8 +64,11 @@ const Why = () => {
             </p>
           </div>
         </div>
+</Slide>
       </div>
       <div className="flex flex-col justify-center items-center text-center">
+<Slide triggerOnce>
+
         <div className="flex flex-col items-center justify-center">
           <h2 className="p-8 font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B] text-5xl">
             No damos solo clases presencial
@@ -71,11 +79,13 @@ const Why = () => {
             tu casa
           </p>
         </div>
+</Slide>
         <img
           className="img-cp w-2/4 self-end"
           src={bkgOnline}
           alt="background online"
         />
+
       </div>
     </div>
   );
