@@ -66,7 +66,7 @@ const Account = (props:any) => {
 		  {/* IMAGEN  DE PERFIL */}
 	      <img
 		className="mx-4 w-40 rounded-full -translate-y-16"
-		src={userAccount?.img}
+		src="https://mui.com/static/images/avatar/2.jpg"/* {userAccount?.img} */
 	      />
 	      <div className="flex gap-4 items-center">
 		<Link
@@ -140,7 +140,7 @@ const Account = (props:any) => {
 	    </div>
 		} 
 	    <hr className="w-[95%]" />
-	    <p className="lg:w-[70%] text-[#999] py-8">
+	    <p className="text-center lg:w-[70%] text-[#999] py-8">
 		{userAccount?.desc}
 	    </p>
 	  {props.teacher &&

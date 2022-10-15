@@ -132,7 +132,7 @@ const ProfileSettings = (props:any) => {
 		      <option value="Mujer">Mujer</option>
 		    </select>
 		  </fieldset>
-			<button className="rounded py-3 bg-[#007AE9] text-white mt-3 text-sm" type='button' onClick={() => saveStudent()}>Guardar</button>
+			<button className="self-center rounded py-3 bg-[#007AE9] text-white mt-3 text-sm" type='button' onClick={() => saveStudent()}>Guardar</button>
 		</form>
 		</div>
 		</div>

@@ -10,6 +10,7 @@ import Profile from './components/pages/login/Profile'
 import Account from './components/pages/login/Account'
 import ProfileSettings from './components/pages/login/settings/ProfileSettings'
 import HowTo from './components/pages/howto/HowTo'
+import Workshop from './components/pages/WorkshopContainer'
 import './styles.css'
 
 //UTILITIES
@@ -47,6 +48,7 @@ function App(props:any) {
 			      <Route path='/account/settings' element={<ProfileSettings title="Configuración de perfil" id={props.currentUser?.id}/>}></Route>
 				  <Route path='/howTo' element={<HowTo/>}></Route>
 		      </Routes>
+			  <Workshop/>
 		      <Footer/>
 	      </Router>
 	      </>
