@@ -155,7 +155,7 @@ const Account = (props:any) => {
 	  </div>
 
 	  {
-		props.teacher && <Scheduler userAccount={userAccount}/>
+		props.teacher && <Scheduler id={userAccount._id}/>
 	  }
 	  
 	</div>

@@ -11,7 +11,7 @@ import userControllers from '../controllers/userControllers'
 import workshopControllers from '../controllers/workshopControllers'
 
 let {get_students, get_student, set_student, delete_student, modify_student, verify_email_student, sign_up_student, } = studentControllers
-let {get_teachers, get_teacher, set_teacher, delete_teacher, modify_teacher, verify_email_teacher, sign_up_teacher, add_event_calendar} = teacherControllers
+let {get_teachers, get_teacher, set_teacher, delete_teacher, modify_teacher, verify_email_teacher, sign_up_teacher, add_event_calendar, delete_event_calendar} = teacherControllers
 let {verify_token, login_both} = userControllers
 let {get_workshops, get_workshop, set_workshop, delete_workshop, modify_workshop,} = workshopControllers
 
@@ -46,11 +46,12 @@ Router.route('/teacher/:id')
 .get(get_teacher)
 .delete(delete_teacher)
 
-Router.route('/teacher/addEventCalendar')
-.post(add_event_calendar)
-
 Router.route('/auth/signUpTeacher')
 .post(sign_up_teacher)
+
+Router.route('/teacher/calendar')
+.post(add_event_calendar)
+.put(delete_event_calendar)
 
 
 

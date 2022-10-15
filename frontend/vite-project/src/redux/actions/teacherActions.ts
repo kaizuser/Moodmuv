@@ -115,12 +115,12 @@ const teacherActions = {
 
 	//CALENDAR
 	
-	addEventCalendar: (eventData:{id:string, events:{title:string, start:Date, end:Date}}) => {
+	addEventCalendar: (eventData:{id:string, event:{title:string, start:Date, end:Date}}) => {
 		return async(dispatch:AppDispatch, getState:RootState) => {
 
 			const ans = await axios({
 				method:'post',
-				url:'http://localhost:4000/api/teacher/addEventCalendar',
+				url:'http://localhost:4000/api/teacher/calendar',
 				data:eventData,
 			})
 
@@ -137,7 +137,36 @@ const teacherActions = {
 					icon:'error',
 					title:'Algo salio mal. Intentalo nuevamente',
 					showConfirmButton:false,
-					timer:2000
+					timer:1000
+				})
+			}
+		}
+	},
+
+	deleteEventCalendar: (eventData:{id:string, event:{id:string}}) => {
+		return async(dispatch:AppDispatch, getState:RootState) => {
+
+			const ans = await axios({
+				method:'put',
+				url:'http://localhost:4000/api/teacher/calendar',
+				data:eventData
+			})
+
+
+			if(ans.status === 200){
+				Swal.fire({
+					icon:"success",
+					title:'Haz borrado tu evento con exito',
+					showConfirmButton:false,
+					timer:1000
+				})
+
+			} else {
+				Swal.fire({
+					icon:'error',
+					title:'Algo salio mal. Intentalo nuevamente',
+					showConfirmButton:false,
+					timer:1000
 				})
 			}
 		}

@@ -20,7 +20,6 @@
     "@types/react-datepicker": "^4.4.2",
     "jsx-runtime": "^1.2.0",
     "react": "^18.2.0",
-    "react-awesome-reveal": "^4.1.0",
     "react-icons": "^4.4.0",
     "react-router-dom": "^6.4.0",
     "swiper": "^8.4.2"
@@ -38,6 +37,7 @@
     "axios": "^0.27.2",
     "buffer": "^6.0.3",
     "date-fns": "^2.29.3",
+    "react-awesome-reveal": "^4.1.0",
     "react-big-calendar": "^1.5.0",
     "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",
