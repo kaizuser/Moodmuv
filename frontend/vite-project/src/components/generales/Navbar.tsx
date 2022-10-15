@@ -1,5 +1,12 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useState } from "react";
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import Avatar from '@mui/material/Avatar';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import Menuu from '@mui/material/Menu';
+import { useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Logo from "../../assets/logoDegrade.png";
@@ -22,12 +29,40 @@ const link = ["/explore", "/payments", "/howTo", "/signIn", "/activateAccount"];
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
-
+const settings = [{
+  name:'Profile',
+  href:'/account'
+},
+{
+  name:'Settings',
+  href:'/account/settings'
+},
+{
+  name:'Logout',
+}];
 function Example(props: any) {
   let navigate = useNavigate()
   const [openDrop, setOpenDrop] = useState(false);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+
   const setearOpenDrop = () => {
     setOpenDrop(!openDrop);
+  };
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
   };
   return (
     <Disclosure as="nav" className=" relative z-10">
@@ -68,55 +103,50 @@ function Example(props: any) {
                       <div key={item.name}>
                         {item.name == "Iniciar sesión" ? (
                           props.currentUser ? (
-			      <div>
-
-                              <button className="w-auto mr-4" onClick={() => setearOpenDrop()}>
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  strokeWidth={1.5}
-                                  stroke="currentColor"
-                                  className="w-6 h-6"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-                                  />
-                                </svg>
-                              </button>
-                              <div
-                                className={
-                                  openDrop
-                                    ? "flex flex-col gap-2 text-xs text-center border rounded absolute right-36 top-16 px-4 justify-center items-center bg-white text-[#42136] w-24 h-24"
-                                    : "hidden"
-                                }
-                              >
-                                <Link
-                                  className="text-[#323232]"
-                                  to={"/account"}
-                                >
-                                  Profile
-                                </Link>
-                                <Link
-                                  className="text-[#323232]"
-                                  to={"/account/settings"}
-                                >
-                                  Settings
-                                </Link>
-
-			      <button className="p-[0] text-[#323232]" onClick={() => {
-				      props.logOut()
-				      navigate('/home')
-				      window.scrollTo(0, 0);
-			      }}>
-			      Log out
-			      </button>
-
-                              </div>
-
-			      </div>
+<Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, m:0, width:"auto", mr:2 }}>
+                <Avatar alt="L" src="https://mui.com/static/images/avatar/2.jpg" sx={{width:30, height:30, fontSize:20}}/>
+              </IconButton>
+            </Tooltip>
+            <Menuu
+               sx={{ mt: '45px' }}
+               id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+                  <Link to={'/account'}>
+                <MenuItem onClick={handleCloseUserMenu}>
+                    Profile
+                </MenuItem>
+                  </Link>
+                  <Link to={'/account/settings'}>
+                <MenuItem onClick={handleCloseUserMenu}>
+                    Setting
+                </MenuItem>
+                  </Link>
+                  <Typography onClick={() => {
+                                   props.logOut()
+                                     setearOpenDrop()
+                                     navigate('/home')
+                                      window.scrollTo(0, 0);
+                               }}>
+                <MenuItem onClick={handleCloseUserMenu}>
+                    Logout
+                </MenuItem>
+                  </Typography>
+            </Menuu>
+          </Box>
                           ) : (
                             <Link
                               to={link[navigation.indexOf(item)]}
