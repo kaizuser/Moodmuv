@@ -3,6 +3,7 @@ const Router = require('express').Router();
 
 //UTILITIES
 import passport from '../config/passport'
+import validator from '../config/validator';
 
 //CONTROLLERS
 import studentControllers from '../controllers/studentControllers'
@@ -28,7 +29,7 @@ Router.route('/student/:id')
 .delete(delete_student)
 
 Router.route('/auth/signUpStudent')
-.post(sign_up_student)
+.post(validator, sign_up_student)
 
 
 
@@ -47,7 +48,7 @@ Router.route('/teacher/:id')
 .delete(delete_teacher)
 
 Router.route('/auth/signUpTeacher')
-.post(sign_up_teacher)
+.post(validator, sign_up_teacher)
 
 Router.route('/teacher/calendar')
 .post(add_event_calendar)

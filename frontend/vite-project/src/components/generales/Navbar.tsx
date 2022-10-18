@@ -105,7 +105,7 @@ function Example(props: any) {
                           props.currentUser ? (
 <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, m:0, width:"auto", mr:2 }}>
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, m:0, width:"auto", mr:5 }}>
                 <Avatar alt="L" src="https://mui.com/static/images/avatar/2.jpg" sx={{width:30, height:30, fontSize:20}}/>
               </IconButton>
             </Tooltip>

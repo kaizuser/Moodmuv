@@ -7,7 +7,6 @@ import {Request, Response} from 'express';
 const bcryptjs = require("bcryptjs");
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
-
 import sendEmail from './sendEmail'
 
 interface studentDTO{
@@ -31,16 +30,16 @@ interface studentDTO{
 
 const studentControllers = {
 
-        get_students: async(req:Request, res:Response) => {
-
-                await Student.find().then(data => res.json({data}))
-
-        },
-
         get_student: async(req:Request, res:Response) => {
                 const id:string = req.params.id
 
                 await Student.findOne({_id:id}).then(data => res.json({data}))
+
+        },
+
+        get_students: async(req:Request, res:Response) => {
+
+                await Student.find().then(data => res.json({data}))
 
         },
 

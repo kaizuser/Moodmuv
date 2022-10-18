@@ -4,20 +4,23 @@ import axios from 'axios';
 import type {RootState, AppDispatch} from '../../main'
 import Swal from 'sweetalert2'
 
+//INTERFACES
+interface workshopDTO{
+	_id:string,
+	author:string,
+	name:string,
+	format:string,
+	level:string,
+	desc:string,
+	disciples: Array<string>,
+	duration:string,
+	video:Array<{url:string}>,
+	price:string,
+	location:string,
+}
+
 const workshopActions = {
     
-	fetchWorkshops: () => {
-		return async(dispatch:AppDispatch, getState:RootState) => {
-
-			const ans = await axios({
-				method:'get',
-				url:'http://localhost:4000/api/workshop',
-			})
-
-			dispatch({type:'fetchWorkshops', payload:ans.data.data})
-	       }
-	},
-
 	fetchWorkshop: (id:string) => {
 		return async(dispatch:AppDispatch, getState:RootState) => {
 
@@ -31,7 +34,42 @@ const workshopActions = {
 
 	},
 
-	modifyWorkshop: (workshopData:any) => {
+	fetchWorkshops: () => {
+		return async(dispatch:AppDispatch, getState:RootState) => {
+
+			const ans = await axios({
+				method:'get',
+				url:'http://localhost:4000/api/workshop',
+			})
+
+			dispatch({type:'fetchWorkshops', payload:ans.data.data})
+	       }
+	},
+
+	setWorkshop: (workshopData:workshopDTO) => {
+		return async(dispatch:AppDispatch,getState:RootState)=>{
+
+			const ans = await axios({
+				method:'post',
+				url:'http://localhost:4000/api/workshop',
+				data:workshopData
+			})
+
+		}
+	},
+
+	deleteWorkshop: (id:string)=>{
+		return async(dispatch:AppDispatch, getState:RootState) => {
+
+			const ans = await axios({
+				method:'delete',
+				url:'http://localhost:4000/api/workshop/' + id,
+			})
+
+		}
+	},
+
+	modifyWorkshop: (workshopData:workshopDTO) => {
 		return async(dispatch:AppDispatch, getState:RootState) => {
 
 			const ans = await axios({
@@ -62,28 +100,11 @@ const workshopActions = {
 
 	},
 
-	deleteWorkshop: (id:string)=>{
-		return async(dispatch:AppDispatch, getState:RootState) => {
-
-			const ans = await axios({
-				method:'delete',
-				url:'http://localhost:4000/api/workshop/' + id,
-			})
-
+	filterWorkshop:(workshopsAuxiliar:workshopDTO, searchValue:string, disciplesValue:string, formatValue:string) => {
+		return async (dispatch:AppDispatch, getState:RootState) => {
+			dispatch({type:'filterWorkshops', payload:{workshopsAuxiliar, searchValue, disciplesValue, formatValue}})
 		}
-	},
-
-	setWorkshop: (workshopData:any) => {
-		return async(dispatch:AppDispatch,getState:RootState)=>{
-
-			const ans = await axios({
-				method:'post',
-				url:'http://localhost:4000/api/workshop',
-				data:workshopData
-			})
-
-		}
-	},
+	}
 
 }
 

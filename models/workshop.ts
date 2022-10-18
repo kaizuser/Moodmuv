@@ -14,7 +14,7 @@ interface workshopDTO{
 }
 
 const workshopSchema = new Schema<workshopDTO>({
-	author:{type:Types.ObjectId, required:true},
+	author:{type:Types.ObjectId, ref:'teachers', required:true},
 	name:{type:String, required:true},
 	format:{type:String, required:true},
 	level:{type:String, required:true},

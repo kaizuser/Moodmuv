@@ -4,20 +4,27 @@ import axios from 'axios';
 import type {RootState, AppDispatch} from '../../main'
 import Swal from 'sweetalert2'
 
+//INTERFACES
+interface studentDTO{
+	_id:string,
+	type:string,
+        name:string,
+	email:string,
+	pass:Array<string>,
+        img:string,
+	desc:string,
+	genre:string,
+        ubi:string,
+	inj:string,
+	bornDate:number,
+	verifEmail:boolean,
+	from:string,
+	uniqueString:string,
+	num:string,
+}
+
 const studentActions = {
     
-	fetchStudents: () => {
-		return async(dispatch:AppDispatch, getState:RootState) => {
-
-			const ans = await axios({
-				method:'get',
-				url:'http://localhost:4000/api/student',
-			})
-
-			dispatch({type:'fetchStudents', payload:ans.data.data})
-	       }
-	},
-
 	fetchStudent: (id:string) => {
 		return async(dispatch:AppDispatch, getState:RootState) => {
 
@@ -31,7 +38,42 @@ const studentActions = {
 
 	},
 
-	modifyStudent: (studentData:any) => {
+	fetchStudents: () => {
+		return async(dispatch:AppDispatch, getState:RootState) => {
+
+			const ans = await axios({
+				method:'get',
+				url:'http://localhost:4000/api/student',
+			})
+
+			dispatch({type:'fetchStudents', payload:ans.data.data})
+	       }
+	},
+
+	setStudent: (studentData:studentDTO) => {
+		return async(dispatch:AppDispatch,getState:RootState)=>{
+
+			const ans = await axios({
+				method:'post',
+				url:'http://localhost:4000/api/student',
+				data:studentData
+			})
+
+		}
+	},
+
+	deleteStudent: (id:string)=>{
+		return async(dispatch:AppDispatch, getState:RootState) => {
+
+			const ans = await axios({
+				method:'delete',
+				url:'http://localhost:4000/api/student/' + id,
+			})
+
+		}
+	},
+
+	modifyStudent: (studentData:studentDTO) => {
 		return async(dispatch:AppDispatch, getState:RootState) => {
 
 			const ans = await axios({
@@ -60,29 +102,6 @@ const studentActions = {
 
 	        }
 
-	},
-
-	deleteStudent: (id:string)=>{
-		return async(dispatch:AppDispatch, getState:RootState) => {
-
-			const ans = await axios({
-				method:'delete',
-				url:'http://localhost:4000/api/student/' + id,
-			})
-
-		}
-	},
-
-	setStudent: (studentData:any) => {
-		return async(dispatch:AppDispatch,getState:RootState)=>{
-
-			const ans = await axios({
-				method:'post',
-				url:'http://localhost:4000/api/student',
-				data:studentData
-			})
-
-		}
 	},
 
 	//ACCOUNT

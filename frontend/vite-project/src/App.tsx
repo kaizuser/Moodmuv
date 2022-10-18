@@ -17,7 +17,7 @@ import './styles.css'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import {useEffect} from 'react'
 import {connect} from 'react-redux'
-import verifyActions from './redux/actions/verifyActions'
+import userActions from './redux/actions/userActions'
 import type {RootState, AppDispatch} from './main'
 import {current} from '@reduxjs/toolkit'
 
@@ -56,7 +56,7 @@ function App(props:any) {
 }
 
 const mapDispatch = {
-	verifyToken:verifyActions.verifyToken
+	verifyToken:userActions.verifyToken
 }
 
 const mapState = (state:RootState) => {
