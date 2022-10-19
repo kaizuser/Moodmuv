@@ -125,4 +125,7 @@ select {
             align-self: center;
             text-align: center;
         }
+        .img-cp{
+            width: 50%;
+        }
 }

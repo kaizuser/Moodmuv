@@ -4,7 +4,7 @@ import bkgOnline from "../assets/backgroundOnline.png";
 import { Slide } from "react-awesome-reveal";
 const Why = () => {
   return (
-    <div className="flex flex-col w-full items-center min-h-screen bg-[#f8f8f9]">
+    <div className="flex flex-col w-full items-center min-h-screen bg-[#f3f3f3]">
       <h2 className="p-4 text-center text-5xl sm:w-[25rem] lg:w-[32rem] font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B]">
         ¿Por qué Moodmuv?
       </h2>
@@ -70,7 +70,7 @@ const Why = () => {
 <Slide triggerOnce>
 
         <div className="flex flex-col items-center justify-center">
-          <h2 className="p-8 font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B] text-5xl">
+          <h2 className="pt-16 pb-8 font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B] text-5xl">
             No damos solo clases presencial
           </h2>
           <p className="py-2 w-2/4  text-center text-sm self-center text-[#666]">
@@ -81,7 +81,7 @@ const Why = () => {
         </div>
 </Slide>
         <img
-          className="img-cp w-2/4 self-end"
+          className="img-cp w-[50%] self-end"
           src={bkgOnline}
           alt="background online"
         />

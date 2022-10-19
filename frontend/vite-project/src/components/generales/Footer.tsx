@@ -15,7 +15,7 @@ const Footer = () => {
               alt="Flowbite Logo"
             />
             <span className="text-[#999] self-center font-medium whitespace-nowrap ">
-              MoodMuv
+              Moodmuv
             </span>
           </a>
           <ul className="flex flex-wrap items-center mb-6 text-sm text-gray-500 sm:mb-0 ">
@@ -45,7 +45,7 @@ const Footer = () => {
         <span className="block text-sm text-gray-500 sm:text-center ">
           © 2022{" "}
           <a href="https://flowbite.com/" className="hover:underline">
-            Flowbite™
+            Moodmuv
           </a>
           . All Rights Reserved.
         </span>

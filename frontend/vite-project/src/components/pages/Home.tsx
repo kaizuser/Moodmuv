@@ -9,12 +9,12 @@ const Home = ({title}) => {
   return (
     <>
       <div
-        className="div-home relative min-h-screen flex flex-col
-       justify-center items-center sm:flex-wrap md:flex-nowrap bg-transparent gap-8 bg-[#f8f8f9]"
+        className="div-home relative min-h-[86vh] flex flex-col
+       justify-center items-center sm:flex-wrap md:flex-nowrap bg-transparent gap-8 bg-[#f3f3f3]"
       >
         {/* 100vh */}
         <video
-          className="grayscale -top-24 absolute h-full object-cover w-full"
+          className="grayscale -bottom-0 absolute h-full object-cover w-full"
           autoPlay
           loop
           muted
@@ -31,13 +31,13 @@ const Home = ({title}) => {
           <BotonPrimario text="Conocer Plataforma" />
         </div>
         </Fade>
-
         {/* 200vh */}
       </div>
-      <Why />
-      <div className="p-16">
+      <div className="py-16 px-12 bg-[#f3f3f3]">
+        <h2 className="p-4 text-center text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B]">Talleres</h2>
       <GridTalleres/>
       </div>
+      <Why />
     </>
   );
 };
