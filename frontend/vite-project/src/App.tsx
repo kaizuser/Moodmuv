@@ -39,8 +39,9 @@ function App(props:any) {
 		      <Routes>
 			      <Route path='/' element={<Home title="Home"/>}></Route>
 			      <Route path='/home' element={<Home title="Home"/>}></Route>
-			      <Route path='/profile/:id' element={<Profile title="Perfil"/>}></Route>
 			      <Route path='/explore' element={<Explore title="Explore"/>}></Route>
+			      <Route path='/explore/profile/:id' element={<Profile title="Perfil"/>}></Route>
+			      <Route path='/explore/workshop/:id' element={<Workshop/>}></Route>
 			      <Route path='/signIn' element={<SignIn title="Iniciar Sesión"/>} ></Route>
 			      <Route path='/signUp' element={<SignUp title="Registro"/>}></Route>
 			      <Route path='/forgotPass' element={<ForgotPassword title="Recuperar password"/>}></Route>
@@ -48,7 +49,6 @@ function App(props:any) {
 			      <Route path='/account/settings' element={<ProfileSettings title="Configuración de perfil" id={props.currentUser?.id}/>}></Route>
 				  <Route path='/howTo' element={<HowTo/>}></Route>
 		      </Routes>
-			  <Workshop/>
 		      <Footer/>
 	      </Router>
 	      </>

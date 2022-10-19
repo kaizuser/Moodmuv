@@ -91,10 +91,14 @@ class Explore extends React.Component <any, any>{
 					
 					<div className='flex justify-between items-center m-4'>
 					<div className='flex gap-2  items-center text-xs text-[#007AE9] font-bold cursor-pointer'>
+					<Link to={'/explore/profile/' + workshop.author}>
+
 					<img className="object-cover rounded-full w-8 h-8" src="https://i.pinimg.com/originals/86/08/70/860870066df05a7a29bcb5bb9ea2e9a7.jpg" alt="imagen" />
-					<Link to={'/profile'}></Link>
+					</Link>
 					</div>
-					<p className='text-[#007AE9] text-xs cursor-pointer'>Ver mas</p>
+					<Link to={'/explore/workshop/' + workshop._id}>
+						<p className='text-[#007AE9] text-xs cursor-pointer'>Ver mas</p>
+					</Link>
 					</div>
 				</div>
 				)) : ''}
