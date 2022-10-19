@@ -1,5 +1,5 @@
 import BotonPrimario from "../generales/BotonPrimario";
-import { Fade} from "react-awesome-reveal";
+import { Fade, Slide, } from "react-awesome-reveal";
 import BotonSecundario from "../generales/BotonSecundario";
 import Why from "../Why";
 import sample from "../../assets/video.mp4";
@@ -34,8 +34,10 @@ const Home = ({title}) => {
         {/* 200vh */}
       </div>
       <div className="py-16 px-12 bg-[#f3f3f3]">
-        <h2 className="p-4 text-center text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B]">Talleres</h2>
-      <GridTalleres/>
+       <Slide direction="down" triggerOnce>
+        <h2 className="p-8 pb-14 text-center text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B]">Talleres</h2>
+       </Slide>
+        <GridTalleres/>
       </div>
       <Why />
     </>
