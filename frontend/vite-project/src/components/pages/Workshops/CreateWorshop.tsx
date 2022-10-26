@@ -39,13 +39,13 @@ const CreateWorshop = () => {
             <form action="#" method="POST">
               <div className="shadow sm:overflow-hidden sm:rounded-md">
                 <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
-                <div className="grid grid-cols-6 gap-6">
+                  <div className="grid grid-cols-6 gap-6">
                     <div className="col-span-6 sm:col-span-3">
                       <label
                         htmlFor="first-name"
                         className=" block text-sm font-medium text-gray-700"
                       >
-                        Workshop
+                        Workshop Nombre
                       </label>
                       <input
                         type="text"
@@ -53,7 +53,7 @@ const CreateWorshop = () => {
                         id="first-name"
                         autoComplete="given-name"
                         className="px-2 py-1 border mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        placeholder="Workshop Name"
+                        placeholder="Acroyoga, Handstand, Etc"
                       />
                     </div>
 
@@ -74,6 +74,79 @@ const CreateWorshop = () => {
                       />
                     </div>
                   </div>
+
+                   <div className="grid grid-cols-6 gap-6">
+                    <div className="col-span-6 sm:col-span-3">
+                      <label
+                        htmlFor="first-name"
+                        className=" block text-sm font-medium text-gray-700"
+                      >
+                        Ubicación
+                      </label>
+                      <input
+                        type="text"
+                        name="first-name"
+                        id="first-name"
+                        autoComplete="given-name"
+                        className="px-2 py-1 border mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        placeholder="ex: California"
+                      />
+                    </div>
+
+                    <div className="col-span-6 sm:col-span-3">
+                      <label
+                        htmlFor="last-name"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Iframe
+                      </label>
+                      <input
+                        type="text"
+                        name="last-name"
+                        id="last-name"
+                        autoComplete="family-name"
+                        className="px-2 py-1 border mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        placeholder="<iframe src='https://... "
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-6 gap-6">
+                    <div className="col-span-6 sm:col-span-3">
+                      <label
+                        htmlFor="first-name"
+                        className=" block text-sm font-medium text-gray-700"
+                      >
+                        Formato
+                      </label>
+                      <input
+                        type="text"
+                        name="first-name"
+                        id="first-name"
+                        autoComplete="given-name"
+                        className="px-2 py-1 border mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        placeholder="Workshop Name"
+                      />
+                    </div>
+
+                    <div className="col-span-6 sm:col-span-3">
+                      <label
+                        htmlFor="last-name"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Nivel
+                      </label>
+                      <input
+                        type="text"
+                        name="last-name"
+                        id="last-name"
+                        autoComplete="family-name"
+                        className="px-2 py-1 border mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        placeholder="Martes y Jueves 22hs"
+                      />
+                    </div>
+                  </div>
+
                   <div className="grid grid-cols-3 gap-6">
                     
                     <div className="col-span-3 sm:col-span-2">
@@ -81,7 +154,7 @@ const CreateWorshop = () => {
                         htmlFor="company-website"
                         className="block text-sm font-medium text-gray-700"
                       >
-                        School
+                        Escuela (si ésta influye)
                       </label>
                       <div className="mt-1 flex rounded-md shadow-sm">
                         <input
@@ -123,7 +196,7 @@ const CreateWorshop = () => {
                       htmlFor="about"
                       className="block text-sm font-medium text-gray-700"
                     >
-                      About
+                      Información
                     </label>
                     <div className="mt-1">
                       <textarea
@@ -200,7 +273,7 @@ const CreateWorshop = () => {
           <div className="border-t border-gray-200" />
         </div>
       </div>
-
+{/* 
       <div className="mt-10 sm:mt-0">
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-1">
@@ -527,7 +600,7 @@ const CreateWorshop = () => {
             </form>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
