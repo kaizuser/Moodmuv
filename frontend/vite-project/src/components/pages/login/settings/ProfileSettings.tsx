@@ -85,7 +85,7 @@ const ProfileSettings = (props:any) => {
 		    <label htmlFor="file-upload" className="cursor-pointer text-xs text-[#007AE9]">
 		      Cambiar foto de perfil
 		    </label>
-		    <input onChange={(e)=> setAvatarFile(e.target.files[0])} className="hidden" id="file-upload" type="file"/>
+			  <input onChange={(e:any)=> setAvatarFile(e.target.files)} className="hidden" id="file-upload" type="file"/>
 
 		  </fieldset>
 		  <fieldset className="flex gap-4 w-full flex-wrap">

@@ -9,7 +9,7 @@ import {connect} from 'react-redux'
 import studentActions from "../../../redux/actions/studentActions";
 import teacherActions from '../../../redux/actions/teacherActions'
 import { RootState } from "../../../main"
-import Scheduler from "./Calendar"
+import ProfileScheduler from "./ProfileCalendar";
 
 const Profile = (props:any) => {
 	let params = useParams()
@@ -19,7 +19,7 @@ const Profile = (props:any) => {
 		  props.fetchTeacher(params.id)
 	  }
 
-	}, [params.id])
+	}, [params])
 
 	return (
 	<>
@@ -145,7 +145,7 @@ const Profile = (props:any) => {
 	  </div>
 
 	  {
-		props.teacher && <Scheduler id={props.teacher._id}/>
+		props.teacher && <ProfileScheduler id={props.teacher._id}/>
 	  }
 	  
 	</div>

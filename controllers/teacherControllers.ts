@@ -25,7 +25,7 @@ interface teacherDTO{
 	from?:string,
 	uniqueString?:string,
 	num?:string,
-	events?:Array<{title:string, start:string, end:string}>
+	events?:Array<{title:string, start:string, end:string, students:Array<{studentId:string}>}>
 }
 
 const teacherControllers = {
@@ -155,8 +155,39 @@ const teacherControllers = {
 	delete_event_calendar: async (req:Request, res:Response) => {
                 let eventData = req.body
                 let id:string = eventData.id
+
+		await Teacher.findOneAndUpdate({_id:id}, {$pull:{events:{_id:eventData.event.id}}}, {new:true}).then(data => res.json({data}))
+	},
+
+	add_student_calendar: async(req:Request, res:Response) => {
+		let eventData = req.body
+		let id = eventData.id
 		
-		await Teacher.findOneAndUpdate({_id:id}, {$pull:{events:{_id:eventData.event.id}}}).then(data => res.json({data}))
+		await Teacher.findOne({'events._id':eventData.event.id})
+		.then((teacher) => {
+			let isIncluded = true
+
+			teacher && teacher.events.forEach(async (event) => {
+				if(event._id == eventData.event.id){
+					if(!event.students.includes(id)){
+						isIncluded = false
+						await Teacher.findOneAndUpdate({'events._id':eventData.event.id}, {$push:{"events.$.students": id}}).then(data => res.json({data, success:true}))
+					}
+				} 
+			})
+
+			if(isIncluded){
+				res.json({success:false})
+			}
+
+		}).catch(data => res.json({data}))
+	},
+
+	delete_student_calendar: async(req:Request, res:Response) => {
+		let eventData = req.body
+		let id = eventData.id
+
+		await Teacher.findOneAndUpdate({'events._id':eventData.event.id}, {$pull:{"events.$.students":id}}).then(data => res.json({data}))
 	}
 }
 

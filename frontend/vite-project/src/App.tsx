@@ -45,7 +45,7 @@ function App(props:any) {
 			      <Route path='/explore/workshop/:id' element={<Workshop/>}></Route>
 			      <Route path='/signIn' element={<SignIn title="Iniciar Sesión"/>} ></Route>
 			      <Route path='/signUp' element={<SignUp title="Registro"/>}></Route>
-			      <Route path='/forgotPass' element={<ForgotPassword title="Recuperar password"/>}></Route>
+			      <Route path='/forgotPass' element={<ForgotPassword/>}></Route>
 			      <Route path='/account' element={<Account title={"Mi cuenta"}/>}></Route>
 			      <Route path='/account/settings' element={<ProfileSettings title="Configuración de perfil" id={props.currentUser?.id}/>}></Route>
 				  <Route path='/howTo' element={<HowTo/>}></Route>

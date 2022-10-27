@@ -1,4 +1,4 @@
-import { Schema, model} from 'mongoose';
+import { Schema, model, Types} from 'mongoose';
 
 interface teacherDTO{
 	type:string,
@@ -15,7 +15,7 @@ interface teacherDTO{
 	from:string,
         uniqueString:string,
 	num:string,
-	events:Array<{title:string, start:Date, end:Date}>
+	events:Array<{_id:Schema.Types.ObjectId, title:string, start:Date, end:Date, students:Array<string>}>
 }
 
 const teacherSchema = new Schema<teacherDTO>({
@@ -36,7 +36,8 @@ const teacherSchema = new Schema<teacherDTO>({
 	events:[{
 		title:{type:String, required:false},
 		start:{type:Date, required:false},
-		end:{type:Date, required:false}
+		end:{type:Date, required:false},
+		students:[{type:String, required:false}]
 	}]
 })
 

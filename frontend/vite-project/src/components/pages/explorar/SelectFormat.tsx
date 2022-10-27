@@ -10,26 +10,28 @@ import { RootState } from "../../../main";
 const SelectFormat = (props:any) => {
 	const disciples = [
 		{
-			id: 1,
+			id:1,
+			name:'Todos'
+
+		},
+
+		{
+			id: 2,
 			name: "Presencial",
 		},
 
 		{
-			id:2,
+			id:3,
 			name:'Virtual'
 		    
 		},
 
 		{
-			id: 3,
-			name: "None",
-		},
-		{
 			id: 4,
 			name: "None",
 		},
+       ];
 
-	  ];
   function classNames(...classes: any): any {
     return classes.filter(Boolean).join(" ");
   }

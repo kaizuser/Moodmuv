@@ -33,10 +33,11 @@ let GoogleLogIn = (props:any) => {
 
 	    const userData = {
 		    email:credentials.email,
-		    pass:'Google-no-password'
+		    pass:'Google-no-password',
+		    from:'Google'
 	    }
 
-	    let navigateFlag = await props.loginBoth(userData.email, userData.pass)
+	    let navigateFlag = await props.loginBoth(userData.email, userData.pass, userData.from)
 
 	    if (navigateFlag){
 		    navigate('/home')

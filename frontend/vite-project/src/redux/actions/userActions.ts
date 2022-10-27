@@ -24,12 +24,12 @@ const userActions = {
 		}
 	},
 
-	loginBoth: (email:string, pass:string) => {
+	loginBoth: (email:string, pass:string, from:string) => {
 		return async (dispatch:AppDispatch, getState:RootState) => {
 			const ans = await axios({
 				method:'post',
 				url:'http://localhost:4000/api/auth/logInUser',
-				data:{email, pass}
+				data:{email, pass, from}
 			})
 
 			if (ans.data.success){

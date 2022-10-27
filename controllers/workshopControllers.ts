@@ -46,7 +46,7 @@ const workshopControllers = {
         },
 
         modify_workshop: async(req:Request, res:Response) => {
-                let workshopData = req.body
+                let workshopData= req.body
                 let id:string = workshopData.id
 
 		let newWorkshop:workshopDTO = workshopData

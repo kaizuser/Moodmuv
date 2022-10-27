@@ -176,7 +176,7 @@ const teacherActions = {
 			if(ans.status === 200){
 				Swal.fire({
 					icon:"success",
-					title:'Haz borrado tu evento con exito',
+					title:'Haz borrado tu evento con éxito',
 					showConfirmButton:false,
 					timer:1000
 				})
@@ -190,7 +190,35 @@ const teacherActions = {
 				})
 			}
 		}
+	},
+
+	addStudentCalendar: (eventData:{id:string, event:{id:string}}) => {
+		return async(dispatch:AppDispatch, getState:RootState) => {
+
+			const ans = await axios({
+				method:'put',
+				url:'http://localhost:4000/api/teacher/addStudentCalendar',
+				data:eventData
+			})
+
+			if(ans.data.success){
+				Swal.fire({
+					icon:"success",
+					title:'Te haz anotado correctamente',
+					showConfirmButton:false,
+					timer:1000
+				})
+
+			} else {
+				Swal.fire({
+					icon:'error',
+					title:'Ya te haz anotado en este evento',
+					showConfirmButton:false,
+					timer:1000
+				})
+			}
+		}
 	}
 }
 
-export default teacherActions;
+export default teacherActions

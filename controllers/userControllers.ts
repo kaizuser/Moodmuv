@@ -64,7 +64,7 @@ const userControllers = {
 	},
 
 	login_both: async(req:Request, res:Response) => {
-		const { email, pass} = req.body;
+		const { email, pass, from} = req.body;
 
 		try {
 			const student:studentDTO | null = await Student.findOne({ email });
@@ -80,42 +80,51 @@ const userControllers = {
 			} 
 
 			else {
+				if(user.from == from){
+					if (user.verifEmail) {
+						let passMatches = user.pass?.filter((password) =>
+						bcryptjs.compareSync(pass, password)
+						);
 
-				if (user.verifEmail) {
-					let passMatches = user.pass?.filter((password) =>
-					bcryptjs.compareSync(pass, password)
-					);
+						if (passMatches && passMatches.length > 0) {
+							const userData = {
+								id: user._id,
+								email: user.email,
+								pass: user.pass
+							};
 
-					if (passMatches && passMatches.length > 0) {
-						const userData = {
-							id: user._id,
-							email: user.email,
-							pass: user.pass
-						};
+							const token = jwt.sign({ ...userData }, process.env.KEY, {
+							expiresIn: 60 * 60 * 24,
+							});
 
-						const token = jwt.sign({ ...userData }, process.env.KEY, {
-						expiresIn: 60 * 60 * 24,
-						});
+							res.json({
+								success: true,
+								response: { token, userData },
+							});
 
-						res.json({
-							success: true,
-							response: { token, userData },
-						});
+						} else {
+							res.json({
+							success: false,
+							message: "Email or password do not match. Please try again",
+							});
+						}
+
 
 					} else {
-						res.json({
-						success: false,
-						message: "Email or password do not match. Please try again",
-						});
-					}
-
-				} else {
 						res.json({
 						success: false,
 						message: "You haven't verified your email",
 						});
 					}
+
+				} else {
+					res.json({
+					success: false,
+					message: "Email or password do not match. Please try again",
+					});
 				}
+
+			} 
 
 		} catch (error) {
 			console.log(error);

@@ -25,7 +25,8 @@ class Scheduler extends React.Component <any,any>{
 	constructor(props:any){
 		super(props)
 		this.state = {
-			storedEvent:{} 
+			storedEvent:{},
+			events:[]
 		}
 	}
 
@@ -36,12 +37,12 @@ class Scheduler extends React.Component <any,any>{
 	}
 
 	componentDidUpdate(prevProps:any){
-		if(prevProps.teacher !== this.props.teacher){
-			this.props.fetchTeacher(this.props.id)
+		if (prevProps.teacher !== this.props.teacher) {
+			this.setState({events:this.props.teacher.events})
 		}
 	}
 
-	isValidDate = (date:any) => {
+	isValidDate = (date:Date | number) => {
 		return date instanceof Date && !isNaN(date)
 	}
 
@@ -51,14 +52,14 @@ class Scheduler extends React.Component <any,any>{
 		}
 
 		let localizer = dateFnsLocalizer({format, parse, startOfWeek, getDay, locales})
-
+		
 		return (
 			<>
 				<div className='w-full h-auto flex justify-center items-center flex-col space-y-12 ml-12 mb-12'>
 
 					<Calendar
 						localizer={localizer}
-						events={this.props.teacher.events}
+						events={this.state.events}
 						startAccessor={(event:any) => {return new Date(event.start)}}
 						endAccessor={(event:any) => {return new Date(event.end)}}
 						style={{height:500, width:'80%'}}
@@ -68,16 +69,15 @@ class Scheduler extends React.Component <any,any>{
 								title:'¿Está seguro de eliminar este evento?',
 								showConfirmButton:true,
 								showCancelButton:true,
-							}).then((result) => {
+							}).then(async (result) => {
 								if(result.isConfirmed){
 									let eventData = {
 										id:this.props.id,
 										event:{id:event._id}
 									}
 
-									console.log(eventData);
-
-									this.props.deleteEventCalendar(eventData)
+									await this.props.deleteEventCalendar(eventData)
+									this.props.fetchTeacher(this.props.id)
 								}
 							})
 						}}
@@ -156,8 +156,8 @@ class Scheduler extends React.Component <any,any>{
 
 							this.setState({storedEvent:{}})
 
-							this.props.addEventCalendar(eventData)
-
+							await this.props.addEventCalendar(eventData)
+							this.props.fetchTeacher(this.props.id)
 						}}
 						selectable={true}
 						popup

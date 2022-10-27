@@ -15,9 +15,10 @@ const SignIn = (props:any) => {
 	  const userData = {
 		  email:emailValue,
 		  pass:passValue,
+		  from:'form-signUp'
 	  }
 
-	  let navigateFlag = props.loginBoth(userData.email, userData.pass).then((res:any) => {
+	  let navigateFlag = props.loginBoth(userData.email, userData.pass, userData.from).then((res:any) => {
 		  if(res){
 			  navigate('/home')
 			  window.scrollTo(0, 0);

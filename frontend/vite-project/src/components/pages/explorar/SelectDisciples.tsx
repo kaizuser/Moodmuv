@@ -10,33 +10,38 @@ import { RootState } from "../../../main";
 const SelectDisciples = (props:any) => {
 	const disciples = [
 		{
-			id: 1,
+			id:1,
+			name:"Todos"
+		},
+
+		{
+			id: 2,
 			name: "Yoga",
 		},
 
 		{
-			id:2,
+			id:3,
 			name:'Acroyoga'
 		    
 		},
 
 		{
-			id:3,
+			id:4,
 			name:'Twerk'
 		},
 
 		{
-			id:4,
+			id:5,
 			name:'Biodanza'
 		},
 
 		{
-			id:5,
+			id:6,
 			name:'Acrobacia de piso'
 		},
 
 		{
-			id:6,
+			id:7,
 			name:'Handstand'
 		},
 

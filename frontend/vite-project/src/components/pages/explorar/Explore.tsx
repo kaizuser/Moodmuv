@@ -12,7 +12,6 @@ import teacherActions from "../../../redux/actions/teacherActions"
 import workshopActions from "../../../redux/actions/workshopActions";
 import { RootState } from "../../../main";
 import { Link } from "react-router-dom";
-import {Schema} from 'mongoose'
 
 //INTERFACES
 interface workshopDTO{
