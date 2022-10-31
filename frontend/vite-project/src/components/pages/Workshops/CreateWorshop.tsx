@@ -1,11 +1,46 @@
-import React, {useEffect} from "react";
-import { Link } from "react-router-dom";
+//BASICS
+import React from "react";
+import { useState, useEffect } from "react";
+
+//UTILITIES
+import {setFips} from "crypto";
+import axios from "axios";
 
 const CreateWorshop = () => {
   useEffect(() => {
     // 👇️ scroll to top on page load
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
   }, []);
+
+  let [file, setFile] = useState([])
+
+  let uploadTest = async(e) => {
+	  let id = 'god'
+	  let data = new FormData()
+
+	  for(let i=0; i<file.length; i++){
+		  data.append('file', file[i])
+	  }
+
+	  await axios.all([
+		  axios({
+			  method:'post',
+			  url:'http://localhost:4000/api/setMetadata',
+			  data:{id},
+		  }),
+
+		  axios({
+			  method:'post',
+			  url:'http://localhost:4000/api/upload',
+			  data:data,
+			  headers: { "Content-Type": "multipart/form-data"}
+		  }),
+
+	  ])
+  }
+
+  console.log(file);
+  
   return (
     <div className="min-h-screen w-full bg-[#f3f3f3] flex flex-col justify-center items-center">
       <Link to="/account/panel/talleres" className="sticky top-4 flex justify-center items-center  text-[#999] flex gap-2 self-start p-4">
@@ -237,21 +272,25 @@ const CreateWorshop = () => {
                             strokeLinejoin="round"
                           />
                         </svg>
-                        <div className="flex text-sm text-gray-600">
-                          <label
-                            htmlFor="file-upload"
-                            className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
-                          >
-                            <span>Upload a file</span>
-                            <input
-                              id="file-upload"
-                              name="file-upload"
-                              type="file"
-                              className="sr-only"
-                            />
-                          </label>
-                          <p className="pl-1">or drag and drop</p>
-                        </div>
+			<div className="flex text-sm text-gray-600">
+			  <label
+			    htmlFor="file"
+			    className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
+			  >
+			    <span>Upload a file</span>
+			    <input
+			      id="file"
+			      name="file"
+			      type="file"
+			      className="sr-only"
+			      onChange={(e:any) => setFile(e.target.files)}
+			      multiple
+			    />
+			  </label>
+			  <p className="pl-1">or drag and drop</p>
+			</div>
+
+			<button type='button' className="bg-blue w-20" value='Submit' onClick={uploadTest}>SUBMIT</button>
                         <p className="text-xs text-gray-500">
                           PNG, JPG, GIF up to 10MB
                         </p>

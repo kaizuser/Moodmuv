@@ -4,6 +4,9 @@ const Router = require('express').Router();
 //UTILITIES
 import passport from '../config/passport'
 import validator from '../config/validator';
+import storage from '../config/storageFiles';
+const mongoose = require('mongoose')
+const Grid = require('gridfs-stream')
 
 //CONTROLLERS
 import studentControllers from '../controllers/studentControllers'
@@ -14,7 +17,19 @@ import workshopControllers from '../controllers/workshopControllers'
 let {get_students, get_student, set_student, delete_student, modify_student, verify_email_student, sign_up_student, } = studentControllers
 let {get_teachers, get_teacher, set_teacher, delete_teacher, modify_teacher, verify_email_teacher, sign_up_teacher, add_event_calendar, delete_event_calendar, add_student_calendar, delete_student_calendar} = teacherControllers
 let {verify_token, login_both} = userControllers
-let {get_workshops, get_workshop, set_workshop, delete_workshop, modify_workshop,} = workshopControllers
+let {get_workshops, get_workshop, set_workshop, delete_workshop, modify_workshop, set_metadata} = workshopControllers
+
+//INIT GRIDFS-STREAM
+let gfs:any
+let gfsb:any
+
+mongoose.connection.once('open', () => {
+	gfsb = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {bucketName:'videos'})
+	gfs = Grid(mongoose.connection.db, mongoose.mongo)
+	gfs.collection('videos')
+})
+
+let {upload} = storage
 
 
 
@@ -61,6 +76,23 @@ Router.route('/teacher/addStudentCalendar')
 
 Router.route('/teacher/deleteStudentCalendar')
 .put(delete_student_calendar)
+
+//videos
+
+Router.route('/setMetadata')
+.post(set_metadata)
+
+Router.route('/upload')
+.post(upload.array('file'))
+
+Router.route('/video/:filename')
+.get((req:any, res:any) => {
+	gfs.files.findOne({filename:req.params.filename}, (err:any, file:any) => {
+		const readstream = gfsb.openDownloadStream(file._id)
+		console.log(readstream);
+		readstream.pipe(res)
+	})
+})
 
 
 

@@ -2,6 +2,9 @@
 import {Request, Response} from 'express'
 import {Workshop} from '../models/workshop'
 
+//UTILITIES
+import storage from '../config/storageFiles';
+
 interface workshopDTO{
 	author:string,
 	name:string,
@@ -54,6 +57,12 @@ const workshopControllers = {
                 await Workshop.findOneAndUpdate({_id:id},newWorkshop).then(data => res.json({data}))
 
         },
+
+	//GRIDFS 
+	
+	set_metadata: async (req:Request, res:Response) => {
+		storage.updateMetadata(req.body.id)
+	}
 }
 
 export default workshopControllers
