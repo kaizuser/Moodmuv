@@ -14,7 +14,7 @@ const Home = ({title}:any) => {
       >
         {/* 100vh */}
         <video
-          className="grayscale -bottom-0 absolute h-full object-cover w-full"
+          className="-bottom-0 absolute h-full object-cover w-full"
           autoPlay
           loop
           muted

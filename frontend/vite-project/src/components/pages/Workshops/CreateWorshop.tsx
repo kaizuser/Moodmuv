@@ -1,9 +1,14 @@
-import React from "react";
+import React, {useEffect} from "react";
+import { Link } from "react-router-dom";
 
 const CreateWorshop = () => {
+  useEffect(() => {
+    // 👇️ scroll to top on page load
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  }, []);
   return (
     <div className="min-h-screen w-full bg-[#f3f3f3] flex flex-col justify-center items-center">
-      <div className="sticky top-4 flex justify-center items-center  text-[#999] flex gap-2 self-start p-4">
+      <Link to="/account/panel/talleres" className="sticky top-4 flex justify-center items-center  text-[#999] flex gap-2 self-start p-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -19,7 +24,7 @@ const CreateWorshop = () => {
           />
         </svg>
         <p className="text-sm">Volver</p>
-      </div>
+      </Link>
 
       <div>
         <div className="p-4 md:grid md:grid-cols-3 md:gap-6">

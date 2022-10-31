@@ -12,10 +12,12 @@ import ProfileSettings from './components/pages/login/settings/ProfileSettings'
 import HowTo from './components/pages/howto/HowTo'
 import Workshop from './components/pages/Workshops/WorkshopContainer'
 import CreateWorshop from './components/pages/Workshops/CreateWorshop'
+import UserPanel from './components/pages/UserPanel'
+import TalleresPanel from './components/pages/TalleresPanel'
 import './styles.css'
 
 //UTILITIES
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import {useEffect} from 'react'
 import {connect} from 'react-redux'
 import userActions from './redux/actions/userActions'
@@ -23,7 +25,7 @@ import type {RootState, AppDispatch} from './main'
 import {current} from '@reduxjs/toolkit'
 
 function App(props:any) {
-
+	
 	useEffect(() => {
 	if(!props.currentUser?.id){
 		if(localStorage.getItem('token')!== null){
@@ -49,8 +51,10 @@ function App(props:any) {
 			      <Route path='/account' element={<Account title={"Mi cuenta"}/>}></Route>
 			      <Route path='/account/settings' element={<ProfileSettings title="Configuración de perfil" id={props.currentUser?.id}/>}></Route>
 				  <Route path='/howTo' element={<HowTo/>}></Route>
-		      </Routes>
-			  <CreateWorshop/>
+				  <Route path='/account/panel' element={<UserPanel/>}></Route>
+				  <Route path='/account/panel/createworkshop' element={<CreateWorshop/>}></Route>
+				  <Route path='/account/panel/talleres' element={<TalleresPanel/>}></Route>
+		      </Routes>			  
 		      <Footer/>
 	      </Router>
 	      </>
