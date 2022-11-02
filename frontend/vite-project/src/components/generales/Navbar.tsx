@@ -30,16 +30,22 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 const settings = [{
-  name:'Profile',
-  href:'/account'
+	name:'Profile',
+	href:'/account'
 },
 {
-  name:'Settings',
-  href:'/account/settings'
+	name:'Settings',
+	href:'/account/settings'
 },
 {
-  name:'Logout',
-}];
+	name:'Logout',
+},
+{
+	name:'Panel',
+	href:'/account/panel'
+}
+
+];
 function Example(props: any) {
   let navigate = useNavigate()
   const [openDrop, setOpenDrop] = useState(false);
@@ -130,20 +136,30 @@ function Example(props: any) {
                     Profile
                 </MenuItem>
                   </Link>
+
+		  <Link to={'/account/panel'}>
+		  <MenuItem onClick={handleCloseUserMenu}>
+		    Panel
+		  </MenuItem>
+		  </Link>
+
                   <Link to={'/account/settings'}>
                 <MenuItem onClick={handleCloseUserMenu}>
                     Setting
                 </MenuItem>
                   </Link>
+
                   <Typography onClick={() => {
                                    props.logOut()
                                      setearOpenDrop()
                                      navigate('/home')
                                       window.scrollTo(0, 0);
                                }}>
+
                 <MenuItem onClick={handleCloseUserMenu}>
                     Logout
                 </MenuItem>
+
                   </Typography>
             </Menuu>
           </Box>

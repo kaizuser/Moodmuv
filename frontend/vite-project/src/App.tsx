@@ -14,6 +14,7 @@ import Workshop from './components/pages/Workshops/WorkshopContainer'
 import CreateWorshop from './components/pages/Workshops/CreateWorshop'
 import UserPanel from './components/pages/UserPanel'
 import TalleresPanel from './components/pages/TalleresPanel'
+import EventosPanel from './components/pages/EventosPanel'
 import './styles.css'
 
 //UTILITIES
@@ -36,27 +37,30 @@ function App(props:any) {
 	},[props.currentUser])
 
 	return (
-	      <>
-	      <Router>
+		<>
+		<Router>
 		      <Nav currentUser={props.currentUser?.id}/>
 		      <Routes>
-			      <Route path='/' element={<Home title="Home"/>}></Route>
-			      <Route path='/home' element={<Home title="Home"/>}></Route>
-			      <Route path='/explore' element={<Explore title="Explore"/>}></Route>
-			      <Route path='/explore/profile/:id' element={<Profile title="Perfil"/>}></Route>
-			      <Route path='/explore/workshop/:id' element={<Workshop/>}></Route>
-			      <Route path='/signIn' element={<SignIn title="Iniciar Sesión"/>} ></Route>
-			      <Route path='/signUp' element={<SignUp title="Registro"/>}></Route>
-			      <Route path='/forgotPass' element={<ForgotPassword/>}></Route>
-			      <Route path='/account' element={<Account title={"Mi cuenta"}/>}></Route>
-			      <Route path='/account/settings' element={<ProfileSettings title="Configuración de perfil" id={props.currentUser?.id}/>}></Route>
-				  <Route path='/howTo' element={<HowTo/>}></Route>
-				  <Route path='/account/panel' element={<UserPanel/>}></Route>
-				  <Route path='/account/panel/createworkshop' element={<CreateWorshop/>}></Route>
-				  <Route path='/account/panel/talleres' element={<TalleresPanel/>}></Route>
+				<Route path='/' element={<Home title="Home"/>}></Route>
+				<Route path='/home' element={<Home title="Home"/>}></Route>
+				<Route path='/explore' element={<Explore title="Explore"/>}></Route>
+				<Route path='/howTo' element={<HowTo/>}></Route>
+				<Route path='/explore/profile/:id' element={<Profile title="Perfil"/>}></Route>
+				<Route path='/explore/workshop/:id' element={<Workshop/>}></Route>
+				<Route path='/signIn' element={<SignIn title="Iniciar Sesión"/>} ></Route>
+				<Route path='/signUp' element={<SignUp title="Registro"/>}></Route>
+				<Route path='/forgotPass' element={<ForgotPassword/>}></Route>
+				<Route path='/account' element={<Account title={"Mi cuenta"}/>}></Route>
+				<Route path='/account/settings' element={<ProfileSettings title="Configuración de perfil" id={props.currentUser?.id}/>}></Route>
+				<Route path='/account/panel' element={<UserPanel/>}></Route>
+				<Route path='/account/panel/teacherWorkshops' element={<TalleresPanel/>}></Route>
+			      <Route path='/account/panel/teacherEvents' element={<EventosPanel/>}></Route>
+				<Route path='/account/panel/workshop/createWorkshop' element={<CreateWorshop/>}></Route>
+				<Route path='/account/panel/studentWorkshops'></Route>
+			        <Route path='/account/panel/studentEvents'></Route>
 		      </Routes>			  
 		      <Footer/>
-	      </Router>
+		</Router>
 	      </>
   )
 }

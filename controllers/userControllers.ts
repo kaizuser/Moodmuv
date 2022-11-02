@@ -55,6 +55,7 @@ const userControllers = {
 				response: {
 					id:req.user._id,
 					email:req.user.email,
+					type:req.user.type
 				},
 			});
 
@@ -90,7 +91,7 @@ const userControllers = {
 							const userData = {
 								id: user._id,
 								email: user.email,
-								pass: user.pass
+								pass: user.pass,
 							};
 
 							const token = jwt.sign({ ...userData }, process.env.KEY, {
