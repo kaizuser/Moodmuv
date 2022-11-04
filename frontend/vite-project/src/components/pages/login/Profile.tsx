@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import { FaTiktok, FaInstagram, FaFacebookSquare } from "react-icons/fa";
 import {useParams} from 'react-router-dom'
-
+import { Link as NavLink } from '@mui/material';
 //UTILITIES
 import CarouselCards from "./CarouselCards";
 import { useSelector } from "react-redux";
@@ -58,29 +59,20 @@ const Profile = (props:any) => {
 		className="mx-4 w-40 rounded-full -translate-y-16"
 		src="https://mui.com/static/images/avatar/2.jpg"/* {props.teacher?.img} */
 	      />
-	      <div className="flex gap-4 items-center">
-		<Link
-		  to={"/account/settings"}
-		  className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full flex gap-2 text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
-		>
-		  <p>Editar</p>
-		  <svg
-		    xmlns="http://www.w3.org/2000/svg"
-		    fill="none"
-		    viewBox="0 0 24 24"
-		    strokeWidth="1.5"
-		    stroke="currentColor"
-		    className="w-5 h-5"
-		  >
-		    <path
-		      strokeLinecap="round"
-		      strokeLinejoin="round"
-		      d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
-		    />
-		  </svg>
-		</Link>
-	      </div>
+		  {/* REDES */}
+		  <div className="flex gap-4 relative right-0">
+		  <NavLink href="https://www.tiktok.com">
+		  <FaTiktok className="text-[#323232]"/>
+		  </NavLink>
+		  <NavLink href="https://www.instagram.com">
+		  <FaInstagram className="text-[#323232]"/>
+		  </NavLink>
+		  <NavLink href="https://www.instagram.com">
+		  <FaFacebookSquare className="text-[#323232]"/>
+		  </NavLink>
+		  </div>
 	    </div>
+		<p className="text-center shadow-md bg-gradient-to-r from-[#fdc41d] to-[#fbb232] p-3 py-1 rounded-3xl text-white font-bold mb-2">Profesor</p>
 	    <h2 className="font-bold text-4xl text-[#222]">{props.teacher?.name}</h2>
 	    {/* Ubicación */}
 	    <div className="p-4 flex">

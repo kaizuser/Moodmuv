@@ -20,13 +20,16 @@ select {
 
 @media screen and (max-width: 319px) {
     nav{
+<<<<<<< Updated upstream
         background-color: #f8f8f9;
+=======
+        background-color: white;
+>>>>>>> Stashed changes
     }
 
     .text-main{
         font-size: 3rem;
         text-align: center;
-        color: #f3f3f3;
     }
     .p-why{
         width: 100%;
@@ -67,7 +70,6 @@ select {
     .text-main{
         font-size: 3rem;
         text-align: center;
-        color: #f3f3f3;
         position: relative;
         top: 10rem;
     }

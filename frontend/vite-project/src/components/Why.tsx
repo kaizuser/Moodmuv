@@ -44,7 +44,7 @@ const Why = () => {
           </p>
           <div className='div-background_why w-[28rem] h-[20rem] bg-black rounded-2xl relative bg-[url("https://user-images.githubusercontent.com/91817152/192928760-1f880cc5-6d0f-404f-9fc8-cd79b90a9085.jpg")] bg-cover'>
             <p className="pointer-events-none bg-white py-1 bg-gradient-to-r from-[#83EAD1] to-[#63A4FF] px-4 font-bold text-sm text-white absolute z-10 rounded-2xl m-4">
-              Alumno
+              Alumno/a
             </p>
           </div>
         </div>
@@ -79,13 +79,12 @@ const Why = () => {
             tu casa
           </p>
         </div>
-</Slide>
         <img
-          className="img-cp w-[50%] self-end"
+          className="img-cp w-2/4 self-end"
           src={bkgOnline}
-          alt="background online"
+          alt="Background"
         />
-
+</Slide>
       </div>
     </div>
   );

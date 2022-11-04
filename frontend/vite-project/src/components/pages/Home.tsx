@@ -14,19 +14,19 @@ const Home = ({title}:any) => {
       >
         {/* 100vh */}
         <video
-          className="-bottom-0 absolute h-full object-cover w-full"
+          className="-bottom-0 absolute h-full object-cover w-full opacity-70"
           autoPlay
           loop
           muted
         >
           <source src={sample} type="video/mp4" />
         </video>
-        <Fade>
-
-        <h1 className="text-main z-10 text-6xl sm:w-[25rem] lg:w-[42rem] font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B]">
+        <h1 className="my-8 text-main text-6xl sm:w-[25rem] lg:w-[42rem] font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B] drop-shadow-2xl">
           El lugar para impulsar tu creatividad interior
         </h1>
-        <div className="z-10 buttons flex gap-4 ">
+        <Fade>
+
+        <div className="z-10 buttons flex gap-2 ">
           <BotonSecundario text="Clases disponibles" />
           <BotonPrimario text="Conocer Plataforma" />
         </div>
