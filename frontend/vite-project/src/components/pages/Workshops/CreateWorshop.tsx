@@ -44,7 +44,7 @@ const CreateWorshop = () => {
   
   return (
     <div className="min-h-screen w-full bg-[#f3f3f3] flex flex-col justify-center items-center">
-      <Link to="/account/panel/talleres" className="sticky top-4 flex justify-center items-center  text-[#999] flex gap-2 self-start p-4">
+      <Link to={"/account/panel/teacherWorkshops" || "account/panel/studentsWorkshops" } className="sticky top-4 flex justify-center items-center  text-[#999] flex gap-2 self-start p-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

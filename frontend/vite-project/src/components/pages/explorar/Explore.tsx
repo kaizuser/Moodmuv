@@ -5,7 +5,7 @@ import SelectDisciples from "./SelectDisciples";
 import SelectFormat from './SelectFormat'
 import CardExplore from './CardExplore'
 import Search from "./Search";
-
+import '../../../styles/mediaqueriesExplore.css'
 //UTILITIES
 import {connect} from 'react-redux'
 import teacherActions from "../../../redux/actions/teacherActions"
@@ -31,6 +31,8 @@ interface workshopDTO{
 class Explore extends React.Component <any, any>{
 
 	constructor(props:any){
+		console.log(props)
+
 		super(props)
 		this.state = {
 			search:'',
@@ -43,6 +45,7 @@ class Explore extends React.Component <any, any>{
 	componentDidMount(){
 		this.props.fetchTeachers()
 		this.props.fetchWorkshops()
+		
 	}
 
 	setParameters = (value:string, camp:string) => {
@@ -56,23 +59,23 @@ class Explore extends React.Component <any, any>{
 		}
 		
 	}
-
 	render(): React.ReactNode {
 
 		return (
-
-		<div className="w-full h-screen">
-		<div className="min-h-12 w-full flex gap-4 p-4 px-8 shadow-md m-1">
-			<div className='w-[55%] flex justify-center items-center gap-4'>
+		<div className="w-full min-h-screen">
+		<div className="relative min-h-12 w-full flex flex-col gap-4 p-4 px-8 shadow-md justify-center items-center">
+			<img className="w-full h-56 object-cover h-full pointer-events-none" src="https://images.ctfassets.net/ew96z4wsnz93/43E3JISXM59HIQwfm6C0DX/03081ce4d57b8e5856c1396522c4c1d1/CRO_CustomisableMembershipsModule_2x.png" alt="" />
+				<h1 className="drop-shadow-md text-4xl pointer-events-none font-bold text-white absolute">Explorar</h1>
+			<div className='-bottom-4 w-fit flex justify-center items-center flex-wrap gap-4'>
 				<Search setParameters={this.setParameters} parameters={[this.state.search, this.state.disciples, this.state.format]}/>
 				<SelectDisciples setParameters={this.setParameters} parameters={[this.state.search, this.state.disciples, this.state.format]}/>
 				<SelectFormat setParameters={this.setParameters} parameters={[this.state.search, this.state.disciples, this.state.format]}/>
 			</div>
 		</div>
-		<div className="flex w-100">
-			<div className="w-4/6 px-4 h-screen bg-[#F3F3F3] flex flex-wrap gap-4 justify-center overflow-scroll p-4">
+		<div className="flex w-full">
+			<div className="cartas w-4/6 px-4 overflow-x-hidden h-screen bg-[#F3F3F3] flex flex-wrap gap-4 justify-center items-start overflow-scroll p-4">
 				{this.props.workshops ? this.props.workshops.map((workshop:workshopDTO) => (
-				<div className="max-w-xs rounded overflow-hidden shadow-lg" key={workshop._id}>
+				<div className="w-[13rem] min-h-[25rem] rounded overflow-hidden shadow-lg" key={workshop._id}>
 					<img className="w-full h-44 object-cover" src="https://algarabia.com/wp-content/uploads/2017/05/El-texto-del-pa%CC%81rrafo-36.jpg" alt="Sunset in the mountains"/>
 					<div className="flex justify-between items-center px-6 py-4">
 						<div>
@@ -88,7 +91,7 @@ class Explore extends React.Component <any, any>{
 
 					</div>
 					
-					<div className='flex justify-between items-center m-4'>
+					<div className='flex justify-between items-center m-4 self-end content-end'>
 					<div className='flex gap-2  items-center text-xs text-[#007AE9] font-bold cursor-pointer'>
 					<Link to={'/explore/profile/' + workshop.author}>
 
@@ -102,8 +105,10 @@ class Explore extends React.Component <any, any>{
 				</div>
 				)) : ''}
 			</div>
-			<div className="w-3/6 h-screen bg-[#222]">
-			aca va el mapa
+			<div className="w-3/6 h-screen bg-[#222] mapita">
+			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d268123.79887572123!2d11.08380360310596!3d43.83418004934677!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132a5403bfe22ff5%3A0x5591438487aaf1f5!2sCatedral%20de%20Santa%20Mar%C3%ADa%20del%20Fiore!5e0!3m2!1ses-419!2sar!4v1667691210849!5m2!1ses-419!2sar" className="w-full h-full">
+
+			</iframe>
 			</div>
 		</div>
 		</div>

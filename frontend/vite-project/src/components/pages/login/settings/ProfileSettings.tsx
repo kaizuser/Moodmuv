@@ -1,5 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
-
+import '../../../../styles/mediaqueriesSettings.css'
+import Chip from '@mui/material/Chip';
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
 //UTILITIES
 import { Link, useNavigate } from "react-router-dom";
 import studentActions from "../../../../redux/actions/studentActions";
@@ -53,7 +57,7 @@ const ProfileSettings = (props: any) => {
 
   let user = props.student || props.teacher;
   let navigate = useNavigate()
-
+  const disciplines = ["Acroyoga", "Yoga"]
   return (
     <>
       {user && (
@@ -158,6 +162,33 @@ const ProfileSettings = (props: any) => {
                   defaultValue={user?.desc}
                 ></textarea>
               </fieldset>
+
+              <fieldset className="flex gap-4 w-full flex-wrap">
+                <aside className="flex justify-end px-6 w-44 min-h-4">
+                  <label
+                    className="font-bold  text-right self-center"
+                    htmlFor=""
+                  >
+                    Disciplinas
+                  </label>
+                </aside>
+                <Autocomplete
+                        freeSolo
+                className="ubi-input border-0 grow rounded w-fit px-0"
+        multiple
+        id="size-small-outlined-multi"
+        options={disciplines}
+        getOptionLabel={(option) => option}
+        defaultValue={[disciplines[0]]}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            className=" border-0 w-full"
+          />
+        )}
+      />              </fieldset>
+
+      
               <fieldset className="flex gap-4 w-full flex-wrap">
                 <aside className="flex justify-end px-6 w-44 min-h-4">
                   <label

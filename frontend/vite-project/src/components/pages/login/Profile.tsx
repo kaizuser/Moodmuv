@@ -67,7 +67,7 @@ const Profile = (props:any) => {
 		  <NavLink href="https://www.instagram.com">
 		  <FaInstagram className="text-[#323232]"/>
 		  </NavLink>
-		  <NavLink href="https://www.instagram.com">
+		  <NavLink href="https://www.facebook.com">
 		  <FaFacebookSquare className="text-[#323232]"/>
 		  </NavLink>
 		  </div>

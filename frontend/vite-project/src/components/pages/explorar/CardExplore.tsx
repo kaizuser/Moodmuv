@@ -7,7 +7,7 @@ const CardExplore = () => {
     }
     
   return (
-    <div className="max-w-xs rounded overflow-hidden shadow-lg">
+    <div className="max-w-[10rem] rounded overflow-hidden shadow-lg">
     <img className="w-full h-44 object-cover" src="https://algarabia.com/wp-content/uploads/2017/05/El-texto-del-pa%CC%81rrafo-36.jpg" alt="Sunset in the mountains"/>
     <div className="px-6 py-4">
       <div className='flex w-full justify-between text-gray-700 text-base text-xs pb-2'>

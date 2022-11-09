@@ -4,49 +4,50 @@ import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
 //UTILITIES
 import workshopActions from "../../../redux/actions/workshopActions";
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
 import { RootState } from "../../../main";
 
-const SelectFormat = (props:any) => {
-	const disciples = [
-		{
-			id:1,
-			name:'Todos'
+const SelectFormat = (props: any) => {
+  const disciples = [
+    {
+      id: 1,
+      name: "Todos",
+    },
 
-		},
+    {
+      id: 2,
+      name: "Presencial",
+    },
 
-		{
-			id: 2,
-			name: "Presencial",
-		},
-
-		{
-			id:3,
-			name:'Virtual'
-		    
-		},
-
-		{
-			id: 4,
-			name: "None",
-		},
-       ];
+    {
+      id: 3,
+      name: "Virtual",
+    }
+  ];
 
   function classNames(...classes: any): any {
     return classes.filter(Boolean).join(" ");
   }
-  const [selected, setSelected] = useState(disciples[3]);
+  const [selected, setSelected] = useState(disciples[0]);
   return (
-    <div className="w-40">
-	    <Listbox value={selected} onChange={(event) => {
-		    setSelected(event)
-		    props.setParameters(event.name, 'format')
-		    props.filterWorkshop(props.workshopsAuxiliar, props.parameters[0], props.parameters[1], event.name)
-	    }}>
+    <div className="w-32">
+      <Listbox
+        value={selected}
+        onChange={(event) => {
+          setSelected(event);
+          props.setParameters(event.name, "format");
+          props.filterWorkshop(
+            props.workshopsAuxiliar,
+            props.parameters[0],
+            props.parameters[1],
+            event.name
+          );
+        }}
+      >
         {({ open }) => (
           <>
-	     <div className="relative mt-[2px]">
-              <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+            <div className="relative">
+              <Listbox.Button className="py-2 relative shadow w-full cursor-default rounded-md bg-white py-2 pl-3 pr-10 text-left shadow focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
                 <span className="flex items-center">
                   <span className="ml-3 block truncate">{selected.name}</span>
                 </span>
@@ -118,15 +119,15 @@ const SelectFormat = (props:any) => {
 };
 
 const mapDispatch = {
-	filterWorkshop:workshopActions.filterWorkshop
-}
+  filterWorkshop: workshopActions.filterWorkshop,
+};
 
-const mapState = (state:RootState) => {
-	return {
-		workshopsAuxiliar:state.workshopReducer.workshopsAuxiliar
-	}
-}
+const mapState = (state: RootState) => {
+  return {
+    workshopsAuxiliar: state.workshopReducer.workshopsAuxiliar,
+  };
+};
 
-const connector = connect(mapState, mapDispatch)
+const connector = connect(mapState, mapDispatch);
 
-export default connector(SelectFormat)
+export default connector(SelectFormat);

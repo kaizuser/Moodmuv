@@ -1,5 +1,6 @@
 //BASICS
 import React from 'react'
+import GlobalStyles from '@mui/material/GlobalStyles';
 
 //UTILITIES 
 import {connect} from 'react-redux'
@@ -20,6 +21,7 @@ import PropTypes from 'prop-types'
 //CSS 
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import "react-datepicker/dist/react-datepicker.css";
+import '../../../styles/mediaqueriesCalendar.css';
 
 class Scheduler extends React.Component <any,any>{
 	constructor(props:any){
@@ -40,6 +42,23 @@ class Scheduler extends React.Component <any,any>{
 		if (prevProps.teacher !== this.props.teacher) {
 			this.setState({events:this.props.teacher.events})
 		}
+		let events = document.querySelectorAll(".rbc-event")
+		
+		/* THIAGO CHUSMEA ESTO */
+
+		/*  for(let event of events) {
+			switch(event.type){
+				case "Workshop":
+					event.className = 'bg-green-400'
+					break
+				case "Ciclo":
+					event.className = 'bg-red-400'
+					break
+				case "Evento":
+				event.className = 'bg-red-400'
+				break
+			}
+		} */
 	}
 
 	isValidDate = (date:Date | number) => {
@@ -55,14 +74,13 @@ class Scheduler extends React.Component <any,any>{
 		
 		return (
 			<>
-				<div className='w-full h-auto flex justify-center items-center flex-col space-y-12 ml-12 mb-12'>
-
+				<div className='w-full p-8 min-h-screen flex justify-center items-center flex-col'>
 					<Calendar
 						localizer={localizer}
 						events={this.state.events}
 						startAccessor={(event:any) => {return new Date(event.start)}}
 						endAccessor={(event:any) => {return new Date(event.end)}}
-						style={{height:500, width:'80%'}}
+						style={{minHeight:500, width:'100%'}}
 						onSelectEvent={(event) => {
 							Swal.fire({
 								icon:'question',

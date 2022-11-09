@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+*{
+    font-family: inter;
+}
+@media screen  and (max-width:390px){
+    .rbc-month-row{
+    }
+    .rbc-event-content{
+        font-size: small;
+    }
+}
+.rbc-month-row{
+    min-height:8rem;
+}
+
+.rbc-toolbar-label{
+    font-size: 3rem;
+    font-weight: 900;
+    color: #7d4dff;
+}
+.rbc-toolbar>span:first-child{
+    display: flex;
+}
+/* TODAY */
+.rbc-toolbar>span:first-child>button:nth-child(1){
+    order: 2;
+    border-radius: 0;
+    border-left: 0;
+}
+/* Back */
+.rbc-toolbar>span:first-child>button:nth-child(2){
+    order: 1;
+    border-radius: .2rem 0 0 .2rem;
+    -webkit-border-radius: .2rem 0 0 .2rem;
+    -moz-border-radius: .2rem 0 0 .2rem;
+    -ms-border-radius: .2rem 0 0 .2rem;
+    -o-border-radius: .2rem 0 0 .2rem;
+}
+/* next */
+.rbc-toolbar>span:first-child>button:nth-child(3){
+    order: 3;
+}
+.rbc-month-header{
+    height: 3rem;    
+background:#f3f3f3;
+color: #7d4dff;
+text-transform: uppercase;
+margin: auto 0;
+}
+.rbc-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.rbc-header>span{
+    text-align: center;
+
+}
+.rbc-day-bg{
+    text-align: center;
+    height: 100%;
+}
+.rbc-today{
+    height: 100%;
+    display: flex;
+}
+.rbc-header{
+    font-weight: 600;
+    font-size: 1rem;
+}
+.rbc-date-cell{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+}
+.rbc-button-link{
+    background-color: #1be2ac;
+    color: #fff;
+    margin-top: .4rem;
+    margin-bottom: .4rem;
+    width: 1.4rem;
+    height: 1.4rem;
+    font-size: 1rem;
+    border-radius: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    -o-border-radius: 100%;
+}
+.rbc-show-more{
+    width: 100%;
+    color: #999!important;
+    padding: 0!important;
+    border-radius:0;
+    background-color: transparent;
+    font-weight: 300;
+}
+.rbc-show-more:hover{
+    color: #666!important;
+}

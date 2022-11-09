@@ -54,8 +54,8 @@ function App(props:any) {
 				<Route path='/account/settings' element={<ProfileSettings title="Configuración de perfil" id={props.currentUser?.id}/>}></Route>
 				<Route path='/account/panel' element={<UserPanel/>}></Route>
 				<Route path='/account/panel/teacherWorkshops' element={<TalleresPanel/>}></Route>
-			      <Route path='/account/panel/teacherEvents' element={<EventosPanel/>}></Route>
-				<Route path='/account/panel/workshop/createWorkshop' element={<CreateWorshop/>}></Route>
+			      <Route path={"/account/panel/teacherEvents" || "/account/panel/teacherWorkshops"} element={<EventosPanel/>}></Route>
+				<Route path='/account/panel/createworkshop' element={<CreateWorshop/>}></Route>
 				<Route path='/account/panel/studentWorkshops'></Route>
 			        <Route path='/account/panel/studentEvents'></Route>
 		      </Routes>			  

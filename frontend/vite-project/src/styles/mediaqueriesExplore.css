@@ -1,0 +1,8 @@
+@media screen and (max-width:524px) {
+    .mapita{
+        display:none;
+    }
+    .cartas{
+        width: 100%;
+    }
+}

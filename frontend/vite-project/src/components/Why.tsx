@@ -67,7 +67,7 @@ const Why = () => {
 </Slide>
       </div>
       <div className="flex flex-col justify-center items-center text-center">
-<Slide triggerOnce>
+<Slide triggerOnce className="relative flex justify-end">
 
         <div className="flex flex-col items-center justify-center">
           <h2 className="pt-16 pb-8 font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B] text-5xl">
@@ -80,7 +80,7 @@ const Why = () => {
           </p>
         </div>
         <img
-          className="img-cp w-2/4 self-end"
+          className="img-cp w-2/4"
           src={bkgOnline}
           alt="Background"
         />

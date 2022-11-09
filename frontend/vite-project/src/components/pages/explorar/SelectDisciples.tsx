@@ -49,10 +49,10 @@ const SelectDisciples = (props:any) => {
   function classNames(...classes: any): any {
     return classes.filter(Boolean).join(" ");
   }
-  const [selected, setSelected] = useState(disciples[3]);
+  const [selected, setSelected] = useState(disciples[0]);
   
   return (
-    <div className="w-40">
+    <div className="w-32 ">
 	    <Listbox value={selected} onChange={(event) => {
 		    setSelected(event)
 		    props.setParameters(event.name, 'disciples')
@@ -60,8 +60,8 @@ const SelectDisciples = (props:any) => {
 	    }}>
         {({ open }) => (
           <>
-	     <div className="relative mt-[2px]">
-              <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+	     <div className="relative ">
+              <Listbox.Button className="py-2 relative w-full cursor-default rounded-md bg-white py-2 pl-3 pr-10 text-left shadow focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
                 <span className="flex items-center">
                   <span className="ml-3 block truncate">{selected.name}</span>
                 </span>

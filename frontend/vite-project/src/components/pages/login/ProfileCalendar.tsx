@@ -43,7 +43,7 @@ class ProfileScheduler extends React.Component <any,any>{
 
 		return (
 			<>
-				<div className='w-full h-auto flex justify-center items-center flex-col space-y-12 ml-12 mb-12'>
+				<div className='w-full min-h-screen flex justify-center items-center flex-col'>
 
 					<Calendar
 						localizer={localizer}
