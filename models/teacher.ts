@@ -10,12 +10,13 @@ interface teacherDTO{
 	genre:string,
         ubi:string,
 	disciples:Array<string>,
+	media:Array<string>,
 	bornDate:number,
 	verifEmail:boolean,
 	from:string,
         uniqueString:string,
 	num:string,
-	events:Array<{_id:Schema.Types.ObjectId, title:string, start:Date, end:Date, students:Array<string>}>
+	events:Array<{_id:Schema.Types.ObjectId, title:string, start:Date, end:Date, students:Array<string>, activity:string}>
 }
 
 const teacherSchema = new Schema<teacherDTO>({
@@ -28,6 +29,7 @@ const teacherSchema = new Schema<teacherDTO>({
 	genre:{type:String, required:false},
         ubi:{type:String, required:false},
 	disciples:[{type:String, required:false}],
+	media:[{type:String, required:false}],
 	bornDate:{type:Number, required:false},
 	verifEmail:{type:Boolean, required:true},
 	from:{type:String, required:true},
@@ -37,7 +39,8 @@ const teacherSchema = new Schema<teacherDTO>({
 		title:{type:String, required:false},
 		start:{type:Date, required:false},
 		end:{type:Date, required:false},
-		students:[{type:String, required:false}]
+		students:[{type:String, required:false}],
+		activity:{type:String, required:false}
 	}]
 })
 

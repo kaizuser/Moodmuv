@@ -10,8 +10,8 @@ import Profile from './components/pages/login/Profile'
 import Account from './components/pages/login/Account'
 import ProfileSettings from './components/pages/login/settings/ProfileSettings'
 import HowTo from './components/pages/howto/HowTo'
-import Workshop from './components/pages/Workshops/WorkshopContainer'
-import CreateWorshop from './components/pages/Workshops/CreateWorshop'
+import Activity from './components/pages/Activities/ActivityContainer'
+import CreateActivity from './components/pages/Activities/CreateActivities'
 import UserPanel from './components/pages/UserPanel'
 import TalleresPanel from './components/pages/TalleresPanel'
 import EventosPanel from './components/pages/EventosPanel'
@@ -46,17 +46,17 @@ function App(props:any) {
 				<Route path='/explore' element={<Explore title="Explore"/>}></Route>
 				<Route path='/howTo' element={<HowTo/>}></Route>
 				<Route path='/explore/profile/:id' element={<Profile title="Perfil"/>}></Route>
-				<Route path='/explore/workshop/:id' element={<Workshop/>}></Route>
+				<Route path='/explore/activity/:id' element={<Activity/>}></Route>
 				<Route path='/signIn' element={<SignIn title="Iniciar Sesión"/>} ></Route>
 				<Route path='/signUp' element={<SignUp title="Registro"/>}></Route>
 				<Route path='/forgotPass' element={<ForgotPassword/>}></Route>
 				<Route path='/account' element={<Account title={"Mi cuenta"}/>}></Route>
 				<Route path='/account/settings' element={<ProfileSettings title="Configuración de perfil" id={props.currentUser?.id}/>}></Route>
 				<Route path='/account/panel' element={<UserPanel/>}></Route>
-				<Route path='/account/panel/teacherWorkshops' element={<TalleresPanel/>}></Route>
-			      <Route path={"/account/panel/teacherEvents" || "/account/panel/teacherWorkshops"} element={<EventosPanel/>}></Route>
-				<Route path='/account/panel/createworkshop' element={<CreateWorshop/>}></Route>
-				<Route path='/account/panel/studentWorkshops'></Route>
+				<Route path='/account/panel/teacherActivities' element={<TalleresPanel/>}></Route>
+			      <Route path='/account/panel/teacherEvents' element={<EventosPanel id={props.currentUser?.id}/>}></Route>
+				<Route path='/account/panel/teacherActivities/createActivity' element={<CreateActivity/>}></Route>
+				<Route path='/account/panel/studentActivities'></Route>
 			        <Route path='/account/panel/studentEvents'></Route>
 		      </Routes>			  
 		      <Footer/>
@@ -71,7 +71,8 @@ const mapDispatch = {
 
 const mapState = (state:RootState) => {
 	return {
-		currentUser:state.userReducer.currentUser
+		currentUser:state.userReducer.currentUser,
+		activities:state.activityReducer.activities
 	}
 }
 

@@ -15,6 +15,9 @@ import Logo from "../../assets/logoDegrade.png";
 import { Link, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import userActions from "../../redux/actions/userActions";
+import teacherActions from '../../redux/actions/teacherActions'
+import studentActions from '../../redux/actions/studentActions'
+import activityActions from '../../redux/actions/activityActions'
 
 const navigation = [
   { name: "Explorar", href: "#", current: false },
@@ -153,7 +156,10 @@ function Example(props: any) {
                                    props.logOut()
                                      setearOpenDrop()
                                      navigate('/home')
-                                      window.scrollTo(0, 0);
+                                     window.scrollTo(0, 0);
+				     props.resetStoreTeacher()
+				     props.resetStoreStudent()
+				     props.resetStoreActivities()
                                }}>
 
                 <MenuItem onClick={handleCloseUserMenu}>
@@ -259,7 +265,10 @@ function Example(props: any) {
 }
 
 const mapDispatch = {
-	logOut:userActions.logOut
+	logOut:userActions.logOut,
+	resetStoreTeacher:teacherActions.resetStore,
+	resetStoreStudent:studentActions.resetStore,
+	resetStoreActivities:activityActions.resetStore
 }
 
 const connector = connect(null, mapDispatch)

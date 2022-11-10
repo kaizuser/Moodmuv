@@ -1,7 +1,7 @@
 import React from "react";
 
 //UTILITIES
-import workshopActions from "../../../redux/actions/workshopActions";
+import activityActions from "../../../redux/actions/activityActions";
 import {connect} from "react-redux";
 import { RootState } from "../../../main";
 
@@ -17,7 +17,7 @@ function Search(props:any){
 			</div>
 			    <input type="search" id="default-search" className="py-[.38rem] rounded-md shadow w-96 px-10 placeholder:text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" placeholder="Search Activities, Disciplines..." required onChange={(event) => {
 			    props.setParameters(event.target.value, 'search')
-			    props.filterWorkshop(props.workshopsAuxiliar, event.target.value, props.parameters[1], props.parameters[2])
+			    props.filterActivity(props.activitiesAuxiliar, event.target.value, props.parameters[1], props.parameters[2])
 			    }}/>
 		    </div>
 		</form>
@@ -25,12 +25,12 @@ function Search(props:any){
 }
 
 const mapDispatch = {
-	filterWorkshop:workshopActions.filterWorkshop
+	filterActivity:activityActions.filterActivity
 }
 
 const mapState = (state:RootState) => {
 	return {
-		workshopsAuxiliar:state.workshopReducer.workshopsAuxiliar
+		activitiesAuxiliar:state.activityReducer.activitiesAuxiliar
 	}
 }
 

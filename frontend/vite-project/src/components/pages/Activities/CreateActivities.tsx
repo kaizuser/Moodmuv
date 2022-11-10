@@ -7,13 +7,24 @@ import {setFips} from "crypto";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const CreateWorshop = () => {
+const CreateActivity = () => {
   useEffect(() => {
     // 👇️ scroll to top on page load
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
   }, []);
+  let [FFV, setFFV] = useState('none')
+  let [SFV, setSFV] = useState('none')
 
+  let [name, setName] = useState()
+  let [format, setFormat] = useState()
+  let [level, setLevel] = useState()
+  let [desc, setDesc] = useState()
+  let [disc, setDisc] = useState()
+  let [dur, setDur] = useState()
   let [file, setFile] = useState([])
+  let [price, setPrice] = useState()
+  let [loc, setLoc] = useState()
+ 
 
   let uploadTest = async(e) => {
 	  let id = 'god'
@@ -44,7 +55,7 @@ const CreateWorshop = () => {
   
   return (
     <div className="min-h-screen w-full bg-[#f3f3f3] flex flex-col justify-center items-center">
-      <Link to={"/account/panel/teacherWorkshops" || "account/panel/studentsWorkshops" } className="sticky top-4 flex justify-center items-center  text-[#999] flex gap-2 self-start p-4">
+      <Link to="/account/panel/teacherWorkshops" className="sticky top-4 flex justify-center items-center  text-[#999] flex gap-2 self-start p-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -100,29 +111,74 @@ const CreateWorshop = () => {
 
                     <div className="col-span-6 sm:col-span-3">
                       <label
-                        htmlFor="last-name"
+                        htmlFor="format"
                         className="block text-sm font-medium text-gray-700"
                       >
-                        Hours
+		      Formato
                       </label>
-                      <input
-                        type="text"
-                        name="last-name"
-                        id="last-name"
-                        autoComplete="family-name"
-                        className="px-2 py-1 border mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        placeholder="Martes y Jueves 22hs"
-                      />
+		      <select name='format' className='px-2 py-1 border mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm' onChange={(event) => {
+			      if(event.target.options[event.target.selectedIndex].value == 'Virtual'){
+				      setFFV('block')
+				      setSFV('none')
+			      } else {
+				      setFFV('none')
+				      setSFV('block')
+			      }
+
+		      }}>
+		      <option hidden>Elige tu formato</option>
+		      <option value='Virtual'>Virtual</option>
+		      <option value='Presencial'>Presencial</option>
+		      </select>
                     </div>
                   </div>
 
-                   <div className="grid grid-cols-6 gap-6">
+		  <div className='first-form-container space-y-6 bg-white py-5' style={{display:FFV}}>
+                  <div className="grid grid-cols-6 gap-6">
                     <div className="col-span-6 sm:col-span-3">
                       <label
                         htmlFor="first-name"
                         className=" block text-sm font-medium text-gray-700"
                       >
-                        Ubicación
+                        Disciplinas
+                      </label>
+
+		      <select className="px-2 py-1 border mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+		      <option hidden>Elige las disciplinas</option>
+		      <option value='Yoga'>Yoga</option>
+		      <option value='Acroyoga'>Acroyoga</option>
+		      <option value='Twerk'>Twerk</option>
+		      <option value='Acrobacia de piso'>Acrobacia de piso</option>
+		      <option value='biodanza'>biodanza</option>
+		      <option value='Handstand'>Handstand</option>
+
+		      </select>
+                    </div>
+
+                    <div className="col-span-6 sm:col-span-3">
+                      <label
+                        htmlFor="last-name"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Nivel
+                      </label>
+		      <select className="px-2 py-1 border mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+		      <option hidden>Elige el nivel</option>
+		      <option value='Dificil'>Dificil</option>
+		      <option value='Intermedio'>Intermedio</option>
+		      <option value='Facil'>Facil</option>
+
+		      </select>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-6">
+                   <div className="col-span-6 sm:col-span-3">
+                      <label
+                        htmlFor="first-name"
+                        className=" block text-sm font-medium text-gray-700"
+                      >
+                        Duration
                       </label>
                       <input
                         type="text"
@@ -130,28 +186,35 @@ const CreateWorshop = () => {
                         id="first-name"
                         autoComplete="given-name"
                         className="px-2 py-1 border mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        placeholder="ex: California"
+                        placeholder="Formato HS"
                       />
                     </div>
+                  </div>                
 
-                    <div className="col-span-6 sm:col-span-3">
-                      <label
-                        htmlFor="last-name"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Iframe
-                      </label>
-                      <input
-                        type="text"
-                        name="last-name"
-                        id="last-name"
-                        autoComplete="family-name"
-                        className="px-2 py-1 border mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        placeholder="<iframe src='https://... "
+                  <div>
+                    <label
+                      htmlFor="about"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Descripción
+                    </label>
+                    <div className="mt-1">
+                      <textarea
+                        id="about"
+                        name="about"
+                        rows={3}
+                        className="border p-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        placeholder="Tu descripción"
+                        defaultValue={""}
                       />
                     </div>
+                    <p className="mt-2 text-sm text-gray-500">
+                      Introduce una descripción intuitiva y util
+                    </p>
                   </div>
+                </div>
 
+		<div className='second-form-container space-y-6 bg-white py-5' style={{display:SFV}}>
                   <div className="grid grid-cols-6 gap-6">
                     <div className="col-span-6 sm:col-span-3">
                       <label
@@ -253,56 +316,15 @@ const CreateWorshop = () => {
                       Brief description for your profile. URLs are hyperlinked.
                     </p>
                   </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                    </label>
-                    <div className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
-                      <div className="space-y-1 text-center">
-                        <svg
-                          className="mx-auto h-12 w-12 text-gray-400"
-                          stroke="currentColor"
-                          fill="none"
-                          viewBox="0 0 48 48"
-                          aria-hidden="true"
-                        >
-                          <path
-                            d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                            strokeWidth={2}
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-			<div className="flex text-sm text-gray-600">
-			  <label
-			    htmlFor="file"
-			    className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
-			  >
-			    <span>Upload a file</span>
-			    <input
-			      id="file"
-			      name="file"
-			      type="file"
-			      className="sr-only"
-			      onChange={(e:any) => setFile(e.target.files)}
-			      multiple
-			    />
-			  </label>
-			  <p className="pl-1">or drag and drop</p>
-			</div>
-
-			<button type='button' className="bg-blue w-20" value='Submit' onClick={uploadTest}>SUBMIT</button>
-                        <p className="text-xs text-gray-500">
-                          PNG, JPG, GIF up to 10MB
-                        </p>
-                      </div>
-                    </div>
-                  </div>
                 </div>
+		  </div>
+
                 <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
                   <button
-                    type="submit"
+                    type="button"
                     className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+
+		    onClick={uploadTest}
                   >
                     Save
                   </button>
@@ -319,36 +341,36 @@ const CreateWorshop = () => {
         </div>
       </div>
 {/* 
-      <div className="mt-10 sm:mt-0">
-        <div className="md:grid md:grid-cols-3 md:gap-6">
-          <div className="md:col-span-1">
-            <div className="px-4 sm:px-0">
-              <h3 className="text-lg font-medium leading-6 text-gray-900">
-                Personal Information
-              </h3>
-              <p className="mt-1 text-sm text-gray-600">
-                Use a permanent address where you can receive mail.
-              </p>
-            </div>
-          </div>
-          <div className="mt-5 md:col-span-2 md:mt-0">
-            <form action="#" method="POST">
-              <div className="overflow-hidden shadow sm:rounded-md">
-                <div className="bg-white px-4 py-5 sm:p-6">
-                  <div className="grid grid-cols-6 gap-6">
-                    <div className="col-span-6 sm:col-span-3">
-                      <label
-                        htmlFor="first-name"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        First name
-                      </label>
-                      <input
-                        type="text"
-                        name="first-name"
-                        id="first-name"
-                        autoComplete="given-name"
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+<div className="mt-10 sm:mt-0">
+<div className="md:grid md:grid-cols-3 md:gap-6">
+  <div className="md:col-span-1">
+    <div className="px-4 sm:px-0">
+      <h3 className="text-lg font-medium leading-6 text-gray-900">
+	Personal Information
+      </h3>
+      <p className="mt-1 text-sm text-gray-600">
+	Use a permanent address where you can receive mail.
+      </p>
+    </div>
+  </div>
+  <div className="mt-5 md:col-span-2 md:mt-0">
+    <form action="#" method="POST">
+      <div className="overflow-hidden shadow sm:rounded-md">
+	<div className="bg-white px-4 py-5 sm:p-6">
+	  <div className="grid grid-cols-6 gap-6">
+	    <div className="col-span-6 sm:col-span-3">
+	      <label
+		htmlFor="first-name"
+		className="block text-sm font-medium text-gray-700"
+	      >
+		First name
+	      </label>
+	      <input
+		type="text"
+		name="first-name"
+		id="first-name"
+		autoComplete="given-name"
+		className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       />
                     </div>
 
@@ -650,4 +672,4 @@ const CreateWorshop = () => {
   );
 };
 
-export default CreateWorshop;
+export default CreateActivity;

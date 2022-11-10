@@ -19,7 +19,7 @@ function DashboardContent(props:any) {
             <Box className="gap-4 justify-center items-center flex flex-wrap grow w-11/12 h-[50vh] bg-[#f8f8f9]">
 		{props.currentUser.type === 'Teacher' ? 
 		<>
-                <Link to="/account/panel/teacherWorkshops" className='grow rounded-[1.5rem] relative bg-white h-[15rem] shadow bg-[url("https://post.greatist.com/wp-content/uploads/sites/2/2021/08/GRT-acroyoga-couple-732x549-thumb.jpg")] bg-cover bg-center'>
+                <Link to="/account/panel/teacherActivities" className='grow rounded-[1.5rem] relative bg-white h-[15rem] shadow bg-[url("https://post.greatist.com/wp-content/uploads/sites/2/2021/08/GRT-acroyoga-couple-732x549-thumb.jpg")] bg-cover bg-center'>
         <Fade>
                     <span className='text-sm py-1 px-4 bg-white rounded-[3rem] absolute top-2 left-2 drop-shadow-md bg-gradient-to-r from-[#563D81] to-[#6E5E8B] text-white'>Workshops</span>
         </Fade>  
@@ -32,7 +32,7 @@ function DashboardContent(props:any) {
 		</>
 		:
 		<>
-                <Link to="/account/panel/studentWorkshops" className='rounded relative bg-white w-[20rem] h-[15rem] shadow bg-[url("https://post.greatist.com/wp-content/uploads/sites/2/2021/08/GRT-acroyoga-couple-732x549-thumb.jpg")] bg-cover'>
+                <Link to="/account/panel/studentActivities" className='rounded relative bg-white w-[20rem] h-[15rem] shadow bg-[url("https://post.greatist.com/wp-content/uploads/sites/2/2021/08/GRT-acroyoga-couple-732x549-thumb.jpg")] bg-cover'>
                     <span className='text-sm py-1 px-4 bg-white rounded absolute top-2 left-2'>Workshops</span>
                 </Link>
                 <Link to="/account/panel/studentEvents" className='rounded relative bg-white w-[20rem] h-[15rem] shadow bg-[url("https://cdn.andro4all.com/andro4all/2021/09/8-apps-para-descubrir-eventos-cercanos-a-tu-ubicacion.jpg")] bg-cover'>

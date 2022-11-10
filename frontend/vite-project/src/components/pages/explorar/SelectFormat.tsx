@@ -3,8 +3,8 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
 //UTILITIES
-import workshopActions from "../../../redux/actions/workshopActions";
-import { connect } from "react-redux";
+import activityActions from "../../../redux/actions/activityActions";
+import {connect} from 'react-redux'
 import { RootState } from "../../../main";
 
 const SelectFormat = (props: any) => {
@@ -36,8 +36,8 @@ const SelectFormat = (props: any) => {
         onChange={(event) => {
           setSelected(event);
           props.setParameters(event.name, "format");
-          props.filterWorkshop(
-            props.workshopsAuxiliar,
+          props.filterActivity(
+            props.activitiesAuxiliar,
             props.parameters[0],
             props.parameters[1],
             event.name
@@ -119,14 +119,14 @@ const SelectFormat = (props: any) => {
 };
 
 const mapDispatch = {
-  filterWorkshop: workshopActions.filterWorkshop,
-};
+	filterActivity:activityActions.filterActivity
+}
 
-const mapState = (state: RootState) => {
-  return {
-    workshopsAuxiliar: state.workshopReducer.workshopsAuxiliar,
-  };
-};
+const mapState = (state:RootState) => {
+	return {
+		activitiesAuxiliar:state.activityReducer.activitiesAuxiliar
+	}
+}
 
 const connector = connect(mapState, mapDispatch);
 

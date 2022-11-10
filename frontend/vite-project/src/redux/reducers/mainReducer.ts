@@ -2,13 +2,13 @@ import { combineReducers } from "redux";
 import studentReducer from './studentReducer'
 import teacherReducer from './teacherReducer'
 import userReducer from './userReducer'
-import workshopReducer from "./workshopReducers";
+import activityReducer from "./activityReducers";
 
 const mainReducer = combineReducers({
 	studentReducer,
 	teacherReducer,
 	userReducer,
-	workshopReducer
+	activityReducer
 })
 
 export default mainReducer

@@ -16,6 +16,9 @@ const teacherReducer = (state = initialState, action:any) => {
 			...state,
 			teachers:action.payload
 		}
+	
+	case 'resetStore':
+		return initialState
 
         default:
             return state

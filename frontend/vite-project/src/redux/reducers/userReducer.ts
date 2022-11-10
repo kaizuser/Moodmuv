@@ -7,7 +7,7 @@ const userReducer = (state = initialState, action:any) => {
 	case 'currentUser':
 		return {
 			...state,
-			currentUser:action.payload
+			currentUser:action.payload,
 		}
 
         default:

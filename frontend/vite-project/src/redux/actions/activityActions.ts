@@ -1,81 +1,70 @@
-import axios from 'axios';
-
 //UTILITIES
 import type {RootState, AppDispatch} from '../../main'
 import Swal from 'sweetalert2'
+import axios from 'axios';
 
 //INTERFACES
-interface workshopDTO{
-	_id:string,
-	author:string,
-	name:string,
-	format:string,
-	level:string,
-	desc:string,
-	disciples: Array<string>,
-	duration:string,
-	video:Array<{url:string}>,
-	price:string,
-	location:string,
-}
+import activityDTO from '../../types/activityDTO'
 
-const workshopActions = {
+const activityActions = {
     
-	fetchWorkshop: (id:string) => {
+	fetchActivity: (id:string) => {
 		return async(dispatch:AppDispatch, getState:RootState) => {
 
 			const ans = await axios({
 				method:'get',
-				url:'http://localhost:4000/api/workshop/' + id,
+				url:'http://localhost:4000/api/activity/' + id,
 			})
 
-			dispatch({type:'fetchWorkshop', payload:ans.data.data})
+			dispatch({type:'fetchActivity', payload:ans.data.data})
+
+			return ans.data.data
 	        }
 
 	},
 
-	fetchWorkshops: () => {
+	fetchActivities: () => {
 		return async(dispatch:AppDispatch, getState:RootState) => {
 
 			const ans = await axios({
 				method:'get',
-				url:'http://localhost:4000/api/workshop',
+				url:'http://localhost:4000/api/activity',
 			})
 
-			dispatch({type:'fetchWorkshops', payload:ans.data.data})
+			dispatch({type:'fetchActivities', payload:ans.data.data})
 	       }
 	},
 
-	setWorkshop: (workshopData:workshopDTO) => {
+	setActivity: (activityData:activityDTO) => {
 		return async(dispatch:AppDispatch,getState:RootState)=>{
 
 			const ans = await axios({
 				method:'post',
-				url:'http://localhost:4000/api/workshop',
-				data:workshopData
+				url:'http://localhost:4000/api/activity',
+				data:activityData
 			})
 
 		}
 	},
 
-	deleteWorkshop: (id:string)=>{
+	deleteActivity: (id:string)=>{
 		return async(dispatch:AppDispatch, getState:RootState) => {
 
 			const ans = await axios({
 				method:'delete',
-				url:'http://localhost:4000/api/workshop/' + id,
+				url:'http://localhost:4000/api/activity/' + id,
 			})
 
 		}
 	},
 
-	modifyWorkshop: (workshopData:workshopDTO) => {
+	modifyActivity: (activityData:activityDTO) => {
 		return async(dispatch:AppDispatch, getState:RootState) => {
 
 			const ans = await axios({
 				method:'put',
-				url:'http://localhost:4000/api/workshop',
-				data:workshopData,
+				url:'http://localhost:4000/api/activity',
+				data:activityData,
 			})
 
 			if(ans.status === 200){
@@ -100,12 +89,21 @@ const workshopActions = {
 
 	},
 
-	filterWorkshop:(workshopsAuxiliar:workshopDTO, searchValue:string, disciplesValue:string, formatValue:string) => {
+	filterActivity:(activitiesAuxiliar:activityDTO, searchValue:string, disciplesValue:string, formatValue:string) => {
 		return async (dispatch:AppDispatch, getState:RootState) => {
-			dispatch({type:'filterWorkshops', payload:{workshopsAuxiliar, searchValue, disciplesValue, formatValue}})
+			dispatch({type:'filterActivities', payload:{activitiesAuxiliar, searchValue, disciplesValue, formatValue}})
 		}
-	}
+	},
+
+	//STORE RESET
+
+	resetStore: () => {
+		return async (dispatch:AppDispatch, getState:RootState) => {
+			dispatch({type:'resetStore'})
+		}
+	},
+
 
 }
 
-export default workshopActions
+export default activityActions

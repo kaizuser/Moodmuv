@@ -1,28 +1,11 @@
-import axios from 'axios';
-
 //UTILITIES
 import type {RootState, AppDispatch} from '../../main'
 import Swal from 'sweetalert2'
+import axios from 'axios';
+
 
 //INTERFACES
-interface teacherDTO{
-	_id:string,
-	type:string,
-        name:string,
-	email:string,
-	pass:Array<string>,
-        img:string,
-	desc:string,
-	genre:string,
-        ubi:string,
-	disciples:Array<string>,
-	bornDate:number,
-	verifEmail:boolean,
-	from:string,
-        uniqueString:string,
-	num:string,
-	events:Array<{title:string, start:Date, end:Date}>
-}
+import teacherDTO from '../../types/teacherDTO'
 
 const teacherActions = {
     
@@ -218,7 +201,16 @@ const teacherActions = {
 				})
 			}
 		}
-	}
+	},
+
+	//STORE RESET
+
+	resetStore: () => {
+		return async (dispatch:AppDispatch, getState:RootState) => {
+			dispatch({type:'resetStore'})
+		}
+	},
+
 }
 
 export default teacherActions

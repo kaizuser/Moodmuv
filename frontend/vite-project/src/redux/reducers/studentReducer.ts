@@ -17,6 +17,10 @@ const studentReducer = (state = initialState, action:any) => {
 			students:action.payload
 		}
 
+	case 'resetStore':
+		return initialState
+
+
         default:
             return state
     }

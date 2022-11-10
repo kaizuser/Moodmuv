@@ -6,17 +6,17 @@ import { RiInstagramLine } from "react-icons/ri";
 import { RiFacebookBoxFill } from "react-icons/ri";
 import { Link, useParams } from "react-router-dom";
 import {connect} from 'react-redux'
-import workshopActions from "../../../redux/actions/workshopActions";
+import activityActions from "../../../redux/actions/activityActions";
 import {RootState} from "../../../main";
 
-const WorkshopDetail = (props:any) => {
+const ActivityDetail = (props:any) => {
 	let texto = "Avanzado"; //este tiene q venir de la db igual
 	let id = useParams().id
 	let textColor;
 
 	useEffect(() => {
-	  if(props.workshop == undefined){
-		  props.fetchWorkshop(id)
+	  if(props.activity == undefined){
+		  props.fetchActivity(id)
 	  }
 	}, [id])
 
@@ -35,12 +35,12 @@ const WorkshopDetail = (props:any) => {
 	return (
 		<>
 		{
-		props.workshop && (
+		props.activity && (
 		<div className="relative min-h-screen w-full flex bg-[#f3f3f3] py-8 ">
 		<div className="w-[90%] px-12 min-h-full flex flex-col justify-center items-center">
 		<Slide className='grayscale shadow-sm rounded-xl h-96 w-full bg-black text-center flex items-center justify-center bg-[url("https://images.unsplash.com/photo-1526718583451-e88ebf774771?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80")] bg-center bg-cover'>
 		<h2 className="text-white font-bold text-5xl text-center">
-		Title del Workshop
+		Title del Activity
 		</h2>
 		</Slide>
 		<div className=" whitespace-pre-wrap  p-8 shadow-sm rounded-xl bg-white min-h-[20rem] w-full mt-4">
@@ -93,7 +93,7 @@ const WorkshopDetail = (props:any) => {
 		<div className="sticky top-4 px-8 py-8 flex flex-col items-center mr-12 rounded-xl h-screen w-1/2 grow bg-white">
 		<div className="w-full flex justify-between">
 		<p className="text-[#999] text-sm w-1/2">
-		Workshop dictado por{" "}
+		Activity dictado por{" "}
 		<span className="text-[#000]">Nombre o Escuela</span>
 		</p>
 		<img
@@ -208,15 +208,15 @@ const WorkshopDetail = (props:any) => {
 };
 
 const mapDispatch = {
-	fetchWorkshop:workshopActions.fetchWorkshop
+	fetchActivity:activityActions.fetchActivity
 }
 
 const mapState = (state:RootState) => {
 	return {
-		workshop:state.workshopReducer.workshop
+		activity:state.activityReducer.activity
 	}
 }
 
 const connector = connect(mapState, mapDispatch)
 
-export default connector(WorkshopDetail)
+export default connector(ActivityDetail)

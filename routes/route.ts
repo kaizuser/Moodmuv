@@ -12,12 +12,12 @@ const Grid = require('gridfs-stream')
 import studentControllers from '../controllers/studentControllers'
 import teacherControllers from '../controllers/teacherControllers'
 import userControllers from '../controllers/userControllers'
-import workshopControllers from '../controllers/workshopControllers'
+import activityControllers from '../controllers/activityControllers'
 
 let {get_students, get_student, set_student, delete_student, modify_student, verify_email_student, sign_up_student, } = studentControllers
-let {get_teachers, get_teacher, set_teacher, delete_teacher, modify_teacher, verify_email_teacher, sign_up_teacher, add_event_calendar, delete_event_calendar, add_student_calendar, delete_student_calendar} = teacherControllers
+let {get_teachers, get_teacher, set_teacher, delete_teacher, modify_teacher, verify_email_teacher, sign_up_teacher, add_event_calendar, delete_event_calendar, add_student_calendar, delete_student_calendar,} = teacherControllers
 let {verify_token, login_both} = userControllers
-let {get_workshops, get_workshop, set_workshop, delete_workshop, modify_workshop, set_metadata} = workshopControllers
+let {get_activities, get_activity, set_activity, delete_activity, modify_activity, set_metadata} = activityControllers
 
 //INIT GRIDFS-STREAM
 let gfs:any
@@ -77,6 +77,8 @@ Router.route('/teacher/addStudentCalendar')
 Router.route('/teacher/deleteStudentCalendar')
 .put(delete_student_calendar)
 
+Router.route('/teacher/addActivitiesCalendar')
+
 //videos
 
 Router.route('/setMetadata')
@@ -100,15 +102,15 @@ Router.route('/video/:filename')
 
 
 
-//WORKSHOPS
-Router.route('/workshop')
-.get(get_workshops)
-.post(set_workshop)
-.put(modify_workshop)
+//ACTIVITIES
+Router.route('/activity')
+.get(get_activities)
+.post(set_activity)
+.put(modify_activity)
 
-Router.route('/workshop/:id')
-.get(get_workshop)
-.delete(delete_workshop)
+Router.route('/activity/:id')
+.get(get_activity)
+.delete(delete_activity)
 
 
 

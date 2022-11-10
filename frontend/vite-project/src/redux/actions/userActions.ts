@@ -1,8 +1,7 @@
-import axios from 'axios';
-
 //UTILITIES
 import type {RootState, AppDispatch} from '../../main'
 import Swal from 'sweetalert2'
+import axios from 'axios';
 
 const userActions = {
 	verifyToken: (token:string) => {

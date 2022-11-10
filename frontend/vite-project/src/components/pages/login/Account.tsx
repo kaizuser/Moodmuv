@@ -7,18 +7,19 @@ import { Link } from "react-router-dom";
 import {connect} from 'react-redux'
 import studentActions from "../../../redux/actions/studentActions";
 import teacherActions from '../../../redux/actions/teacherActions'
+import activityActions from "../../../redux/actions/activityActions";
 import { RootState } from "../../../main"
 import Scheduler from "./Calendar"
 
 
 const Account = (props:any) => {
 	interface studentType {
-	id: string;
-	email: string;
+		id: string;
+		email: string;
 	}
 
 	let currentUser: studentType = useSelector(
-	(store: any) => store.userReducer.currentUser
+		(store: any) => store.userReducer.currentUser
 	);
 
 	useEffect(() => {
@@ -168,13 +169,13 @@ const Account = (props:any) => {
 
 let mapDispatch = {
 	fetchStudent:studentActions.fetchStudent,
-	fetchTeacher:teacherActions.fetchTeacher
+	fetchTeacher:teacherActions.fetchTeacher,
 }
 
 let mapState = (state:RootState) => {
 	return {
 		teacher:state.teacherReducer.teacher,
-		student:state.studentReducer.student
+		student:state.studentReducer.student,
 	}
 }
 

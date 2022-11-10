@@ -3,7 +3,7 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
 //UTILITIES
-import workshopActions from "../../../redux/actions/workshopActions";
+import activityActions from "../../../redux/actions/activityActions";
 import {connect} from "react-redux";
 import { RootState } from "../../../main";
 
@@ -56,7 +56,7 @@ const SelectDisciples = (props:any) => {
 	    <Listbox value={selected} onChange={(event) => {
 		    setSelected(event)
 		    props.setParameters(event.name, 'disciples')
-		    props.filterWorkshop(props.workshopsAuxiliar, props.parameters[0], event.name, props.parameters[2])
+		    props.filterActivity(props.activitiesAuxiliar, props.parameters[0], event.name, props.parameters[2])
 	    }}>
         {({ open }) => (
           <>
@@ -133,12 +133,12 @@ const SelectDisciples = (props:any) => {
 };
 
 const mapDispatch = {
-	filterWorkshop:workshopActions.filterWorkshop
+	filterActivity:activityActions.filterActivity
 }
 
 const mapState = (state:RootState) => {
 	return {
-		workshopsAuxiliar:state.workshopReducer.workshopsAuxiliar
+		activitiesAuxiliar:state.activityReducer.activitiesAuxiliar
 	}
 }
 

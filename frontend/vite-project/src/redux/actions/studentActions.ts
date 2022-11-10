@@ -1,27 +1,10 @@
-import axios from 'axios';
-
 //UTILITIES
 import type {RootState, AppDispatch} from '../../main'
 import Swal from 'sweetalert2'
+import axios from 'axios';
 
 //INTERFACES
-interface studentDTO{
-	_id:string,
-	type:string,
-        name:string,
-	email:string,
-	pass:Array<string>,
-        img:string,
-	desc:string,
-	genre:string,
-        ubi:string,
-	inj:string,
-	bornDate:number,
-	verifEmail:boolean,
-	from:string,
-	uniqueString:string,
-	num:string,
-}
+import studentDTO from '../../types/studentDTO'
 
 const studentActions = {
     
@@ -131,6 +114,14 @@ const studentActions = {
 					timer:2000
 				})
 			}
+		}
+	},
+
+	//STORE RESET
+
+	resetStore: () => {
+		return async (dispatch:AppDispatch, getState:RootState) => {
+			dispatch({type:'resetStore'})
 		}
 	},
 }

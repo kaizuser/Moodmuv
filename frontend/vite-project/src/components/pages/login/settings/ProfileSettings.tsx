@@ -12,6 +12,7 @@ import userActions from "../../../../redux/actions/userActions";
 import { connect } from "react-redux";
 import Swal from "sweetalert2";
 import { RootState } from "../../../../main";
+import validator from 'validator'
 
 const ProfileSettings = (props: any) => {
   const [nameValue, setName] = useState(

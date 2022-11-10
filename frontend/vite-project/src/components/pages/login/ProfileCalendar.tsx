@@ -4,8 +4,11 @@ import React from 'react'
 //UTILITIES 
 import {connect} from 'react-redux'
 import teacherActions from '../../../redux/actions/teacherActions'
+import activityActions from '../../../redux/actions/activityActions'
 import Swal from 'sweetalert2'
 import { RootState } from '../../../main'
+import { useNavigate} from 'react-router-dom'
+import { useEffect } from 'react'
 
 //UTILITIES CALENDAR
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar'
@@ -21,75 +24,80 @@ import PropTypes from 'prop-types'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import "react-datepicker/dist/react-datepicker.css";
 
-class ProfileScheduler extends React.Component <any,any>{
-	constructor(props:any){
-		super(props)
-		this.state = {
-			storedEvent:{} 
+function ProfileScheduler (props:any) {
+	let navigate = useNavigate()
+
+	useEffect(() => {
+		if(!props.teacher){
+			props.fetchTeacher(props.id)
 		}
+	}, [props.id])
+
+	let locales = {
+		'es':es_AR
 	}
 
-	componentDidMount(){
-		this.props.fetchTeacher(this.props.id)
-	}
+	let localizer = dateFnsLocalizer({format, parse, startOfWeek, getDay, locales})
 
-	
-	render(): React.ReactNode {
-		let locales = {
-			'es':es_AR
-		}
+	return (
+		<>
+			<div className='w-full min-h-screen flex justify-center items-center flex-col'>
 
-		let localizer = dateFnsLocalizer({format, parse, startOfWeek, getDay, locales})
+				<Calendar
+					localizer={localizer}
+					events={props.teacher.events}
+					startAccessor={(event:any) => {return new Date(event.start)}}
+					endAccessor={(event:any) => {return new Date(event.end)}}
+					style={{height:500, width:'80%'}}
+					onSelectEvent={async (event) => {
 
-		return (
-			<>
-				<div className='w-full min-h-screen flex justify-center items-center flex-col'>
+						let activity = await props.fetchActivity(event.activity)
 
-					<Calendar
-						localizer={localizer}
-						events={this.props.teacher.events}
-						startAccessor={(event:any) => {return new Date(event.start)}}
-						endAccessor={(event:any) => {return new Date(event.end)}}
-						style={{height:500, width:'80%'}}
-						onSelectEvent={(event) => {
-							Swal.fire({
-								icon:'question',
-								title:'¿Quiere anotarse a este evento?',
-								showConfirmButton:true,
-								showCancelButton:true,
-							}).then((result) => {
-								if(result.isConfirmed){
-									
-									let eventData = {
-										id:this.props.currentUser.id,
-										event:{id:event._id}
-									}
+						Swal.fire({
+							title:'Información de la actividad',
+							html:`<h1>${activity.name}</h1>`,
+							showConfirmButton:true,
+							confirmButtonText:'Check',
+							showDenyButton:true,
+							denyButtonText:'Anotarse',
+							denyButtonColor:'green',
+							showCancelButton:true,
+						}).then((result) => {
+							if(result.isConfirmed){
+								navigate(`/explore/activity/${activity._id}`)
+							} else if(result.isDenied){
 
-									this.props.addStudentCalendar(eventData)
+								let eventData = {
+									id:props.currentUser.id,
+									event:{id:event._id}
 								}
-							})
-						}}
-						selectable={true}
-						popup
-						views={['month','day']}
-					/>
-				</div>
 
-			</>
-		)
+								props.addStudentCalendar(eventData)
+							}
+						})
+					}}
+					selectable={true}
+					popup
+					views={['month','day']}
+				/>
+			</div>
 
-	}
+		</>
+	)
+
 }
 
 let mapDispatch = {
 	addStudentCalendar:teacherActions.addStudentCalendar,
-	fetchTeacher:teacherActions.fetchTeacher
+	fetchTeacher:teacherActions.fetchTeacher,
+	fetchActivity:activityActions.fetchActivity
 }
 
 let mapState = (state:RootState) => {
 	return {
 		teacher: state.teacherReducer.teacher,
-		currentUser: state.userReducer.currentUser
+		currentUser: state.userReducer.currentUser,
+		activity:state.activityReducer.activity
 	}
 }
 

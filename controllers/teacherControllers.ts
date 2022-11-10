@@ -20,12 +20,13 @@ interface teacherDTO{
         ubi?:string,
 	email?:string,
 	disciples?:Array<string>,
+	media?:Array<string>,
 	bornDate?:number,
 	verifEmail?:boolean,
 	from?:string,
 	uniqueString?:string,
 	num?:string,
-	events?:Array<{title:string, start:string, end:string, students:Array<{studentId:string}>}>
+	events?:Array<{title:string, start:string, end:string, students:Array<{studentId:string}>, activities:string}>
 }
 
 const teacherControllers = {
@@ -149,7 +150,7 @@ const teacherControllers = {
                 let eventData = req.body
                 let id:string = eventData.id
 
-		await Teacher.findOneAndUpdate({_id:id}, {$push:{events:{title:eventData.event.title, start:eventData.event.start, end:eventData.event.end}}}, {new:true}).then(data => res.json({data}))
+		await Teacher.findOneAndUpdate({_id:id}, {$push:{events:{title:eventData.event.title, start:eventData.event.start, end:eventData.event.end, activity:eventData.event.id}}}, {new:true}).then(data => res.json({data}))
 	},
 
 	delete_event_calendar: async (req:Request, res:Response) => {
@@ -161,7 +162,7 @@ const teacherControllers = {
 
 	add_student_calendar: async(req:Request, res:Response) => {
 		let eventData = req.body
-		let id = eventData.id
+		let id:string = eventData.id
 		
 		await Teacher.findOne({'events._id':eventData.event.id})
 		.then((teacher) => {
@@ -185,10 +186,10 @@ const teacherControllers = {
 
 	delete_student_calendar: async(req:Request, res:Response) => {
 		let eventData = req.body
-		let id = eventData.id
+		let id:string = eventData.id
 
 		await Teacher.findOneAndUpdate({'events._id':eventData.event.id}, {$pull:{"events.$.students":id}}).then(data => res.json({data}))
-	}
+	},
 }
 
 export default teacherControllers

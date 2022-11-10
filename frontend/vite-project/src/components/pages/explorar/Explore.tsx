@@ -9,43 +9,36 @@ import '../../../styles/mediaqueriesExplore.css'
 //UTILITIES
 import {connect} from 'react-redux'
 import teacherActions from "../../../redux/actions/teacherActions"
-import workshopActions from "../../../redux/actions/workshopActions";
+import activityActions from "../../../redux/actions/activityActions";
 import { RootState } from "../../../main";
 import { Link } from "react-router-dom";
 
 //INTERFACES
-interface workshopDTO{
-	_id:string,
-	author:string,
-	name:string,
-	format:string,
-	level:string,
-	desc:string,
-	disciples: Array<string>,
-	duration:string,
-	video:Array<{url:string}>,
-	price:string,
-	location:string,
-}
+import activityDTO from "../../../types/activityDTO";
 
 class Explore extends React.Component <any, any>{
 
 	constructor(props:any){
-		console.log(props)
-
 		super(props)
 		this.state = {
 			search:'',
 			disciples:'',
-			format:''
+			format:'',
+			activities:[]
 		}
 
 	}
 
 	componentDidMount(){
 		this.props.fetchTeachers()
-		this.props.fetchWorkshops()
-		
+		this.props.fetchActivities()
+	}
+
+	componentDidUpdate(prevProps:any){
+		if(prevProps.activities !== this.props.activities){
+			this.setState({activities:this.props.activities.filter((activity:activityDTO) => {return activity.type === 'class'})})
+
+		}
 	}
 
 	setParameters = (value:string, camp:string) => {
@@ -59,6 +52,7 @@ class Explore extends React.Component <any, any>{
 		}
 		
 	}
+
 	render(): React.ReactNode {
 
 		return (
@@ -74,14 +68,14 @@ class Explore extends React.Component <any, any>{
 		</div>
 		<div className="flex w-full">
 			<div className="cartas w-4/6 px-4 overflow-x-hidden h-screen bg-[#F3F3F3] flex flex-wrap gap-4 justify-center items-start overflow-scroll p-4">
-				{this.props.workshops ? this.props.workshops.map((workshop:workshopDTO) => (
-				<div className="w-[13rem] min-h-[25rem] rounded overflow-hidden shadow-lg" key={workshop._id}>
+				{this.state.activities ? this.state.activities.map((activity:activityDTO) => (
+				<div className="w-[13rem] min-h-[25rem] rounded overflow-hidden shadow-lg" key={activity._id}>
 					<img className="w-full h-44 object-cover" src="https://algarabia.com/wp-content/uploads/2017/05/El-texto-del-pa%CC%81rrafo-36.jpg" alt="Sunset in the mountains"/>
 					<div className="flex justify-between items-center px-6 py-4">
 						<div>
-							<div className="font-bold text-xl mb-2">{workshop.name}</div>
+							<div className="font-bold text-xl mb-2">{activity.name}</div>
 							<p className="text-gray-700 text-base">
-							{workshop.desc}
+							{activity.desc}
 							</p>
 						</div>
 
@@ -93,12 +87,12 @@ class Explore extends React.Component <any, any>{
 					
 					<div className='flex justify-between items-center m-4 self-end content-end'>
 					<div className='flex gap-2  items-center text-xs text-[#007AE9] font-bold cursor-pointer'>
-					<Link to={'/explore/profile/' + workshop.author}>
+					<Link to={'/explore/profile/' + activity.author}>
 
 					<img className="object-cover rounded-full w-8 h-8" src="https://i.pinimg.com/originals/86/08/70/860870066df05a7a29bcb5bb9ea2e9a7.jpg" alt="imagen" />
 					</Link>
 					</div>
-					<Link to={'/explore/workshop/' + workshop._id}>
+					<Link to={'/explore/activity/' + activity._id}>
 						<p className='text-[#007AE9] text-xs cursor-pointer'>Ver mas</p>
 					</Link>
 					</div>
@@ -120,13 +114,13 @@ class Explore extends React.Component <any, any>{
 
 const mapDispatch = {
 	fetchTeachers:teacherActions.fetchTeachers,
-	fetchWorkshops:workshopActions.fetchWorkshops
+	fetchActivities:activityActions.fetchActivities
 }
 
 const mapState = (state:RootState) => {
 	return {
 		teachers:state.teacherReducer.teachers,
-		workshops:state.workshopReducer.workshops
+		activities:state.activityReducer.activities
 	}
 }
 
