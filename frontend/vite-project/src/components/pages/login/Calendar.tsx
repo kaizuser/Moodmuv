@@ -80,8 +80,7 @@ class Scheduler extends React.Component <any,any>{
 		}
 
 		let localizer = dateFnsLocalizer({format, parse, startOfWeek, getDay, locales})
-
-		console.log(this.state.activities);
+		
 
 		return (
 			<>

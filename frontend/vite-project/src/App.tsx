@@ -15,18 +15,21 @@ import CreateActivity from './components/pages/Activities/CreateActivities'
 import UserPanel from './components/pages/UserPanel'
 import TalleresPanel from './components/pages/TalleresPanel'
 import EventosPanel from './components/pages/EventosPanel'
+import Spinner from './components/generales/Spinner'
+import ChangePassword from './components/pages/login/settings/changePassword'
+
 import './styles.css'
 
 //UTILITIES
 import {BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
 import userActions from './redux/actions/userActions'
 import type {RootState, AppDispatch} from './main'
 import {current} from '@reduxjs/toolkit'
 
 function App(props:any) {
-	
+	const [loading, setLoading] = useState(true)
 	useEffect(() => {
 	if(!props.currentUser?.id){
 		if(localStorage.getItem('token')!== null){
@@ -34,34 +37,43 @@ function App(props:any) {
 		props.verifyToken(token)
 		}
 	}
+	setTimeout(()=>{
+		setLoading(false)
+	}, 3000)
 	},[props.currentUser])
 
 	return (
 		<>
-		<Router>
-		      <Nav currentUser={props.currentUser?.id}/>
-		      <Routes>
-				<Route path='/' element={<Home title="Home"/>}></Route>
-				<Route path='/home' element={<Home title="Home"/>}></Route>
-				<Route path='/explore' element={<Explore title="Explore"/>}></Route>
-				<Route path='/howTo' element={<HowTo/>}></Route>
-				<Route path='/explore/profile/:id' element={<Profile title="Perfil"/>}></Route>
-				<Route path='/explore/activity/:id' element={<Activity/>}></Route>
-				<Route path='/signIn' element={<SignIn title="Iniciar Sesión"/>} ></Route>
-				<Route path='/signUp' element={<SignUp title="Registro"/>}></Route>
-				<Route path='/forgotPass' element={<ForgotPassword/>}></Route>
-				<Route path='/account' element={<Account title={"Mi cuenta"}/>}></Route>
-				<Route path='/account/settings' element={<ProfileSettings title="Configuración de perfil" id={props.currentUser?.id}/>}></Route>
-				<Route path='/account/panel' element={<UserPanel/>}></Route>
-				<Route path='/account/panel/teacherActivities' element={<TalleresPanel/>}></Route>
-			      <Route path='/account/panel/teacherEvents' element={<EventosPanel id={props.currentUser?.id}/>}></Route>
-				<Route path='/account/panel/teacherActivities/createActivity' element={<CreateActivity/>}></Route>
-				<Route path='/account/panel/studentActivities'></Route>
-			        <Route path='/account/panel/studentEvents'></Route>
-		      </Routes>			  
-		      <Footer/>
-		</Router>
-	      </>
+		{
+			loading ? (<Spinner/>) : (
+			<Router>
+				<Nav currentUser={props.currentUser?.id}/>
+				<Routes>
+				  <Route path='/' element={<Home title="Home"/>}></Route>
+				  <Route path='/home' element={<Home title="Home"/>}></Route>
+				  <Route path='/explore' element={<Explore title="Explore"/>}></Route>
+				  <Route path='/howTo' element={<HowTo/>}></Route>
+				  <Route path='/explore/profile/:id' element={<Profile title="Perfil"/>}></Route>
+				  <Route path='/explore/activity/:id' element={<Activity/>}></Route>
+				  <Route path='/signIn' element={<SignIn title="Iniciar Sesión"/>} ></Route>
+				  <Route path='/signUp' element={<SignUp title="Registro"/>}></Route>
+				  <Route path='/forgotPass' element={<ForgotPassword/>}></Route>
+				  <Route path='/account' element={<Account title={"Mi cuenta"}/>}></Route>
+				  <Route path='/account/settings' element={<ProfileSettings title="Configuración de perfil" id={props.currentUser?.id}/>}></Route>
+				  <Route path='/account/panel' element={<UserPanel/>}></Route>
+				  <Route path='/account/panel/teacherActivities' element={<TalleresPanel/>}></Route>
+					<Route path='/account/panel/teacherEvents' element={<EventosPanel id={props.currentUser?.id}/>}></Route>
+				  <Route path='/account/panel/teacherActivities/createActivity' element={<CreateActivity/>}></Route>
+				  <Route path='/account/panel/studentActivities'></Route>
+					  <Route path='/account/panel/studentEvents'></Route>
+					  <Route path='/account/settings/password' element={<ChangePassword/>}></Route>
+
+				</Routes>			  
+				<Footer/>
+		  </Router>)
+		}
+		</>
+		
   )
 }
 

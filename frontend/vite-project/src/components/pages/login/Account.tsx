@@ -31,7 +31,7 @@ const Account = (props:any) => {
 	}, [currentUser])
 
 	let userAccount = props.teacher || props.student
-
+	console.log(props.teacher)
 	return (
 	<>
 	{" "}
