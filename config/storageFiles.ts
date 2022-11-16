@@ -4,9 +4,15 @@ const crypto = require('crypto');
 const path = require('path');
 const {GridFsStorage} = require('multer-gridfs-storage');
 
-let metadata:string
-let updateMetadata = (id:string) => {
-	metadata = id
+interface metadataDTO{
+	id:string,
+	type:string,
+}
+
+let metadata: metadataDTO
+
+let updateMetadata = (meta:metadataDTO) => {
+	metadata = meta
 }
 
 const storage = new GridFsStorage({

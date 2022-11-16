@@ -31,14 +31,16 @@ const ProfileSettings = (props: any) => {
 
 		data.append('file', avatarFile[0])
 
-		console.log(avatarFile[0]);
-
+		let metadata = {
+			id:id,
+			type:'Avatar profile'
+		}
 
 		await axios.all([
 		axios({
 		  method:'post',
 		  url:'http://localhost:4000/api/files/setMetadataFiles',
-		  data:{id},
+		  data:{metadata},
 		}),
 
 		axios({

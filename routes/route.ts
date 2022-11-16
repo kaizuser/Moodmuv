@@ -99,7 +99,7 @@ Router.route('/videos/upload')
 
 Router.route('/files/:id')
 .get((req:any, res:any) => {
-	gfsf.files.findOne({metadata:req.params.id}, (err:any, file:any) => {
+	gfsf.files.findOne({metadata:{id:req.params.id, type:'Avatar profile'}}, (err:any, file:any) => {
 		const readstream = gfsfb.openDownloadStream(file._id)
 
 		let data = ''

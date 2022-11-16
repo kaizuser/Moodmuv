@@ -68,7 +68,7 @@ const activityControllers = {
 	},
 
 	set_metadata_files: async (req:Request, res:Response) => {
-		storageFiles.updateMetadata(req.body.id)
+		storageFiles.updateMetadata(req.body.metadata)
 	}
 }
 
