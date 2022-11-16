@@ -21,7 +21,7 @@ const storage = new GridFsStorage({
         const filename = buf.toString('hex') + path.extname(file.originalname);
         const fileInfo = {
           filename: filename,
-          bucketName: 'files',
+          bucketName: 'videos',
 	  metadata: metadata ? metadata:null
         };
 	
@@ -31,6 +31,6 @@ const storage = new GridFsStorage({
   }
 });
 
-const uploadFiles = multer({ storage });
+const uploadVideos = multer({ storage });
 
-export default {uploadFiles, updateMetadata}
+export default {uploadVideos, updateMetadata}

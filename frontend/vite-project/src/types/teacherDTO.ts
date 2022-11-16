@@ -9,7 +9,6 @@ interface teacherDTO{
 	genre:string,
         ubi:string,
 	disciples:Array<string>,
-	media:Array<string>,
 	bornDate:number,
 	verifEmail:boolean,
 	from:string,

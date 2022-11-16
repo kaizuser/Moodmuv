@@ -9,12 +9,6 @@ import {RootState} from '../../main'
 
 function DashboardContent(props:any) {
 
-	useEffect(() => {
-		if(props.id){
-			props.fetchTeacher(props.id)
-		}
-	}, [props.id])
-
 	return (
 		<>
 		<Box className="flex flex-col items-center p-4 h-screen grow bg-[#f8f8f9]">
@@ -24,7 +18,7 @@ function DashboardContent(props:any) {
 			</Box>
 
 			<div>
-				{props?.teacher?.events.map((event:any) => (
+				{props?.currentUser?.events.map((event:any) => (
 					<div className='mb-5' key={event._id}>
 						<div>Cantidad de estudiantes: {event.students.length}</div>
 						<div>Título: {event.title}</div>
@@ -40,17 +34,13 @@ function DashboardContent(props:any) {
 
 }
 
-const mapDispatch = {
-	fetchTeacher:teacherActions.fetchTeacher
-}
-
 const mapState = (state:RootState) => {
 	return {
-		teacher:state.teacherReducer.teacher
+		currentUser:state.userReducer.currentUser
 	}
 }
 
-const connector = connect(mapState, mapDispatch)
+const connector = connect(mapState, null)
 
 export default connector(DashboardContent)
 

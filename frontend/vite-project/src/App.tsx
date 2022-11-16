@@ -30,16 +30,19 @@ import {current} from '@reduxjs/toolkit'
 
 function App(props:any) {
 	const [loading, setLoading] = useState(true)
+
 	useEffect(() => {
-	if(!props.currentUser?.id){
+	if(props.currentUser == 'login' || !props.currentUser){
 		if(localStorage.getItem('token')!== null){
-		const token = localStorage.getItem("token")
-		props.verifyToken(token)
+			const token = localStorage.getItem("token")
+			props.verifyToken(token)
 		}
 	}
+
 	setTimeout(()=>{
 		setLoading(false)
 	}, 3000)
+
 	},[props.currentUser])
 
 	return (
@@ -47,7 +50,7 @@ function App(props:any) {
 		{
 			loading ? (<Spinner/>) : (
 			<Router>
-				<Nav currentUser={props.currentUser?.id}/>
+				<Nav/>
 				<Routes>
 				  <Route path='/' element={<Home title="Home"/>}></Route>
 				  <Route path='/home' element={<Home title="Home"/>}></Route>
@@ -59,15 +62,14 @@ function App(props:any) {
 				  <Route path='/signUp' element={<SignUp title="Registro"/>}></Route>
 				  <Route path='/forgotPass' element={<ForgotPassword/>}></Route>
 				  <Route path='/account' element={<Account title={"Mi cuenta"}/>}></Route>
-				  <Route path='/account/settings' element={<ProfileSettings title="Configuración de perfil" id={props.currentUser?.id}/>}></Route>
+				  <Route path='/account/settings' element={<ProfileSettings title="Configuración de perfil"/>}></Route>
 				  <Route path='/account/panel' element={<UserPanel/>}></Route>
 				  <Route path='/account/panel/teacherActivities' element={<TalleresPanel/>}></Route>
-					<Route path='/account/panel/teacherEvents' element={<EventosPanel id={props.currentUser?.id}/>}></Route>
+				  <Route path='/account/panel/teacherEvents' element={<EventosPanel id={props.currentUser?._id}/>}></Route>
 				  <Route path='/account/panel/teacherActivities/createActivity' element={<CreateActivity/>}></Route>
 				  <Route path='/account/panel/studentActivities'></Route>
-					  <Route path='/account/panel/studentEvents'></Route>
-					  <Route path='/account/settings/password' element={<ChangePassword/>}></Route>
-
+				  <Route path='/account/panel/studentEvents'></Route>
+				  <Route path='/account/settings/password' element={<ChangePassword/>}></Route>
 				</Routes>			  
 				<Footer/>
 		  </Router>)

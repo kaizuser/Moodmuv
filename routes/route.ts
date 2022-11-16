@@ -4,7 +4,8 @@ const Router = require('express').Router();
 //UTILITIES
 import passport from '../config/passport'
 import validator from '../config/validator';
-import storage from '../config/storageFiles';
+import storageVideos from '../config/storageVideos';
+import storageFiles from '../config/storageFiles'
 const mongoose = require('mongoose')
 const Grid = require('gridfs-stream')
 
@@ -17,19 +18,29 @@ import activityControllers from '../controllers/activityControllers'
 let {get_students, get_student, set_student, delete_student, modify_student, verify_email_student, sign_up_student, } = studentControllers
 let {get_teachers, get_teacher, set_teacher, delete_teacher, modify_teacher, verify_email_teacher, sign_up_teacher, add_event_calendar, delete_event_calendar, add_student_calendar, delete_student_calendar,} = teacherControllers
 let {verify_token, login_both} = userControllers
-let {get_activities, get_activity, set_activity, delete_activity, modify_activity, set_metadata} = activityControllers
+let {get_activities, get_activity, set_activity, delete_activity, modify_activity, set_metadata_videos, set_metadata_files} = activityControllers
 
 //INIT GRIDFS-STREAM
 let gfs:any
 let gfsb:any
+let gfsf:any
+let gfsfb:any
 
 mongoose.connection.once('open', () => {
+
+	//videos
 	gfsb = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {bucketName:'videos'})
 	gfs = Grid(mongoose.connection.db, mongoose.mongo)
 	gfs.collection('videos')
+
+	//files
+	gfsfb = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {bucketName:'files'})
+	gfsf = Grid(mongoose.connection.db, mongoose.mongo)
+	gfsf.collection('files')
 })
 
-let {upload} = storage
+let {uploadVideos} = storageVideos
+let {uploadFiles} = storageFiles
 
 
 
@@ -81,20 +92,38 @@ Router.route('/teacher/addActivitiesCalendar')
 
 //videos
 
-Router.route('/setMetadata')
-.post(set_metadata)
+Router.route('/videos/upload')
+.post(uploadVideos.array('file'))
 
-Router.route('/upload')
-.post(upload.array('file'))
+//files
 
-Router.route('/video/:filename')
+Router.route('/files/:id')
 .get((req:any, res:any) => {
-	gfs.files.findOne({filename:req.params.filename}, (err:any, file:any) => {
-		const readstream = gfsb.openDownloadStream(file._id)
-		console.log(readstream);
-		readstream.pipe(res)
+	gfsf.files.findOne({metadata:req.params.id}, (err:any, file:any) => {
+		const readstream = gfsfb.openDownloadStream(file._id)
+
+		let data = ''
+
+		readstream.on('data', (chunk:any) => {
+			data += chunk.toString('base64')
+		})
+
+		readstream.on('end', () => {
+			res.send(data)
+		})
 	})
 })
+
+Router.route('/files/upload')
+.post(uploadFiles.single('file'))
+
+//metadata 
+
+Router.route('/videos/setMetadataVideos')
+.post(set_metadata_videos)
+
+Router.route('/files/setMetadataFiles')
+.post(set_metadata_files)
 
 
 

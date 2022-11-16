@@ -9,7 +9,6 @@ interface activitieDTO{
 	desc:string,
 	disciples: Array<string>,
 	duration:string,
-	video:Array<{url:string}>,
 	price:string,
 	location:string,
 }
@@ -23,7 +22,6 @@ const activitieSchema = new Schema<activitieDTO>({
 	desc:{type:String, required:true},
 	disciples:[{type:String, required:true}],
 	duration:{type:String, required:true},
-	video:[{url:{type:String, required:false}}],
 	price:{type:String, required:false},
 	location:{type:String, required:false}
 })

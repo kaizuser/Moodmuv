@@ -4,8 +4,10 @@ import Chip from '@mui/material/Chip';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
+
 //UTILITIES
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import studentActions from "../../../../redux/actions/studentActions";
 import teacherActions from "../../../../redux/actions/teacherActions";
 import userActions from "../../../../redux/actions/userActions";
@@ -15,53 +17,63 @@ import { RootState } from "../../../../main";
 import validator from 'validator'
 
 const ProfileSettings = (props: any) => {
-  const [nameValue, setName] = useState(
-    props.student?.name || props.teacher?.name
-  );
-  const [ubiValue, setUbi] = useState(props.student?.ubi || props.teacher?.ubi);
-  const [numValue, setNum] = useState(props.student?.num || props.teacher?.num);
-  const [genreValue, setGenre] = useState(
-    props.student?.genre || props.teacher?.genre
-  );
-  const [descValue, setDesc] = useState(
-    props.student?.desc || props.teacher?.desc
-  );
+	const [nameValue, setName] = useState(props.currentUser.name);
+	const [ubiValue, setUbi] = useState(props.currentUser.ubi);
+	const [numValue, setNum] = useState(props.currentUser.num);
+	const [genreValue, setGenre] = useState(props.currentUser.genre);
+	const [descValue, setDesc] = useState(props.currentUser.desc);
+	const [avatarFile, setAvatarFile] = useState(undefined);
+	const [urlimage, setUrlimage] = useState("");
 
-  const [avatarFile, setAvatarFile] = useState(undefined);
-  const [urlimage, setUrlimage] = useState("");
+	let uploadAvatar = async() => {
+		let id = props.currentUser._id
+		let data = new FormData()
 
-  useEffect(() => {
-    if (!props.student && !props.teacher && props.id !== undefined) {
-      props.fetchStudent(props.id);
-      props.fetchTeacher(props.id);
-    }
-  }, [props]);
+		data.append('file', avatarFile[0])
 
-  let saveStudent = () => {
-    let userData = {
-      id: props.id,
-      name: nameValue,
-      ubi: ubiValue,
-      num: numValue,
-      genre: genreValue,
-      desc: descValue,
-    };
+		console.log(avatarFile[0]);
 
-    if (user.type == "Teacher") {
-      let teacherData = userData;
-      props.modifyTeacher(teacherData);
-    } else {
-      let studentData = userData;
-      props.modifyStudent(studentData);
-    }
-  };
 
-  let user = props.student || props.teacher;
+		await axios.all([
+		axios({
+		  method:'post',
+		  url:'http://localhost:4000/api/files/setMetadataFiles',
+		  data:{id},
+		}),
+
+		axios({
+		  method:'post',
+		  url:'http://localhost:4000/api/files/upload',
+		  data:data,
+		  headers: { "Content-Type": "multipart/form-data"}
+		}),
+
+		])
+	}
+
+	let saveStudent = () => {
+		let userData = {
+			id: props.currentUser._id,
+			name: nameValue,
+			ubi: ubiValue,
+			num: numValue,
+			genre: genreValue,
+			desc: descValue,
+		};
+
+		if (props.currentUser.type == "Teacher") {
+			props.modifyTeacher(userData);
+		} else {
+			props.modifyStudent(userData);
+		}
+	};
+
   let navigate = useNavigate()
   const disciplines = ["Acroyoga", "Yoga"]
+
   return (
     <>
-      {user && (
+      {props.currentUser && (
         <div className="w-full h-full bg-[#fafafa] py-4 min-h-4">
           <div className="m-auto border w-3/4 min-h-96 bg-white flex items-start">
             <div className="min-h-full w-52 border-r flex flex-col self-stretch">
@@ -95,7 +107,7 @@ const ProfileSettings = (props: any) => {
               <fieldset className="flex flex-col gap-2 justify-center items-center">
                 <img
                   className="rounded-full bg-black w-6 h-6"
-                  src={user?.img}
+                  src={props.currentUser?.img}
                   alt=""
                 />
                 <label
@@ -126,7 +138,7 @@ const ProfileSettings = (props: any) => {
                   type="text"
                   name=""
                   id=""
-                  defaultValue={user?.name}
+                  defaultValue={props.currentUser?.name}
                 />
               </fieldset>
               <fieldset className="flex gap-4 w-full flex-wrap">
@@ -144,7 +156,7 @@ const ProfileSettings = (props: any) => {
                   type="text"
                   name=""
                   id=""
-                  defaultValue={user?.num}
+                  defaultValue={props.currentUser?.num}
                 />
               </fieldset>
               <fieldset className="flex gap-4 w-full flex-wrap">
@@ -160,7 +172,7 @@ const ProfileSettings = (props: any) => {
                   onChange={(e) => setDesc(e.target.value)}
                   className="desc-input px-2 border grow rounded"
                   name="textarea"
-                  defaultValue={user?.desc}
+                  defaultValue={props.currentUser?.desc}
                 ></textarea>
               </fieldset>
 
@@ -205,7 +217,7 @@ const ProfileSettings = (props: any) => {
                   type="text"
                   name=""
                   id=""
-                  defaultValue={user?.ubi}
+                  defaultValue={props.currentUser?.ubi}
                 />
               </fieldset>
               <fieldset className="flex gap-4 w-full flex-wrap">
@@ -219,7 +231,7 @@ const ProfileSettings = (props: any) => {
                 </aside>
                 <select
                   onChange={(e) => setGenre(e.target.value)}
-                  defaultValue={user?.genre}
+                  defaultValue={props.currentUser?.genre}
                   className="genre-input text-sm border grow rounded px-2"
                   id=""
                 >
@@ -236,7 +248,11 @@ const ProfileSettings = (props: any) => {
               <button
                 className="self-center rounded py-3 bg-[#007AE9] text-white mt-3 text-sm"
                 type="button"
-                onClick={() => saveStudent()}
+                onClick={() => {
+			uploadAvatar()
+			saveStudent()
+
+	        }}
               >
                 Guardar
               </button>
@@ -251,16 +267,13 @@ const ProfileSettings = (props: any) => {
 let mapDispatch = {
   modifyStudent: studentActions.modifyStudent,
   modifyTeacher: teacherActions.modifyTeacher,
-  fetchStudent: studentActions.fetchStudent,
-  fetchTeacher: teacherActions.fetchTeacher,
   logOut: userActions.logOut,
 };
 
 let mapState = (state: RootState) => {
-  return {
-    student: state.studentReducer.student,
-    teacher: state.teacherReducer.teacher,
-  };
+	return {
+		currentUser:state.userReducer.currentUser
+	};
 };
 
 let connector = connect(mapState, mapDispatch);

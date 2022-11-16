@@ -3,7 +3,9 @@ import {Request, Response} from 'express'
 import { Activity } from '../models/activity';
 
 //UTILITIES
-import storage from '../config/storageFiles';
+import storageVideos from '../config/storageVideos'
+import storageFiles from '../config/storageFiles';
+
 
 interface activityDTO {
 	author:string,
@@ -34,7 +36,7 @@ const activityControllers = {
         },
 
         set_activity: async(req:Request, res:Response) => {
-                let {activityData} = req.body
+                let activityData = req.body
 
 		let activity:activityDTO = activityData
 
@@ -50,7 +52,7 @@ const activityControllers = {
         },
 
         modify_activity: async(req:Request, res:Response) => {
-                let activityData= req.body
+                let activityData = req.body
                 let id:string = activityData.id
 
 		let newActivity:activityDTO = activityData
@@ -59,10 +61,14 @@ const activityControllers = {
 
         },
 
-	//GRIDFS 
+	//SET METADATA FILES & VIDEOS
 	
-	set_metadata: async (req:Request, res:Response) => {
-		storage.updateMetadata(req.body.id)
+	set_metadata_videos: async (req:Request, res:Response) => {
+		storageVideos.updateMetadata(req.body.id)
+	},
+
+	set_metadata_files: async (req:Request, res:Response) => {
+		storageFiles.updateMetadata(req.body.id)
 	}
 }
 

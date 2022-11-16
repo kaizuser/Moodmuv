@@ -68,7 +68,7 @@ function ProfileScheduler (props:any) {
 							} else if(result.isDenied){
 
 								let eventData = {
-									id:props.currentUser.id,
+									id:props.currentUser._id,
 									event:{id:event._id}
 								}
 

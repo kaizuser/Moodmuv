@@ -14,7 +14,7 @@ export default passport.use(new jwtStrategy({
 	jwtFromRequest: extractJwt.fromAuthHeaderAsBearerToken(),
 	secretOrKey: process.env.KEY
 	},(jwt_payload:any,done:any)=>{
-		Student.findOne({_id:jwt_payload.id})
+		Student.findOne({_id:jwt_payload._id})
 
 		.then(student => {
 			if (student) {
@@ -22,7 +22,7 @@ export default passport.use(new jwtStrategy({
 			}
 
 			else {
-				Teacher.findOne({_id:jwt_payload.id})
+				Teacher.findOne({_id:jwt_payload._id})
 				.then(teacher => {
 						if (teacher) {
 							return done(null, teacher)

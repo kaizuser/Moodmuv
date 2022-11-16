@@ -1,6 +1,6 @@
 import React from 'react'
 import Logo from '../../assets/logoDegradeCircle.png'
-import LetraLogo from '../../assets/LogoDegradeLetra.png'
+import LetraLogo from '../../assets/logoDegradeLetra.png'
 import '../../styles/spinner.css'
 const Spinner = () => {
   return (

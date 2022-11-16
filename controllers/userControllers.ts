@@ -52,11 +52,7 @@ const userControllers = {
 		if (!req.err) {
 			res.json({
 				success: true,
-				response: {
-					id:req.user._id,
-					email:req.user.email,
-					type:req.user.type
-				},
+				response: {user:req.user},
 			});
 
 		} else {
@@ -89,7 +85,7 @@ const userControllers = {
 
 						if (passMatches && passMatches.length > 0) {
 							const userData = {
-								id: user._id,
+								_id: user._id,
 								email: user.email,
 								pass: user.pass,
 							};

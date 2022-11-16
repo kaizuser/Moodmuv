@@ -20,7 +20,6 @@ interface teacherDTO{
         ubi?:string,
 	email?:string,
 	disciples?:Array<string>,
-	media?:Array<string>,
 	bornDate?:number,
 	verifEmail?:boolean,
 	from?:string,

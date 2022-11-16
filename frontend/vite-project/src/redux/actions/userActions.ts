@@ -6,7 +6,6 @@ import axios from 'axios';
 const userActions = {
 	verifyToken: (token:string) => {
 		return async (dispatch:AppDispatch, getState:RootState) => {
-
 			const ans = await axios({
 				method:'get',
 				url:'http://localhost:4000/api/auth/verifyToken',
@@ -33,7 +32,7 @@ const userActions = {
 
 			if (ans.data.success){
 				localStorage.setItem('token', ans.data.response.token)
-				dispatch({type:'currentUser', payload:ans.data.response.userData.email})
+				dispatch({type:'currentUser', payload:{user:'login'}})
 
 				Swal.fire({
 					icon:"success",
@@ -68,7 +67,7 @@ const userActions = {
 				timer:1000
 			})
 
-			dispatch({ type: 'currentUser', payload: null});
+			dispatch({ type: 'currentUser', payload: {user:'logout'}});
 		}
 	} 
 	

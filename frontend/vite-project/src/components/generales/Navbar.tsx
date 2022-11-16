@@ -18,6 +18,7 @@ import userActions from "../../redux/actions/userActions";
 import teacherActions from '../../redux/actions/teacherActions'
 import studentActions from '../../redux/actions/studentActions'
 import activityActions from '../../redux/actions/activityActions'
+import { RootState } from '../../main';
 
 const navigation = [
   { name: "Explorar", href: "#", current: false },
@@ -111,7 +112,7 @@ function Example(props: any) {
                     {navigation.map((item, index) => (
                       <div key={item.name}>
                         {item.name == "Iniciar sesión" ? (
-                          props.currentUser ? (
+                          props.currentUser?._id ? (
 <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, m:0, width:"auto", mr:5 }}>
@@ -216,7 +217,7 @@ function Example(props: any) {
               {navigation.map((item, index) => (
                 <div key={index}>
                 {
-                  item.name == "Iniciar sesión" ? (props.currentUser ? (<Disclosure.Button
+                  item.name == "Iniciar sesión" ? (props.currentUser?._id ? (<Disclosure.Button
                     as="a"
                     href={"/account"}
                     className={classNames(
@@ -271,7 +272,13 @@ const mapDispatch = {
 	resetStoreActivities:activityActions.resetStore
 }
 
-const connector = connect(null, mapDispatch)
+const mapState = (state:RootState) => {
+	return {
+		currentUser:state.userReducer.currentUser
+	}
+}
+
+const connector = connect(mapState, mapDispatch)
 
 export default connector(Example)
 

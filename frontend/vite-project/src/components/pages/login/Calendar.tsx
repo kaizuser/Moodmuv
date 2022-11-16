@@ -35,9 +35,9 @@ class Scheduler extends React.Component <any,any>{
 		}
 	}
 
-	async componentDidMount(){
-		if(this.props.id){
-			this.props.fetchTeacher(this.props.id)
+        componentDidMount(){
+		if(this.props.currentUser){
+			this.props.fetchTeacher(this.props.currentUser._id)
 			this.props.fetchActivities()
 		} 
 	}
@@ -100,12 +100,12 @@ class Scheduler extends React.Component <any,any>{
 							}).then(async (result) => {
 								if(result.isConfirmed){
 									let eventData = {
-										id:this.props.id,
+										id:this.props.currentUser._id,
 										event:{id:event._id}
 									}
 
 									await this.props.deleteEventCalendar(eventData)
-									this.props.fetchTeacher(this.props.id)
+									this.props.fetchTeacher(this.props.currentUser._id)
 								}
 							})
 						}}
@@ -223,14 +223,14 @@ class Scheduler extends React.Component <any,any>{
 								let activity = this.state.activities.filter((activity:activityDTO) => {return activity.name === this.state.storedEvent.activity})
 
 								let eventData = {
-									id:this.props.id,
+									id:this.props.currentUser._id,
 									event:{...this.state.storedEvent, start: new Date(slot.slots[0].toString().slice(0,16) + this.state.storedEvent.start + ':00 GMT-0300'), end: new Date( slot.slots[0].toString().slice(0,16) + this.state.storedEvent.end + ':00 GMT-0300'), id:activity[0]._id}
 								}
 
 								this.setState({storedEvent:{}})
 
 								await this.props.addEventCalendar(eventData)
-								this.props.fetchTeacher(this.props.id)
+								this.props.fetchTeacher(this.props.currentUser._id)
 
 							}
 
@@ -257,7 +257,8 @@ let mapDispatch = {
 let mapState = (state:RootState) => {
 	return {
 		teacher: state.teacherReducer.teacher,
-		activities:state.activityReducer.activities
+		activities:state.activityReducer.activities,
+		currentUser:state.userReducer.currentUser
 	}
 }
 
