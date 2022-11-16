@@ -21,36 +21,7 @@ const ProfileSettings = (props: any) => {
 	const [genreValue, setGenre] = useState(props.currentUser?.genre);
 	const [descValue, setDesc] = useState(props.currentUser?.desc);
 	const [avatarFile, setAvatarFile] = useState(undefined);
-	const [urlimage, setUrlimage] = useState("");
-  const [disc, setDisc] = useState(props.currentUser?.disciples);
-
-	let uploadAvatar = async() => {
-		let id = props.currentUser._id
-		let data = new FormData()
-
-		data.append('file', avatarFile[0])
-
-		let metadata = {
-			id:id,
-			type:'Avatar profile'
-		}
-    console.log(metadata)
-		await axios.all([
-		axios({
-		  method:'post',
-		  url:'http://localhost:4000/api/files/setMetadataFiles',
-		  data:{metadata},
-		}),
-
-		axios({
-		  method:'post',
-		  url:'http://localhost:4000/api/files/upload',
-		  data:data,
-		  headers: { "Content-Type": "multipart/form-data"}
-		}),
-
-		])
-	}
+	const [discValue, setDisc] = useState(props.currentUser?.disciples);
 
 	let saveStudent = () => {
 		let userData = {
@@ -60,18 +31,29 @@ const ProfileSettings = (props: any) => {
 			num: numValue,
 			genre: genreValue,
 			desc: descValue,
-      disciples: disc
+		        disciples: discValue
 		};
+
+		let data = new FormData()
+
+		data.append('file', avatarFile[0])
+
+		let metadata = {
+			id:props.currentUser?._id,
+			type:'Avatar profile'
+		}
 
 		if (props.currentUser.type == "Teacher") {
 			props.modifyTeacher(userData);
 		} else {
 			props.modifyStudent(userData);
 		}
+
+		props.setMetadata(metadata)
+		props.uploadAvatar(data)
 	};
 
   let navigate = useNavigate()
-  const disciplines = ["Acroyoga", "Yoga"]
 
   return (
     <>
@@ -238,7 +220,6 @@ const ProfileSettings = (props: any) => {
                 className="self-center rounded py-3 bg-[#007AE9] text-white mt-3 text-sm"
                 type="button"
                 onClick={() => {
-			uploadAvatar()
 			saveStudent()
 
 	        }}
@@ -257,6 +238,8 @@ let mapDispatch = {
   modifyStudent: studentActions.modifyStudent,
   modifyTeacher: teacherActions.modifyTeacher,
   logOut: userActions.logOut,
+  setMetadata: userActions.setMetadata,
+  uploadAvatar: userActions.uploadAvatar
 };
 
 let mapState = (state: RootState) => {
