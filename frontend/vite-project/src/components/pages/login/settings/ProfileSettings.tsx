@@ -1,9 +1,6 @@
-import React, { useEffect, useState, useRef } from "react";
-import '../../../../styles/mediaqueriesSettings.css'
-import Chip from '@mui/material/Chip';
-import Autocomplete from '@mui/material/Autocomplete';
-import TextField from '@mui/material/TextField';
-import Stack from '@mui/material/Stack';
+//BASICS
+import React, { useEffect, useState } from "react";
+import "../../../../styles/mediaqueriesSettings.css";
 
 //UTILITIES
 import { Link, useNavigate } from "react-router-dom";
@@ -14,16 +11,18 @@ import userActions from "../../../../redux/actions/userActions";
 import { connect } from "react-redux";
 import Swal from "sweetalert2";
 import { RootState } from "../../../../main";
-import validator from 'validator'
+import validator from "validator";
+import SelectDisciples from "./SelectDisciples";
 
 const ProfileSettings = (props: any) => {
-	const [nameValue, setName] = useState(props.currentUser.name);
-	const [ubiValue, setUbi] = useState(props.currentUser.ubi);
-	const [numValue, setNum] = useState(props.currentUser.num);
-	const [genreValue, setGenre] = useState(props.currentUser.genre);
-	const [descValue, setDesc] = useState(props.currentUser.desc);
+	const [nameValue, setName] = useState(props.currentUser?.name);
+	const [ubiValue, setUbi] = useState(props.currentUser?.ubi);
+	const [numValue, setNum] = useState(props.currentUser?.num);
+	const [genreValue, setGenre] = useState(props.currentUser?.genre);
+	const [descValue, setDesc] = useState(props.currentUser?.desc);
 	const [avatarFile, setAvatarFile] = useState(undefined);
 	const [urlimage, setUrlimage] = useState("");
+  const [disc, setDisc] = useState(props.currentUser?.disciples);
 
 	let uploadAvatar = async() => {
 		let id = props.currentUser._id
@@ -35,7 +34,7 @@ const ProfileSettings = (props: any) => {
 			id:id,
 			type:'Avatar profile'
 		}
-
+    console.log(metadata)
 		await axios.all([
 		axios({
 		  method:'post',
@@ -61,6 +60,7 @@ const ProfileSettings = (props: any) => {
 			num: numValue,
 			genre: genreValue,
 			desc: descValue,
+      disciples: disc
 		};
 
 		if (props.currentUser.type == "Teacher") {
@@ -98,7 +98,7 @@ const ProfileSettings = (props: any) => {
                 onClick={() => {
                   props.logOut();
                   navigate("/home");
-                  window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+                  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
                 }}
                 className="cursor-pointer w-full p-2 text-xs text-[#222] py-4 px-8"
               >
@@ -187,23 +187,10 @@ const ProfileSettings = (props: any) => {
                     Disciplinas
                   </label>
                 </aside>
-                <Autocomplete
-                        freeSolo
-                className="ubi-input border-0 grow rounded w-fit px-0"
-        multiple
-        id="size-small-outlined-multi"
-        options={disciplines}
-        getOptionLabel={(option) => option}
-        defaultValue={[disciplines[0]]}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            className=" border-0 w-full"
-          />
-        )}
-      />              </fieldset>
 
-      
+                <SelectDisciples disciples={props.currentUser?.disciples}  setDisc={setDisc} />
+                
+              </fieldset>
               <fieldset className="flex gap-4 w-full flex-wrap">
                 <aside className="flex justify-end px-6 w-44 min-h-4">
                   <label
