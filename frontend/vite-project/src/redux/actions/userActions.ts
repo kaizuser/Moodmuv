@@ -83,7 +83,7 @@ const userActions = {
 		}
 	},
 
-	uploadAvatar:(data:FormData) => {
+	uploadFile:(data:FormData) => {
 		return async (dispatch:AppDispatch, getState:RootState) => {
 			const ans = await axios({
 				method:'post',

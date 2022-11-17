@@ -25,14 +25,13 @@ class Account extends React.Component <any, any>{
 	async componentDidMount(){
 		let file = await axios({
 			method:'get',
-			url:'http://localhost:4000/api/files/' + this.props.currentUser._id,
+			url:'http://localhost:4000/api/files/avatarProfile/' + this.props.currentUser?._id,
 		})
 
 		this.setState({file:file.data})
 	}
 
 	render(): React.ReactNode {
-
 		return (
 			<>
 			{" "}

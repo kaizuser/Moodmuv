@@ -18,6 +18,7 @@ import EventosPanel from './components/pages/EventosPanel'
 import Spinner from './components/generales/Spinner'
 import ChangePassword from './components/pages/login/settings/changePassword'
 
+//CSS
 import './styles.css'
 
 //UTILITIES

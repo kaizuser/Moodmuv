@@ -50,7 +50,7 @@ const ProfileSettings = (props: any) => {
 		}
 
 		props.setMetadata(metadata)
-		props.uploadAvatar(data)
+		props.uploadFile(data)
 	};
 
   let navigate = useNavigate()
@@ -239,7 +239,7 @@ let mapDispatch = {
   modifyTeacher: teacherActions.modifyTeacher,
   logOut: userActions.logOut,
   setMetadata: userActions.setMetadata,
-  uploadAvatar: userActions.uploadAvatar
+  uploadFile: userActions.uploadFile
 };
 
 let mapState = (state: RootState) => {

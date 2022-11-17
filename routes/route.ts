@@ -97,9 +97,54 @@ Router.route('/videos/upload')
 
 //files
 
-Router.route('/files/:id')
+Router.route('/files/upload')
+.post(uploadFiles.single('file'))
+
+Router.route('/files/avatarProfile/:id')
 .get((req:any, res:any) => {
-	gfsf.files.findOne({metadata:{id:req.params.id, type:'Avatar profile'}}, (err:any, file:any) => {
+	gfsf.files.find({metadata:{id:req.params.id, type:'Avatar profile'}}).toArray((err:any, file:any) => {
+		if (file.length === 1) {
+			const readstream = gfsfb.openDownloadStream(file[0]._id)
+
+			let data = ''
+
+			readstream.on('data', (chunk:any) => {
+				data += chunk.toString('base64')
+			})
+
+			readstream.on('end', () => {
+				res.send(data)
+			})
+
+		} else if (file.length > 1){
+			let newAvatar = file.pop()
+
+			let oldAvatarArray:Array <string> = file.map((avatar:any) => {return avatar._id})
+
+			gfsfb.delete(...oldAvatarArray)
+
+			const readstream = gfsfb.openDownloadStream(newAvatar._id)
+
+			let data = ''
+
+			readstream.on('data', (chunk:any) => {
+				data += chunk.toString('base64')
+			})
+
+			readstream.on('end', () => {
+				res.send(data)
+			})
+		} else {
+			res.json({error:'No avatar profile image found'})
+		}
+
+	})
+
+})
+
+Router.route('/files/backgroundImageActivity/:id')
+.get((req:any, res:any) => {
+	gfsf.files.findOne({metadata:{id:req.params.id, type:'Background image activity'}}, (err:any, file:any) => {
 		const readstream = gfsfb.openDownloadStream(file._id)
 
 		let data = ''
@@ -113,9 +158,6 @@ Router.route('/files/:id')
 		})
 	})
 })
-
-Router.route('/files/upload')
-.post(uploadFiles.single('file'))
 
 //metadata 
 

@@ -44,6 +44,8 @@ const activityActions = {
 				data:activityData
 			})
 
+			return ans.data.data
+
 		}
 	},
 

@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 
 //UTILITIES
 import { Fade, Slide } from "react-awesome-reveal";
@@ -7,17 +7,31 @@ import { RiFacebookBoxFill } from "react-icons/ri";
 import { Link, useParams } from "react-router-dom";
 import {connect} from 'react-redux'
 import activityActions from "../../../redux/actions/activityActions";
+import userActions from "../../../redux/actions/userActions";
 import {RootState} from "../../../main";
+import axios from "axios";
 
 const ActivityDetail = (props:any) => {
 	let texto = "Avanzado"; //este tiene q venir de la db igual
 	let id = useParams().id
 	let textColor;
 
+	let [fileValue, setFile] = useState('')
+
 	useEffect(() => {
 	  if(props.activity == undefined){
 		  props.fetchActivity(id)
 	  }
+	  async function fetchFile (){
+		let file:string | any = await axios({
+			method:'get',
+			url:'http://localhost:4000/api/files/backgroundImageActivity/' + id,
+		})
+
+		setFile(file.data)
+	  }
+
+	  fetchFile()
 	}, [id])
 
 	switch (texto) {
@@ -38,7 +52,7 @@ const ActivityDetail = (props:any) => {
 		props.activity && (
 		<div className="relative min-h-screen w-full flex bg-[#f3f3f3] py-8 ">
 		<div className="w-[90%] px-12 min-h-full flex flex-col justify-center items-center">
-		<Slide className='grayscale shadow-sm rounded-xl h-96 w-full bg-black text-center flex items-center justify-center bg-[url("https://images.unsplash.com/photo-1526718583451-e88ebf774771?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80")] bg-center bg-cover'>
+		<Slide className={`shadow-sm rounded-xl h-96 w-full bg-black text-center flex items-center justify-center bg-[url("data:image/png;base64,${fileValue}")] bg-center bg-cover`}>
 		<h2 className="text-white font-bold text-5xl text-center">
 		Title del Activity
 		</h2>
@@ -208,7 +222,9 @@ const ActivityDetail = (props:any) => {
 };
 
 const mapDispatch = {
-	fetchActivity:activityActions.fetchActivity
+	fetchActivity:activityActions.fetchActivity,
+	setMetadata:userActions.setMetadata,
+	uploadFile:userActions.uploadFile
 }
 
 const mapState = (state:RootState) => {

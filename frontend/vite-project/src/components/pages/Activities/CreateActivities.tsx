@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import {connect} from 'react-redux'
 import activityActions from '../../../redux/actions/activityActions'
+import userActions from "../../../redux/actions/userActions";
 import {RootState} from "../../../main";
 
 const CreateActivity = (props:any) => {
@@ -18,7 +19,7 @@ const CreateActivity = (props:any) => {
 
   let [viewLocation, setViewLocation] = useState('none')
 
-  let [file, setFile] = useState([])
+  let [bkgImage, setFile] = useState([])
   let [name, setName] = useState('')
   let [type, setType] = useState('')
   let [format, setFormat] = useState('')
@@ -30,23 +31,35 @@ const CreateActivity = (props:any) => {
   let [loc, setLoc] = useState('')
 
   let uploadTest = async() => {
-	  let activityData = {
-		  author:props.currentUser._id,
-		  name:name,
-		  type:type,
-		  format:format,
-		  level:level,
-		  desc:desc,
-		  disciples:disc,
-		  duration:dur,
-		  price:price,
-		  location:loc
-	  }
+	let activityData = {
+	  author:props.currentUser._id,
+	  name:name,
+	  type:type,
+	  format:format,
+	  level:level,
+	  desc:desc,
+	  disciples:disc,
+	  duration:dur,
+	  price:price,
+	  location:loc
+	}
 
-	  console.log(activityData);
-	  
 
-	  props.setActivity(activityData)
+	let activity = await props.setActivity(activityData)
+
+	console.log(activity);
+
+	let data = new FormData()
+
+	data.append('file', bkgImage[0])
+
+	let metadata = {
+		id:activity._id,
+		type:'Background image activity'
+	}
+
+	props.setMetadata(metadata)
+	props.uploadFile(data)
   }
 
   return (
@@ -301,7 +314,9 @@ const CreateActivity = (props:any) => {
 };
 
 const mapDispatch = {
-	setActivity:activityActions.setActivity
+	setActivity:activityActions.setActivity,
+	setMetadata:userActions.setMetadata,
+	uploadFile:userActions.uploadFile
 }
 
 const mapState = (state:RootState) => {
