@@ -6,7 +6,7 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Menuu from '@mui/material/Menu';
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Logo from "../../assets/logoDegrade.png";
@@ -19,7 +19,7 @@ import teacherActions from '../../redux/actions/teacherActions'
 import studentActions from '../../redux/actions/studentActions'
 import activityActions from '../../redux/actions/activityActions'
 import { RootState } from '../../main';
-
+import axios from 'axios';
 const navigation = [
   { name: "Explorar", href: "#", current: false },
   { name: "Planes", href: "#", current: false },
@@ -33,47 +33,39 @@ const link = ["/explore", "/payments", "/howTo", "/signIn", "/activateAccount"];
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
-const settings = [{
-	name:'Profile',
-	href:'/account'
-},
-{
-	name:'Settings',
-	href:'/account/settings'
-},
-{
-	name:'Logout',
-},
-{
-	name:'Panel',
-	href:'/account/panel'
-}
-
-];
 function Example(props: any) {
   let navigate = useNavigate()
   const [openDrop, setOpenDrop] = useState(false);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+	let [fileValue, setFile] = useState(undefined)
 
   const setearOpenDrop = () => {
     setOpenDrop(!openDrop);
   };
 
-  const handleOpenNavMenu = (event:any) => {
-    setAnchorElNav(event.currentTarget);
-  };
   const handleOpenUserMenu = (event:any) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  let id = props.currentUser?._id
+	useEffect(() => {
+	  async function fetchFile (){
+		let file:string | any = await axios({
+      method:'get',
+			url:'http://localhost:4000/api/files/avatarProfile/' + id,
+		})
+
+		setFile(file.data)
+	  }
+
+	  fetchFile()
+	}, ["todavia no sé que poner aca"])
+
+
   return (
     <Disclosure as="nav" className=" relative z-10">
       {({ open }) => (
@@ -116,7 +108,7 @@ function Example(props: any) {
 <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, m:0, width:"auto", mr:5 }}>
-                <Avatar alt="L" src="https://mui.com/static/images/avatar/2.jpg" sx={{width:30, height:30, fontSize:20}}/>
+                <Avatar alt="P" src={fileValue !== undefined ? (`data:image/png;base64,${fileValue}`) : ("")} sx={{width:30, height:30, fontSize:20}}/>
               </IconButton>
             </Tooltip>
             <Menuu
@@ -269,12 +261,16 @@ const mapDispatch = {
 	logOut:userActions.logOut,
 	resetStoreTeacher:teacherActions.resetStore,
 	resetStoreStudent:studentActions.resetStore,
-	resetStoreActivities:activityActions.resetStore
+	resetStoreActivities:activityActions.resetStore,
+  fetchActivity:activityActions.fetchActivity,
+	setMetadata:userActions.setMetadata,
+	uploadFile:userActions.uploadFile
 }
 
 const mapState = (state:RootState) => {
 	return {
-		currentUser:state.userReducer.currentUser
+		currentUser:state.userReducer.currentUser,
+		activity:state.activityReducer.activity
 	}
 }
 

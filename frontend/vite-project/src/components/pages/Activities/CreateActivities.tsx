@@ -57,9 +57,10 @@ const CreateActivity = (props:any) => {
 		id:activity._id,
 		type:'Background image activity'
 	}
-
-	props.setMetadata(metadata)
-	props.uploadFile(data)
+  props.setMetadata(metadata)
+  setTimeout(()=>{
+    props.uploadFile(data)
+  },2000)
   }
 
   return (
@@ -115,7 +116,7 @@ const CreateActivity = (props:any) => {
                         autoComplete="given-name"
                         className="px-2 py-1 border mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         placeholder="Acroyoga, Handstand, Etc"
-			onChange={(event) => setName(event.target.value)}
+			                  onChange={(event) => setName(event.target.value)}
                       />
                     </div>
 
@@ -158,8 +159,8 @@ const CreateActivity = (props:any) => {
 
 		      }}>
 		      <option hidden>Elige tu formato</option>
-		      <option value='virtual'>Virtual</option>
-		      <option value='presencial'>Presencial</option>
+		      <option value='Virtual'>Virtual</option>
+		      <option value='Presencial'>Presencial</option>
 		      </select>
                     </div>
                     <div className="col-span-6 sm:col-span-3">
@@ -213,9 +214,9 @@ const CreateActivity = (props:any) => {
                       </label>
 		      <select className="px-2 py-1 border mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" onChange={(event) => setLevel(event.target.options[event.target.selectedIndex].value)}>
 		      <option hidden>Elige el nivel</option>
-		      <option value='Dificil'>Dificil</option>
+		      <option value='Avanzado'>Avanzado</option>
 		      <option value='Intermedio'>Intermedio</option>
-		      <option value='Facil'>Facil</option>
+		      <option value='Iniciación'>Iniciación</option>
 
 		      </select>
                     </div>

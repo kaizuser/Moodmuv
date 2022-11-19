@@ -24,7 +24,8 @@ class Explore extends React.Component<any, any> {
       disciples: "",
       format: "",
       activities: [],
-      max_length: 77,
+      max_length: 60,
+      max_length_title: 26,
     };
   }
 
@@ -94,11 +95,11 @@ class Explore extends React.Component<any, any> {
           </div>
         </div>
         <div className="flex w-full">
-          <div className="cartas w-4/6 px-4 overflow-x-hidden h-screen bg-[#F3F3F3] flex flex-wrap gap-2 justify-center items-start overflow-scroll p-4">
+          <div className="break-all cartas w-4/6 px-4 overflow-x-hidden h-screen bg-[#F3F3F3] flex flex-wrap gap-2 justify-center items-start overflow-scroll p-4">
             {this.state.activities
               ? this.state.activities.map((activity: activityDTO) => (
                   <div
-                    className="w-[13rem] min-h-[24rem] rounded overflow-hidden shadow-lg flex flex-col"
+                    className="w-[13rem] h-[26rem] rounded overflow-hidden shadow-lg flex flex-col"
                     key={activity._id}
                   >
                     <img
@@ -107,11 +108,11 @@ class Explore extends React.Component<any, any> {
                       alt="Sunset in the mountains"
                     />
                     <div className="flex flex-col justify-start items-left px-6 py-2 grow gap-2">
-                      <div className="font-bold text-xl ">
-                        {activity.name}
+                      <div className="capitalize font-bold text-xl break-words">      
+                        {activity.name.charAt(0)+activity.name.toLocaleLowerCase().substring(1, this.state.max_length_title)}
                       </div>
                       <p className="text-[13px] text-gray-700 text-base">
-                        {activity.desc.length >= this.state.max_length ? activity.desc.slice(0, this.state.max_length) + "... " : activity.desc}
+                        {activity.desc.length >= this.state.max_length ? activity.desc.slice(0, this.state.max_length).toLowerCase() + "... " : activity.desc.toLowerCase()}
                         {
                           activity.desc.length >= this.state.max_length ?
                         <Link className="text-[#007AE9] text-xs cursor-pointer" to={"/explore/activity/"+ activity._id}>learn more</Link>

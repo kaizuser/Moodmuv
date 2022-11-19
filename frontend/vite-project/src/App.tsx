@@ -13,7 +13,7 @@ import HowTo from './components/pages/howto/HowTo'
 import Activity from './components/pages/Activities/ActivityContainer'
 import CreateActivity from './components/pages/Activities/CreateActivities'
 import UserPanel from './components/pages/UserPanel'
-import TalleresPanel from './components/pages/TalleresPanel'
+import TalleresPanel from './components/pages/ActivityPanel'
 import EventosPanel from './components/pages/EventosPanel'
 import Spinner from './components/generales/Spinner'
 import ChangePassword from './components/pages/login/settings/changePassword'
@@ -41,7 +41,7 @@ function App(props:any) {
 
 	setTimeout(()=>{
 		setLoading(false)
-	}, 3000)
+	}, 2000)
 
 	},[props.currentUser])
 

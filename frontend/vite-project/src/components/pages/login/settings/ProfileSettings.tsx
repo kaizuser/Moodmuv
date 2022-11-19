@@ -14,6 +14,7 @@ import Swal from "sweetalert2";
 import { RootState } from "../../../../main";
 import validator from "validator";
 import SelectDisciples from "./SelectDisciples";
+import Avatar from '@mui/material/Avatar';
 
 const ProfileSettings = (props: any) => {
 	const [nameValue, setName] = useState(props.currentUser?.name);
@@ -23,6 +24,7 @@ const ProfileSettings = (props: any) => {
 	const [descValue, setDesc] = useState(props.currentUser?.desc);
 	const [avatarFile, setAvatarFile] = useState(undefined);
 	const [discValue, setDisc] = useState(props.currentUser?.disciples);
+	let [fileValue, setFile] = useState(undefined)
 
 	let saveStudent = () => {
 		let userData = {
@@ -52,13 +54,27 @@ const ProfileSettings = (props: any) => {
 			}
       setTimeout(()=>{
         props.uploadFile(data)
-      }, 2000)
-			props.setMetadata(metadata)
-		}
+	}, 2000)
+	props.setMetadata(metadata)
+}
 
 	};
 
 	let navigate = useNavigate()
+
+	useEffect(()=>{
+		async function fetchFile (){
+			let file:string | any = await axios({
+		  method:'get',
+				url:'http://localhost:4000/api/files/avatarProfile/' + props.currentUser?._id,
+			})
+	
+			setFile(file.data)
+		console.log(file)
+		  }
+	
+		  fetchFile()
+	}, [props.currentUser])
 
 	return (
 	<>
@@ -94,11 +110,9 @@ const ProfileSettings = (props: any) => {
 	    </div>
 	    <form className="w-full px-28 pb-16 my-4 flex flex-col gap-4 min-h-4">
 	      <fieldset className="flex flex-col gap-2 justify-center items-center">
-		<img
-		  className="rounded-full bg-black w-6 h-6"
-		  src={props.currentUser?.img}
-		  alt=""
-		/>
+{/* AVATAR */}
+		  <Avatar alt="P" src={fileValue !== undefined ? (`data:image/png;base64,${fileValue}`) : ("")} sx={{width:25, height:25, fontSize:20}}/>
+
 		<label
 		  htmlFor="file-upload"
 		  className="cursor-pointer text-xs text-[#007AE9]"
