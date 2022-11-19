@@ -17,8 +17,7 @@ import TalleresPanel from './components/pages/TalleresPanel'
 import EventosPanel from './components/pages/EventosPanel'
 import Spinner from './components/generales/Spinner'
 import ChangePassword from './components/pages/login/settings/changePassword'
-
-//CSS
+import Planes from './components/pages/Planes/PlanesMaqueta'
 import './styles.css'
 
 //UTILITIES
@@ -71,6 +70,7 @@ function App(props:any) {
 				  <Route path='/account/panel/studentActivities'></Route>
 				  <Route path='/account/panel/studentEvents'></Route>
 				  <Route path='/account/settings/password' element={<ChangePassword/>}></Route>
+				  <Route path='/payments' element={<Planes/>}></Route>
 				</Routes>			  
 				<Footer/>
 		  </Router>)
