@@ -31,7 +31,11 @@ class Account extends React.Component <any, any>{
 		this.setState({file:file.data})
 	}
 
+
 	render(): React.ReactNode {
+
+		console.log(this.state);
+
 		return (
 			<>
 			{" "}

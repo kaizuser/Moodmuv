@@ -1,6 +1,6 @@
 import { Schema, model, Types } from 'mongoose';
 
-interface activitieDTO{
+interface activityDTO{
 	author:Schema.Types.ObjectId,
 	type:string,
 	name:string,
@@ -13,7 +13,7 @@ interface activitieDTO{
 	location:string,
 }
 
-const activitieSchema = new Schema<activitieDTO>({
+const activitySchema = new Schema<activityDTO>({
 	author:{type:Types.ObjectId, ref:'teachers', required:true},
 	type:{type:String, required:true},
 	name:{type:String, required:true},
@@ -26,4 +26,5 @@ const activitieSchema = new Schema<activitieDTO>({
 	location:{type:String, required:false}
 })
 
-export const Activity = model<activitieDTO>('activities', activitieSchema)
+export const Activity = model<activityDTO>('activities', activitySchema)
+export default activityDTO

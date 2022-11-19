@@ -24,3 +24,6 @@ App.use(methodOverride('_method'))
 App.listen(PORT, () => {
         console.log('Server ready on PORT ' + PORT)
 })   
+
+export default App
+

@@ -4,45 +4,26 @@ const Router = require('express').Router();
 //UTILITIES
 import passport from '../config/passport'
 import validator from '../config/validator';
-import storageVideos from '../config/storageVideos';
-import storageFiles from '../config/storageFiles'
-const mongoose = require('mongoose')
-const Grid = require('gridfs-stream')
+
+//MULTER UTILITIES
+import storageVideos from '../config/storageVideos'
+import storageFiles from '../config/storageFiles';
+
+let {uploadVideos} = storageVideos
+let {uploadFiles} = storageFiles
 
 //CONTROLLERS
 import studentControllers from '../controllers/studentControllers'
 import teacherControllers from '../controllers/teacherControllers'
 import userControllers from '../controllers/userControllers'
 import activityControllers from '../controllers/activityControllers'
+import databaseControllers from '../controllers/databaseControllers';
 
 let {get_students, get_student, set_student, delete_student, modify_student, verify_email_student, sign_up_student, } = studentControllers
 let {get_teachers, get_teacher, set_teacher, delete_teacher, modify_teacher, verify_email_teacher, sign_up_teacher, add_event_calendar, delete_event_calendar, add_student_calendar, delete_student_calendar,} = teacherControllers
 let {verify_token, login_both} = userControllers
-let {get_activities, get_activity, set_activity, delete_activity, modify_activity, set_metadata_videos, set_metadata_files} = activityControllers
-
-//INIT GRIDFS-STREAM
-let gfs:any
-let gfsb:any
-let gfsf:any
-let gfsfb:any
-
-mongoose.connection.once('open', () => {
-
-	//videos
-	gfsb = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {bucketName:'videos'})
-	gfs = Grid(mongoose.connection.db, mongoose.mongo)
-	gfs.collection('videos')
-
-	//files
-	gfsfb = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {bucketName:'files'})
-	gfsf = Grid(mongoose.connection.db, mongoose.mongo)
-	gfsf.collection('files')
-})
-
-let {uploadVideos} = storageVideos
-let {uploadFiles} = storageFiles
-
-
+let {get_activities, get_activity, set_activity, delete_activity, modify_activity,} = activityControllers
+let { set_metadata_videos, set_metadata_files, get_bkgImage_activity, get_avatarImage_profile} = databaseControllers
 
 //STUDENTS ---------------------------
 Router.route('/student')
@@ -101,63 +82,10 @@ Router.route('/files/upload')
 .post(uploadFiles.single('file'))
 
 Router.route('/files/avatarProfile/:id')
-.get((req:any, res:any) => {
-	gfsf.files.find({metadata:{id:req.params.id, type:'Avatar profile'}}).toArray((err:any, file:any) => {
-		if (file.length === 1) {
-			const readstream = gfsfb.openDownloadStream(file[0]._id)
-
-			let data = ''
-
-			readstream.on('data', (chunk:any) => {
-				data += chunk.toString('base64')
-			})
-
-			readstream.on('end', () => {
-				res.send(data)
-			})
-
-		} else if (file.length > 1){
-			let newAvatar = file.pop()
-
-			let oldAvatarArray:Array <string> = file.map((avatar:any) => {return avatar._id})
-
-			gfsfb.delete(...oldAvatarArray)
-
-			const readstream = gfsfb.openDownloadStream(newAvatar._id)
-
-			let data = ''
-
-			readstream.on('data', (chunk:any) => {
-				data += chunk.toString('base64')
-			})
-
-			readstream.on('end', () => {
-				res.send(data)
-			})
-		} else {
-			res.json({error:'No avatar profile image found'})
-		}
-
-	})
-
-})
+.get(get_avatarImage_profile)
 
 Router.route('/files/backgroundImageActivity/:id')
-.get((req:any, res:any) => {
-	gfsf.files.findOne({metadata:{id:req.params.id, type:'Background image activity'}}, (err:any, file:any) => {
-		const readstream = gfsfb.openDownloadStream(file._id)
-
-		let data = ''
-
-		readstream.on('data', (chunk:any) => {
-			data += chunk.toString('base64')
-		})
-
-		readstream.on('end', () => {
-			res.send(data)
-		})
-	})
-})
+.get(get_bkgImage_activity)
 
 //metadata 
 

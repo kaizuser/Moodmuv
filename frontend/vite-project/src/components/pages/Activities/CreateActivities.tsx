@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import {connect} from 'react-redux'
 import activityActions from '../../../redux/actions/activityActions'
-import userActions from "../../../redux/actions/userActions";
+import databaseActions from '../../../redux/actions/databaseActions'
 import {RootState} from "../../../main";
 
 const CreateActivity = (props:any) => {
@@ -315,8 +315,8 @@ const CreateActivity = (props:any) => {
 
 const mapDispatch = {
 	setActivity:activityActions.setActivity,
-	setMetadata:userActions.setMetadata,
-	uploadFile:userActions.uploadFile
+	setMetadata:databaseActions.setMetadata,
+	uploadFile:databaseActions.uploadFile
 }
 
 const mapState = (state:RootState) => {

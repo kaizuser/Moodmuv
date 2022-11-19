@@ -70,30 +70,6 @@ const userActions = {
 			dispatch({ type: 'currentUser', payload: {user:'logout'}});
 		}
 	},
-
-	//AVATAR FILE
-
-	setMetadata:(metadata:{id:string, type:string}) => {
-		return async (dispatch:AppDispatch, getState:RootState) => {
-			const ans = await axios({
-			  method:'post',
-			  url:'http://localhost:4000/api/files/setMetadataFiles',
-			  data:{metadata},
-			})
-		}
-	},
-
-	uploadFile:(data:FormData) => {
-		return async (dispatch:AppDispatch, getState:RootState) => {
-			const ans = await axios({
-				method:'post',
-				url:'http://localhost:4000/api/files/upload',
-				data:data,
-				headers: { "Content-Type": "multipart/form-data"}
-			})
-		
-		}
-	}
 }
 
 export default userActions
