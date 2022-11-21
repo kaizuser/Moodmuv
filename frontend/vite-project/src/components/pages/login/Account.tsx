@@ -23,7 +23,7 @@ class Account extends React.Component <any, any>{
 	}
 
 	async componentDidMount(){
-		let file = await axios({
+		let file: string | any= await axios({
 			method:'get',
 			url:'http://localhost:4000/api/files/avatarProfile/' + this.props.currentUser?._id,
 		})

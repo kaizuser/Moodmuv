@@ -41,13 +41,13 @@ function DashboardContent(props:any) {
 				<h1 className='font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B] drop-shadow-2xl text-3xl my-4 text-center'>Actividades de {props.currentUser?.name}</h1>
 				<h1 className='font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B] drop-shadow-2xl text-3xl my-4'>Clases Regulares</h1>
 				<div className='flex flex-wrap gap-4 w-full min-h-4 items-center justify-center'>
-				{activities && activities.filter((activity:activityDTO)=> activity.type === "class").map((activity:activityDTO) => (
+				{activities && activities.filter((activity:activityDTO)=> activity.type === "Class").map((activity:activityDTO) => (
 					<CardActivity activities={activity} />
 					))}
 				</div>
 				<h1 className='font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B] drop-shadow-2xl text-3xl my-4'>Clases No Regulares</h1>
 				<div className='flex flex-wrap gap-4 w-full min-h-4 items-center justify-center'>
-				{activities && activities.filter((activity:activityDTO)=> activity.type !== "class").map((activity:activityDTO) => (
+				{activities && activities.filter((activity:activityDTO)=> activity.type !== "Class").map((activity:activityDTO) => (
 					<CardActivity activities={activity} />
 					))}
 				</div>

@@ -38,7 +38,7 @@ class Explore extends React.Component<any, any> {
     if (prevProps.activities !== this.props.activities) {
       this.setState({
         activities: this.props.activities.filter((activity: activityDTO) => {
-          return activity.type === "class";
+          return activity.type === "Class";
         }),
       });
     }

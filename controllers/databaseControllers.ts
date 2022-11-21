@@ -43,7 +43,6 @@ let databaseControllers = {
 	get_bkgImage_activity: async (req:Request, res:Response) => {
 		try {
 			gfsf.files.findOne({metadata:{id:req.params.id, type:'Background image activity'}}, (err:any, file:any) => {
-					console.log(file)
 				const readstream = gfsfb.openDownloadStream(file._id)
 
 				let data = ''

@@ -44,6 +44,23 @@ const activityActions = {
 				data:activityData
 			})
 
+			if(ans.status === 200){
+				Swal.fire({
+					icon:"success",
+					title:'Haz creado tu actividad exitosamente',
+					showConfirmButton:false,
+					timer:1000
+				})
+
+			} else {
+				Swal.fire({
+					icon:'error',
+					title:'Algo salio mal. Intentalo nuevamente',
+					showConfirmButton:false,
+					timer:2000
+				})
+			}
+
 			return ans.data.data
 
 		}

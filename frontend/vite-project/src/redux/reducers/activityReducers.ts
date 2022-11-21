@@ -31,7 +31,7 @@ const activityReducer = (state = initialState, action:any) => {
 		} 
 
 		if (action.payload.formatValue !== '' && action.payload.formatValue !== 'Todos'){
-			filteredData = filteredData.filter((data:activityDTO) => data.format == action.payload.formatValue.toLowerCase())
+			filteredData = filteredData.filter((data:activityDTO) => data.format == action.payload.formatValue)
 		}
 
 		return {

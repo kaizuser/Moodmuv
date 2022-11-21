@@ -17,6 +17,8 @@ import SelectDisciples from "./SelectDisciples";
 import Avatar from '@mui/material/Avatar';
 
 const ProfileSettings = (props: any) => {
+	let navigate = useNavigate()
+
 	const [nameValue, setName] = useState(props.currentUser?.name);
 	const [ubiValue, setUbi] = useState(props.currentUser?.ubi);
 	const [numValue, setNum] = useState(props.currentUser?.num);
@@ -25,6 +27,19 @@ const ProfileSettings = (props: any) => {
 	const [avatarFile, setAvatarFile] = useState(undefined);
 	const [discValue, setDisc] = useState(props.currentUser?.disciples);
 	let [fileValue, setFile] = useState(undefined)
+
+	useEffect(()=>{
+		async function fetchFile (){
+			let file:string | any = await axios({
+				method:'get',
+				url:'http://localhost:4000/api/files/avatarProfile/' + props.currentUser?._id,
+			})
+
+			setFile(file.data)
+		  }
+
+		  fetchFile()
+	}, [props.currentUser])
 
 	let saveStudent = () => {
 		let userData = {
@@ -52,29 +67,13 @@ const ProfileSettings = (props: any) => {
 				id:props.currentUser?._id,
 				type:'Avatar profile'
 			}
-      setTimeout(()=>{
-        props.uploadFile(data)
-	}, 2000)
-	props.setMetadata(metadata)
-}
+		setTimeout(()=>{
+		props.uploadFile(data)
+		}, 2000)
+		props.setMetadata(metadata)
+		}
 
 	};
-
-	let navigate = useNavigate()
-
-	useEffect(()=>{
-		async function fetchFile (){
-			let file:string | any = await axios({
-		  method:'get',
-				url:'http://localhost:4000/api/files/avatarProfile/' + props.currentUser?._id,
-			})
-	
-			setFile(file.data)
-		console.log(file)
-		  }
-	
-		  fetchFile()
-	}, [props.currentUser])
 
 	return (
 	<>
