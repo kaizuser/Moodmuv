@@ -68,8 +68,8 @@ const ProfileSettings = (props: any) => {
 				type:'Avatar profile'
 			}
 		setTimeout(()=>{
-		props.uploadFile(data)
-		}, 2000)
+		props.uploadFile(data, props.currentUser?._id)
+		}, 500)
 		props.setMetadata(metadata)
 		}
 

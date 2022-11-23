@@ -43,18 +43,21 @@ let databaseControllers = {
 	get_bkgImage_activity: async (req:Request, res:Response) => {
 		try {
 			gfsf.files.findOne({metadata:{id:req.params.id, type:'Background image activity'}}, (err:any, file:any) => {
-				const readstream = gfsfb.openDownloadStream(file._id)
+				if(file !== null){
+					const readstream = gfsfb.openDownloadStream(file._id)
 
-				let data = ''
+					let data = ''
 
-				readstream.on('data', (chunk:any) => {
-					data += chunk.toString('base64')
-				})
+					readstream.on('data', (chunk:any) => {
+						data += chunk.toString('base64')
+					})
 
-				readstream.on('end', () => {
-					res.send(data)
-				})
+					readstream.on('end', () => {
+						res.send(data)
+					})
+				}
 			})
+
 		} catch(err) {
 			res.json({error:'File not found'})
 		}
@@ -63,9 +66,9 @@ let databaseControllers = {
 
 	get_avatarImage_profile: async (req:Request, res:Response) => {
 		try{
-			gfsf.files.find({metadata:{id:req.params.id, type:'Avatar profile'}}).toArray((err:any, file:any) => {
-				if (file.length === 1) {
-					const readstream = gfsfb.openDownloadStream(file[0]._id)
+			gfsf.files.findOne({metadata:{id:req.params.id, type:'Avatar profile'}}, (err:any, file:any) => {
+				if(file !== null){
+					const readstream = gfsfb.openDownloadStream(file._id)
 
 					let data = ''
 
@@ -76,30 +79,23 @@ let databaseControllers = {
 					readstream.on('end', () => {
 						res.send(data)
 					})
-
-				} else if (file.length > 1){
-					let newAvatar = file.pop()
-
-					let oldAvatarArray:Array <string> = file.map((avatar:any) => {return avatar._id})
-
-					gfsfb.delete(...oldAvatarArray)
-
-					const readstream = gfsfb.openDownloadStream(newAvatar._id)
-
-					let data = ''
-
-					readstream.on('data', (chunk:any) => {
-						data += chunk.toString('base64')
-					})
-
-					readstream.on('end', () => {
-						res.send(data)
-					})
-				} 
-
+				}
 			})
 
 		} catch (error) {
+			res.json({error:'File not found'})
+		}
+	},
+
+	upload_avatarImage_profile: async(req:Request, res:Response) => {
+		try {
+			gfsf.files.find({metadata:{id:req.params.id, type:'Avatar profile'}}).toArray((err:any, file:any) => {
+				if(file !== null && file.length > 1){
+					gfsfb.delete(file[0]._id)
+				}
+			})
+
+		} catch(error){
 			res.json({error:'File not found'})
 		}
 	}

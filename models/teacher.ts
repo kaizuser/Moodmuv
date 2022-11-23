@@ -10,16 +10,16 @@ interface teacherDTO{
 	genre:string,
         ubi:string,
 	disciples:Array<string>,
-	bornDate:number,
+	bornDate:Date,
 	verifEmail:boolean,
 	from:string,
         uniqueString:string,
 	num:string,
-	events:Array<{_id:Schema.Types.ObjectId, title:string, start:Date, end:Date, students:Array<string>, activity:string}>
+	events:Array<{_id:Schema.Types.ObjectId, title:string, start:Date, end:Date, students:Array<Schema.Types.ObjectId>, activity:Schema.Types.ObjectId}>
 }
 
 const teacherSchema = new Schema<teacherDTO>({
-	type:{type:String, required:false},
+	type:{type:String, required:true},
         name:{type:String, required:false},
 	email:{type:String, required:true},
 	pass:[{type:String, required:true}],
@@ -28,7 +28,7 @@ const teacherSchema = new Schema<teacherDTO>({
 	genre:{type:String, required:false},
         ubi:{type:String, required:false},
 	disciples:[{type:String, required:false}],
-	bornDate:{type:Number, required:false},
+	bornDate:{type:Date, required:false},
 	verifEmail:{type:Boolean, required:true},
 	from:{type:String, required:true},
 	uniqueString:{type:String, required:true},
@@ -37,8 +37,8 @@ const teacherSchema = new Schema<teacherDTO>({
 		title:{type:String, required:false},
 		start:{type:Date, required:false},
 		end:{type:Date, required:false},
-		students:[{type:String, required:false}],
-		activity:{type:String, required:false}
+		students:[{type:Types.ObjectId, required:false}],
+		activity:{type:Types.ObjectId, required:false}
 	}]
 })
 

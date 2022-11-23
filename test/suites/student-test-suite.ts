@@ -3,22 +3,17 @@ import chai,  {should, expect, assert} from 'chai'
 import chaiHttp from  'chai-http'
 import request from 'supertest'
 import createServer from '../setup/server-suite-setup'
-import mongoose from 'mongoose'
+import mongoose, {Schema} from 'mongoose'
 import { Response } from 'express'
 import axios from 'axios'
 import {log} from 'console'
 
 //INTERFACES
-interface activityDTO{
-	_id?:string
-	author:string,
-	type:string,
-	name:string,
-	format:string,
-	level:string,
-	desc:string,
-	disciples: Array<string>,
-	duration:string,
+interface studentDTO{
+	_id?:string,
+	email:string,
+	pass:string,
+	from:string,
 }
 
 //SERVER SETUP
@@ -29,44 +24,38 @@ chai.use(chaiHttp)
 chai.should()
 
 //GENERIC DATA
-let genericUserId = '63788a81e53b7917b97733fc'
-let genericActivity:activityDTO;
+let genericTeacher:studentDTO;
 
-describe('Test suite for activities', function () {
+describe('Test suite for students', function () {
 
 	//SETTING GENERIC ACTIVITY FOR THE FOLLOWING PROCESS
-	describe('Set activity', function() {
+	describe('Set student', function() {
 		this.timeout(5000)
 
-		it('Should create an activity', function (done){
-			let activityData:activityDTO = {
-				author: genericUserId,
-				type:'Event',
-				name:'Activity test',
-				format:'Virtual',
-				level:'Dificil',
-				desc:'Test description',
-				disciples:['Acroyoga'],
-				duration:'20HS',
+		it('Should create a student', function (done){
+			let studentData:studentDTO = {
+				email:'test@gmail.com',
+				pass:'Flamigera1',
+				from:'Google',
 			} 
 
-			request(App).post('/api/activity')
-			.send(activityData)
+			request(App).post('/api/student')
+			.send(studentData)
 			.end(function (req, res) {
 				res.should.have.status(200)
 				res.body.data.should.be.a('object')
-				genericActivity = res.body.data
+				genericTeacher = res.body.data
 				done()
 			})
 		})
 
 		it('Should return error - (lack of data)', function (done){
-			let activityData = {
+			let studentData = {
 				name:'noData'
 			}
 
-			request(App).post('/api/activity')
-			.send(activityData)
+			request(App).post('/api/student')
+			.send(studentData)
 			.end(function (req, res) {
 				res.should.have.status(200)
 				assert.equal(res.body.data, null)
@@ -75,15 +64,15 @@ describe('Test suite for activities', function () {
 		})
 	})
 
-	describe('Modify activity', function(){
-		it('Should modify an activity', function(done) {
-			let activityData = {
-				id:genericActivity._id,
+	describe('Modify student', function(){
+		it('Should modify a student', function(done) {
+			let studentData = {
+				id:genericTeacher._id,
 				name:'Modified'
 			}
 
-			request(App).put(`/api/activity`)
-			.send(activityData)
+			request(App).put(`/api/student`)
+			.send(studentData)
 			.end(function(req, res){
 				res.should.have.status(200)
 				res.body.data.should.be.a('object')
@@ -92,13 +81,13 @@ describe('Test suite for activities', function () {
 		})
 
 		it('Should return error - (wrong data/id)', function(done){
-			let activityData = {
-				id:genericActivity._id + '0',
+			let studentData = {
+				id:genericTeacher._id + '0',
 				noData:'noData'
 			}
 
-			request(App).put(`/api/activity`)
-			.send(activityData)
+			request(App).put(`/api/student`)
+			.send(studentData)
 			.end(function(req, res){
 				res.should.have.status(200)
 				assert.equal(res.body.data, null)
@@ -107,10 +96,10 @@ describe('Test suite for activities', function () {
 		})
 	})
 
-	describe('Get activities', function() {
+	describe('Get students', function() {
 		this.timeout(5000)
-		it('Checks response for get activities - (list of activities)', function(done) {
-			request(App).get('/api/activity')
+		it('Checks response for get students - (list of students)', function(done) {
+			request(App).get('/api/student')
 			.end(function (req, res) {
 				res.should.have.status(200)
 				res.body.data.should.be.a('array')
@@ -119,11 +108,11 @@ describe('Test suite for activities', function () {
 		})
 	})
 
-	describe('Get activity', function(){
+	describe('Get student', function(){
 		this.timeout(5000)
 
-		it('Should get one activity', function(done){
-			request(App).get(`/api/activity/${genericActivity._id}`)
+		it('Should get one student', function(done){
+			request(App).get(`/api/student/${genericTeacher._id}`)
 			.end(function(req, res) {
 				res.should.have.status(200)
 				res.body.data.should.be.a('object')
@@ -132,7 +121,7 @@ describe('Test suite for activities', function () {
 		})
 
 		it('Should return error - (wrong id)', function (done) {
-			request(App).get(`/api/activity/${genericActivity}0`)
+			request(App).get(`/api/student/${genericTeacher}0`)
 			.end(function(req, res) {
 				res.should.have.status(200)
 				assert.equal(res.body.data, null)
@@ -141,9 +130,9 @@ describe('Test suite for activities', function () {
 		})
 	})
 
-	describe('Delete activity', function(){
-		it('Should delete an activity', function(done){
-			request(App).delete(`/api/activity/${genericActivity._id}`)
+	describe('Delete student', function(){
+		it('Should delete a student', function(done){
+			request(App).delete(`/api/student/${genericTeacher._id}`)
 			.end(function(req, res){
 				res.should.have.status(200)
 				res.body.data.should.be.a('object')
@@ -152,7 +141,7 @@ describe('Test suite for activities', function () {
 		})
 
 		it('Should return an error - (wrong id)', function(done){
-			request(App).delete(`/api/activity/${genericActivity}0`)
+			request(App).delete(`/api/student/${genericTeacher}0`)
 			.end(function(req, res){
 				res.should.have.status(200)
 				assert.equal(res.body.data, null)

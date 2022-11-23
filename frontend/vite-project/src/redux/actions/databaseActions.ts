@@ -21,12 +21,12 @@ const userActions = {
 		}
 	},
 
-	uploadFile:(data:FormData) => {
+	uploadFile:(data:FormData, id:string) => {
 		return async (dispatch:AppDispatch, getState:RootState) => {
 			try {
 				const ans = await axios({
 					method:'post',
-					url:'http://localhost:4000/api/files/upload',
+					url:'http://localhost:4000/api/files/upload/' + id,
 					data:data,
 					headers: { "Content-Type": "multipart/form-data"}
 				})
