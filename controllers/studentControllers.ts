@@ -10,22 +10,23 @@ const jwt = require("jsonwebtoken");
 import sendEmail from './sendEmail'
 
 interface studentDTO{
-	type?:string,
-        name?:string,
-	pass?:Array<string>,
-        img?:string,
-	backImg?:string,
-	desc?:string,
-	genre?:string,
-        ubi?:string,
-	email?:string,
-	inj?:string,
-	bornDate?:number,
-	verifEmail?:boolean,
-	from?:string,
-	uniqueString?:string,
-	num?:string,
-	events?:Date
+	id:string
+	type:string,
+        name:string,
+	pass:Array<string>,
+        img:string,
+	backImg:string,
+	desc:string,
+	genre:string,
+        ubi:string,
+	email:string,
+	inj:string,
+	bornDate:number,
+	verifEmail:boolean,
+	from:string,
+	uniqueString:string,
+	num:string,
+	events:Date
 }
 
 const studentControllers = {
@@ -33,41 +34,48 @@ const studentControllers = {
         get_student: async(req:Request, res:Response) => {
                 const id:string = req.params.id
 
-                await Student.findOne({_id:id}).then(data => res.json({data}))
-
+                await Student.findOne({_id:id})
+		.then(data => res.json({data}))
+		.catch(error => res.json({error}))
         },
 
         get_students: async(req:Request, res:Response) => {
 
-                await Student.find().then(data => res.json({data}))
-
+                await Student.find()
+		.then(data => res.json({data}))
+		.catch(error => res.json({error}))
         },
 
         set_student: async(req:Request, res:Response) => {
-                let studentData = req.body
+                let studentData:studentDTO = req.body
+
 		studentData.pass ?  studentData.pass = [bcryptjs.hashSync(studentData.pass, 10)] : null
+		studentData.verifEmail = true
+		studentData.uniqueString = crypto.randomBytes(20).toString("hex")
+		studentData.type = 'Student'
 
-		let student:studentDTO = studentData
-
-                new Student(student).save().then(data => res.json({data}))
-
+                new Student(studentData).save()
+		.then(data => res.json({data}))
+		.catch(error => res.json({error}))
         },
 
         delete_student: async(req:Request, res:Response) => {
                 const id:string = req.params.id
 
-                await Student.findOneAndDelete({_id:id}).then(data => res.json({data}))
-
+                await Student.findOneAndDelete({_id:id})
+		.then(data => res.json({data}))
+		.catch(error => res.json({error}))
         },
 
         modify_student: async(req:Request, res:Response) => {
-                let studentData = req.body
+                let studentData:studentDTO = req.body
+
                 let id:string = studentData.id
 		studentData.pass ? studentData.pass = [bcryptjs.hashSync(studentData.pass, 10)] : null
 
-		let newStudent:studentDTO = studentData
-
-                await Student.findOneAndUpdate({_id:id},newStudent).then(data => res.json({data}))
+                await Student.findOneAndUpdate({_id:id},studentData)
+		.then(data => res.json({data}))
+		.catch(error => res.json({error}))
 
         },
 

@@ -117,7 +117,7 @@ const userControllers = {
 				} else {
 					res.json({
 					success: false,
-					message: "Email or password do not match. Please try again",
+					message: "Account not found",
 					});
 				}
 

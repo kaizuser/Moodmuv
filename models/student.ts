@@ -10,7 +10,7 @@ interface studentDTO{
 	genre:string,
         ubi:string,
 	inj:string,
-	bornDate:number,
+	bornDate:Date,
 	verifEmail:boolean,
 	from:string,
 	uniqueString:string,
@@ -18,7 +18,7 @@ interface studentDTO{
 }
 
 const studentSchema = new Schema<studentDTO>({
-	type:{type:String, required:false},
+	type:{type:String, required:true},
         name:{type:String, required:false},
 	email:{type:String, required:true},
 	pass:[{type:String, required:true}],
@@ -27,7 +27,7 @@ const studentSchema = new Schema<studentDTO>({
 	genre:{type:String, required:false},
         ubi:{type:String, required:false},
 	inj:{type:String, required:false},
-	bornDate:{type:Number, required:false},
+	bornDate:{type:Date, required:false},
 	verifEmail:{type:Boolean, required:true},
 	from:{type:String, required:true},
 	uniqueString:{type:String, required:true},

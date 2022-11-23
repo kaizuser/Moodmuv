@@ -8,7 +8,6 @@ interface activityDTO{
 	desc:string,
 	disciples: Array<string>,
 	duration:string,
-	video:Array<{url:string}>,
 	price:string,
 	location:string,
 }

@@ -27,4 +27,3 @@ const activitySchema = new Schema<activityDTO>({
 })
 
 export const Activity = model<activityDTO>('activities', activitySchema)
-export default activityDTO

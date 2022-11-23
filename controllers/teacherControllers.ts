@@ -10,22 +10,22 @@ const jwt = require("jsonwebtoken");
 import sendEmail from './sendEmail'
 
 interface teacherDTO{
-	type?:string,
-        name?:string,
-	pass?:Array<string>,
-        img?:string,
-	backImg?:string,
-	desc?:string,
-	genre?:string,
-        ubi?:string,
-	email?:string,
-	disciples?:Array<string>,
-	bornDate?:number,
-	verifEmail?:boolean,
-	from?:string,
-	uniqueString?:string,
-	num?:string,
-	events?:Array<{title:string, start:string, end:string, students:Array<{studentId:string}>, activities:string}>
+	type:string,
+        name:string,
+	pass:Array<string>,
+        img:string,
+	backImg:string,
+	desc:string,
+	genre:string,
+        ubi:string,
+	email:string,
+	disciples:Array<string>,
+	bornDate:number,
+	verifEmail:boolean,
+	from:string,
+	uniqueString:string,
+	num:string,
+	events:Array<{title:string, start:string, end:string, students:Array<{studentId:string}>, activities:string}>
 }
 
 const teacherControllers = {
@@ -33,41 +33,48 @@ const teacherControllers = {
         get_teacher: async(req:Request, res:Response) => {
                 const id:string = req.params.id
 
-                await Teacher.findOne({_id:id}).then(data => res.json({data}))
-
+                await Teacher.findOne({_id:id})
+		.then(data => res.json({data}))
+		.catch(error => res.json({error}))
         },
 
         get_teachers: async(req:Request, res:Response) => {
 
-                await Teacher.find().then(data => res.json({data}))
-
+                await Teacher.find()
+		.then(data => res.json({data}))
+		.catch(error => res.json({error}))
         },
 
         set_teacher: async(req:Request, res:Response) => {
-                let teacherData = req.body
+                let teacherData:teacherDTO = req.body
+
 		teacherData.pass ? teacherData.pass = [bcryptjs.hashSync(teacherData.pass, 10)] : null
+		teacherData.verifEmail = true
+		teacherData.uniqueString = crypto.randomBytes(20).toString("hex")
+		teacherData.type = 'Teacher'
 
-		let teacher:teacherDTO = teacherData
-
-                new Teacher(teacher).save().then(data => res.json({data}))
-
+                new Teacher(teacherData).save()
+		.then(data => res.json({data}))
+		.catch(error => res.json({error}))
         },
 
         delete_teacher: async(req:Request, res:Response) => {
                 const id:string = req.params.id
 
-                await Teacher.findOneAndDelete({_id:id}).then(data => res.json({data}))
+                await Teacher.findOneAndDelete({_id:id})
+		.then(data => res.json({data}))
+		.catch(error => res.json({error}))
         },
 
         modify_teacher: async(req:Request, res:Response) => {
                 let teacherData = req.body
+
                 let id:string = teacherData.id
 		teacherData.pass ? teacherData.pass = [bcryptjs.hashSync(teacherData.pass, 10)] : null
 
-		let newTeacher:teacherDTO = teacherData
-
-                await Teacher.findOneAndUpdate({_id:id},newTeacher).then(data => res.json({data}))
-
+                await Teacher.findOneAndUpdate({_id:id},teacherData)
+		.then(data => res.json({data}))
+		.catch(error => res.json({error}))
         },
 
 	//ACCOUNT
@@ -169,7 +176,7 @@ const teacherControllers = {
 
 			teacher && teacher.events.forEach(async (event) => {
 				if(event._id == eventData.event.id){
-					if(!event.students.includes(id)){
+					if(!event.students.toString().includes(id)){
 						isIncluded = false
 						await Teacher.findOneAndUpdate({'events._id':eventData.event.id}, {$push:{"events.$.students": id}}).then(data => res.json({data, success:true}))
 					}

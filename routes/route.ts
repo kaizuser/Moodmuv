@@ -23,7 +23,7 @@ let {get_students, get_student, set_student, delete_student, modify_student, ver
 let {get_teachers, get_teacher, set_teacher, delete_teacher, modify_teacher, verify_email_teacher, sign_up_teacher, add_event_calendar, delete_event_calendar, add_student_calendar, delete_student_calendar,} = teacherControllers
 let {verify_token, login_both} = userControllers
 let {get_activities, get_activity, set_activity, delete_activity, modify_activity,} = activityControllers
-let { set_metadata_videos, set_metadata_files, get_bkgImage_activity, get_avatarImage_profile} = databaseControllers
+let { set_metadata_videos, set_metadata_files, get_bkgImage_activity, get_avatarImage_profile, upload_avatarImage_profile} = databaseControllers
 
 //STUDENTS ---------------------------
 Router.route('/student')
@@ -78,8 +78,8 @@ Router.route('/videos/upload')
 
 //files
 
-Router.route('/files/upload')
-.post(uploadFiles.single('file'))
+Router.route('/files/upload/:id')
+.post(uploadFiles.single('file'), upload_avatarImage_profile)
 
 Router.route('/files/avatarProfile/:id')
 .get(get_avatarImage_profile)
