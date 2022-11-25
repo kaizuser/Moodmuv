@@ -12,7 +12,7 @@ import {log} from 'console'
 interface teacherDTO{
 	_id?:string,
 	email:string,
-	pass:string,
+	pass?:string,
 	from:string,
 }
 
@@ -96,6 +96,21 @@ describe('Test suite for teachers', function () {
 		})
 	})
 
+	describe('Sign up teacher', function (){
+		it('Should sign up correctly', function(done){
+		        let email = 'thiagochiesa444@gmail.com'
+		        let pass ='Flamigera1'
+			let from = 'Google'
+
+			request(App).post('/auth/signUpTeacher')
+			.send({email, pass, from})
+			.end(function(req,res){
+				console.log(res.body)
+				done()
+			})
+		})
+	})
+
 	describe('Get teachers', function() {
 		this.timeout(5000)
 		it('Checks response for get teachers - (list of teachers)', function(done) {
@@ -149,6 +164,8 @@ describe('Test suite for teachers', function () {
 			})
 		})
 	})
+
+
 })
 
 

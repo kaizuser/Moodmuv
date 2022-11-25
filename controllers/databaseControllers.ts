@@ -93,10 +93,12 @@ let databaseControllers = {
 				if(file !== null && file.length > 1){
 					gfsfb.delete(file[0]._id)
 				}
+
+				res.json({success:true})
 			})
 
 		} catch(error){
-			res.json({error:'File not found'})
+			res.json({success:false})
 		}
 	}
 }

@@ -108,7 +108,6 @@ const teacherControllers = {
 				});
 
 			} else {
-
 				const hashPass = bcryptjs.hashSync(pass, 10);
 
 				const newTeacher = await new Teacher({
@@ -122,11 +121,13 @@ const teacherControllers = {
 
 				if (from !== "form-signUp") {
 					newTeacher.verifEmail = true
+					newTeacher.pass = []
+
 					await newTeacher.save();
 
 					res.json({
 					success: true,
-					message: "Your account was created with succesfully"
+					message: "Your account was created succesfully"
 				});
 
 				} else {

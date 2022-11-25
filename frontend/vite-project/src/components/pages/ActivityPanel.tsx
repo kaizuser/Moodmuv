@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux'
 import activityActions from '../../redux/actions/activityActions'
+import userActions from '../../redux/actions/userActions';
 import {RootState} from '../../main';
 import CardActivity from './Activities/CardActivity'
 
@@ -22,7 +23,7 @@ function DashboardContent(props:any) {
 			setActivities(props.activities.filter((activity:activityDTO) => {return activity.author == props.currentUser._id}))
 		}
 	}, [props.activities, props.currentUser])
-	console.log(props.activities)
+
 	return (
 		<>
 		<Box className="flex flex-col items-center p-4 min-h-screen grow bg-[#f8f8f9]">
@@ -60,7 +61,8 @@ function DashboardContent(props:any) {
 }
 
 const mapDispatch = {
-	fetchActivities:activityActions.fetchActivities
+	fetchActivities:activityActions.fetchActivities,
+	verifyToken:userActions.verifyToken
 }
 
 const mapState = (state:RootState) => {

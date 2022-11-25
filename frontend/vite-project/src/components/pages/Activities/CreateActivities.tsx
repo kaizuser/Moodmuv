@@ -3,6 +3,7 @@ import React from "react";
 import { useState, useEffect,} from "react";
 
 //UTILITIES
+import Swal from "sweetalert2";
 import {setFips} from "crypto";
 import { Link,  useNavigate} from "react-router-dom";
 import axios from "axios";
@@ -33,6 +34,16 @@ const CreateActivity = (props:any) => {
 	let [loc, setLoc] = useState('')
 
 	let uploadTest = async() => {
+
+		Swal.fire({
+		  title: 'Creando tu actividad',
+		  timer: 20000,
+		  didOpen: () => {
+		    Swal.showLoading()
+		  },
+		allowOutsideClick: false
+		})
+
 		let activityData = {
 		  author:props.currentUser._id,
 		  name:name,
@@ -49,8 +60,6 @@ const CreateActivity = (props:any) => {
 
 		let activity = await props.setActivity(activityData)
 
-		console.log(activity);
-
 		let data = new FormData()
 
 		data.append('file', bkgImage[0])
@@ -59,11 +68,30 @@ const CreateActivity = (props:any) => {
 			id:activity._id,
 			type:'Background image activity'
 		}
+
 		props.setMetadata(metadata)
 
-		setTimeout(()=>{
-			props.uploadFile(data)
-		},2000)
+		setTimeout(async()=>{
+			let ans = await props.uploadFile(data, props.currentUser?._id)
+
+			if(ans){
+				Swal.close()
+
+				Swal.fire({
+					icon:"success",
+					title:'Haz configurado tu actividad correctamente',
+					showConfirmButton:false,
+					timer:1000
+				})
+			} else {
+				Swal.fire({
+					icon:'error',
+					title:'Algo salio mal. Intentalo nuevamente',
+					showConfirmButton:false,
+					timer:2000
+				})
+			}
+		}, 500)
 
 		navigate('/account/panel/teacherActivities')
 	}
@@ -285,7 +313,6 @@ const CreateActivity = (props:any) => {
 			  <p className="pl-1">or drag and drop</p>
 			</div>
 
-			<button type='button' className="bg-blue w-20" value='Submit' onClick={uploadTest}>SUBMIT</button>
 			<p className="text-xs text-gray-500">
 			  PNG, JPG, GIF up to 10MB
 			</p>

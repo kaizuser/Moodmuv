@@ -6,7 +6,7 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Menuu from '@mui/material/Menu';
-import { useState,useEffect } from "react";
+import { useState,useEffect, useContext } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Logo from "../../assets/logoDegrade.png";
@@ -14,6 +14,7 @@ import Logo from "../../assets/logoDegrade.png";
 //UTILITIES
 import { Link, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
+import SpinnerContext from '../../utils/SpinnerContext'
 import userActions from "../../redux/actions/userActions";
 import teacherActions from '../../redux/actions/teacherActions'
 import studentActions from '../../redux/actions/studentActions'
@@ -34,11 +35,13 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 function Example(props: any) {
+	let {spinner, setSpinner}:any = useContext(SpinnerContext)
 	let navigate = useNavigate()
 
 	const [openDrop, setOpenDrop] = useState(false);
 	const [anchorElNav, setAnchorElNav] = useState(null);
 	const [anchorElUser, setAnchorElUser] = useState(null);
+
 	let [fileValue, setFile] = useState(undefined)
 
 	const setearOpenDrop = () => {
@@ -65,7 +68,7 @@ function Example(props: any) {
 	  }
 
 	  fetchFile()
-	}, ["todavia no sé que poner aca"])
+	}, [spinner])
 
 
 	return (

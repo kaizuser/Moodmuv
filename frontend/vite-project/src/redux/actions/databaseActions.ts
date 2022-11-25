@@ -30,6 +30,9 @@ const userActions = {
 					data:data,
 					headers: { "Content-Type": "multipart/form-data"}
 				})
+
+				return ans.data.success
+
 			} catch(error){
 				//pass
 			}
