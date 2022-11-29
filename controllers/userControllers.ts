@@ -77,7 +77,21 @@ const userControllers = {
 			} 
 
 			else {
-				if(user.from == from){
+				if(user.from == 'Google'){
+					const userData = {
+						_id: user._id,
+						email: user.email,
+					};
+
+					const token = jwt.sign({ ...userData }, process.env.KEY, {
+					expiresIn: 60 * 60 * 24,
+					});
+
+					res.json({
+						success: true,
+						response: { token, userData },
+					});
+				} else if(user.from == 'form-signUp'){
 					if (user.verifEmail) {
 						let passMatches = user.pass?.filter((password) =>
 						bcryptjs.compareSync(pass, password)

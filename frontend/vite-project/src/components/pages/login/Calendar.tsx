@@ -80,8 +80,7 @@ class Scheduler extends React.Component <any,any>{
 		}
 
 		let localizer = dateFnsLocalizer({format, parse, startOfWeek, getDay, locales})
-		
-
+		console.log(document.querySelector("rbc-toolbar-label"))
 		return (
 			<>
 				<div className='w-full p-8 min-h-screen flex justify-center items-center flex-col'>

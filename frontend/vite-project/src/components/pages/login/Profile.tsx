@@ -72,7 +72,7 @@ const Profile = (props:any) => {
 		  </NavLink>
 		  </div>
 	    </div>
-		<p className="text-center shadow-md bg-gradient-to-r from-[#fdc41d] to-[#fbb232] p-3 py-1 rounded-3xl text-white font-bold mb-2">Profesor</p>
+		<p className="text-center shadow-md bg-gradient-to-t from-[#fdc41d] to-[#fbb232] p-3 py-1 rounded-3xl text-white font-bold mb-2">Profesor</p>
 	    <h2 className="font-bold text-4xl text-[#222]">{props.teacher?.name}</h2>
 	    {/* Ubicación */}
 	    <div className="p-4 flex">
@@ -126,10 +126,10 @@ const Profile = (props:any) => {
 		{props.teacher?.desc}
 	    </p>
 	  {props.teacher &&
-<><div className="shadow-md px-20 py-2 rounded-md bg-gradient-to-r from-[#563D81] to-[#6E5E8B]">
+<><div className="shadow-md px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 	      <h3 className="font-bold text-white text-4xl">Cursos</h3>
 	    </div>
-	    <div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-r from-[#563D81] to-[#6E5E8B]">
+	    <div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 	      <h3 className="font-bold text-white text-4xl">Cursos</h3>
 	    </div>
 	    <CarouselCards />

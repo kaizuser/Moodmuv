@@ -44,25 +44,7 @@ const activityActions = {
 				data:activityData
 			})
 
-			if(ans.status === 200){
-				Swal.fire({
-					icon:"success",
-					title:'Haz creado tu actividad exitosamente',
-					showConfirmButton:false,
-					timer:1000
-				})
-
-			} else {
-				Swal.fire({
-					icon:'error',
-					title:'Algo salio mal. Intentalo nuevamente',
-					showConfirmButton:false,
-					timer:2000
-				})
-			}
-
 			return ans.data.data
-
 		}
 	},
 
@@ -85,25 +67,6 @@ const activityActions = {
 				url:'http://localhost:4000/api/activity',
 				data:activityData,
 			})
-
-			if(ans.status === 200){
-				Swal.fire({
-					icon:"success",
-					title:'Haz configurado tu información correctamente',
-					showConfirmButton:false,
-					timer:1000
-				})
-
-			} else {
-				Swal.fire({
-					icon:'error',
-					title:'Algo salio mal. Intentalo nuevamente',
-					showConfirmButton:false,
-					timer:2000
-				})
-			}
-
-
 	        }
 
 	},

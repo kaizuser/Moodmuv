@@ -50,7 +50,7 @@ const ActivityDetail = (props:any) => {
 		<>
 		{
 		props.activity && (
-		<div className="relative min-h-screen w-full flex bg-[#f3f3f3] py-8 ">
+		<div className="relative min-h-screen w-full flex bg-[#f8f8f9] py-8 ">
 		<div className="w-[90%] px-12 min-h-full flex flex-col justify-center items-center">
 		<Slide className={`shadow-sm rounded-xl h-96 w-full bg-black text-center flex items-center justify-center bg-[url("data:image/png;base64,${fileValue}")] bg-center bg-cover`}>
 		<h2 className="text-white font-bold text-5xl text-center break-all">
@@ -148,7 +148,7 @@ const ActivityDetail = (props:any) => {
 		d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z"
 		/>
 		</svg>
-		<p>Formato: <span className="capitalize">{props.activity?.format}</span></p>
+		<p>Formato: <span className="capitalize|">{props.activity?.format}</span></p>
 		</div>
 		<div className="flex gap-1">
 		<svg

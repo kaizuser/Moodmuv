@@ -43,17 +43,19 @@ let databaseControllers = {
 	get_bkgImage_activity: async (req:Request, res:Response) => {
 		try {
 			gfsf.files.findOne({metadata:{id:req.params.id, type:'Background image activity'}}, (err:any, file:any) => {
-				const readstream = gfsfb.openDownloadStream(file._id)
+				if(file !== null){
+					const readstream = gfsfb.openDownloadStream(file._id)
 
-				let data = ''
+					let data = ''
 
-				readstream.on('data', (chunk:any) => {
-					data += chunk.toString('base64')
-				})
+					readstream.on('data', (chunk:any) => {
+						data += chunk.toString('base64')
+					})
 
-				readstream.on('end', () => {
-					res.send(data)
-				})
+					readstream.on('end', () => {
+						res.send(data)
+					})
+				}
 			})
 
 		} catch(err) {
@@ -65,17 +67,19 @@ let databaseControllers = {
 	get_avatarImage_profile: async (req:Request, res:Response) => {
 		try{
 			gfsf.files.findOne({metadata:{id:req.params.id, type:'Avatar profile'}}, (err:any, file:any) => {
-				const readstream = gfsfb.openDownloadStream(file._id)
+				if(file !== null){
+					const readstream = gfsfb.openDownloadStream(file._id)
 
-				let data = ''
+					let data = ''
 
-				readstream.on('data', (chunk:any) => {
-					data += chunk.toString('base64')
-				})
+					readstream.on('data', (chunk:any) => {
+						data += chunk.toString('base64')
+					})
 
-				readstream.on('end', () => {
-					res.send(data)
-				})
+					readstream.on('end', () => {
+						res.send(data)
+					})
+				}
 			})
 
 		} catch (error) {
@@ -86,11 +90,15 @@ let databaseControllers = {
 	upload_avatarImage_profile: async(req:Request, res:Response) => {
 		try {
 			gfsf.files.find({metadata:{id:req.params.id, type:'Avatar profile'}}).toArray((err:any, file:any) => {
-				gfsfb.delete(file[0]._id)
+				if(file !== null && file.length > 1){
+					gfsfb.delete(file[0]._id)
+				}
+
+				res.json({success:true})
 			})
 
 		} catch(error){
-			res.json({error:'File not found'})
+			res.json({success:false})
 		}
 	}
 }

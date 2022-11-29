@@ -1,10 +1,11 @@
 //BASICS
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../../../../styles/mediaqueriesSettings.css";
 
 //UTILITIES
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import SpinnerContext from '../../../../utils/SpinnerContext'
 import studentActions from "../../../../redux/actions/studentActions";
 import teacherActions from "../../../../redux/actions/teacherActions";
 import userActions from "../../../../redux/actions/userActions";
@@ -19,6 +20,7 @@ import Avatar from '@mui/material/Avatar';
 const ProfileSettings = (props: any) => {
 	let navigate = useNavigate()
 
+	const {spinner, setSpinner}:any = useContext(SpinnerContext)
 	const [nameValue, setName] = useState(props.currentUser?.name);
 	const [ubiValue, setUbi] = useState(props.currentUser?.ubi);
 	const [numValue, setNum] = useState(props.currentUser?.num);
@@ -39,9 +41,10 @@ const ProfileSettings = (props: any) => {
 		  }
 
 		  fetchFile()
-	}, [props.currentUser])
 
-	let saveStudent = () => {
+	}, [props.currentUser, spinner])
+
+	let saveStudent = async () => {
 		let userData = {
 			id: props.currentUser._id,
 			name: nameValue,
@@ -53,10 +56,19 @@ const ProfileSettings = (props: any) => {
 		};
 
 		if (props.currentUser.type == "Teacher") {
-			props.modifyTeacher(userData);
+			await props.modifyTeacher(userData);
 		} else {
-			props.modifyStudent(userData);
+			await props.modifyStudent(userData);
 		}
+
+		Swal.fire({
+		  title: 'Configurando tu información',
+		  timer: 20000,
+		  didOpen: () => {
+		    Swal.showLoading()
+		  },
+		allowOutsideClick: false
+		})
 
 		if(avatarFile !== undefined){
 			let data = new FormData()
@@ -67,12 +79,48 @@ const ProfileSettings = (props: any) => {
 				id:props.currentUser?._id,
 				type:'Avatar profile'
 			}
-		setTimeout(()=>{
-		props.uploadFile(data, props.currentUser?._id)
-		}, 500)
-		props.setMetadata(metadata)
-		}
 
+			props.setMetadata(metadata)
+
+			setTimeout(async()=>{
+				let ans = await props.uploadFile(data, props.currentUser?._id)
+
+				await props.verifyToken(localStorage.getItem('token'))
+				setSpinner(!spinner)
+
+				setAvatarFile(undefined)
+
+				if(ans){
+					Swal.close()
+
+					Swal.fire({
+						icon:"success",
+						title:'Haz configurado tu información correctamente',
+						showConfirmButton:false,
+						timer:1000
+					})
+				} else {
+					Swal.fire({
+						icon:'error',
+						title:'Algo salio mal. Intentalo nuevamente',
+						showConfirmButton:false,
+						timer:2000
+					})
+				}
+			}, 500)
+
+		} else {
+			await props.verifyToken(localStorage.getItem('token'))
+
+			Swal.close()
+
+			Swal.fire({
+				icon:"success",
+				title:'Haz configurado tu información correctamente',
+				showConfirmButton:false,
+				timer:1000
+			})
+		}
 	};
 
 	return (
@@ -209,6 +257,67 @@ const ProfileSettings = (props: any) => {
 		  defaultValue={props.currentUser?.ubi}
 		/>
 	      </fieldset>
+
+		  <fieldset className="flex gap-4 w-full flex-wrap">
+		<aside className="flex justify-end px-6 w-44 min-h-4">
+		  <label
+		    className="font-bold  text-right self-center"
+		    htmlFor=""
+		  >
+		    Facebook
+		  </label>
+		</aside>
+		<input
+		  onChange={(e) => setUbi(e.target.value)}
+		  className="social-input border grow rounded px-2"
+		  type="text"
+		  placeholder="https://www.facebook.com/moodmuv/"
+		  name=""
+		  id=""
+		  defaultValue={props.currentUser?.ubi}
+		/>
+	      </fieldset>
+
+		  <fieldset className="flex gap-4 w-full flex-wrap">
+		<aside className="flex justify-end px-6 w-44 min-h-4">
+		  <label
+		    className="font-bold  text-right self-center"
+		    htmlFor=""
+		  >
+		    Instagram
+		  </label>
+		</aside>
+		<input
+		  onChange={(e) => setUbi(e.target.value)}
+		  className="social-input border grow rounded px-2"
+		  type="text"
+		  name=""
+		  placeholder="https://www.instagram.com/moodmuv/"
+		  id=""
+		  defaultValue={props.currentUser?.ubi}
+		/>
+	      </fieldset>
+
+		  <fieldset className="flex gap-4 w-full flex-wrap">
+		<aside className="flex justify-end px-6 w-44 min-h-4">
+		  <label
+		    className="font-bold  text-right self-center"
+		    htmlFor=""
+		  >
+		    Tik Tok
+		  </label>
+		</aside>
+		<input
+		  onChange={(e) => setUbi(e.target.value)}
+		  className="social-input border grow rounded px-2"
+		  type="text"
+		  placeholder="https://www.tiktok.com/@moodmuv"
+		  name=""
+		  id=""
+		  defaultValue={props.currentUser?.ubi}
+		/>
+	      </fieldset>
+
 	      <fieldset className="flex gap-4 w-full flex-wrap">
 		<aside className="flex justify-end px-6 w-44 min-h-4">
 		  <label
@@ -256,6 +365,7 @@ let mapDispatch = {
   modifyStudent: studentActions.modifyStudent,
   modifyTeacher: teacherActions.modifyTeacher,
   logOut: userActions.logOut,
+  verifyToken:userActions.verifyToken,
   setMetadata: databaseActions.setMetadata,
   uploadFile: databaseActions.uploadFile
 };
