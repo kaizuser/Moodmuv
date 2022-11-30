@@ -93,7 +93,7 @@ const CreateActivity = (props:any) => {
 			}
 		}, 500)
 
-		navigate('/account/panel/teacherActivities')
+		navigate('/account/panel')
 	}
 
 	return (
@@ -348,7 +348,7 @@ const CreateActivity = (props:any) => {
 
 const mapDispatch = {
 	setActivity:activityActions.setActivity,
-	setMetadata:databaseActions.setMetadata,
+	setMetadata:databaseActions.setMetadataFile,
 	uploadFile:databaseActions.uploadFile
 }
 

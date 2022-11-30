@@ -19,14 +19,14 @@ import {
 	  async function fetchFile (){
 		let file:string | any = await axios({
 			method:'get',
-			url:'http://localhost:4000/api/files/backgroundImageActivity/' + props.activities?._id,
+			url:'http://localhost:4000/api/files/backgroundImageActivity/' + props.activity?._id,
 		})
 
 		setFile(file.data)
 	  }
 
 	  fetchFile()
-	}, [props.activities?._id])
+	}, [props.activity])
 
       const max_length =  16
     return (

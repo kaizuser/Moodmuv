@@ -366,7 +366,7 @@ let mapDispatch = {
   modifyTeacher: teacherActions.modifyTeacher,
   logOut: userActions.logOut,
   verifyToken:userActions.verifyToken,
-  setMetadata: databaseActions.setMetadata,
+  setMetadata: databaseActions.setMetadataFile,
   uploadFile: databaseActions.uploadFile
 };
 

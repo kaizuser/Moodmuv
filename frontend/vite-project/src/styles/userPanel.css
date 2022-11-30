@@ -1,0 +1,4 @@
+.fade-user-panel:hover p{
+	color:white;
+	transition: color .5s ease-in;
+} 

@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+//BASICS
+import { useEffect, useState,} from "react";
 
 //UTILITIES
 import Box from "@mui/material/Box";
@@ -9,11 +10,14 @@ import userActions from "../../redux/actions/userActions";
 import { RootState } from "../../main";
 import CardActivity from "./Activities/CardActivity";
 import CardCarousel from "./login/CarouselCardsDetail";
+import { useParams } from "react-router-dom";
+
 //INTERFACES
 import activityDTO from "../../types/activityDTO";
 
 function DashboardContent(props: any) {
   let [activities, setActivities] = useState([]);
+  let param = useParams()
 
   useEffect(() => {
     if (!props.activities) {
@@ -64,13 +68,10 @@ function DashboardContent(props: any) {
             <h1 className="font-bold text-transparent bg-clip-text bg-gradient-to-t from-[#563D81] to-[#6E5E8B] drop-shadow-2xl text-3xl my-4 text-center">
               Actividades de {props.currentUser?.name}
             </h1>
-            <h1 className="font-bold text-transparent bg-clip-text bg-gradient-to-t from-[#563D81] to-[#6E5E8B] drop-shadow-2xl text-3xl my-4">
-              Clases Regulares
-            </h1>
             <div className="flex flex-wrap gap-4 w-full min-h-4 items-center justify-center">
               {activities &&
                 activities
-                  .filter((activity: activityDTO) => activity.type === "Class")
+                  .filter((activity: activityDTO) => activity.type === param.type)
                   .map((activity: activityDTO) => (
                     <div
                       style={{
@@ -79,34 +80,14 @@ function DashboardContent(props: any) {
                         minHeight: "20rem",
                       }}
                       className="flex flex-col justify-start items-start rounded-3xl bg-[#fefefe] shadow m-4"
+		      key={activity._id}
                     >
-                      <CardCarousel activi={activity} />
+                      <CardCarousel activity={activity} />
 					  <div className="flex justify-between w-full text-[#999] my-2 px-2">
 						<Link to={"/explore/activity/" + activity._id } className="text-sm">Ver detalle</Link>
 						<Link to={"/"} className="text-sm">Eliminar</Link>
 						
 					  </div>
-                    </div>
-                  ))}
-            </div>
-            <h1 className="font-bold text-transparent bg-clip-text bg-gradient-to-t from-[#563D81] to-[#6E5E8B] drop-shadow-2xl text-3xl my-4">
-              Clases No Regulares
-            </h1>
-            <div className="flex flex-wrap gap-4 w-full min-h-4 items-center justify-center">
-              {activities &&
-                activities
-                  .filter((activity: activityDTO) => activity.type !== "Class")
-                  .map((activity: activityDTO) => (
-                    <div
-                      style={{
-                        padding: ".7rem",
-                        width: "20rem",
-                        minHeight: "20rem",
-                      }}
-                      className="flex flex-col justify-start items-start rounded-3xl bg-[#fefefe] shadow m-4"
-                    >
-                      <CardCarousel activi={activity} />
-					  
                     </div>
                   ))}
             </div>

@@ -11,16 +11,33 @@ import studentActions from "../../../redux/actions/studentActions";
 import teacherActions from '../../../redux/actions/teacherActions'
 import { RootState } from "../../../main"
 import ProfileScheduler from "./ProfileCalendar";
+import axios from "axios";
 
 const Profile = (props:any) => {
 	let params = useParams()
+	let [teacherFlag, setFlag] = useState(true)
+	let [fileProfile, setFileProfile] = useState(undefined)
 
 	useEffect(() => {
-	  if(params.id){
+	  if(params.id && teacherFlag){
 		  props.fetchTeacher(params.id)
+		  setFlag(false)
 	  }
 
-	}, [params])
+	  if(props.teacher){
+		  let fetchFile = async() => {
+			let file: string | any = await axios({
+				method:'get',
+				url:'http://localhost:4000/api/files/avatarProfile/' + props.teacher?._id,
+			})
+
+			setFileProfile(file.data)
+		  }
+
+		  fetchFile()
+	  }
+
+	}, [params, props.teacher])
 
 	return (
 	<>
@@ -56,8 +73,9 @@ const Profile = (props:any) => {
 	      </div>
 		  {/* IMAGEN  DE PERFIL */}
 	      <img
-		className="mx-4 w-40 rounded-full -translate-y-16"
-		src="https://mui.com/static/images/avatar/2.jpg"/* {props.teacher?.img} */
+		className="mx-4 w-40 h-40 object-cover object-center rounded-full -translate-y-16"
+
+		src={`data:image/png;base64,${fileProfile}`}/* {props.teacher?.img} */
 	      />
 		  {/* REDES */}
 		  <div className="flex gap-4 relative right-0">

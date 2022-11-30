@@ -100,6 +100,29 @@ let databaseControllers = {
 		} catch(error){
 			res.json({success:false})
 		}
+	},
+
+	get_video: async(req:Request, res:Response) => {
+		try{
+			gfs.files.findOne({metadata:req.params.id}, (err:any, file:any) => {
+				if(file !== null){
+					const readstream = gfsb.openDownloadStream(file._id)
+
+					let data = ''
+
+					readstream.on('data', (chunk:any) => {
+						data += chunk.toString('base64')
+					})
+
+					readstream.on('end', () => {
+						res.send(data)
+					})
+				}
+			})
+
+		} catch (error) {
+			res.json({error:'File not found'})
+		}
 	}
 }
 

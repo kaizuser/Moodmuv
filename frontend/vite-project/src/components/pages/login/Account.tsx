@@ -1,15 +1,12 @@
+//BASICS
 import React, { useEffect, useState } from "react";
 
 //UTILITIES
 import { FaTiktok, FaInstagram, FaFacebookSquare } from "react-icons/fa";
 import { Link as NavLink } from '@mui/material';
 import CarouselCards from "./CarouselCards";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {connect} from 'react-redux'
-import studentActions from "../../../redux/actions/studentActions";
-import teacherActions from '../../../redux/actions/teacherActions'
-import activityActions from "../../../redux/actions/activityActions";
 import axios from "axios";
 import { RootState } from "../../../main"
 import Scheduler from "./Calendar"
@@ -130,7 +127,7 @@ class Account extends React.Component <any, any>{
 			      </p>
 			    </div>
 			    {/* Oficio */}
-			    { this.props.teacher &&
+			    { this.props.currentUser &&
 			    <div className="flex p-4">
 			      <svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -214,21 +211,13 @@ class Account extends React.Component <any, any>{
 		}
 };
 
-let mapDispatch = {
-	fetchStudent:studentActions.fetchStudent,
-	fetchTeacher:teacherActions.fetchTeacher,
-	fetchActivities:activityActions.fetchActivities
-}
-
 let mapState = (state:RootState) => {
 	return {
-		teacher:state.teacherReducer.teacher,
-		student:state.studentReducer.student,
 		currentUser:state.userReducer.currentUser,
 		activities:state.activityReducer.activities		
 	}
 }
 
-let connector = connect(mapState, mapDispatch)
+let connector = connect(mapState, null)
 
 export default connector(Account);

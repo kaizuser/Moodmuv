@@ -65,10 +65,8 @@ function Example(props: any) {
 
 		setFile(file.data)
 	  }
-	  if(props?.currentUser){
-		  fetchFile()
-	  }
-	}, [props?.currentUser])
+	  fetchFile()
+	}, [spinner, props.currentUser])
 
 
 	return (
@@ -267,9 +265,7 @@ const mapDispatch = {
 	resetStoreTeacher:teacherActions.resetStore,
 	resetStoreStudent:studentActions.resetStore,
 	resetStoreActivities:activityActions.resetStore,
-  	fetchActivity:activityActions.fetchActivity,
-	setMetadata:userActions.setMetadata,
-	uploadFile:userActions.uploadFile
+	fetchActivity:activityActions.fetchActivity,
 }
 
 const mapState = (state:RootState) => {

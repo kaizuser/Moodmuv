@@ -6,6 +6,7 @@ import GlobalStyles from '@mui/material/GlobalStyles';
 import {connect} from 'react-redux'
 import teacherActions from '../../../redux/actions/teacherActions'
 import activityActions from "../../../redux/actions/activityActions";
+import userActions from '../../../redux/actions/userActions';
 import activityDTO from '../../../types/activityDTO'
 import Swal from 'sweetalert2'
 import { RootState } from '../../../main'
@@ -36,19 +37,18 @@ class Scheduler extends React.Component <any,any>{
 	}
 
         componentDidMount(){
-		if(this.props.currentUser){
-			this.props.fetchTeacher(this.props.currentUser._id)
-			this.props.fetchActivities()
-		} 
+		this.props.fetchActivities()
+		this.setState({events:this.props.currentUser.events, })
 	}
 
 	componentDidUpdate(prevProps:any){
-		if (prevProps.teacher !== this.props.teacher) {
-			this.setState({events:this.props.teacher.events, })
+
+		if(prevProps.currentUser !== this.props.currentUser){
+			this.setState({events:this.props.currentUser.events, })
 		}
 
-		if(prevProps.activities !== this.props.activities){
-			this.setState({activities:this.props.activities.filter((activity:activityDTO) => {return activity.author == this.props.teacher._id})})
+		if(prevProps.activities !== this.props.activities && this.props.currentUser){
+			this.setState({activities:this.props.activities.filter((activity:activityDTO) => {return activity.author == this.props.currentUser._id})})
 		}
 
 		let events = document.querySelectorAll(".rbc-event")
@@ -80,7 +80,7 @@ class Scheduler extends React.Component <any,any>{
 		}
 
 		let localizer = dateFnsLocalizer({format, parse, startOfWeek, getDay, locales})
-		console.log(document.querySelector("rbc-toolbar-label"))
+
 		return (
 			<>
 				<div className='w-full p-8 min-h-screen flex justify-center items-center flex-col'>
@@ -104,7 +104,8 @@ class Scheduler extends React.Component <any,any>{
 									}
 
 									await this.props.deleteEventCalendar(eventData)
-									this.props.fetchTeacher(this.props.currentUser._id)
+
+									this.props.verifyToken(localStorage.getItem('token'))
 								}
 							})
 						}}
@@ -229,8 +230,8 @@ class Scheduler extends React.Component <any,any>{
 								this.setState({storedEvent:{}})
 
 								await this.props.addEventCalendar(eventData)
-								this.props.fetchTeacher(this.props.currentUser._id)
 
+								this.props.verifyToken(localStorage.getItem('token'))
 							}
 
 						}}
@@ -250,7 +251,8 @@ let mapDispatch = {
 	addEventCalendar:teacherActions.addEventCalendar,
 	deleteEventCalendar:teacherActions.deleteEventCalendar,
 	fetchTeacher:teacherActions.fetchTeacher,
-	fetchActivities:activityActions.fetchActivities
+	fetchActivities:activityActions.fetchActivities,
+	verifyToken:userActions.verifyToken
 }
 
 let mapState = (state:RootState) => {

@@ -5,12 +5,17 @@ import { connect } from "react-redux";
 import { RootState } from "../../main";
 import Dashboard from "./ActivityPanel";
 import { Fade } from "react-awesome-reveal";
-//icons
+
+//ICONS
 import ActivityIcon from "../../assets/PanelIconos/fireIcons.svg";
 import CicleIcon from "../../assets/PanelIconos/folder-openIcons.svg";
 import WorkshopIcon from "../../assets/PanelIconos/lightning-boltRayito.svg";
 import EventIcon from "../../assets/PanelIconos/starIcons.svg";
 import EclipseIcon from '../../assets/PanelIconos/Ellipse 138.svg'
+
+//CSS
+import '../../styles/userPanel.css'
+
 function DashboardContent(props: any) {
   return (
     <>
@@ -28,13 +33,13 @@ function DashboardContent(props: any) {
           <Box className="gap-4 flex flex-wrap justify-center  w-full min-h-[50vh] bg-[#f8f8f9]">
             {props.currentUser.type === "Teacher" ? (
               <>
-                <Link
-                  to="/account/panel/teacherActivities"
-                  className="w-[49%] rounded-md relative bg-white h-[18rem] shadow flex flex-col gap-8 p-4"
+                <div
+                  className="w-[49%] rounded-md relative bg-white h-[33vh] shadow flex flex-col gap-8 p-4"
                 >
                   <h3 className="font-bold text-sm text-[#323232]">Actividades</h3>
-                  <Fade className="flex gap-4">
-                    <div className="flex gap-2 w-full items-center">
+		<Link to={"/account/panel/teacherActivities/Class"}>
+		  <Fade className="fade-user-panel flex gap-4 w-44 hover:bg-[#563D81] p-1 rounded-md transition duration-300 ease-in">
+		    <div className="flex gap-2 w-full items-center">
                       <img
                         className="p-1 w-6 h-6 rounded-full border border-[#3a57e8]"
                         src={CicleIcon}
@@ -45,7 +50,9 @@ function DashboardContent(props: any) {
                       </p>
                     </div>
                   </Fade>
-                  <Fade className="flex gap-4">
+		</Link>
+		<Link to={"/account/panel/teacherActivities/Cicle"}>
+                  <Fade className="fade-user-panel flex gap-4 w-[5.5rem] hover:bg-[#563D81] p-1 rounded-md transition duration-300 ease-in">
                     <div className="flex gap-2 w-full items-center">
                       <img
                         className="p-1 w-6 h-6 rounded-full border border-[#1aa053]"
@@ -57,8 +64,9 @@ function DashboardContent(props: any) {
                       </p>
                     </div>
                   </Fade>
-
-                  <Fade className="flex gap-4">
+		</Link>
+		<Link to={"/account/panel/teacherActivities/Event"}>
+                  <Fade className="fade-user-panel flex gap-4 w-40 hover:bg-[#563D81] p-1 rounded-md transition duration-300 ease-in">
                     <div className="flex gap-2 w-full items-center">
                       <img
                         className="p-1 w-6 h-6 rounded-full border border-[#c03221]"
@@ -70,7 +78,9 @@ function DashboardContent(props: any) {
                       </p>
                     </div>
                   </Fade>
-                  <Fade className="flex gap-4">
+		</Link>
+		<Link to={"/account/panel/teacherActivities/Workshop"}>
+                  <Fade className="fade-user-panel flex gap-4 w-28 hover:bg-[#563D81] p-1 rounded-md transition duration-300 ease-in">
                     <div className="flex gap-2 w-full items-center">
                       <img
                         className="p-1 w-6 h-6 rounded-full border border-[#3a57e8]"
@@ -82,13 +92,11 @@ function DashboardContent(props: any) {
                       </p>
                     </div>
                   </Fade>
-                </Link>
-                <Link
-                  to="/account/panel/teacherEvents"
-                  className="w-[49%] rounded-md relative bg-white h-[18rem] shadow flex flex-col gap-8 p-4"
-                >
+		</Link>
+                </div>
+		<Link to="/account/panel/teacherEvents" className="w-[49%] rounded-md relative bg-white h-[33vh] shadow flex flex-col gap-8 p-4">
                   <h3 className="font-bold text-sm text-[#323232]">Eventos de Calendario</h3>
-                  <Fade className="flex gap-4">
+                  <Fade className="fade-user-panel flex gap-4 w-44 hover:bg-[#563D81] p-1 rounded-md transition duration-300 ease-in">
                     <div className="flex gap-2 w-full items-center">
                       <img
                         className="p-1 w-6 h-6 rounded-full "
@@ -100,7 +108,7 @@ function DashboardContent(props: any) {
                       </p>
                     </div>
                   </Fade>
-                </Link>
+		</Link>
               </>
             ) : (
               <>

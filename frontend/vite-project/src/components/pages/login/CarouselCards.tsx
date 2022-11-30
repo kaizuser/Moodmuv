@@ -24,10 +24,10 @@ const CarouselContainer = ({activity}:any) => {
         className="mySwiper"
       >
         { 
-activity?.map((activi:any)=>{
+activity?.map((activity:any)=>{
   return(
-    <SwiperSlide  style={{padding:".7rem",width:"20rem",  minHeight:"20rem"}} className="flex flex-col justify-start items-start rounded-3xl bg-[#fefefe] shadow m-4" >
-      <CarouselCardsDetail activi={activi} />
+    <SwiperSlide  style={{padding:".7rem",width:"20rem",  minHeight:"20rem"}} className="flex flex-col justify-start items-start rounded-3xl bg-[#fefefe] shadow m-4" key={activity._id} >
+      <CarouselCardsDetail activity={activity} />
   </SwiperSlide>
   )})          
 }
