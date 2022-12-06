@@ -1,3 +1,4 @@
+import React, {useEffect, useState} from 'react'
 //UTILITIES
 import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
@@ -5,7 +6,7 @@ import { connect } from "react-redux";
 import { RootState } from "../../main";
 import Dashboard from "./ActivityPanel";
 import { Fade } from "react-awesome-reveal";
-
+import activityActions from "../../redux/actions/activityActions"
 //ICONS
 import ActivityIcon from "../../assets/PanelIconos/fireIcons.svg";
 import CicleIcon from "../../assets/PanelIconos/folder-openIcons.svg";
@@ -15,8 +16,17 @@ import EclipseIcon from '../../assets/PanelIconos/Ellipse 138.svg'
 
 //CSS
 import '../../styles/userPanel.css'
+import axios from "axios";
 
 function DashboardContent(props: any) {
+  const [activityUser, setActivityUser] = useState([])
+  useEffect(()=>{
+    props.fetchActivities()
+    if(props.activities){
+      setActivityUser(props.activities.filter(activity => activity.author._id === props.currentUser._id))
+    }
+  },[])
+  console.log(activityUser)
   return (
     <>
       {props.currentUser && (
@@ -34,7 +44,7 @@ function DashboardContent(props: any) {
             {props.currentUser.type === "Teacher" ? (
               <>
                 <div
-                  className="w-[49%] rounded-md relative bg-white h-[33vh] shadow flex flex-col gap-8 p-4"
+                  className="w-[49%] rounded-md relative bg-white min-h-[33vh] shadow flex flex-col gap-8 p-4"
                 >
                   <h3 className="font-bold text-sm text-[#323232]">Actividades</h3>
 		<Link to={"/account/panel/teacherActivities/Class"}>
@@ -46,7 +56,7 @@ function DashboardContent(props: any) {
                         alt="actividades"
                       />
                       <p className="font-bold text-[12px] text-[#323232]">
-                        Actividades Regulares:
+                        Actividades Regulares:{activityUser.filter(actividades =>actividades.type === "Class").length}
                       </p>
                     </div>
                   </Fade>
@@ -60,7 +70,7 @@ function DashboardContent(props: any) {
                         alt="actividades"
                       />
                       <p className="font-bold text-[12px] text-[#323232]">
-                        Ciclos:
+                        Ciclos:{activityUser.filter(actividades =>actividades.type === "Cicle").length}
                       </p>
                     </div>
                   </Fade>
@@ -74,7 +84,7 @@ function DashboardContent(props: any) {
                         alt="actividades"
                       />
                       <p className="font-bold text-[12px] text-[#323232]">
-                        Eventos/Festivales:
+                        Eventos/Festivales:{activityUser.filter(actividades =>actividades.type === "Event").length}
                       </p>
                     </div>
                   </Fade>
@@ -88,7 +98,7 @@ function DashboardContent(props: any) {
                         alt="actividades"
                       />
                       <p className="font-bold text-[12px] text-[#323232]">
-                        Workshops:
+                        Workshops:{activityUser.filter(actividades =>actividades.type === "Workshop").length}
                       </p>
                     </div>
                   </Fade>
@@ -136,13 +146,16 @@ function DashboardContent(props: any) {
     </>
   );
 }
-
+const mapDispatch = {
+  fetchActivities: activityActions.fetchActivities,
+}
 const mapState = (state: RootState) => {
   return {
     currentUser: state.userReducer.currentUser,
+    activities: state.activityReducer.activities
   };
 };
 
-const connector = connect(mapState, null);
+const connector = connect(mapState, mapDispatch);
 
 export default connector(DashboardContent);

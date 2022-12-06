@@ -48,7 +48,7 @@ class Scheduler extends React.Component <any,any>{
 		}
 
 		if(prevProps.activities !== this.props.activities && this.props.currentUser){
-			this.setState({activities:this.props.activities.filter((activity:activityDTO) => {return activity.author == this.props.currentUser._id})})
+			this.setState({activities:this.props.activities.filter((activity:activityDTO) => {return activity.author._id == this.props.currentUser._id})})
 		}
 
 		let events = document.querySelectorAll(".rbc-event")

@@ -32,10 +32,10 @@ class Account extends React.Component <any, any>{
 		})
 
 		this.setState({file:file.data})
-		this.setState({activitiesRegular:this.props.activities.filter((e:any)=>e.type.includes("Class")  && e.author.includes(this.props.currentUser?._id))})
-		this.setState({activitiesCicle:this.props.activities.filter((e:any)=>e.type.includes("Cicle") && e.author.includes(this.props.currentUser?._id))})
-		this.setState({activitiesWorkshop:this.props.activities.filter((e:any)=>e.type.includes("Workshop") && e.author.includes(this.props.currentUser?._id))})
-		this.setState({activitiesEvent:this.props.activities.filter((e:any)=>e.type.includes("Event") && e.author.includes(this.props.currentUser?._id))})
+		this.setState({activitiesRegular:this.props.activities.filter((e:any)=>e.type.includes("Class")  && e.author?._id.includes(this.props.currentUser?._id))})
+		this.setState({activitiesCicle:this.props.activities.filter((e:any)=>e.type.includes("Cicle") && e.author?._id.includes(this.props.currentUser?._id))})
+		this.setState({activitiesWorkshop:this.props.activities.filter((e:any)=>e.type.includes("Workshop") && e.author?._id.includes(this.props.currentUser?._id))})
+		this.setState({activitiesEvent:this.props.activities.filter((e:any)=>e.type.includes("Event") && e.author?._id.includes(this.props.currentUser?._id))})
 	}
 
 

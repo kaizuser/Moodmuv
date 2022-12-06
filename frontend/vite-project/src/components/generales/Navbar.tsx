@@ -21,14 +21,15 @@ import studentActions from '../../redux/actions/studentActions'
 import activityActions from '../../redux/actions/activityActions'
 import { RootState } from '../../main';
 import axios from 'axios';
+
 const navigation = [
-  { name: "Explorar", href: "#", current: false },
-  { name: "Planes", href: "#", current: false },
-  { name: "Quienes somos", href: "#", current: false },
-  { name: "Como funciona la plataforma", href: "#", current: false },
-  { name: "Iniciar sesión", href: "#", current: false },
-  { name: "Activa tu prueba", href: "#", current: true },
-];
+	{ name: "Explorar", href: "#", current: false },
+	{ name: "Planes", href: "#", current: false },
+	{ name: "Quienes somos", href: "#", current: false },
+	{ name: "Como funciona la plataforma", href: "#", current: false },
+	{ name: "Iniciar sesión", href: "#", current: false },
+	{ name: "Activa tu prueba", href: "#", current: true },
+  ];
 
 const link = ["/explore", "/payments","/aboutUs", "/howTo", "/signIn", "/activateAccount"];
 

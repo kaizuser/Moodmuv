@@ -34,7 +34,7 @@ export default function AnimatedMulti(props:any) {
   
   return (
     <Select
-      className='w-full'
+      className='grow '
       closeMenuOnSelect={false}
       components={animatedComponents}
       name={"disciples"}

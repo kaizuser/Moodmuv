@@ -19,6 +19,7 @@ interface activityDTO {
 const activityControllers = {
         get_activities: async(req:Request, res:Response) => {
                 await Activity.find()
+		.populate({ path: 'author', select: '_id'})
 		.then(data => res.json({data}))
 		.catch(error => res.json({error}))
         },

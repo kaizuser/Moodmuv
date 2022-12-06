@@ -19,6 +19,7 @@ import EventosPanel from './components/pages/EventosPanel'
 import Spinner from './components/generales/Spinner'
 import ChangePassword from './components/pages/login/settings/changePassword'
 import Planes from './components/pages/Planes/PlanesMaqueta'
+import AboutUs from './components/pages/about us/AboutContainer'
 import './styles.css'
 
 //UTILITIES
@@ -76,6 +77,7 @@ function App(props:any) {
 					<Route path='/account/panel/studentEvents'></Route>
 					<Route path='/account/settings/password' element={<ChangePassword/>}></Route>
 					<Route path='/payments' element={<Planes/>}></Route>
+					<Route path='/aboutUs' element={<AboutUs/>}></Route>
 				</Routes>			  
 				<Footer/>
 				</SpinnerContext.Provider>

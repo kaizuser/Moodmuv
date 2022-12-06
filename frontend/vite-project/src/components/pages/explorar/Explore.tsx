@@ -55,6 +55,7 @@ class Explore extends React.Component<any, any> {
   };
 
   render(): React.ReactNode {
+    console.log(this.props.activities)
     return (
       <div className="w-full min-h-screen">
         <div className="relative min-h-12 w-full flex flex-col gap-4 p-4 px-8 shadow-md justify-center items-center">
@@ -97,46 +98,7 @@ class Explore extends React.Component<any, any> {
           <div className="break-all cartas w-4/6 px-4 overflow-x-hidden h-screen bg-[#F3F3F3] flex flex-wrap gap-2 justify-center items-start overflow-scroll p-4">
             {this.state.activities
               ? this.state.activities.map((activity: activityDTO) => (
-                  <div
-                    className="w-[13rem] h-[26rem] rounded overflow-hidden shadow-lg flex flex-col"
-                    key={activity._id}
-                  >
-                    <img
-                      className="w-full h-44 object-cover"
-                      src="https://algarabia.com/wp-content/uploads/2017/05/El-texto-del-pa%CC%81rrafo-36.jpg"
-                      alt="Sunset in the mountains"
-                    />
-                    <div className="flex flex-col justify-start items-left px-6 py-2 grow gap-2">
-                      <div className="capitalize font-bold text-xl break-words">      
-                        {activity.name.charAt(0)+activity.name.toLocaleLowerCase().substring(1, this.state.max_length_title)}
-                      </div>
-                      <p className="text-[13px] text-gray-700 text-base">
-                        {activity.desc.length >= this.state.max_length ? activity.desc.slice(0, this.state.max_length).toLowerCase() + "... " : activity.desc.toLowerCase()}
-                        {
-                          activity.desc.length >= this.state.max_length ?
-                        <Link className="text-[#007AE9] text-xs cursor-pointer" to={"/explore/activity/"+ activity._id}>learn more</Link>
-                        : ""
-                        }
-                      </p>
-                      <div className="h-fit w-full mb-1 flex justify-between items-end grow">
-                      <div className="flex gap-2  items-center text-xs text-[#007AE9] font-bold cursor-pointer">
-                        <Link to={"/explore/profile/" + activity.author} onClick={this.props.resetStore}>
-                          <img
-                            className="object-cover rounded-full w-8 h-8"
-                            src="https://i.pinimg.com/originals/86/08/70/860870066df05a7a29bcb5bb9ea2e9a7.jpg"
-                            alt="imagen"
-                          />
-                        </Link>
-                      </div>
-                      <Link to={"/explore/activity/" + activity._id}>
-                        <p className="text-[#007AE9] text-xs cursor-pointer">
-                          Ver mas
-                        </p>
-                      </Link>
-                      </div>
-                    </div>
-
-                  </div>
+                  <CardExplore activity={activity} max_length={this.state.max_length} max_length_title={this.state.max_length_title} resetStore={this.props.resetStore} />
                 ))
               : ""}
           </div>
