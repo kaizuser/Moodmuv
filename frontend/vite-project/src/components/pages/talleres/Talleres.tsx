@@ -42,7 +42,7 @@ const GridTalleres = () => {
       <div className="first-child flex flex-col items-start text-start justify-center px-8 gap-4 w-1/2">
     <Slide>
         <p className="uppercase text-[#999] text-xs font-black">The grand moment</p>
-        <h3 className="font-bold text-6xl text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B] py-2">{arraycitoTalleres[num].name}</h3>
+        <h3 className="font-bold text-6xl text-transparent bg-clip-text bg-gradient-to-t from-[#563D81] to-[#6E5E8B] py-2">{arraycitoTalleres[num].name}</h3>
         <p className="text-[#999] text-sm">{arraycitoTalleres[num].descripción}</p>
         <button className="shadow-sm rounded text-[#767676] uppercase w-fit font-black text-xs border border-[#d1d1d1] p-4">Explorar taller</button>
     </Slide>

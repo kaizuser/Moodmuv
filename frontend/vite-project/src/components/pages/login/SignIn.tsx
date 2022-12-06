@@ -45,8 +45,8 @@ const SignIn = (props:any) => {
         <div className="absolute -top-40 -right-0 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
         <div className="absolute -top-20 -right-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
       </div>
-      <div className="flex md:w-1/2 sm:h-full formulario justify-center py-10 items-center bg-white">
-        <form className="bg-white">
+      <div className="flex md:w-1/2 sm:h-full formulario justify-center py-10 items-center bg-[#f8f8f9]">
+        <form className="">
           <h1 className="text-gray-800 font-semibold text-2xl mb-1">Iniciar sesión</h1>
           <p className="text-sm font-normal text-gray-600 mb-7 sm:mb-2">Bienvenido otra vez!</p>
 	  <a className="registrarme font-semibold text-[#5FAABF] cursor-pointer">Quiero registrarme</a>

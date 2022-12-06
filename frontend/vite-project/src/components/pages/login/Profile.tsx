@@ -11,16 +11,33 @@ import studentActions from "../../../redux/actions/studentActions";
 import teacherActions from '../../../redux/actions/teacherActions'
 import { RootState } from "../../../main"
 import ProfileScheduler from "./ProfileCalendar";
+import axios from "axios";
 
 const Profile = (props:any) => {
 	let params = useParams()
+	let [teacherFlag, setFlag] = useState(true)
+	let [fileProfile, setFileProfile] = useState(undefined)
 
 	useEffect(() => {
-	  if(params.id){
+	  if(params.id && teacherFlag){
 		  props.fetchTeacher(params.id)
+		  setFlag(false)
 	  }
 
-	}, [params])
+	  if(props.teacher){
+		  let fetchFile = async() => {
+			let file: string | any = await axios({
+				method:'get',
+				url:'http://localhost:4000/api/files/avatarProfile/' + props.teacher?._id,
+			})
+
+			setFileProfile(file.data)
+		  }
+
+		  fetchFile()
+	  }
+
+	}, [params, props.teacher])
 
 	return (
 	<>
@@ -56,8 +73,9 @@ const Profile = (props:any) => {
 	      </div>
 		  {/* IMAGEN  DE PERFIL */}
 	      <img
-		className="mx-4 w-40 rounded-full -translate-y-16"
-		src="https://mui.com/static/images/avatar/2.jpg"/* {props.teacher?.img} */
+		className="mx-4 w-40 h-40 object-cover object-center rounded-full -translate-y-16"
+
+		src={`data:image/png;base64,${fileProfile}`}/* {props.teacher?.img} */
 	      />
 		  {/* REDES */}
 		  <div className="flex gap-4 relative right-0">
@@ -72,7 +90,7 @@ const Profile = (props:any) => {
 		  </NavLink>
 		  </div>
 	    </div>
-		<p className="text-center shadow-md bg-gradient-to-r from-[#fdc41d] to-[#fbb232] p-3 py-1 rounded-3xl text-white font-bold mb-2">Profesor</p>
+		<p className="text-center shadow-md bg-gradient-to-t from-[#fdc41d] to-[#fbb232] p-3 py-1 rounded-3xl text-white font-bold mb-2">Profesor</p>
 	    <h2 className="font-bold text-4xl text-[#222]">{props.teacher?.name}</h2>
 	    {/* Ubicación */}
 	    <div className="p-4 flex">
@@ -126,10 +144,10 @@ const Profile = (props:any) => {
 		{props.teacher?.desc}
 	    </p>
 	  {props.teacher &&
-<><div className="shadow-md px-20 py-2 rounded-md bg-gradient-to-r from-[#563D81] to-[#6E5E8B]">
+<><div className="shadow-md px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 	      <h3 className="font-bold text-white text-4xl">Cursos</h3>
 	    </div>
-	    <div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-r from-[#563D81] to-[#6E5E8B]">
+	    <div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 	      <h3 className="font-bold text-white text-4xl">Cursos</h3>
 	    </div>
 	    <CarouselCards />

@@ -257,6 +257,67 @@ const ProfileSettings = (props: any) => {
 		  defaultValue={props.currentUser?.ubi}
 		/>
 	      </fieldset>
+
+		  <fieldset className="flex gap-4 w-full flex-wrap">
+		<aside className="flex justify-end px-6 w-44 min-h-4">
+		  <label
+		    className="font-bold  text-right self-center"
+		    htmlFor=""
+		  >
+		    Facebook
+		  </label>
+		</aside>
+		<input
+		  onChange={(e) => setUbi(e.target.value)}
+		  className="social-input border grow rounded px-2"
+		  type="text"
+		  placeholder="https://www.facebook.com/moodmuv/"
+		  name=""
+		  id=""
+		  defaultValue={props.currentUser?.ubi}
+		/>
+	      </fieldset>
+
+		  <fieldset className="flex gap-4 w-full flex-wrap">
+		<aside className="flex justify-end px-6 w-44 min-h-4">
+		  <label
+		    className="font-bold  text-right self-center"
+		    htmlFor=""
+		  >
+		    Instagram
+		  </label>
+		</aside>
+		<input
+		  onChange={(e) => setUbi(e.target.value)}
+		  className="social-input border grow rounded px-2"
+		  type="text"
+		  name=""
+		  placeholder="https://www.instagram.com/moodmuv/"
+		  id=""
+		  defaultValue={props.currentUser?.ubi}
+		/>
+	      </fieldset>
+
+		  <fieldset className="flex gap-4 w-full flex-wrap">
+		<aside className="flex justify-end px-6 w-44 min-h-4">
+		  <label
+		    className="font-bold  text-right self-center"
+		    htmlFor=""
+		  >
+		    Tik Tok
+		  </label>
+		</aside>
+		<input
+		  onChange={(e) => setUbi(e.target.value)}
+		  className="social-input border grow rounded px-2"
+		  type="text"
+		  placeholder="https://www.tiktok.com/@moodmuv"
+		  name=""
+		  id=""
+		  defaultValue={props.currentUser?.ubi}
+		/>
+	      </fieldset>
+
 	      <fieldset className="flex gap-4 w-full flex-wrap">
 		<aside className="flex justify-end px-6 w-44 min-h-4">
 		  <label
@@ -305,7 +366,7 @@ let mapDispatch = {
   modifyTeacher: teacherActions.modifyTeacher,
   logOut: userActions.logOut,
   verifyToken:userActions.verifyToken,
-  setMetadata: databaseActions.setMetadata,
+  setMetadata: databaseActions.setMetadataFile,
   uploadFile: databaseActions.uploadFile
 };
 

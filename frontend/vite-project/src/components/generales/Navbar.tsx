@@ -24,12 +24,13 @@ import axios from 'axios';
 const navigation = [
   { name: "Explorar", href: "#", current: false },
   { name: "Planes", href: "#", current: false },
+  { name: "Quienes somos", href: "#", current: false },
   { name: "Como funciona la plataforma", href: "#", current: false },
   { name: "Iniciar sesión", href: "#", current: false },
   { name: "Activa tu prueba", href: "#", current: true },
 ];
 
-const link = ["/explore", "/payments", "/howTo", "/signIn", "/activateAccount"];
+const link = ["/explore", "/payments","/aboutUs", "/howTo", "/signIn", "/activateAccount"];
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -54,22 +55,19 @@ function Example(props: any) {
 
 	const handleCloseUserMenu = () => {
 	setAnchorElUser(null);
-	};
-	let id = props.currentUser?._id
+	};	
 
 	useEffect(() => {
 		async function fetchFile (){
 			let file:string | any = await axios({
 				method:'get',
-				url:'http://localhost:4000/api/files/avatarProfile/' + id,
+				url:'http://localhost:4000/api/files/avatarProfile/' + props?.currentUser?._id,
 			})
 
 		setFile(file.data)
 	  }
-
 	  fetchFile()
-	}, [spinner])
-
+	}, [spinner, props.currentUser])
 
 	return (
 	<Disclosure as="nav" className=" relative z-10">
@@ -174,7 +172,7 @@ function Example(props: any) {
 			      <span
 				className={classNames(
 				  item.current
-				    ? "hover:bg-gradient-to-r hover:from-[#443166] hover:to-[#59457B] bg-gradient-to-r from-[#563D81] to-[#6E5E8B] text-white"
+				    ? "hover:bg-gradient-to-t hover:from-[#443166] hover:to-[#59457B] bg-gradient-to-t from-[#563D81] to-[#6E5E8B] text-white"
 				    : "text-black",
 				  "px-3 py-2 rounded-md text-sm font-medium"
 				)}
@@ -191,7 +189,7 @@ function Example(props: any) {
 			    <span
 			      className={classNames(
 				item.current
-				  ? "hover:bg-gradient-to-r hover:from-[#443166] hover:to-[#59457B] bg-gradient-to-r from-[#563D81] to-[#6E5E8B] text-white"
+				  ? "hover:bg-gradient-to-t hover:from-[#443166] hover:to-[#59457B] bg-gradient-to-t from-[#563D81] to-[#6E5E8B] text-white"
 				  : "text-black",
 				"px-3 py-2 rounded-md text-sm font-medium"
 			      )}
@@ -219,7 +217,7 @@ function Example(props: any) {
 		    href={"/account"}
 		    className={classNames(
 		      item.current
-			? "bg-gradient-to-r from-[#563D81] to-[#563D81] text-white"
+			? "bg-gradient-to-t from-[#563D81] to-[#563D81] text-white"
 			: "text-[#2C2C2C] hover:text-white",
 		      "block px-3 py-2 rounded-md text-base font-medium"
 		    )}
@@ -231,7 +229,7 @@ function Example(props: any) {
 		    href={link[navigation.indexOf(item)]}
 		    className={classNames(
 		      item.current
-			? "bg-gradient-to-r from-[#563D81] to-[#563D81] text-white"
+			? "bg-gradient-to-t from-[#563D81] to-[#563D81] text-white"
 			: "text-[#2C2C2C] hover:text-white",
 		      "block px-3 py-2 rounded-md text-base font-medium"
 		    )}
@@ -243,7 +241,7 @@ function Example(props: any) {
 		  href={link[navigation.indexOf(item)]}
 		  className={classNames(
 		    item.current
-		      ? "bg-gradient-to-r from-[#563D81] to-[#563D81] text-white"
+		      ? "bg-gradient-to-t from-[#563D81] to-[#563D81] text-white"
 		      : "text-[#2C2C2C] hover:text-white",
 		    "block px-3 py-2 rounded-md text-base font-medium"
 		  )}
@@ -267,9 +265,7 @@ const mapDispatch = {
 	resetStoreTeacher:teacherActions.resetStore,
 	resetStoreStudent:studentActions.resetStore,
 	resetStoreActivities:activityActions.resetStore,
-  fetchActivity:activityActions.fetchActivity,
-	setMetadata:userActions.setMetadata,
-	uploadFile:userActions.uploadFile
+	fetchActivity:activityActions.fetchActivity,
 }
 
 const mapState = (state:RootState) => {

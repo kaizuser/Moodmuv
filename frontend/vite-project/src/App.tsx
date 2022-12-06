@@ -13,6 +13,7 @@ import HowTo from './components/pages/howto/HowTo'
 import Activity from './components/pages/Activities/ActivityContainer'
 import CreateActivity from './components/pages/Activities/CreateActivities'
 import UserPanel from './components/pages/UserPanel'
+import VideosInterface from './components/pages/Videos/VideosInterface'
 import TalleresPanel from './components/pages/ActivityPanel'
 import EventosPanel from './components/pages/EventosPanel'
 import Spinner from './components/generales/Spinner'
@@ -53,32 +54,33 @@ function App(props:any) {
 			loading ? (<Spinner/>) : (
 			<Router>
 				<SpinnerContext.Provider value={{spinner, setSpinner}}>
-					<Nav/>
-					<Routes>
-					  <Route path='/' element={<Home title="Home"/>}></Route>
-					  <Route path='/home' element={<Home title="Home"/>}></Route>
-					  <Route path='/explore' element={<Explore title="Explore"/>}></Route>
-					  <Route path='/howTo' element={<HowTo/>}></Route>
-					  <Route path='/explore/profile/:id' element={<Profile title="Perfil"/>}></Route>
-					  <Route path='/explore/activity/:id' element={<Activity/>}></Route>
-					  <Route path='/signIn' element={<SignIn title="Iniciar Sesión"/>} ></Route>
-					  <Route path='/signUp' element={<SignUp title="Registro"/>}></Route>
-					  <Route path='/forgotPass' element={<ForgotPassword/>}></Route>
-					  <Route path='/account' element={<Account title={"Mi cuenta"}/>}></Route>
-					  <Route path='/account/settings' element={<ProfileSettings title="Configuración de perfil"/>}></Route>
-					  <Route path='/account/panel' element={<UserPanel/>}></Route>
-					  <Route path='/account/panel/teacherActivities' element={<TalleresPanel/>}></Route>
-					  <Route path='/account/panel/teacherEvents' element={<EventosPanel id={props.currentUser?._id}/>}></Route>
-					  <Route path='/account/panel/teacherActivities/createActivity' element={<CreateActivity/>}></Route>
-					  <Route path='/account/panel/studentActivities'></Route>
-					  <Route path='/account/panel/studentEvents'></Route>
-					  <Route path='/account/settings/password' element={<ChangePassword/>}></Route>
-					  <Route path='/payments' element={<Planes/>}></Route>
-					</Routes>			  
-					<Footer/>
+				<Nav/>
+				<Routes>
+					<Route path='/' element={<Home title="Home"/>}></Route>
+					<Route path='/home' element={<Home title="Home"/>}></Route>
+					<Route path='/explore' element={<Explore title="Explore"/>}></Route>
+					<Route path='/howTo' element={<HowTo/>}></Route>
+					<Route path='/explore/profile/:id' element={<Profile title="Perfil"/>}></Route>
+					<Route path='/explore/activity/:id' element={<Activity/>}></Route>
+					<Route path='/signIn' element={<SignIn title="Iniciar Sesión"/>} ></Route>
+					<Route path='/signUp' element={<SignUp title="Registro"/>}></Route>
+					<Route path='/forgotPass' element={<ForgotPassword/>}></Route>
+					<Route path='/account' element={<Account title={"Mi cuenta"}/>}></Route>
+					<Route path='/account/settings' element={<ProfileSettings title="Configuración de perfil"/>}></Route>
+					<Route path='/account/panel' element={<UserPanel/>}></Route>
+					<Route path='/account/panel/teacherActivities/:type' element={<TalleresPanel/>}></Route>
+					<Route path='/account/panel/teacherEvents' element={<EventosPanel id={props.currentUser?._id}/>}></Route>
+					<Route path='/account/panel/teacherActivities/createActivity' element={<CreateActivity/>}></Route>
+					<Route path='/account/panel/teacherVideos' element={<VideosInterface/>}></Route>
+					<Route path='/account/panel/studentActivities'></Route>
+					<Route path='/account/panel/studentEvents'></Route>
+					<Route path='/account/settings/password' element={<ChangePassword/>}></Route>
+					<Route path='/payments' element={<Planes/>}></Route>
+				</Routes>			  
+				<Footer/>
 				</SpinnerContext.Provider>
 
-		  </Router>)
+			</Router>)
 		}
 		</>
 		

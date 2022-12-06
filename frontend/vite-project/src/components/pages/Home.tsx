@@ -21,8 +21,8 @@ const Home = ({title}:any) => {
         >
           <source src={sample} type="video/mp4" />
         </video>
-        <h1 className="my-8 text-main text-6xl sm:w-[25rem] lg:w-[42rem] font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B] drop-shadow-2xl">
-          El lugar para impulsar tu creatividad interior
+        <h1 className=" text-main text-6xl sm:w-[25rem] lg:w-[62rem] font-bold text-[#323232] drop-shadow-2xl">
+        Una ventana de exhibición para expandir tus conocimientos.
         </h1>
         <Fade>
 
@@ -35,7 +35,7 @@ const Home = ({title}:any) => {
       </div>
       <div className="py-16 px-12 bg-[#f3f3f3]">
        <Slide direction="down" triggerOnce>
-        <h2 className="p-8 pb-14 text-center text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B]">Talleres</h2>
+        <h2 className="p-8 pb-14 text-center text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">Eventos / Festivales</h2>
        </Slide>
         <GridTalleres/>
       </div>

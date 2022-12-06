@@ -5,11 +5,11 @@ import disableCheck from '../../../assets/checkeds/disableCheck.png'
 const PlanesMaqueta = () => {
   return (
     <div className='bg-[#f3f3f3] w-full min-h-[90vh] flex flex-col justify-center items-center gap-2'>
-        <h1 className='font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#563D81] to-[#6E5E8B] drop-shadow-2xl text-4xl text-center'>Planes disponibles</h1>
+        <h1 className='font-bold text-transparent bg-clip-text bg-gradient-to-t from-[#563D81] to-[#6E5E8B] drop-shadow-2xl text-4xl text-center'>Planes disponibles</h1>
         <p className='text-[#666] w-1/2 text-sm'>Al registrarte, puedes elegir entre nuestros planes más populares. Y, una vez completado el registro, tendrás más planes disponibles. Puedes cambiar o cancelar tu suscripción en cualquier momento.</p>
         <div className='flex flex-wrap justify-center items-end gap-8 w-full my-2 px-24'>
             <div className='bg-[#f5f5f5] border rounded-xl w-52 h-64'>
-              <div className='flex items-center justify-center h-1/4 w-full bg-gradient-to-r from-[#563D81] to-[#6E5E8B] rounded-t-xl' >
+              <div className='flex items-center justify-center h-1/4 w-full bg-gradient-to-t from-[#563D81] to-[#6E5E8B] rounded-t-xl' >
                 <h3 className='font-bold text-white drop-shadow-[0_5px_12px_rgb(255,255,255)] text-3xl flex gap-2 justify-center items-center'>
                   <span className='text-sm font-light'>
                     $
@@ -40,7 +40,7 @@ const PlanesMaqueta = () => {
               </div>
               </div>
             <div className='bg-[#f5f5f5] border rounded-xl w-52 h-80 mb-6'>
-              <div className='flex items-center justify-center h-1/4 w-full bg-gradient-to-r from-[#563D81] to-[#6E5E8B] rounded-t-xl' >
+              <div className='flex items-center justify-center h-1/4 w-full bg-gradient-to-t from-[#563D81] to-[#6E5E8B] rounded-t-xl' >
                 <h3 className='font-bold text-white drop-shadow-[0_0_25px_rgb(255,255,255)] text-5xl flex gap-2 justify-center items-center'>
                   <span className='text-sm font-light'>
                     $
@@ -74,7 +74,7 @@ const PlanesMaqueta = () => {
               </div>
               </div>
             <div className='bg-[#f5f5f5] border rounded-xl w-52 h-64'>
-              <div className='flex items-center justify-center h-1/4 w-full bg-gradient-to-r from-[#563D81] to-[#6E5E8B] rounded-t-xl' >
+              <div className='flex items-center justify-center h-1/4 w-full bg-gradient-to-t from-[#563D81] to-[#6E5E8B] rounded-t-xl' >
                 <h3 className='font-bold text-white drop-shadow-[0_5px_12px_rgb(255,255,255)] text-3xl flex gap-2 justify-center items-center'>
                   <span className='text-sm font-light'>
                     $

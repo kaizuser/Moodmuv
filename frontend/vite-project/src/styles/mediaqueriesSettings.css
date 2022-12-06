@@ -3,3 +3,6 @@
     width: 2rem;
     height: 2rem;
 }
+.social-input::placeholder{
+    font-size: 13px!important;
+}

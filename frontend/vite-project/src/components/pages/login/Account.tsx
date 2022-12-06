@@ -1,13 +1,12 @@
+//BASICS
 import React, { useEffect, useState } from "react";
 
 //UTILITIES
+import { FaTiktok, FaInstagram, FaFacebookSquare } from "react-icons/fa";
+import { Link as NavLink } from '@mui/material';
 import CarouselCards from "./CarouselCards";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {connect} from 'react-redux'
-import studentActions from "../../../redux/actions/studentActions";
-import teacherActions from '../../../redux/actions/teacherActions'
-import activityActions from "../../../redux/actions/activityActions";
 import axios from "axios";
 import { RootState } from "../../../main"
 import Scheduler from "./Calendar"
@@ -18,7 +17,11 @@ class Account extends React.Component <any, any>{
 	constructor(props:any){
 		super(props)
 		this.state = {
-			file:undefined
+			file:undefined,
+			activitiesRegular:[],
+			activitiesCicle:[],
+			activitiesWorkshop:[],
+			activitiesEvent:[]
 		}
 	}
 
@@ -29,6 +32,10 @@ class Account extends React.Component <any, any>{
 		})
 
 		this.setState({file:file.data})
+		this.setState({activitiesRegular:this.props.activities.filter((e:any)=>e.type.includes("Class")  && e.author.includes(this.props.currentUser?._id))})
+		this.setState({activitiesCicle:this.props.activities.filter((e:any)=>e.type.includes("Cicle") && e.author.includes(this.props.currentUser?._id))})
+		this.setState({activitiesWorkshop:this.props.activities.filter((e:any)=>e.type.includes("Workshop") && e.author.includes(this.props.currentUser?._id))})
+		this.setState({activitiesEvent:this.props.activities.filter((e:any)=>e.type.includes("Event") && e.author.includes(this.props.currentUser?._id))})
 	}
 
 
@@ -43,7 +50,11 @@ class Account extends React.Component <any, any>{
 			  {/* Perfil Contenedor */}
 			  <div className=" flex flex-col items-center rounded-xl bg-white w-11/12 min-h-96 -translate-y-48 shadow">
 			    <div className="flex justify-center items-center w-full">
-			      <div className="invisible flex gap-4 items-center">
+
+				  
+				  {/* EDITAR */}
+				  
+				<div className="flex gap-4 items-center">
 				<Link
 				  to={"/account/settings"}
 				  className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full flex gap-2 text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
@@ -65,34 +76,30 @@ class Account extends React.Component <any, any>{
 				  </svg>
 				</Link>
 			      </div>
+
 				  {/* IMAGEN  DE PERFIL */}
 			      <img
 				className="mx-4 w-40 h-40 object-cover object-center rounded-full -translate-y-16"
 				src={`data:image/png;base64,${this.state.file}`}/* {this.props.currentUser?.img} */
 			      />
-			      <div className="flex gap-4 items-center">
-				<Link
-				  to={"/account/settings"}
-				  className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full flex gap-2 text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
-				>
-				  <p>Editar</p>
-				  <svg
-				    xmlns="http://www.w3.org/2000/svg"
-				    fill="none"
-				    viewBox="0 0 24 24"
-				    strokeWidth="1.5"
-				    stroke="currentColor"
-				    className="w-5 h-5"
-				  >
-				    <path
-				      strokeLinecap="round"
-				      strokeLinejoin="round"
-				      d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
-				    />
-				  </svg>
-				</Link>
-			      </div>
+
+
+		{/* SOCIAL ICONS */}
+		<div className="flex gap-4 items-center">
+					<NavLink href="https://www.tiktok.com">
+					<FaTiktok className="text-[#323232]"/>
+					</NavLink>
+					<NavLink href="https://www.instagram.com">
+					<FaInstagram className="text-[#323232]"/>
+					</NavLink>
+					<NavLink href="https://www.facebook.com">
+					<FaFacebookSquare className="text-[#323232]"/>
+					</NavLink>
+				</div>
+
 			    </div>
+				{this.props.currentUser?.type === "Teacher" && <p className="text-center shadow-md bg-gradient-to-t from-[#fdc41d] to-[#fbb232] p-3 py-1 rounded-3xl text-white font-bold mb-2">Profesor</p>}
+				{this.props.currentUser?.type === "User" && <p className="text-center shadow-md bg-gradient-to-t from-cyan-500 to-blue-500  p-3 py-1 rounded-3xl text-white font-bold mb-2">Alumno</p>}
 			    <h2 className="font-bold text-4xl text-[#222]">{this.props.currentUser?.name}</h2>
 			    {/* Ubicación */}
 			    <div className="p-4 flex">
@@ -120,7 +127,7 @@ class Account extends React.Component <any, any>{
 			      </p>
 			    </div>
 			    {/* Oficio */}
-			    { this.props.teacher &&
+			    { this.props.currentUser &&
 			    <div className="flex p-4">
 			      <svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -146,17 +153,51 @@ class Account extends React.Component <any, any>{
 			    <p className="text-center lg:w-[70%] text-[#999] py-8">
 				{this.props.currentUser?.desc}
 			    </p>
-			  {this.props.currentUser.type == 'Teacher' &&
-		<><div className="shadow-md px-20 py-2 rounded-md bg-gradient-to-r from-[#563D81] to-[#6E5E8B]">
-			      <h3 className="font-bold text-white text-4xl">Cursos</h3>
-			    </div>
-			    <div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-r from-[#563D81] to-[#6E5E8B]">
-			      <h3 className="font-bold text-white text-4xl">Cursos</h3>
-			    </div>
-			    <CarouselCards />
-				</>}
 			  </div>
 
+
+			  {/* FULL CAROUSELES */}
+
+
+			  
+			  {this.props.currentUser.type == 'Teacher' &&  this.state?.activitiesRegular.length > 0 ? 
+			  (
+		<><div className="shadow-md px-20 -mt-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+			      <h3 className="font-bold text-white text-4xl">Clases regulares</h3>
+			    </div>
+			    <div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+			      <h3 className="font-bold text-white text-4xl">Clases regulares</h3>
+			    </div>
+				<CarouselCards activity={this.state?.activitiesRegular}/>
+				</>) : ""}				
+			  {this.props.currentUser.type == 'Teacher' &&  this.state?.activitiesWorkshop.length > 0 ?
+		<><div className="shadow-md mt-20 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+			      <h3 className="font-bold text-white text-4xl">Taller</h3>
+			    </div>
+			    <div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+			      <h3 className="font-bold text-white text-4xl">Taller</h3>
+			    </div>
+				<CarouselCards activity={this.state?.activitiesWorkshop}/>
+
+				</> : ""}				
+				{this.props.currentUser.type == 'Teacher' &&  this.state?.activitiesCicle.length > 0 ? 
+		<><div className="shadow-md mt-20 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+			      <h3 className="font-bold text-white text-4xl">Ciclos</h3>
+			    </div>
+			    <div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+			      <h3 className="font-bold text-white text-4xl">Ciclos</h3>
+			    </div>
+				<CarouselCards activity={this.state?.activitiesCicle}/>				
+				</> : ""}				
+				{this.props.currentUser.type == 'Teacher' && this.state?.activitiesEvent.length > 0 ?
+		<><div className="shadow-md mt-20 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+			      <h3 className="font-bold text-white text-4xl">Eventos</h3>
+			    </div>
+			    <div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+			      <h3 className="font-bold text-white text-4xl">Eventos</h3>
+			    </div>
+				<CarouselCards activity={this.state?.activitiesEvent}/>
+		</> : ""}		
 			  {
 				this.props.currentUser.type == 'Teacher' && <Scheduler id={this.props.currentUser._id}/>
 			  }
@@ -170,19 +211,13 @@ class Account extends React.Component <any, any>{
 		}
 };
 
-let mapDispatch = {
-	fetchStudent:studentActions.fetchStudent,
-	fetchTeacher:teacherActions.fetchTeacher,
-}
-
 let mapState = (state:RootState) => {
 	return {
-		teacher:state.teacherReducer.teacher,
-		student:state.studentReducer.student,
-		currentUser:state.userReducer.currentUser
+		currentUser:state.userReducer.currentUser,
+		activities:state.activityReducer.activities		
 	}
 }
 
-let connector = connect(mapState, mapDispatch)
+let connector = connect(mapState, null)
 
 export default connector(Account);
