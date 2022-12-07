@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 const CardExplore = (props:any) => {
     const [open, setOpen] = useState(false);
     const [file, setFile] = useState();
+    const [backgroundFile, setBackgroundFile] = useState()
     function setearOpen() {
       setOpen(!open);
     }
@@ -15,8 +16,16 @@ const CardExplore = (props:any) => {
         method:'get',
         url:'http://localhost:4000/api/files/avatarProfile/' + props.activity?.author?._id,
       })
+
+      let backgroundfile:string | any = await axios({
+        method:'get',
+        url:'http://localhost:4000/api/files/backgroundImageActivity/' + props.activity?._id,
+      })
+
+      setBackgroundFile(backgroundfile.data)
   
       setFile(file.data)
+
       }
   
       fetchFile()
@@ -29,8 +38,8 @@ const CardExplore = (props:any) => {
                   >
                     <img
                       className="w-full h-44 object-cover"
-                      src="https://algarabia.com/wp-content/uploads/2017/05/El-texto-del-pa%CC%81rrafo-36.jpg"
-                      alt="Sunset in the mountains"
+                      src={`data:image/png;base64,${backgroundFile}`}
+                      alt=""
                     />
                     <div className="flex flex-col justify-start items-left px-6 py-2 grow gap-2">
                       <div className="capitalize font-bold text-xl break-words">      

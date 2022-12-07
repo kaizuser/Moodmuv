@@ -54,7 +54,7 @@ function DashboardContent(props: any) {
 			>
 			  <h3 className="font-bold text-sm text-[#323232]">Actividades</h3>
 			<Link to={"/account/panel/teacherActivities/Class"}>
-			  <Fade className="fade-user-panel flex gap-4 w-44 hover:bg-[#563D81] p-1 rounded-md transition duration-300 ease-in">
+			  <Fade className="fade-user-panel flex gap-4 w-48 hover:bg-[#563D81] p-1 rounded-md transition duration-300 ease-in">
 			    <div className="flex gap-2 w-full items-center">
 			      <img
 				className="p-1 w-6 h-6 rounded-full border border-[#3a57e8]"
@@ -62,13 +62,13 @@ function DashboardContent(props: any) {
 				alt="actividades"
 			      />
 			      <p className="font-bold text-[12px] text-[#323232]">
-				Actividades Regulares:{activityUser?.filter(actividades =>actividades.type === "Class").length}
+				Actividades Regulares: {activityUser?.filter(actividades =>actividades.type === "Class").length}
 			      </p>
 			    </div>
 			  </Fade>
 			</Link>
 			<Link to={"/account/panel/teacherActivities/Cicle"}>
-			  <Fade className="fade-user-panel flex gap-4 w-[5.5rem] hover:bg-[#563D81] p-1 rounded-md transition duration-300 ease-in">
+			  <Fade className="fade-user-panel flex gap-4 w-24 hover:bg-[#563D81] p-1 rounded-md transition duration-300 ease-in">
 			    <div className="flex gap-2 w-full items-center">
 			      <img
 				className="p-1 w-6 h-6 rounded-full border border-[#1aa053]"
@@ -76,13 +76,13 @@ function DashboardContent(props: any) {
 				alt="actividades"
 			      />
 			      <p className="font-bold text-[12px] text-[#323232]">
-				Ciclos:{activityUser?.filter(actividades =>actividades.type === "Cicle").length}
+				Ciclos: {activityUser?.filter(actividades =>actividades.type === "Cicle").length}
 			      </p>
 			    </div>
 			  </Fade>
 			</Link>
 			<Link to={"/account/panel/teacherActivities/Event"}>
-			  <Fade className="fade-user-panel flex gap-4 w-40 hover:bg-[#563D81] p-1 rounded-md transition duration-300 ease-in">
+			  <Fade className="fade-user-panel flex gap-4 w-44 hover:bg-[#563D81] p-1 rounded-md transition duration-300 ease-in">
 			    <div className="flex gap-2 w-full items-center">
 			      <img
 				className="p-1 w-6 h-6 rounded-full border border-[#c03221]"
@@ -90,13 +90,13 @@ function DashboardContent(props: any) {
 				alt="actividades"
 			      />
 			      <p className="font-bold text-[12px] text-[#323232]">
-				Eventos/Festivales:{activityUser?.filter(actividades =>actividades.type === "Event").length}
+				Eventos/Festivales: {activityUser?.filter(actividades =>actividades.type === "Event").length}
 			      </p>
 			    </div>
 			  </Fade>
 			</Link>
 			<Link to={"/account/panel/teacherActivities/Workshop"}>
-			  <Fade className="fade-user-panel flex gap-4 w-28 hover:bg-[#563D81] p-1 rounded-md transition duration-300 ease-in">
+			  <Fade className="fade-user-panel flex gap-4 w-32 hover:bg-[#563D81] p-1 rounded-md transition duration-300 ease-in">
 			    <div className="flex gap-2 w-full items-center">
 			      <img
 				className="p-1 w-6 h-6 rounded-full border border-[#3a57e8]"
@@ -104,7 +104,7 @@ function DashboardContent(props: any) {
 				alt="actividades"
 			      />
 			      <p className="font-bold text-[12px] text-[#323232]">
-				Workshops:{activityUser?.filter(actividades =>actividades.type === "Workshop").length}
+				Workshops: {activityUser?.filter(actividades =>actividades.type === "Workshop").length}
 			      </p>
 			    </div>
 			  </Fade>

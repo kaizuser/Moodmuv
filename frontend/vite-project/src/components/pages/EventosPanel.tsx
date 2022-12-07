@@ -14,7 +14,7 @@ function DashboardContent(props:any) {
 
 	return (
 		<>
-		<Box className="flex flex-col gap-4 justify-start items-center py-4 px-4 min-h-screen grow bg-[#f8f8f9]">
+		<Box className="flex flex-col gap-4 justify-start items-center py-4 px-4 min-h-screen grow bg-[#F3F3F3]">
 			<Box className="flex w-[99.50%] min-h-[10rem] bg-[#333] rounded-b-md bg-[url('https://user-images.githubusercontent.com/91817152/203515449-37e392bc-a22e-48b9-a49d-c062443ba7c6.png')] flex flex-col justify-center items-start px-4">
 			<h1 className="drop-shadow-md text-3xl font-medium text-[#fff] relative">Eventos</h1>
 			<p className="drop-shadow-md  font-medium text-[#fff] relative">
@@ -22,7 +22,7 @@ function DashboardContent(props:any) {
           </p>
 			</Box>
 
-			<div className='bg-[#F3F3F3]'>
+			<div className=''>
 
 				<div className='flex justify-center items-center flex-wrap p-5 w-screen h-auto'>
 					{props?.currentUser?.events.map((event:any) => (

@@ -20,6 +20,7 @@ import Avatar from "@mui/material/Avatar";
 const ProfileSettings = (props: any) => {
   let navigate = useNavigate();
 
+  //PERSONAL INFORMATION
   const { spinner, setSpinner }: any = useContext(SpinnerContext);
   const [nameValue, setName] = useState(props.currentUser?.name);
   const [ubiValue, setUbi] = useState(props.currentUser?.ubi);
@@ -28,6 +29,11 @@ const ProfileSettings = (props: any) => {
   const [descValue, setDesc] = useState(props.currentUser?.desc);
   const [avatarFile, setAvatarFile] = useState(undefined);
   const [discValue, setDisc] = useState(props.currentUser?.disciples);
+  const [mediaFacebook, setFacebook] = useState(props.currentUser?.media[0])
+  const [mediaInstagram, setInstagram] = useState(props.currentUser?.media[1])
+  const [mediaTiktok, setTiktok] = useState(props.currentUser?.media[2])
+
+  //PROFILE AVATAR
   let [fileValue, setFile] = useState(undefined);
 
   useEffect(() => {
@@ -54,7 +60,10 @@ const ProfileSettings = (props: any) => {
       genre: genreValue,
       desc: descValue,
       disciples: discValue,
+      media:[mediaFacebook, mediaInstagram, mediaTiktok]
     };
+
+    console.log(userData)
 
     if (props.currentUser.type == "Teacher") {
       await props.modifyTeacher(userData);
@@ -123,6 +132,8 @@ const ProfileSettings = (props: any) => {
     }
   };
 
+  console.log(props.currentUser)
+
   return (
     <>
       {props.currentUser && (
@@ -155,7 +166,7 @@ const ProfileSettings = (props: any) => {
                 Cerrar sesión
               </p>
             </div>
-            <form className="w-full px-28 pb-16 my-4 flex flex-col gap-4 min-h-4">
+            <form className="w-full px-28 pb-16 my-4 flex flex-col gap-4 min-h-4 items-center justify-center">
               <fieldset className="flex flex-col gap-2 justify-center items-center">
                 {/* AVATAR */}
                 <Avatar
@@ -181,6 +192,7 @@ const ProfileSettings = (props: any) => {
                   type="file"
                 />
               </fieldset>
+	      <h1 className='font-bold mt-4 text-[#222]'>Información Personal</h1>
               <fieldset className="flex gap-4 w-full flex-wrap">
                 <aside className="flex justify-end px-6 w-44 min-h-4">
                   <label
@@ -301,6 +313,9 @@ const ProfileSettings = (props: any) => {
 
 {/* Facebook */}
 
+
+	      <h1 className='font-bold mt-4 text-[#222]'>Redes Sociales</h1>
+
               <fieldset className="flex gap-4 w-full flex-wrap">
                 <button
                   type="button"
@@ -326,6 +341,8 @@ const ProfileSettings = (props: any) => {
                   placeholder="https://www.facebook.com/moodmuv/"
                   name=""
                   id=""
+		  defaultValue={props.currentUser?.media[0]}
+		  onChange={(e) => setFacebook(e.target.value)}
                 />
               </fieldset>
 
@@ -357,6 +374,8 @@ const ProfileSettings = (props: any) => {
                   placeholder="https://www.instagram.com/mrain00/"
                   name=""
                   id=""
+		  defaultValue={props.currentUser?.media[1]}
+		  onChange={(e) => setInstagram(e.target.value)}
                 />
               </fieldset>
 
@@ -380,6 +399,8 @@ const ProfileSettings = (props: any) => {
                   placeholder="https://www.tiktok.com/@elpipocroficial"
                   name=""
                   id=""
+		  defaultValue={props.currentUser?.media[2]}
+		  onChange={(e) => setTiktok(e.target.value)}
                 />
               </fieldset>
 

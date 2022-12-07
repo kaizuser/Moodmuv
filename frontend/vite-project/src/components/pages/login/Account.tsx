@@ -40,6 +40,7 @@ class Account extends React.Component <any, any>{
 
 
 	render(): React.ReactNode {
+		console.log(this.props.currentUser)
 		return (
 			<>
 			{" "}
@@ -51,7 +52,6 @@ class Account extends React.Component <any, any>{
 			  <div className=" flex flex-col items-center rounded-xl bg-white w-11/12 min-h-96 -translate-y-48 shadow">
 			    <div className="flex justify-center items-center w-full">
 
-				  
 				  {/* EDITAR */}
 				  
 				<div className="flex gap-4 items-center">
@@ -85,16 +85,24 @@ class Account extends React.Component <any, any>{
 
 
 		{/* SOCIAL ICONS */}
-		<div className="flex gap-4 items-center">
-					<NavLink href="https://www.tiktok.com">
-					<FaTiktok className="text-[#323232]"/>
-					</NavLink>
-					<NavLink href="https://www.instagram.com">
-					<FaInstagram className="text-[#323232]"/>
-					</NavLink>
-					<NavLink href="https://www.facebook.com">
-					<FaFacebookSquare className="text-[#323232]"/>
-					</NavLink>
+		<div className="flex gap-4 items-center w-[6.5rem]">
+			                {this.props.currentUser.media[2] && this.props.currentUser.media[2].includes('tiktok') && 
+						<NavLink href={this.props.currentUser.media[2]}>
+						<FaTiktok className="text-[#323232]"/>
+						</NavLink>
+					}
+
+			                {this.props.currentUser.media[1] && this.props.currentUser.media[1].includes('instagram') && 
+						<NavLink href={this.props.currentUser.media[1]}>
+						<FaInstagram className="text-[#323232]"/>
+						</NavLink>
+					}
+		
+			                {this.props.currentUser.media[0] && this.props.currentUser.media[0].includes('facebook') && 
+						<NavLink href={this.props.currentUser.media[0]}>
+						<FaFacebookSquare className="text-[#323232]"/>
+						</NavLink>
+					}
 				</div>
 
 			    </div>
