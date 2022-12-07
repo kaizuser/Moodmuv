@@ -1,6 +1,6 @@
 interface activityDTO{
 	_id:string,
-	author:string,
+	author:{_id:string},
 	type:string,
 	name:string,
 	format:string,

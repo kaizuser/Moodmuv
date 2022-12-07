@@ -55,7 +55,6 @@ class Explore extends React.Component<any, any> {
   };
 
   render(): React.ReactNode {
-    console.log(this.props.activities)
     return (
       <div className="w-full min-h-screen">
         <div className="relative min-h-12 w-full flex flex-col gap-4 p-4 px-8 shadow-md justify-center items-center">
@@ -98,7 +97,7 @@ class Explore extends React.Component<any, any> {
           <div className="break-all cartas w-4/6 px-4 overflow-x-hidden h-screen bg-[#F3F3F3] flex flex-wrap gap-2 justify-center items-start overflow-scroll p-4">
             {this.state.activities
               ? this.state.activities.map((activity: activityDTO) => (
-                  <CardExplore activity={activity} max_length={this.state.max_length} max_length_title={this.state.max_length_title} resetStore={this.props.resetStore} />
+                  <CardExplore activity={activity} max_length={this.state.max_length} max_length_title={this.state.max_length_title} resetStore={this.props.resetStore} key={activity._id}/>
                 ))
               : ""}
           </div>

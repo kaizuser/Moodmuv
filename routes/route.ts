@@ -25,6 +25,8 @@ let {verify_token, login_both} = userControllers
 let {get_activities, get_activity, set_activity, delete_activity, modify_activity,} = activityControllers
 let { set_metadata_videos, set_metadata_files, get_bkgImage_activity, get_avatarImage_profile, upload_avatarImage_profile, get_video} = databaseControllers
 
+
+
 //STUDENTS ---------------------------
 Router.route('/student')
 .get(get_students)

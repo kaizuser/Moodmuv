@@ -5,15 +5,14 @@ const Footer = () => {
   return (
     <>
       <footer className="p-4 shadow md:px-6 md:py-8">
-        <div className="sm:flex sm:items-center sm:justify-between">
-        <Link to="/home" className="hover:underline">
-
+	      <div className="flex sm:items-center sm:justify-between sm:flex-row justify-center items-center flex-col space-y-3">
+		      <Link to="/home" className="hover:underline flex flex-col gap-3">
             <img
               src={Logo}
-              className="mr-3 h-8"
+		    className="m-0 h-8 m-auto"
               alt="Flowbite Logo"
             />
-            <span className="text-[#999] self-center font-medium whitespace-nowrap ">
+            <span className="text-[#999] self-center font-medium whitespace-nowrap">
               Moodmuv
             </span>
           </Link>

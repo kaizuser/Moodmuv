@@ -1,4 +1,3 @@
-
 //UTILITIES
 import {useEffect} from 'react'
 import Box from '@mui/material/Box';
@@ -6,8 +5,12 @@ import { Link } from 'react-router-dom';
 import {connect} from 'react-redux'
 import teacherActions from '../../redux/actions/teacherActions';
 import {RootState} from '../../main'
+//COMPONENTS
+import UserPanelDetails from './UserPanelDetails';
 
 function DashboardContent(props:any) {
+
+	let months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
 
 	return (
 		<>
@@ -15,19 +18,18 @@ function DashboardContent(props:any) {
 			<Box className="flex w-[99.50%] min-h-[10rem] bg-[#333] rounded-b-md bg-[url('https://user-images.githubusercontent.com/91817152/203515449-37e392bc-a22e-48b9-a49d-c062443ba7c6.png')] flex flex-col justify-center items-start px-4">
 			<h1 className="drop-shadow-md text-3xl font-medium text-[#fff] relative">Eventos</h1>
 			<p className="drop-shadow-md  font-medium text-[#fff] relative">
-            El panel donde podrás ver tus eventos/festivales.
+            El panel donde podrás ver tus eventos del calendarios
           </p>
 			</Box>
 
-			<div>
-				{props?.currentUser?.events.map((event:any) => (
-					<div className='mb-5' key={event._id}>
-						<div>Cantidad de estudiantes: {event.students.length}</div>
-						<div>Título: {event.title}</div>
-					</div>
-				))
+			<div className='bg-[#F3F3F3]'>
 
-				}
+				<div className='flex justify-center items-center flex-wrap p-5 w-screen h-auto'>
+					{props?.currentUser?.events.map((event:any) => (
+							<UserPanelDetails event={event} key={event._id}/>
+					))}
+					
+				</div>
 			</div>
 		</Box>
 		</>
