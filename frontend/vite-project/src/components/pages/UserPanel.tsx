@@ -50,7 +50,7 @@ function DashboardContent(props: any) {
 		    {props.currentUser.type === "Teacher" ? (
 		      <>
 			<div
-			  className="w-[49%] rounded-md relative bg-white min-h-[33vh] shadow flex flex-col gap-8 p-4"
+			  className="w-[49%] rounded-md relative bg-white min-h-[50vh] shadow flex flex-col gap-8 p-4"
 			>
 			  <h3 className="font-bold text-sm text-[#323232]">Actividades</h3>
 			<Link to={"/account/panel/teacherActivities/Class"}>
@@ -121,6 +121,22 @@ function DashboardContent(props: any) {
 			      />
 			      <p className="font-bold text-[12px] text-[#323232]">
 				Cantidad de eventos:
+			      </p>
+			    </div>
+			  </Fade>
+			</Link>
+			{/* VIDEOS */}
+			<Link to="/account/panel/teacherVideos" className="grow rounded-md relative bg-white h-[33vh] shadow flex flex-col gap-8 p-4">
+			  <h3 className="font-bold text-sm text-[#323232]">Panel de videos</h3>
+			  <Fade className="fade-user-panel flex gap-4 w-44 hover:bg-[#563D81] p-1 rounded-md transition duration-300 ease-in">
+			    <div className="flex gap-2 w-full items-center">
+			      <img
+				className="p-1 w-6 h-6 rounded-full "
+				src={EclipseIcon}
+				alt="actividades"
+			      />
+			      <p className="font-bold text-[12px] text-[#323232]">
+				Cantidad de videos:
 			      </p>
 			    </div>
 			  </Fade>

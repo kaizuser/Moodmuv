@@ -1,4 +1,10 @@
 import React from 'react'
 
-export VideoInter
+const InterfaceVideos = () => {
+  return (
+    
+    <div>InterfaceVideos</div>
+  )
+}
 
+export default InterfaceVideos

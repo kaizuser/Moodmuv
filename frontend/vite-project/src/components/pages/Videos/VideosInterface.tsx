@@ -1,5 +1,6 @@
 //BASICS
 import React from 'react'
+import Box from "@mui/material/Box";
 
 //UTILITIES
 import databaseActions from '../../../redux/actions/databaseActions'
@@ -54,10 +55,18 @@ class VideosInterface extends React.Component <any, any> {
 		console.log(this.state.data)
 		return (
 
-			<div className='py-5'>
+			<div className='py-5 px-4'>
+ <Box className="flex w-[99.50%] min-h-[10rem] bg-[#333] rounded-b-md bg-[url('https://user-images.githubusercontent.com/91817152/203515449-37e392bc-a22e-48b9-a49d-c062443ba7c6.png')] flex flex-col justify-center items-start px-4">
+		    <h1 className="drop-shadow-md text-3xl font-medium text-[#fff] relative">
+		      Panel de videos
+		    </h1>
+		    <p className=" drop-shadow-md  font-medium text-[#fff] relative">
+		      El panel donde podrás ver tus clinicas de videos
+		    </p>
+		  </Box>				
 			    <label className="block text-sm font-medium text-gray-700">
 			    </label>
-			    <div className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
+			    <div className="mt-1 flex justify-center items-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
 			      <div className="space-y-1 text-center">
 				<svg
 				  className="mx-auto h-12 w-12 text-gray-400"
@@ -95,7 +104,7 @@ class VideosInterface extends React.Component <any, any> {
 				  PNG, JPG, GIF up to 10MB
 				</p>
 
-			      <button className='w-20 h-4 bg-red-500 border-black border-2' onClick={this.uploadVideo}>Submit</button>
+			      <button className='text-white w-20 h-4 p-4 mx-auto flex self-center align-center content-center items-center bg-gradient-to-t from-[#563D81] to-[#6E5E8B]  font-semibold rounded' onClick={this.uploadVideo}>Submit</button>
 			      </div>
 			    </div>
 
