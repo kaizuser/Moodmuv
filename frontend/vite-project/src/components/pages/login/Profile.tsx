@@ -9,21 +9,28 @@ import { Link } from "react-router-dom";
 import {connect} from 'react-redux'
 import studentActions from "../../../redux/actions/studentActions";
 import teacherActions from '../../../redux/actions/teacherActions'
+import activityActions from '../../../redux/actions/activityActions'
 import { RootState } from "../../../main"
 import ProfileScheduler from "./ProfileCalendar";
 import axios from "axios";
 
 const Profile = (props:any) => {
+	console.log(props)
 	let params = useParams()
 	let [teacherFlag, setFlag] = useState(true)
 	let [fileProfile, setFileProfile] = useState(undefined)
 
-	useEffect(() => {
-	  if(params.id && teacherFlag){
-		  props.fetchTeacher(params.id)
-		  setFlag(false)
-	  }
+	let [activitiesRegular, setActivitiesRegular] = useState([])
+	let [activitiesCicle, setActivitiesCicle] = useState([])
+	let [activitiesWorkshop, setActivitiesWorkshop] = useState([])
+	let [activitiesEvent, setActivitiesEvent] = useState([])
 
+	useEffect(() => {
+		if(params.id && teacherFlag){
+			props.fetchTeacher(params.id)
+			setFlag(false)
+			props.fetchActivities()
+	  }
 	  if(props.teacher){
 		  let fetchFile = async() => {
 			let file: string | any = await axios({
@@ -36,16 +43,25 @@ const Profile = (props:any) => {
 
 		  fetchFile()
 	  }
-
+	  if(props.activities){
+		setActivitiesRegular(props?.activities.filter((e:any)=>e?.type.includes("Class") && e?.author?._id.includes(props.teacher._id)))
+		setActivitiesCicle(props?.activities.filter((e:any)=>e?.type.includes("Cicle") && e?.author?._id.includes(props.teacher._id)))
+		setActivitiesWorkshop(props?.activities.filter((e:any)=>e?.type.includes("Workshop") && e?.author?._id.includes(props.teacher._id)))
+		setActivitiesEvent(props?.activities.filter((e:any)=>e?.type.includes("Event") && e?.author?._id.includes(props.teacher._id)))
+		console.log(activitiesRegular)
+		console.log(activitiesCicle)
+		console.log(activitiesWorkshop)
+		console.log(activitiesEvent)
+	  }
 	}, [params, props.teacher])
-
+	console.log(props.activities)
 	return (
 	<>
 	{" "}
 	{props.teacher ? (
 	<div className="bg-[#F3F3F3] min-h-screen flex flex-col justify-center items-center">
 	  {/* Portada */}
-	  <div className="h-[80vh] w-full bg-[url('https://images.unsplash.com/photo-1663206950304-6ac585f8669d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80')]   bg-center bg-cover"></div>
+	  <div className="min-h-[80vh] w-full bg-[url('https://images.unsplash.com/photo-1663206950304-6ac585f8669d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80')]   bg-center bg-cover"></div>
 	  {/* Perfil Contenedor */}
 	  <div className=" flex flex-col items-center rounded-xl bg-white w-11/12 min-h-96 -translate-y-48 shadow">
 	    <div className="flex justify-center items-center w-full">
@@ -78,17 +94,27 @@ const Profile = (props:any) => {
 		src={`data:image/png;base64,${fileProfile}`}/* {props.teacher?.img} */
 	      />
 		  {/* REDES */}
-		  <div className="flex gap-4 relative right-0">
-		  <NavLink href="https://www.tiktok.com">
-		  <FaTiktok className="text-[#323232]"/>
-		  </NavLink>
-		  <NavLink href="https://www.instagram.com">
-		  <FaInstagram className="text-[#323232]"/>
-		  </NavLink>
-		  <NavLink href="https://www.facebook.com">
-		  <FaFacebookSquare className="text-[#323232]"/>
-		  </NavLink>
-		  </div>
+
+		  		<div className="flex gap-4 items-center w-[6.5rem]">
+			                {props.teacher?.media[2] && props.teacher?.media[2].includes('tiktok') && 
+						<NavLink href={props.teacher?.media[2]}>
+						<FaTiktok className="text-[#323232]"/>
+						</NavLink>
+					}
+
+			                {props.teacher?.media[1] && props.teacher?.media[1].includes('instagram') && 
+						<NavLink href={props.teacher?.media[1]}>
+						<FaInstagram className="text-[#323232]"/>
+						</NavLink>
+					}
+		
+			                {props.teacher?.media[0] && props.teacher?.media[0].includes('facebook') && 
+						<NavLink href={props.teacher?.media[0]}>
+						<FaFacebookSquare className="text-[#323232]"/>
+						</NavLink>
+					}
+				</div>
+
 	    </div>
 		<p className="text-center shadow-md bg-gradient-to-t from-[#fdc41d] to-[#fbb232] p-3 py-1 rounded-3xl text-white font-bold mb-2">Profesor</p>
 	    <h2 className="font-bold text-4xl text-[#222]">{props.teacher?.name}</h2>
@@ -134,25 +160,58 @@ const Profile = (props:any) => {
 		  d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z"
 		/>
 	      </svg>
-		 <p className="text-[#666]">
-		Solution Manager - Creative Tim Officer
-	      </p>
+		  <p className="text-[#999] text-sm px-1">
+				 {props.teacher?.disciples.join(" - ")}
+
+			      </p>
 	    </div>
 		} 
 	    <hr className="w-[95%]" />
 	    <p className="text-center lg:w-[70%] text-[#999] py-8">
 		{props.teacher?.desc}
 	    </p>
-	  {props.teacher &&
-<><div className="shadow-md px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
-	      <h3 className="font-bold text-white text-4xl">Cursos</h3>
-	    </div>
-	    <div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
-	      <h3 className="font-bold text-white text-4xl">Cursos</h3>
-	    </div>
-	    <CarouselCards />
-		</>}
 	  </div>
+ 
+ {/* FULL CAROUSELES */}
+ 
+ {props.teacher.type == 'Teacher' &&  activitiesRegular.length > 0 ? 
+			  (
+		<><div className="shadow-md px-20 -mt-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+			      <h3 className="font-bold text-white text-4xl">Clases regulares</h3>
+			    </div>
+			    <div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+			      <h3 className="font-bold text-white text-4xl">Clases regulares</h3>
+			    </div>
+				<CarouselCards activity={activitiesRegular}/>
+				</>) : ""}				
+			  {props.teacher.type == 'Teacher' &&  activitiesWorkshop.length > 0 ?
+		<><div className="shadow-md mt-20 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+			      <h3 className="font-bold text-white text-4xl">Taller</h3>
+			    </div>
+			    <div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+			      <h3 className="font-bold text-white text-4xl">Taller</h3>
+			    </div>
+				<CarouselCards activity={activitiesWorkshop}/>
+
+				</> : ""}				
+				{props.teacher.type == 'Teacher' &&  activitiesCicle.length > 0 ? 
+		<><div className="shadow-md mt-20 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+			      <h3 className="font-bold text-white text-4xl">Ciclos</h3>
+			    </div>
+			    <div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+			      <h3 className="font-bold text-white text-4xl">Ciclos</h3>
+			    </div>
+				<CarouselCards activity={activitiesCicle}/>				
+				</> : ""}				
+				{props.teacher.type == 'Teacher' && activitiesEvent.length > 0 ?
+		<><div className="shadow-md mt-20 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+			      <h3 className="font-bold text-white text-4xl">Eventos</h3>
+			    </div>
+			    <div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+			      <h3 className="font-bold text-white text-4xl">Eventos</h3>
+			    </div>
+				<CarouselCards activity={activitiesEvent}/>
+		</> : ""}		
 
 	  {
 		props.teacher && <ProfileScheduler id={props.teacher._id}/>
@@ -167,12 +226,17 @@ const Profile = (props:any) => {
 };
 
 let mapDispatch = {
-	fetchTeacher:teacherActions.fetchTeacher
+	fetchTeacher:teacherActions.fetchTeacher,
+	fetchActivity:activityActions.fetchActivity,
+	fetchActivities:activityActions.fetchActivities
 }
 
 let mapState = (state:RootState) => {
 	return {
 		teacher:state.teacherReducer.teacher,
+		activities:state.activityReducer.activities,	
+		activity:state.activityReducer.activity
+		
 	}
 }
 
