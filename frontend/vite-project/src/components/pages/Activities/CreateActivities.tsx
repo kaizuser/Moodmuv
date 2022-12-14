@@ -1,11 +1,10 @@
 //BASICS
-import React from "react";
-import { useState, useEffect,} from "react";
+import React, { useState, useEffect } from "react";
 
 //UTILITIES
 import Swal from "sweetalert2";
 import {setFips} from "crypto";
-import { Link,  useNavigate} from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {connect} from 'react-redux'
 import activityActions from '../../../redux/actions/activityActions'
@@ -13,7 +12,12 @@ import databaseActions from '../../../redux/actions/databaseActions'
 import {RootState} from "../../../main";
 
 const CreateActivity = (props:any) => {
-	let navigate = useNavigate()
+  let navigate = useNavigate()
+
+  useEffect(() => {
+    // 👇️ scroll to top on page load
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  }, []);
 
 	useEffect(() => {
 	// 👇️ scroll to top on page load
@@ -34,16 +38,6 @@ const CreateActivity = (props:any) => {
 	let [loc, setLoc] = useState('')
 
 	let uploadTest = async() => {
-
-		Swal.fire({
-		  title: 'Creando tu actividad',
-		  timer: 20000,
-		  didOpen: () => {
-		    Swal.showLoading()
-		  },
-		allowOutsideClick: false
-		})
-
 		let activityData = {
 		  author:props.currentUser._id,
 		  name:name,
@@ -72,28 +66,11 @@ const CreateActivity = (props:any) => {
 		props.setMetadata(metadata)
 
 		setTimeout(async()=>{
-			let ans = await props.uploadFile(data, props.currentUser?._id)
+			await props.uploadFile(data, props.currentUser?._id)
+			await props.resetStore()
 
-			if(ans){
-				Swal.close()
-
-				Swal.fire({
-					icon:"success",
-					title:'Haz configurado tu actividad correctamente',
-					showConfirmButton:false,
-					timer:1000
-				})
-			} else {
-				Swal.fire({
-					icon:'error',
-					title:'Algo salio mal. Intentalo nuevamente',
-					showConfirmButton:false,
-					timer:2000
-				})
-			}
+			navigate('/account/panel')
 		}, 500)
-
-		navigate('/account/panel')
 	}
 
 	return (
@@ -348,6 +325,7 @@ const CreateActivity = (props:any) => {
 
 const mapDispatch = {
 	setActivity:activityActions.setActivity,
+	resetStore:activityActions.resetStore,
 	setMetadata:databaseActions.setMetadataFile,
 	uploadFile:databaseActions.uploadFile
 }

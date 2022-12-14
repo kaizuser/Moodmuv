@@ -1,4 +1,4 @@
-import express, {Application, Request, Response, NextFunction} from 'express'
+import express, {Application} from 'express'
 import Router from "../../routes/route";
 
 export default function createServer() {

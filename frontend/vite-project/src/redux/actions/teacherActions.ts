@@ -61,6 +61,15 @@ const teacherActions = {
 	modifyTeacher: (teacherData:teacherDTO) => {
 		return async(dispatch:AppDispatch, getState:RootState) => {
 
+			Swal.fire({
+				title: "Configurando tu información",
+				timer: 20000,
+				didOpen: () => {
+				Swal.showLoading();
+				},
+				allowOutsideClick: false,
+			});
+
 			const ans = await axios({
 				method:'put',
 				url:'http://localhost:4000/api/teacher',

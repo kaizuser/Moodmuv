@@ -18,6 +18,7 @@ class Account extends React.Component <any, any>{
 		super(props)
 		this.state = {
 			file:undefined,
+			videos:undefined,
 			activitiesRegular:[],
 			activitiesCicle:[],
 			activitiesWorkshop:[],
@@ -31,7 +32,16 @@ class Account extends React.Component <any, any>{
 			url:'http://localhost:4000/api/files/avatarProfile/' + this.props.currentUser?._id,
 		})
 
+		let videos:string | any = await axios({
+			method:'get',
+			url:'http://localhost:4000/api/videos/' + this.props.currentUser?._id,
+		})
+
+		this.setState({videos:videos.data})
 		this.setState({file:file.data})
+
+		console.log(videos)
+
 		this.setState({activitiesRegular:this.props.activities.filter((e:any)=>e.type.includes("Class")  && e.author?._id.includes(this.props.currentUser?._id))})
 		this.setState({activitiesCicle:this.props.activities.filter((e:any)=>e.type.includes("Cicle") && e.author?._id.includes(this.props.currentUser?._id))})
 		this.setState({activitiesWorkshop:this.props.activities.filter((e:any)=>e.type.includes("Workshop") && e.author?._id.includes(this.props.currentUser?._id))})
@@ -40,7 +50,6 @@ class Account extends React.Component <any, any>{
 
 
 	render(): React.ReactNode {
-		console.log(this.props.currentUser)
 		return (
 			<>
 			{" "}
@@ -78,10 +87,21 @@ class Account extends React.Component <any, any>{
 			      </div>
 
 				  {/* IMAGEN  DE PERFIL */}
+
+			      {this.state.file?.success == false ? (
+			      <img
+				className="mx-4 w-40 h-40 object-cover object-center rounded-full -translate-y-16"
+			      />
+			      ) : 
+
+			      (
 			      <img
 				className="mx-4 w-40 h-40 object-cover object-center rounded-full -translate-y-16"
 				src={`data:image/png;base64,${this.state.file}`}/* {this.props.currentUser?.img} */
 			      />
+			      )
+			      }
+
 
 
 		{/* SOCIAL ICONS */}
@@ -166,7 +186,27 @@ class Account extends React.Component <any, any>{
 
 			  {/* FULL CAROUSELES */}
 
+			{this.state.videos?.success == false ?
+				(
+					<>
 
+					</>
+				) : 
+				(
+					<>
+						<div className="shadow-md px-20 -mt-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+						<h3 className="font-bold text-white text-4xl">Videos</h3>
+						</div>
+						<div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+						<h3 className="font-bold text-white text-4xl">Videos</h3>
+						</div>
+						<video src={`data:video/mp4;base64,${this.state.videos}`} controls className='mb-40 mt-12 w-[30rem] h-[30rem]'></video>
+
+					)
+
+					</>
+				)
+			}
 			  
 			  {this.props.currentUser.type == 'Teacher' &&  this.state?.activitiesRegular.length > 0 ? 
 			  (

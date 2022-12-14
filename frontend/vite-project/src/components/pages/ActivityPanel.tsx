@@ -24,8 +24,7 @@ function DashboardContent(props: any) {
       props.fetchActivities();
     }
     if (props.activities && props.currentUser) {
-      setActivities(
-        props.activities.filter((activity: activityDTO) => {
+      setActivities(props.activities.filter((activity: activityDTO) => {
           return activity.author?._id == props.currentUser._id;
         })
       );

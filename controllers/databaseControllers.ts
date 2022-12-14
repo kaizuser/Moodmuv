@@ -79,6 +79,8 @@ let databaseControllers = {
 					readstream.on('end', () => {
 						res.send(data)
 					})
+				} else {
+					res.json({success:false})
 				}
 			})
 
@@ -117,6 +119,8 @@ let databaseControllers = {
 					readstream.on('end', () => {
 						res.send(data)
 					})
+				} else {
+					res.json({success:false})
 				}
 			})
 
@@ -124,6 +128,15 @@ let databaseControllers = {
 			res.json({error:'File not found'})
 		}
 	},
+
+	uploadVideo: async(req:Request, res:Response) => {
+		if(req.file){
+			res.json({success:true})
+		} else {
+			res.json({success:false})
+		}
+	}
+
 }
 
 export default databaseControllers

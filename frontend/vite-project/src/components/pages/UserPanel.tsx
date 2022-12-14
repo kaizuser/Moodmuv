@@ -62,7 +62,7 @@ function DashboardContent(props: any) {
 				alt="actividades"
 			      />
 			      <p className="font-bold text-[12px] text-[#323232]">
-				Actividades Regulares: {activityUser?.filter(actividades =>actividades.type === "Class").length}
+				Actividades Regulares: {activityUser?.filter((actividades:activityDTO) =>actividades.type === "Class").length}
 			      </p>
 			    </div>
 			  </Fade>
@@ -76,7 +76,7 @@ function DashboardContent(props: any) {
 				alt="actividades"
 			      />
 			      <p className="font-bold text-[12px] text-[#323232]">
-				Ciclos: {activityUser?.filter(actividades =>actividades.type === "Cicle").length}
+				Ciclos: {activityUser?.filter((actividades:activityDTO) =>actividades.type === "Cicle").length}
 			      </p>
 			    </div>
 			  </Fade>
@@ -90,7 +90,7 @@ function DashboardContent(props: any) {
 				alt="actividades"
 			      />
 			      <p className="font-bold text-[12px] text-[#323232]">
-				Eventos/Festivales: {activityUser?.filter(actividades =>actividades.type === "Event").length}
+				Eventos/Festivales: {activityUser?.filter((actividades:activityDTO) =>actividades.type === "Event").length}
 			      </p>
 			    </div>
 			  </Fade>
@@ -104,7 +104,7 @@ function DashboardContent(props: any) {
 				alt="actividades"
 			      />
 			      <p className="font-bold text-[12px] text-[#323232]">
-				Workshops: {activityUser?.filter(actividades =>actividades.type === "Workshop").length}
+				Workshops: {activityUser?.filter((actividades:activityDTO) =>actividades.type === "Workshop").length}
 			      </p>
 			    </div>
 			  </Fade>

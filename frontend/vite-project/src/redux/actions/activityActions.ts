@@ -38,6 +38,15 @@ const activityActions = {
 	setActivity: (activityData:activityDTO) => {
 		return async(dispatch:AppDispatch,getState:RootState)=>{
 
+			Swal.fire({
+				title: 'Creando tu actividad',
+				timer: 20000,
+				didOpen: () => {
+				Swal.showLoading()
+				},
+				allowOutsideClick: false
+			})
+
 			const ans = await axios({
 				method:'post',
 				url:'http://localhost:4000/api/activity',
@@ -45,7 +54,8 @@ const activityActions = {
 			})
 
 			return ans.data.data
-		}
+
+			}
 	},
 
 	deleteActivity: (id:string)=>{

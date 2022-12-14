@@ -3,10 +3,6 @@ import chai,  {should, expect, assert} from 'chai'
 import chaiHttp from  'chai-http'
 import request from 'supertest'
 import createServer from '../setup/server-suite-setup'
-import mongoose, {Schema} from 'mongoose'
-import { Response } from 'express'
-import axios from 'axios'
-import {log} from 'console'
 
 //INTERFACES
 interface teacherDTO{
@@ -105,7 +101,6 @@ describe('Test suite for teachers', function () {
 			request(App).post('/auth/signUpTeacher')
 			.send({email, pass, from})
 			.end(function(req,res){
-				console.log(res.body)
 				done()
 			})
 		})

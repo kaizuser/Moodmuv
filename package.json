@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=dev mocha -r ts-node/register test/**/*.ts --check-leaks --recursive",
+    "test": "NODE_ENV=dev mocha test/**/*.ts --check-leaks --recursive",
     "start": "nodemon server.ts"
   },
   "repository": {

@@ -3,10 +3,6 @@ import chai,  {should, expect, assert} from 'chai'
 import chaiHttp from  'chai-http'
 import request from 'supertest'
 import createServer from '../setup/server-suite-setup'
-import mongoose, {Schema} from 'mongoose'
-import { Response } from 'express'
-import axios from 'axios'
-import {log} from 'console'
 
 //INTERFACES
 interface studentDTO{

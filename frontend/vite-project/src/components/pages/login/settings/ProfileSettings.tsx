@@ -63,22 +63,11 @@ const ProfileSettings = (props: any) => {
       media:[mediaFacebook, mediaInstagram, mediaTiktok]
     };
 
-    console.log(userData)
-
     if (props.currentUser.type == "Teacher") {
       await props.modifyTeacher(userData);
     } else {
       await props.modifyStudent(userData);
     }
-
-    Swal.fire({
-      title: "Configurando tu información",
-      timer: 20000,
-      didOpen: () => {
-        Swal.showLoading();
-      },
-      allowOutsideClick: false,
-    });
 
     if (avatarFile !== undefined) {
       let data = new FormData();
@@ -93,32 +82,15 @@ const ProfileSettings = (props: any) => {
       props.setMetadata(metadata);
 
       setTimeout(async () => {
-        let ans = await props.uploadFile(data, props.currentUser?._id);
+        await props.uploadFile(data, props.currentUser?._id);
 
         await props.verifyToken(localStorage.getItem("token"));
         setSpinner(!spinner);
 
         setAvatarFile(undefined);
-
-        if (ans) {
-          Swal.close();
-
-          Swal.fire({
-            icon: "success",
-            title: "Haz configurado tu información correctamente",
-            showConfirmButton: false,
-            timer: 1000,
-          });
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "Algo salio mal. Intentalo nuevamente",
-            showConfirmButton: false,
-            timer: 2000,
-          });
-        }
       }, 500);
     } else {
+
       await props.verifyToken(localStorage.getItem("token"));
 
       Swal.close();
@@ -131,8 +103,6 @@ const ProfileSettings = (props: any) => {
       });
     }
   };
-
-  console.log(props.currentUser)
 
   return (
     <>

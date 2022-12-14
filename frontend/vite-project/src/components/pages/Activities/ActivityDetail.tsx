@@ -44,7 +44,6 @@ const ActivityDetail = (props:any) => {
 		textColor = "text-orange-500 bg-orange-300 px-1";
 		break;
 	}
-	console.log(props)
 	return (
     <>
       {props.activity && (
