@@ -95,7 +95,7 @@ class Explore extends React.Component<any, any> {
           <div className="break-all cartas w-4/6 px-4 overflow-x-hidden h-screen bg-[#F3F3F3] flex flex-wrap gap-2 justify-center items-start overflow-scroll p-4">
             {this.state.activities
               ? this.state.activities.map((activity: activityDTO) => (
-                  <CardExplore activity={activity} max_length={this.state.max_length} max_length_title={this.state.max_length_title} resetStore={this.props.resetStore} key={activity._id}/>
+                  <CardExplore activity={activity} max_length={this.state.max_length} max_length_title={this.state.max_length_title} resetStoreTeacher={this.props.resetStoreTeacher} resetStoreActivity={this.props.resetStoreActivity} key={activity._id}/>
                 ))
               : ""}
           </div>
@@ -114,7 +114,9 @@ class Explore extends React.Component<any, any> {
 const mapDispatch = {
   fetchTeachers: teacherActions.fetchTeachers,
   fetchActivities: activityActions.fetchActivities,
-  resetStore:teacherActions.resetStore,
+  resetStoreTeacher:teacherActions.resetStore,
+  resetStoreActivity:activityActions.resetStore
+
 };
 
 const mapState = (state: RootState) => {

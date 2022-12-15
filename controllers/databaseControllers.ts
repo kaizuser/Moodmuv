@@ -106,19 +106,30 @@ let databaseControllers = {
 
 	get_video: async(req:Request, res:Response) => {
 		try{
-			gfs.files.findOne({metadata:req.params.id}, (err:any, file:any) => {
-				if(file !== null){
-					const readstream = gfsb.openDownloadStream(file._id)
+			gfs.files.find({metadata:req.params.id}).toArray(async(err:any, file:any) => {
+				if(file !== null && file.length >= 1){
+					var dataList: Array<string> = []
+					var data:string;
 
-					let data = ''
+					for(let i = 0; i<file.length; i++){
+						var readstream = gfsb.openDownloadStream(file[i]._id)
 
-					readstream.on('data', (chunk:any) => {
-						data += chunk.toString('base64')
-					})
+						await readstream.on('data', (chunk:any) => {
+							data += chunk.toString('base64')
+						})
 
-					readstream.on('end', () => {
-						res.send(data)
-					})
+						await readstream.on('end', () => {
+							dataList.push(data)
+
+							if(dataList.length == file.length){
+								res.send(dataList)
+							}
+
+							data = ''
+						})
+
+					}
+
 				} else {
 					res.json({success:false})
 				}

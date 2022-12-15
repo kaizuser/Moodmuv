@@ -6,7 +6,6 @@ const initialState = {
 const teacherReducer = (state = initialState, action:any) => {
     switch (action.type) {
 	case 'fetchTeacher':
-		console.log(action.payload)
 		return {
 			...state,
 			teacher: action.payload,   

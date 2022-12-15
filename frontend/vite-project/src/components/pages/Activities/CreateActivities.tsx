@@ -24,7 +24,7 @@ const CreateActivity = (props:any) => {
 	window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
 	}, []);
 
-	let [viewLocation, setViewLocation] = useState('none')
+	let [view, setView] = useState('none')
 
 	let [bkgImage, setFile] = useState([])
 	let [name, setName] = useState('')
@@ -36,6 +36,8 @@ const CreateActivity = (props:any) => {
 	let [dur, setDur] = useState('')
 	let [price, setPrice] = useState('')
 	let [loc, setLoc] = useState('')
+	let [getThere, setGetThere] = useState('')
+	let [needs, setNeeds] = useState('')
 
 	let uploadTest = async() => {
 		let activityData = {
@@ -48,7 +50,9 @@ const CreateActivity = (props:any) => {
 		  disciples:disc,
 		  duration:dur,
 		  price:price,
-		  location:loc
+		  location:loc,
+		  getThere:getThere,
+		  needs:needs
 		}
 
 
@@ -161,9 +165,9 @@ const CreateActivity = (props:any) => {
 			      setFormat(event.target.options[event.target.selectedIndex].value)
 
 			      if(event.target.options[event.target.selectedIndex].value == 'Presencial'){
-				      setViewLocation('block')
+				      setView('block')
 			      } else {
-				      setViewLocation('none')
+				      setView('none')
 			      }
 
 
@@ -232,7 +236,47 @@ const CreateActivity = (props:any) => {
 		    </div>
 		  </div>
 
-		  <div className="pt-5">
+		  <div className='space-y-6 bg-white py-5' style={{display:`${view}`}}>
+
+		  <div className="grid grid-cols-6 gap-6">
+		    <div className="col-span-6 sm:col-span-3">
+		      <label
+			htmlFor="first-name"
+			className=" block text-sm font-medium text-gray-700"
+		      >
+			Ubicación
+		      </label>
+		      <input
+			type="text"
+			name="first-name"
+			id="first-name"
+			autoComplete="given-name"
+			className="px-2 py-1 border mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+			placeholder="Describe la ubicación"
+			onChange={(event) => setLoc(event.target.value)}
+		      />
+		    </div>
+		    <div className="col-span-6 sm:col-span-3">
+		      <label
+			htmlFor="first-name"
+			className=" block text-sm font-medium text-gray-700"
+		      >
+			Como llegar
+		      </label>
+		      <input
+			type="text"
+			name="first-name"
+			id="first-name"
+			autoComplete="given-name"
+			className="px-2 py-1 border mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+			placeholder="Describe como llegar"
+			onChange={(event) => setGetThere(event.target.value)}
+		      />
+		    </div>
+		    </div>
+		  </div>
+
+		  <div className="py-5">
 		    <label
 		      htmlFor="about"
 		      className="block text-sm font-medium text-gray-700"
@@ -245,14 +289,31 @@ const CreateActivity = (props:any) => {
 			name="about"
 			rows={3}
 			className="border p-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-			placeholder="Tu descripción"
+			placeholder="Introduce una descripción resumida y util"
 			onChange={(event) => setDesc(event.target.value)}
 		      />
 		    </div>
-		    <p className="mt-2 text-sm text-gray-500">
-		      Introduce una descripción intuitiva y util
-		  </p>
 		 </div>
+
+		  <div className="py-5">
+		    <label
+		      htmlFor="about"
+		      className="block text-sm font-medium text-gray-700"
+		    >
+		      Que necesitás
+		    </label>
+		    <div className="mt-1">
+		      <textarea
+			id="about"
+			name="about"
+			rows={3}
+			className="border p-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+			placeholder="Describe lo que necesita el estudiante para tu actividad (opcional)"
+			onChange={(event) => setNeeds(event.target.value)}
+		      />
+		    </div>
+		 </div>
+
 		  <div className='py-5'>
 		    <label className="block text-sm font-medium text-gray-700">
 		    </label>

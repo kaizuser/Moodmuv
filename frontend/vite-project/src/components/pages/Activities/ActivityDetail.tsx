@@ -12,56 +12,66 @@ import {RootState} from "../../../main";
 import axios from "axios";
 import '../../../styles/mediaqueriesActivityDetail.css'
 import teacherActions from '../../../redux/actions/teacherActions'
+import { FaTiktok, FaInstagram, FaFacebookSquare } from "react-icons/fa";
+import { Link as NavLink } from '@mui/material';
+
 const ActivityDetail = (props:any) => {
 	let id = useParams().id
 	let textColor;
 	let [fileValue, setFile] = useState('')
-  let [profileImage, setProfileImage] = useState('')
+	let [profileImage, setProfileImage] = useState('')
+
+	console.log(props.activity)
+
 	useEffect(() => {
-	  if(props.activity == undefined){
-		  props.fetchActivity(id)
-	  }
-    
-	  async function fetchFile (){
-		let file:string | any = await axios({
-      method:'get',
-			url:'http://localhost:4000/api/files/backgroundImageActivity/' + id,
-		})
-   
-		setFile(file.data)
-  }
-  if(props.activity){
-    props.fetchTeacher(props.activity.author)
-  }
-  async function imageFileFetch (){
-    let profile:string | any = await axios({
-      method:'get',
-      url:'http://localhost:4000/api/files/avatarProfile/' + props.activity?.author,
-    })
-  setProfileImage(profile.data)
-  }
-  imageFileFetch()
-  fetchFile()
-}, [id, props.activity])
+		if(!props.activity){
+			props.fetchActivity(id)
+		}
+
+		async function fetchFile (){
+			let file:string | any = await axios({
+			method:'get',
+				url:'http://localhost:4000/api/files/backgroundImageActivity/' + id,
+			})
+
+			setFile(file.data)
+		}
+
+		if(props.activity){
+			props.fetchTeacher(props.activity.author)
+		}
+
+		async function imageFileFetch (){
+			let profile:string | any = await axios({
+				method:'get',
+				url:'http://localhost:4000/api/files/avatarProfile/' + props.activity?.author,
+			})
+			setProfileImage(profile.data)
+		}
+
+		imageFileFetch()
+		fetchFile()
+
+	}, [id, props.activity])
 
 
 	switch (props.activity?.level) {
-		case "Iniciación":
-		textColor = "text-green-600 bg-green-300 px-1";
-		break;
-		case "Intermedio":
-		textColor = "text-yellow-500 bg-yellow-100 px-1";
-		break;
-		case "Avanzado":
-		textColor = "text-orange-500 bg-orange-300 px-1";
-		break;
+	case "Iniciación":
+	textColor = "text-green-600 bg-green-300 px-1";
+	break;
+	case "Intermedio":
+	textColor = "text-yellow-500 bg-yellow-100 px-1";
+	break;
+	case "Avanzado":
+	textColor = "text-orange-500 bg-orange-300 px-1";
+	break;
 	}
-  console.log(props.teacher)
+
 	return (
     <>
-      {props.activity && (
+      {props.activity && props.teacher && (
         <div className="apartado-padre relative min-h-screen w-full flex bg-[#f8f8f9] py-8">
-          <div className="apartado-1 w-[90%] mx-12 min-h-full flex flex-col justify-center items-center">
+          <div className="apartado-1 w-[90%] mx-12 min-h-full flex flex-col justify-start items-center">
           	<div className="w-full h-96 flex flex-col justify-center items-center">
 				<h2 className="text-white font-bold text-5xl text-center break-all absolute z-10">
 					{props.activity?.name}
@@ -81,26 +91,32 @@ const ActivityDetail = (props:any) => {
                 {props.activity?.duration}
               </p>
               <hr className="w-full my-4" />
+	      {props.activity.format == 'P'}
+	      {props.activity.format == 'Presencial' && (
+	      <>
               <h2 className="font-medium text-xl text-[#222222]">
-                Qué necesitas
+		      Que necesitás
               </h2>
               <span
                 style={{ whiteSpace: "pre-wrap" }}
                 className="w-full h-full text-md text-[#999]"
               >
-                Las herramientas que necesitas para realizar las clases en
-                RecreoBienestar -Amor -Paciencia -Disciplina Elementos: -Mat
-                -Pelota de Tenis -Ropa Cómoda -Libros -Toalla de manos o manta
+
+		{props.activity.needs}
               </span>
+
               <hr className="w-full my-4" />
               <h2 className="font-medium text-xl text-[#222222]">
                 Como llegar
               </h2>
-              <p className="text-md text-[#999]">Caminando capo</p>
+              <p className="text-md text-[#999]">{props.activity.getThere}</p>
+	      </>
+	      )}
+
             </div>
           </div>
           <div className="apartado-2 sticky top-4 px-8 py-8 flex flex-col items-center mr-12 rounded-xl h-screen w-1/2 grow bg-white">
-            <div className="w-full flex justify-between">
+            <div className="w-full flex justify-between items-center">
               <p className="text-[#999] text-sm w-1/2">
                 Actividad dictado por{" "}
                 <span className="text-[#000]">{props.teacher.name}</span>
@@ -117,6 +133,9 @@ const ActivityDetail = (props:any) => {
                 className="w-full h-56 mb-4"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52540.41689444957!2d-58.5987020377721!3d-34.60982394707292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb8698cab7fa3%3A0xc4d83fe138c75b6f!2sCaseros%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses-419!2sar!4v1666135328596!5m2!1ses-419!2sar"
               ></iframe>
+
+	    <div className='flex flex-col justify-start items-start space-y-2'>
+	      {props.activity.format == 'Presencial' && (
               <div className="flex gap-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -137,11 +156,14 @@ const ActivityDetail = (props:any) => {
                     d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
                   />
                 </svg>
+
                 <p>
                   Ubicación:{" "}
-                  <span className="text-sm text-[#999]">Santiago de Chile</span>
+                  <span className="text-sm text-[#999]">{props.activity.location}</span>
                 </p>
               </div>
+	      )}
+
               <div className="flex gap-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -159,7 +181,7 @@ const ActivityDetail = (props:any) => {
                 </svg>
                 <p>
                   Formato:{" "}
-                  <span className="capitalize|">{props.activity?.format}</span>
+                  <span className="capitalize|">{props.activity.format}</span>
                 </p>
               </div>
               <div className="flex gap-1">
@@ -180,7 +202,7 @@ const ActivityDetail = (props:any) => {
 
                 <p>
                   Nivel:{" "}
-                  <span className={textColor}>{props.activity?.level}</span>
+                  <span className={textColor}>{props.activity.level}</span>
                 </p>
               </div>
               <div className="flex gap-1">
@@ -198,16 +220,31 @@ const ActivityDetail = (props:any) => {
                     d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
                   />
                 </svg>
-                <p>+54 11 5013 5178</p>
+                <p>{props.teacher.num}</p>
               </div>
-              <div className="flex gap-1">
-                <RiInstagramLine className="w-5 h-5" />
-                <Link to={"/home"}>Algún ig</Link>
-              </div>
-              <div className="flex gap-1">
-                <RiFacebookBoxFill className="w-5 h-5" />
-                <Link to={"/home"}>Algún fb</Link>
-              </div>
+		{props.teacher?.media[2] && props.teacher?.media[2].includes('tiktok') && 
+		<NavLink href={props.teacher?.media[2]} className='flex gap-1' style={{textDecoration:'none'}}>
+			<FaTiktok className="text-[#323232] w-5 h-5"/>
+			<p className='text-[#999]'>Check {props.teacher.name}'s Tiktok</p>
+		</NavLink>
+		}
+
+		{props.teacher?.media[1] && props.teacher?.media[1].includes('instagram') && 
+		<NavLink href={props.teacher?.media[1]} className='flex gap-1' style={{textDecoration:'none'}}>
+			<FaInstagram className="text-[#323232] w-5 h-5"/>
+			<p className='text-[#999]'>Check {props.teacher.name}'s Instagram</p>
+		</NavLink>
+		}
+
+		{props.teacher?.media[0] && props.teacher?.media[0].includes('facebook') && 
+		<NavLink href={props.teacher?.media[0]} className='flex gap-1' style={{textDecoration:'none'}}>
+			<FaFacebookSquare className="text-[#323232] w-5 h-5"/>
+			<p className='text-[#999]'>Check {props.teacher.name}'s Facebook</p>
+		</NavLink>
+		}
+	    </div>
+
+
             </Fade>
           </div>
         </div>
@@ -218,9 +255,7 @@ const ActivityDetail = (props:any) => {
 
 const mapDispatch = {
 	fetchActivity:activityActions.fetchActivity,
-	setMetadata:userActions.setMetadata,
-	uploadFile:userActions.uploadFile,
-  fetchTeacher: teacherActions.fetchTeacher
+	fetchTeacher: teacherActions.fetchTeacher
 }
 
 const mapState = (state:RootState) => {

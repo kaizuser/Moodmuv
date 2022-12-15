@@ -40,8 +40,6 @@ class Account extends React.Component <any, any>{
 		this.setState({videos:videos.data})
 		this.setState({file:file.data})
 
-		console.log(videos)
-
 		this.setState({activitiesRegular:this.props.activities.filter((e:any)=>e.type.includes("Class")  && e.author?._id.includes(this.props.currentUser?._id))})
 		this.setState({activitiesCicle:this.props.activities.filter((e:any)=>e.type.includes("Cicle") && e.author?._id.includes(this.props.currentUser?._id))})
 		this.setState({activitiesWorkshop:this.props.activities.filter((e:any)=>e.type.includes("Workshop") && e.author?._id.includes(this.props.currentUser?._id))})
@@ -50,6 +48,7 @@ class Account extends React.Component <any, any>{
 
 
 	render(): React.ReactNode {
+		console.log(this.state.videos)
 		return (
 			<>
 			{" "}

@@ -10,6 +10,8 @@ interface activityDTO{
 	duration:string,
 	price:string,
 	location:string,
+	getThere:string,
+	needs:string,
 }
 
 export default activityDTO
