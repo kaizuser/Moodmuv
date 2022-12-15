@@ -200,10 +200,7 @@ class Account extends React.Component <any, any>{
 						<div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 						<h3 className="font-bold text-white text-4xl">Videos</h3>
 						</div>
-						<video src={`data:video/mp4;base64,${this.state.videos}`} controls className='mb-40 mt-12 w-[30rem] h-[30rem]'></video>
-
-					)
-
+						<video src={`data:video/mp4;base64,${this.state.videos}`} controls className='mb-40 object-cover w-[30rem] h-[30rem]'></video>
 					</>
 				)
 			}

@@ -1,0 +1,14 @@
+@media screen and (max-width:880px) {
+    .apartado-padre{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%!important;
+    }
+    .apartado-1{
+    }
+    .apartado-2{
+        margin-left: 3rem;
+        margin-right: 3rem;
+        margin-top: 1rem;
+    }
+}

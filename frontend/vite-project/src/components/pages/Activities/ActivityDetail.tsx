@@ -10,28 +10,40 @@ import activityActions from "../../../redux/actions/activityActions";
 import userActions from "../../../redux/actions/userActions";
 import {RootState} from "../../../main";
 import axios from "axios";
-
+import '../../../styles/mediaqueriesActivityDetail.css'
+import teacherActions from '../../../redux/actions/teacherActions'
 const ActivityDetail = (props:any) => {
 	let id = useParams().id
 	let textColor;
-
 	let [fileValue, setFile] = useState('')
-
+  let [profileImage, setProfileImage] = useState('')
 	useEffect(() => {
 	  if(props.activity == undefined){
 		  props.fetchActivity(id)
 	  }
+    
 	  async function fetchFile (){
 		let file:string | any = await axios({
-			method:'get',
+      method:'get',
 			url:'http://localhost:4000/api/files/backgroundImageActivity/' + id,
 		})
-
+   
 		setFile(file.data)
-	  }
+  }
+  if(props.activity){
+    props.fetchTeacher(props.activity.author)
+  }
+  async function imageFileFetch (){
+    let profile:string | any = await axios({
+      method:'get',
+      url:'http://localhost:4000/api/files/avatarProfile/' + props.activity?.author,
+    })
+  setProfileImage(profile.data)
+  }
+  imageFileFetch()
+  fetchFile()
+}, [id, props.activity])
 
-	  fetchFile()
-	}, [id])
 
 	switch (props.activity?.level) {
 		case "Iniciación":
@@ -44,16 +56,17 @@ const ActivityDetail = (props:any) => {
 		textColor = "text-orange-500 bg-orange-300 px-1";
 		break;
 	}
+  console.log(props.teacher)
 	return (
     <>
       {props.activity && (
-        <div className="relative min-h-screen w-full flex bg-[#f8f8f9] py-8 ">
-          <div className="w-[90%] mx-12 min-h-full flex flex-col justify-center items-center">
+        <div className="apartado-padre relative min-h-screen w-full flex bg-[#f8f8f9] py-8">
+          <div className="apartado-1 w-[90%] mx-12 min-h-full flex flex-col justify-center items-center">
           	<div className="w-full h-96 flex flex-col justify-center items-center">
 				<h2 className="text-white font-bold text-5xl text-center break-all absolute z-10">
 					{props.activity?.name}
 					</h2>
-                <img className="relative w-full h-full object-cover object-center rounded-xl brightness-75 z-0 relative"  src={"data:image/png;base64," + fileValue} alt="asd" />
+                <img className="relative w-full h-full object-cover object-center rounded-xl brightness-75 z-0 relative grayscale-[50%] shadow-xl"  src={"data:image/png;base64," + fileValue} alt="asd" />
 			</div>
             <div className=" whitespace-pre-wrap  p-8 shadow-sm rounded-xl bg-white min-h-[20rem] w-full mt-4">
               <h2 className="font-medium text-xl text-[#222222] border-b-4 text-indigo-500 border-indigo-500 w-fit leading-2 mb-2 ">
@@ -86,15 +99,15 @@ const ActivityDetail = (props:any) => {
               <p className="text-md text-[#999]">Caminando capo</p>
             </div>
           </div>
-          <div className="sticky top-4 px-8 py-8 flex flex-col items-center mr-12 rounded-xl h-screen w-1/2 grow bg-white">
+          <div className="apartado-2 sticky top-4 px-8 py-8 flex flex-col items-center mr-12 rounded-xl h-screen w-1/2 grow bg-white">
             <div className="w-full flex justify-between">
               <p className="text-[#999] text-sm w-1/2">
-                Activity dictado por{" "}
-                <span className="text-[#000]">Nombre o Escuela</span>
+                Actividad dictado por{" "}
+                <span className="text-[#000]">{props.teacher.name}</span>
               </p>
               <img
-                className="rounded"
-                src="https://cdn.domestika.org/ar_1:1,c_fill,dpr_1.0,f_auto,h_48,pg_1,t_base_params,w_48/v1584699954/avatars/000/499/833/499833-original.jpg?1584699954"
+                className="rounded w-12 h-12 object-cover"
+                src={"data:image/png;base64," + profileImage}
                 alt=""
               />
             </div>
@@ -206,12 +219,14 @@ const ActivityDetail = (props:any) => {
 const mapDispatch = {
 	fetchActivity:activityActions.fetchActivity,
 	setMetadata:userActions.setMetadata,
-	uploadFile:userActions.uploadFile
+	uploadFile:userActions.uploadFile,
+  fetchTeacher: teacherActions.fetchTeacher
 }
 
 const mapState = (state:RootState) => {
 	return {
-		activity:state.activityReducer.activity
+		activity:state.activityReducer.activity,
+    teacher:state.teacherReducer.teacher,
 	}
 }
 

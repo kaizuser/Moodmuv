@@ -22,6 +22,8 @@ import activityActions from '../../redux/actions/activityActions'
 import { RootState } from '../../main';
 import axios from 'axios';
 
+//css
+import '../../styles/mediaqueriesNavbar.css'
 const navigation = [
 	{ name: "Explorar", href: "#", current: false },
 	{ name: "Planes", href: "#", current: false },

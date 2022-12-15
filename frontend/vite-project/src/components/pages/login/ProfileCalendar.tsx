@@ -41,14 +41,13 @@ function ProfileScheduler (props:any) {
 
 	return (
 		<>
-			<div className='w-full min-h-screen flex justify-center items-center flex-col'>
-
+			<div className='w-full p-8 min-h-screen flex justify-center items-center flex-col'>
 				<Calendar
 					localizer={localizer}
 					events={props.teacher.events}
 					startAccessor={(event:any) => {return new Date(event.start)}}
 					endAccessor={(event:any) => {return new Date(event.end)}}
-					style={{height:500, width:'80%'}}
+					style={{minHeight:500, width:'100%'}}
 					onSelectEvent={async (event) => {
 
 						let activity = await props.fetchActivity(event.activity)

@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 
 //INTERFACES
 import activityDTO from "../../../types/activityDTO";
-
+import imageExplore from '../../../assets/index.jpg'
 class Explore extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
@@ -57,15 +57,13 @@ class Explore extends React.Component<any, any> {
   render(): React.ReactNode {
     return (
       <div className="w-full min-h-screen">
-        <div className="relative min-h-12 w-full flex flex-col gap-4 p-4 px-8 shadow-md justify-center items-center">
+        <div className="relative min-h-12 w-full flex flex-col gap-4 py-4 shadow-md justify-center items-center">
           <img
-            className="w-full h-56 object-cover h-full pointer-events-none"
-            src="https://images.ctfassets.net/ew96z4wsnz93/43E3JISXM59HIQwfm6C0DX/03081ce4d57b8e5856c1396522c4c1d1/CRO_CustomisableMembershipsModule_2x.png"
+            className="w-full h-screen object-cover h-full pointer-events-none"
+            src={imageExplore}
             alt=""
           />
-          <h1 className="drop-shadow-md text-4xl pointer-events-none font-bold text-white absolute">
-            Explorar
-          </h1>
+          
           <div className="-bottom-4 w-fit flex justify-center items-center flex-wrap gap-4">
             <Search
               setParameters={this.setParameters}

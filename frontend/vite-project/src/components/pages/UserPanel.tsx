@@ -110,7 +110,7 @@ function DashboardContent(props: any) {
 			  </Fade>
 			</Link>
 			</div>
-			<Link to="/account/panel/teacherEvents" className="w-[49%] rounded-md relative bg-white h-[33vh] shadow flex flex-col gap-8 p-4">
+			<Link to="/account/panel/teacherEvents" className="w-[49%] rounded-md relative bg-white min-h-[50vh] shadow flex flex-col gap-8 p-4">
 			  <h3 className="font-bold text-sm text-[#323232]">Eventos de Calendario</h3>
 			  <Fade className="fade-user-panel flex gap-4 w-44 hover:bg-[#563D81] p-1 rounded-md transition duration-300 ease-in">
 			    <div className="flex gap-2 w-full items-center">
