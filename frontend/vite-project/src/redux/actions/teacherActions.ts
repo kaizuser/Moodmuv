@@ -75,6 +75,7 @@ const teacherActions = {
 				url:'http://localhost:4000/api/teacher',
 				data:teacherData,
 			})
+			console.log(ans)
 		}
 
 	},

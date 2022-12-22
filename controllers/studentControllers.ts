@@ -15,7 +15,7 @@ interface studentDTO{
         name:string,
 	pass:Array<string>,
         img:string,
-	backImg:string,
+		backImg:string,
 	desc:string,
 	genre:string,
         ubi:string,

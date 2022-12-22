@@ -18,6 +18,11 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
 
+import Video from  '../videos/Video'
+import RadioImages from "./RadioImages";
+import teacherDTO from '../../../types/teacherDTO'
+import '../../../styles/mediaqueriesAccount.css'
+import jsonImgs from './radioImages.json'
 class Account extends React.Component <any, any>{
 
 	constructor(props:any){
@@ -28,11 +33,14 @@ class Account extends React.Component <any, any>{
 			activitiesRegular:[],
 			activitiesCicle:[],
 			activitiesWorkshop:[],
-			activitiesEvent:[]
+			activitiesEvent:[],
+			backImg:{image:"#f3f3f3"},
+
 		}
 	}
 
 	async componentDidMount(){
+		let backimg = jsonImgs.find(e=> e.name === this.props.currentUser.backImg)
 		let file: string | any= await axios({
 			method:'get',
 			url:'http://localhost:4000/api/files/avatarProfile/' + this.props.currentUser?._id,
@@ -42,27 +50,30 @@ class Account extends React.Component <any, any>{
 			method:'get',
 			url:'http://localhost:4000/api/videos/' + this.props.currentUser?._id,
 		})
-
+		
 		this.setState({videos:videos.data})
 		this.setState({file:file.data})
-
 		this.setState({activitiesRegular:this.props.activities.filter((e:any)=>e.type.includes("Class")  && e.author?._id.includes(this.props.currentUser?._id))})
 		this.setState({activitiesCicle:this.props.activities.filter((e:any)=>e.type.includes("Cicle") && e.author?._id.includes(this.props.currentUser?._id))})
 		this.setState({activitiesWorkshop:this.props.activities.filter((e:any)=>e.type.includes("Workshop") && e.author?._id.includes(this.props.currentUser?._id))})
 		this.setState({activitiesEvent:this.props.activities.filter((e:any)=>e.type.includes("Event") && e.author?._id.includes(this.props.currentUser?._id))})
+		backimg ? this.setState({backImg:backimg}) : ""
 	}
-
-
 	render(): React.ReactNode {
+		console.log(this.props.currentUser)
 		return (
 			<>
 			{" "}
 			{this.props.currentUser ? (
 			<div className="bg-[#F3F3F3] min-h-screen flex flex-col justify-center items-center">
 			  {/* Portada */}
-			  <div className="h-[80vh] w-full bg-[url('https://images.unsplash.com/photo-1663206950304-6ac585f8669d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80')]   bg-center bg-cover"></div>
+			  <div className={`flex justify-center items-start h-[80vh] w-full bg-[url('${this.state?.backImg?.image}')]   bg-center bg-cover`}>
+				
+	<RadioImages/>
+				
+			  </div>
 			  {/* Perfil Contenedor */}
-			  <div className=" flex flex-col items-center rounded-xl bg-white w-11/12 min-h-96 -translate-y-48 shadow">
+			  <div className="profile-contain flex flex-col items-center rounded-xl bg-white w-11/12 min-h-96 -translate-y-48 shadow">
 			    <div className="flex justify-center items-center w-full">
 
 				  {/* EDITAR */}
@@ -186,7 +197,6 @@ class Account extends React.Component <any, any>{
 				{this.props.currentUser?.desc}
 			    </p>
 			  </div>
-
 
 			  {/* FULL CAROUSELES */}
 

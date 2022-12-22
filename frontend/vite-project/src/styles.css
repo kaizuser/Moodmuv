@@ -20,11 +20,7 @@ select {
 
 @media screen and (max-width: 319px) {
     nav{
-<<<<<<< Updated upstream
         background-color: #f8f8f9;
-=======
-        background-color: white;
->>>>>>> Stashed changes
     }
 
     .text-main{

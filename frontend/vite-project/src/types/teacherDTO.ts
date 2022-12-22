@@ -5,6 +5,7 @@ interface teacherDTO{
 	email:string,
 	pass:Array<string>,
         img:string,
+		backImg:string,
 	desc:string,
 	genre:string,
         ubi:string,
