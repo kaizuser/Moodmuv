@@ -52,7 +52,6 @@ const CreateActivity = (props:any) => {
 		  needs:needs
 		}
 
-
 		let activity = await props.setActivity(activityData)
 
 		let data = new FormData()

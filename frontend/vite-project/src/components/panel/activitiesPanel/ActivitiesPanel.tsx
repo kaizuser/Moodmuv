@@ -82,11 +82,11 @@ function DashboardContent(props: any) {
 		      key={activity._id}
                     >
                       <CardCarousel activity={activity} />
-					  <div className="flex justify-between w-full text-[#999] my-2 px-2">
-						<Link to={"/explore/activity/" + activity._id } className="text-sm">Ver detalle</Link>
-						<Link to={"/"} className="text-sm">Eliminar</Link>
-						
-					  </div>
+			  <div className="flex justify-between w-full text-[#999] my-2 px-2">
+				<Link to={"/explore/activity/" + activity._id } className="text-sm" onClick={props.resetStore}>Ver detalle</Link>
+				<Link to={"/"} className="text-sm">Eliminar</Link>
+				
+			  </div>
                     </div>
                   ))}
             </div>
@@ -100,6 +100,7 @@ function DashboardContent(props: any) {
 const mapDispatch = {
   fetchActivities: activityActions.fetchActivities,
   verifyToken: userActions.verifyToken,
+  resetStore:activityActions.resetStore
 };
 
 const mapState = (state: RootState) => {

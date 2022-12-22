@@ -18,8 +18,6 @@ const ActivityDetail = (props:any) => {
 	let [fileValue, setFile] = useState('')
 	let [profileImage, setProfileImage] = useState('')
 
-	console.log(props.activity)
-
 	useEffect(() => {
 		if(!props.activity){
 			props.fetchActivity(id)
@@ -75,7 +73,7 @@ const ActivityDetail = (props:any) => {
 					</h2>
                 <img className="relative w-full h-full object-cover object-center rounded-xl brightness-75 z-0 relative grayscale-[50%] shadow-xl"  src={"data:image/png;base64," + fileValue} alt="asd" />
 			</div>
-            <div className=" whitespace-pre-wrap  p-8 shadow-sm rounded-xl bg-white min-h-[20rem] w-full mt-4">
+            <div className=" whitespace-pre-wrap  p-8 shadow-sm rounded-xl bg-white h-auto w-full mt-4">
               <h2 className="font-medium text-xl text-[#222222] border-b-4 text-indigo-500 border-indigo-500 w-fit leading-2 mb-2 ">
                 Información
               </h2>

@@ -1,5 +1,10 @@
 import React from "react";
 
+//UTILITIES
+import {Link} from 'react-router-dom'
+import activityActions from "../../../redux/actions/activityActions";
+import {connect} from 'react-redux'
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import CarouselCardsDetail from "../account/CarouselCardsDetails";
@@ -12,7 +17,7 @@ import "swiper/css/pagination";
 // import required modules
 import { FreeMode, Pagination } from "swiper";
 
-const CarouselContainer = ({activity}:any) => {    
+const CarouselContainer = (props:any) => {    
   return (
     <div className="w-full min-h-28 p-4 ">
       <Swiper
@@ -48,10 +53,13 @@ const CarouselContainer = ({activity}:any) => {
         className="mySwiper"
       >
         { 
-activity?.map((activity:any)=>{
+props.activity?.map((activity:any)=>{
   return(
     <SwiperSlide  style={{padding:".7rem",width:"20rem",  minHeight:"20rem"}} className="flex flex-col justify-start items-start rounded-3xl bg-[#fefefe] shadow m-4" key={activity._id} >
       <CarouselCardsDetail activity={activity} />
+	  <div className="flex justify-between w-full text-[#999] my-2 px-2">
+		<Link to={"/explore/activity/" + activity._id } className="text-sm" onClick={props.resetStore}>Ver detalle</Link>
+	  </div>
   </SwiperSlide>
   )})          
 }
@@ -59,4 +67,11 @@ activity?.map((activity:any)=>{
     </div>
   );
 }
-export default CarouselContainer
+
+const mapDispatch = {
+	resetStore:activityActions.resetStore
+}
+
+const connector = connect(null, mapDispatch)
+
+export default connector(CarouselContainer)
