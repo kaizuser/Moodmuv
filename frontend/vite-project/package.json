@@ -21,6 +21,7 @@
     "@react-oauth/google": "^0.2.8",
     "@types/react-datepicker": "^4.4.2",
     "jsx-runtime": "^1.2.0",
+    "mdb-react-ui-kit": "^5.1.0",
     "plyr-react": "^5.1.2",
     "react": "^18.2.0",
     "react-icons": "^4.4.0",

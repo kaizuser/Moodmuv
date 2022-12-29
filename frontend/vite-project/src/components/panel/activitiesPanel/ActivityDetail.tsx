@@ -124,10 +124,7 @@ const ActivityDetail = (props:any) => {
             </div>
             <hr className="w-full my-4" />
             <Fade className="w-full flex flex-col gap-2 text-sm text-[#999] items-start">
-              <iframe
-                className="w-full h-56 mb-4"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52540.41689444957!2d-58.5987020377721!3d-34.60982394707292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb8698cab7fa3%3A0xc4d83fe138c75b6f!2sCaseros%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses-419!2sar!4v1666135328596!5m2!1ses-419!2sar"
-              ></iframe>
+
 
 	    <div className='flex flex-col justify-start items-start space-y-2'>
 	      {props.activity.format == 'Presencial' && (
@@ -154,7 +151,7 @@ const ActivityDetail = (props:any) => {
 
                 <p>
                   Ubicación:{" "}
-                  <span className="text-sm text-[#999]">{props.activity.location}</span>
+                  <span className="text-sm text-[#999]">{props?.activity?.location}</span>
                 </p>
               </div>
 	      )}

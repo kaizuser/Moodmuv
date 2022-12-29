@@ -25,7 +25,7 @@ const RadioImages = (props:any) => {
     return (
       <p
         onClick={() => handleOpenEdit()}
-        className="cursor-pointer text-[#624087] text-xs border border-[#624087] bg-[] rounded px-6 py-2 backdrop-blur self-center mb-28 text-center order-2"
+        className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full flex gap-2 text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 order-2 self-center mb-28 cursor-pointer"
       >
         Editar Portada
       </p>
@@ -65,7 +65,7 @@ const RadioImages = (props:any) => {
     return (
       <p
         onClick={() => SaveData()}
-        className="self-stretch grow cursor-pointer text-[#624087] text-xs border border-[#624087] rounded px-6 py-2 backdrop-blur self-center mb-28 text-center order-2"
+        className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full flex gap-2 text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 order-2 self-center mb-28 cursor-pointer"
       >
         Guardar
       </p>

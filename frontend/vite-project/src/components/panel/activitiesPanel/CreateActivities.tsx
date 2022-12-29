@@ -59,7 +59,7 @@ const CreateActivity = (props:any) => {
 		data.append('file', bkgImage[0])
 
 		let metadata = {
-			id:activity._id,
+			id:activity?._id,
 			type:'Background image activity'
 		}
 

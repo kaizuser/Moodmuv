@@ -91,20 +91,18 @@ class Explore extends React.Component<any, any> {
             />
           </div>
         </div>
-        <div className="flex w-full">
-          <div className="break-all cartas w-4/6 px-4 overflow-x-hidden h-screen bg-[#F3F3F3] flex flex-wrap gap-2 justify-center items-start overflow-scroll p-4">
+          <div className="break-all cartas w-full p-16 min-h-screen bg-[#F3F3F3] flex flex-wrap gap-8 justify-center items-start ">
             {this.state.activities
               ? this.state.activities.map((activity: activityDTO) => (
                   <CardExplore activity={activity} max_length={this.state.max_length} max_length_title={this.state.max_length_title} resetStoreTeacher={this.props.resetStoreTeacher} resetStoreActivity={this.props.resetStoreActivity} key={activity._id}/>
                 ))
               : ""}
-          </div>
-          <div className="w-3/6 h-screen bg-[#222] mapita">
+          {/* <div className="w-3/6 h-screen bg-[#222] mapita">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d268123.79887572123!2d11.08380360310596!3d43.83418004934677!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132a5403bfe22ff5%3A0x5591438487aaf1f5!2sCatedral%20de%20Santa%20Mar%C3%ADa%20del%20Fiore!5e0!3m2!1ses-419!2sar!4v1667691210849!5m2!1ses-419!2sar"
               className="w-full h-full"
             ></iframe>
-          </div>
+          </div> */}
         </div>
       </div>
     );

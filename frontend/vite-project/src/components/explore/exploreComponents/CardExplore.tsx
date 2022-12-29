@@ -46,7 +46,7 @@ const CardExplore = (props:any) => {
 		{props.activity?.name.charAt(0)+props.activity?.name.toLocaleLowerCase().substring(1, props.max_length_title)}
 		</div>
 		<p className="text-[13px] text-gray-700 text-base">
-		{props.activity?.desc.length >= props.max_length ? props.activity?.desc.slice(0, props.max_length).toLowerCase() + "... " : props.activity?.desc.toLowerCase()}
+		{props.activity?.desc.length >= props.max_length ? props?.activity?.desc.slice(0, props.max_length).toLowerCase() + "... " : props.activity?.desc.toLowerCase()}
 		{
 			props.activity?.desc.length >= props.max_length ?
 			<Link className="text-[#007AE9] text-xs cursor-pointer" to={"/explore/activity/"+ props.activity?._id} onClick={props.resetStoreActivity}>Learn more</Link>
@@ -55,7 +55,7 @@ const CardExplore = (props:any) => {
 		</p>
 		<div className="h-fit w-full mb-1 flex justify-between items-end grow">
 		<div className="flex gap-2  items-center text-xs text-[#007AE9] font-bold cursor-pointer">
-		<Link to={"/explore/profile/" + props.activity?.author._id} onClick={props.resetStoreTeacher}>
+		<Link to={"/explore/profile/" + props?.activity?.author?._id} onClick={props.resetStoreTeacher}>
 			<img
 			className="object-cover rounded-full w-8 h-8"
 			src={`data:image/png;base64,${file}`}
@@ -63,7 +63,7 @@ const CardExplore = (props:any) => {
 			/>
 		</Link>
 		</div>
-		<Link to={"/explore/activity/" + props.activity?._id}>
+		<Link to={"/explore/activity/" + props?.activity?._id}>
 			<p className="text-[#007AE9] text-xs cursor-pointer" onClick={props.resetStoreActivity}>
 			Learn more
 			</p>

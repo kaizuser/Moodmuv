@@ -26,12 +26,9 @@ const HowTo = () => {
         />
       </div>
       <Section/>
-      <div className="min-h-screen w-full relative flex justify-center items-center">
-        <div className="flex justify-center items-center relative top-14">
-      <h2 className="text-[#fff] px-6 relative z-20 text-6xl w-80 font-bold flex flex-col break-normal">Preguntas <span className="text-4xl font-light text-[#fff]">Frecuentes</span></h2>
-      <Faq/>
-        </div>
-      <img className="min-h-screen w-full absolute z-0 bottom-0"src={Vector}/>
+      <h2 className="text-[#323232] px-6 relative z-20 text-6xl w-80 font-bold flex flex-col break-normal">Preguntas <span className="text-4xl font-light text-[#323232]">Frecuentes</span></h2>
+      <div className="w-[90%] h-full pb-28 ">
+        <Faq/>
       </div>
     </div>
   );

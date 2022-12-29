@@ -99,7 +99,7 @@ class Account extends React.Component <any, any>{
 				    />
 				  </svg>
 				</Link>
-			      </div>
+			    </div>
 
 				  {/* IMAGEN  DE PERFIL */}
 
