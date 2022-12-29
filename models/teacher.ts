@@ -25,7 +25,7 @@ const teacherSchema = new Schema<teacherDTO>({
         name:{type:String, required:false},
 	email:{type:String, required:true},
 	pass:[{type:String, required:true}],
-	img:{type:String, required:false},
+        img:{type:String, required:false},
 	backImg:{type:String, required:false},
 	desc:{type:String, required:false},
 	genre:{type:String, required:false},

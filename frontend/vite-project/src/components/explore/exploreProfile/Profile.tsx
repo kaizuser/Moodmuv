@@ -14,7 +14,6 @@ import ProfileScheduler from "./ProfileCalendar";
 import axios from "axios";
 
 const Profile = (props:any) => {
-	console.log(props)
 	let params = useParams()
 	let [teacherFlag, setFlag] = useState(true)
 	let [fileProfile, setFileProfile] = useState(undefined)
@@ -47,13 +46,8 @@ const Profile = (props:any) => {
 		setActivitiesCicle(props?.activities.filter((e:any)=>e?.type.includes("Cicle") && e?.author?._id.includes(props.teacher._id)))
 		setActivitiesWorkshop(props?.activities.filter((e:any)=>e?.type.includes("Workshop") && e?.author?._id.includes(props.teacher._id)))
 		setActivitiesEvent(props?.activities.filter((e:any)=>e?.type.includes("Event") && e?.author?._id.includes(props.teacher._id)))
-		console.log(activitiesRegular)
-		console.log(activitiesCicle)
-		console.log(activitiesWorkshop)
-		console.log(activitiesEvent)
 	  }
 	}, [params, props.teacher])
-	console.log(props.activities)
 	return (
 	<>
 	{" "}

@@ -35,7 +35,7 @@ class Account extends React.Component <any, any>{
 			activitiesWorkshop:[],
 			activitiesEvent:[],
 			backImg:{image:"#f3f3f3"},
-
+			setRender:false
 		}
 	}
 
@@ -53,14 +53,23 @@ class Account extends React.Component <any, any>{
 		
 		this.setState({videos:videos.data})
 		this.setState({file:file.data})
-		this.setState({activitiesRegular:this.props.activities.filter((e:any)=>e.type.includes("Class")  && e.author?._id.includes(this.props.currentUser?._id))})
-		this.setState({activitiesCicle:this.props.activities.filter((e:any)=>e.type.includes("Cicle") && e.author?._id.includes(this.props.currentUser?._id))})
-		this.setState({activitiesWorkshop:this.props.activities.filter((e:any)=>e.type.includes("Workshop") && e.author?._id.includes(this.props.currentUser?._id))})
-		this.setState({activitiesEvent:this.props.activities.filter((e:any)=>e.type.includes("Event") && e.author?._id.includes(this.props.currentUser?._id))})
-		backimg ? this.setState({backImg:backimg}) : ""
+
+		this.setState({activitiesRegular:this.props?.activities?.filter((e:any)=>e.type.includes("Class")  && e.author?._id.includes(this.props.currentUser?._id))})
+		this.setState({activitiesCicle:this.props?.activities?.filter((e:any)=>e.type.includes("Cicle") && e.author?._id.includes(this.props.currentUser?._id))})
+		this.setState({activitiesWorkshop:this.props?.activities?.filter((e:any)=>e.type.includes("Workshop") && e.author?._id.includes(this.props.currentUser?._id))})
+		this.setState({activitiesEvent:this.props?.activities?.filter((e:any)=>e.type.includes("Event") && e.author?._id.includes(this.props.currentUser?._id))})
+
+		backimg ? this.setState({backImg:backimg}) : ''
 	}
+
+	componentDidUpdate(prevProps:any){
+		if(prevProps.currentUser !== this.props.currentUser){
+			let backimg = jsonImgs.find(e=> e.name === this.props.currentUser.backImg)
+			backimg ? this.setState({backImg:backimg}) : ''
+		}
+	}
+
 	render(): React.ReactNode {
-		console.log(this.props.currentUser)
 		return (
 			<>
 			{" "}

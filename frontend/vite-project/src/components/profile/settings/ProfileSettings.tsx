@@ -27,7 +27,7 @@ const ProfileSettings = (props: any) => {
   const [genreValue, setGenre] = useState(props.currentUser?.genre);
   const [descValue, setDesc] = useState(props.currentUser?.desc);
   const [avatarFile, setAvatarFile] = useState(undefined);
-  const [discValue, setDisc] = useState(props.currentUser?.disciples);
+  const [discValue, setDisc] = useState(props.currentUser?.disciples)
   const [mediaFacebook, setFacebook] = useState(props.currentUser?.media[0])
   const [mediaInstagram, setInstagram] = useState(props.currentUser?.media[1])
   const [mediaTiktok, setTiktok] = useState(props.currentUser?.media[2])

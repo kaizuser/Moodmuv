@@ -1,3 +1,5 @@
+
+//UTILITIES
 import React, { useRef, useState } from "react";
 import json from "./radioImages.json";
 import teacherActions from "../../../redux/actions/teacherActions";
@@ -5,6 +7,7 @@ import studentActions from "../../../redux/actions/studentActions";
 import { RootState } from "../../../main";
 import { connect } from "react-redux";
 import Swal from "sweetalert2";
+import userActions from "../../../redux/actions/userActions";
 
 const RadioImages = (props:any) => {
   const [check, setCheck] = useState(null);
@@ -15,7 +18,6 @@ const RadioImages = (props:any) => {
     };
   };
   const checkImage = (e: any) => {
-    console.log(e);
     setCheck(e);
   };
   const handleOpenEdit = () => {
@@ -37,7 +39,6 @@ const RadioImages = (props:any) => {
             id: props.currentUser._id,
             backImg: check
           };
-          console.log(userData)
           if (props.currentUser.type == "Teacher") {
               await props.modifyTeacher(userData);
             } else {
@@ -50,6 +51,8 @@ const RadioImages = (props:any) => {
               showConfirmButton: false,
               timer: 1000,
             })
+
+        await props.verifyToken(localStorage.getItem("token"));
     }else{
         Swal.fire({
             icon:'error',
@@ -71,8 +74,6 @@ const RadioImages = (props:any) => {
       </p>
     );
   };
-console.log(json)
-console.log(props.currentUser)
   return (
     !editBkg ? (
     <EditarPortada />
@@ -83,7 +84,7 @@ console.log(props.currentUser)
         className="relative z-10 w-full content-center break-words min-h-[1rem] flex  flex-wrap justify-center gap-4 my-8 "
       >
         {json.map((e) => (
-          <div className="relative flex flex-col justify-center items-center w-fit h-fit ">
+          <div className="relative flex flex-col justify-center items-center w-fit h-fit " key={e.name}>
             <img
               className={
                 e.name.includes(check)
@@ -113,16 +114,18 @@ console.log(props.currentUser)
   )
   )
 };
+
 let mapDispatch = {
     modifyStudent: studentActions.modifyStudent,
     modifyTeacher: teacherActions.modifyTeacher,
-  };
+    verifyToken:userActions.verifyToken
+};
   
-  let mapState = (state: RootState) => {
+let mapState = (state: RootState) => {
     return {
       currentUser: state.userReducer.currentUser,
     };
-  };
+};
   
   let connector = connect(mapState, mapDispatch);
   
