@@ -16,6 +16,8 @@ const userActions = {
 
 			if (ans.data.success){
 				dispatch({type:'currentUser', payload:ans.data.response})
+
+				return ans.data.response
 			} else {
 				localStorage.removeItem('token')
 			}
