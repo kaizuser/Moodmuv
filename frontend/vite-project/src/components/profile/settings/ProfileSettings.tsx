@@ -15,7 +15,7 @@ import Swal from "sweetalert2";
 import { RootState } from "../../../main";
 import SelectDisciples from "./SelectDisciples";
 import Avatar from "@mui/material/Avatar";
-
+import '../../../styles/mediaqueriesSettings.css'
 const ProfileSettings = (props: any) => {
   let navigate = useNavigate();
 
@@ -107,8 +107,8 @@ const ProfileSettings = (props: any) => {
     <>
       {props.currentUser && (
         <div className="w-full h-full bg-[#fafafa] py-4 min-h-4">
-          <div className="m-auto border w-3/4 min-h-96 bg-white flex items-start">
-            <div className="min-h-full w-52 border-r flex flex-col self-stretch">
+          <div className="change m-auto border w-3/4 min-h-96 bg-white flex items-start">
+            <div className="nav-s min-h-full w-52 border-r flex flex-col self-stretch">
               <p className="w-full p-2 text-xs text-[#222] border-l-2 border-[#222] py-4 font-bold px-8">
                 Editar perfil
               </p>
@@ -122,7 +122,7 @@ const ProfileSettings = (props: any) => {
                 to={"/account/settings/desactive"}
                 className="w-full p-2 text-xs text-[#222] py-4 px-8"
               >
-                Desactivar cuenta
+                Eliminar cuenta
               </Link>
               <p
                 onClick={() => {
@@ -135,8 +135,8 @@ const ProfileSettings = (props: any) => {
                 Cerrar sesión
               </p>
             </div>
-            <form className="w-full px-28 pb-16 my-4 flex flex-col gap-4 min-h-4 items-center justify-center">
-              <fieldset className="flex flex-col gap-2 justify-center items-center">
+            <form className="form w-full px-28 pb-16 my-4 flex flex-col gap-4 min-h-4 items-center justify-center">
+              <fieldset className="fieldset flex flex-col gap-2 justify-center items-center">
                 {/* AVATAR */}
                 <Avatar
                   alt="P"
@@ -149,7 +149,7 @@ const ProfileSettings = (props: any) => {
                 />
 
                 <label
-                  htmlFor="file-upload"
+                  htmlFor="label file-upload"
                   className="cursor-pointer text-xs text-[#007AE9]"
                 >
                   Cambiar foto de perfil
@@ -162,10 +162,10 @@ const ProfileSettings = (props: any) => {
                 />
               </fieldset>
 	      <h1 className='font-bold mt-4 text-[#222]'>Información Personal</h1>
-              <fieldset className="flex gap-4 w-full flex-wrap">
-                <aside className="flex justify-end px-6 w-44 min-h-4">
+              <fieldset className="fieldset flex gap-4 w-full flex-wrap">
+                <aside className="aside flex justify-end px-6 w-44 min-h-4">
                   <label
-                    className="font-bold  text-right self-center"
+                    className="label font-bold  text-right self-center"
                     htmlFor=""
                   >
                     Nombre
@@ -180,10 +180,10 @@ const ProfileSettings = (props: any) => {
                   defaultValue={props.currentUser?.name}
                 />
               </fieldset>
-              <fieldset className="flex gap-4 w-full flex-wrap">
-                <aside className="flex justify-end px-6 w-44 min-h-4">
+              <fieldset className="fieldset flex gap-4 w-full flex-wrap">
+                <aside className="aside flex justify-end px-6 w-44 min-h-4">
                   <label
-                    className="font-bold  text-right self-center"
+                    className="label font-bold  text-right self-center"
                     htmlFor=""
                   >
                     Número de telefono
@@ -199,10 +199,10 @@ const ProfileSettings = (props: any) => {
                 />
               </fieldset>
 
-              <fieldset className="flex gap-4 w-full flex-wrap">
-                <aside className="flex justify-end px-6 w-44 min-h-4">
+              <fieldset className="fieldset flex gap-4 w-full flex-wrap">
+                <aside className="aside flex justify-end px-6 w-44 min-h-4">
                   <label
-                    className="font-bold  text-right self-center"
+                    className="label font-bold  text-right self-center"
                     htmlFor=""
                   >
                     Ubicación
@@ -219,10 +219,10 @@ const ProfileSettings = (props: any) => {
               </fieldset>
 
 
-              <fieldset className="flex gap-4 w-full flex-wrap">
-                <aside className="flex justify-end px-6 w-44 min-h-4">
+              <fieldset className="fieldset flex gap-4 w-full flex-wrap">
+                <aside className="aside flex justify-end px-6 w-44 min-h-4">
                   <label
-                    className="font-bold  text-right self-center"
+                    className="label font-bold  text-right self-center"
                     htmlFor=""
                   >
                     Descripción
@@ -236,10 +236,10 @@ const ProfileSettings = (props: any) => {
                 ></textarea>
               </fieldset>
 
-              <fieldset className="flex gap-4 w-full flex-wrap">
-                <aside className="flex justify-end px-6 w-44 min-h-4">
+              <fieldset className="fieldset flex gap-4 w-full flex-wrap">
+                <aside className="aside flex justify-end px-6 w-44 min-h-4">
                   <label
-                    className="font-bold  text-right self-center"
+                    className="label font-bold  text-right self-center"
                     htmlFor=""
                   >
                     Disciplinas
@@ -252,10 +252,10 @@ const ProfileSettings = (props: any) => {
                 />
               </fieldset>
 
-              <fieldset className="flex gap-4 w-full flex-wrap">
-                <aside className="flex justify-end px-6 w-44 min-h-4">
+              <fieldset className="fieldset flex gap-4 w-full flex-wrap">
+                <aside className="aside flex justify-end px-6 w-44 min-h-4">
                   <label
-                    className="font-bold  text-right self-center"
+                    className="label font-bold  text-right self-center"
                     htmlFor=""
                   >
                     Género
@@ -285,7 +285,7 @@ const ProfileSettings = (props: any) => {
 
 	      <h1 className='font-bold mt-4 text-[#222]'>Redes Sociales</h1>
 
-              <fieldset className="flex gap-4 w-full flex-wrap">
+              <fieldset className="fieldset flex gap-4 w-full flex-wrap">
                 <button
                   type="button"
                   data-mdb-ripple="true"
@@ -318,7 +318,7 @@ const ProfileSettings = (props: any) => {
 
 {/* Instagram */}
 
-              <fieldset className="flex gap-4 w-full flex-wrap">
+              <fieldset className="fieldset flex gap-4 w-full flex-wrap">
                 <button
                   type="button"
                   data-mdb-ripple="true"
@@ -350,7 +350,7 @@ const ProfileSettings = (props: any) => {
 
 
 {/* TIKTOK */}
-              <fieldset className="flex gap-4 w-full flex-wrap">
+              <fieldset className="fieldset flex gap-4 w-full flex-wrap">
                 <button
                   type="button"
                   data-mdb-ripple="true"
@@ -365,7 +365,7 @@ const ProfileSettings = (props: any) => {
                 <input
                   className="social-input border grow rounded px-2 border-[#d3d3d3] hover:border-[#b3b3b3]"
                   type="text"
-                  placeholder="https://www.tiktok.com/@elpipocroficial"
+                  placeholder="https://www.tiktok.com/@moodmuv"
                   name=""
                   id=""
 		  defaultValue={props.currentUser?.media[2]}

@@ -6,3 +6,48 @@
 .social-input::placeholder{
     font-size: 13px!important;
 }
+@media (max-width: 750px) {
+    .change{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }   
+    .nav-s{
+        width: 100%;
+        border: none;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .nav-s > p, .nav-s > a {
+        width: fit-content;
+        padding: 1rem;
+    }
+    .nav-s>p:first-child{
+        border: none;
+        border-top: 1px solid #222;
+    }
+    .form{
+        width: 100%;
+        text-align: center;
+    }
+    .fieldset{
+        justify-content: center ;
+        align-items: center;
+    }
+    .fieldset>button{
+        margin: 0 auto;
+    }
+    .aside{
+        justify-content: center;
+        align-items: center;
+    }
+    .label{
+        text-align: center;
+    }
+}
+@media (max-width: 589px) {
+
+}
