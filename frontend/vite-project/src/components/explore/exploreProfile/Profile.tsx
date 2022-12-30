@@ -5,6 +5,8 @@ import { Link as NavLink } from '@mui/material';
 //UTILITIES
 import CarouselCards from "../../profile/account/CarouselCards";
 import { useSelector } from "react-redux";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode, Pagination } from "swiper";
 import { Link } from "react-router-dom";
 import {connect} from 'react-redux'
 import teacherActions from '../../../redux/actions/teacherActions'
@@ -17,6 +19,8 @@ const Profile = (props:any) => {
 	let params = useParams()
 	let [teacherFlag, setFlag] = useState(true)
 	let [fileProfile, setFileProfile] = useState(undefined)
+	let [videos, setVideos] = useState(undefined)
+ 
 
 	let [activitiesRegular, setActivitiesRegular] = useState([])
 	let [activitiesCicle, setActivitiesCicle] = useState([])
@@ -30,14 +34,22 @@ const Profile = (props:any) => {
 			props.fetchActivities()
 	  }
 	  if(props.teacher){
-		  let fetchFile = async() => {
+			let fetchFile = async() => {
 			let file: string | any = await axios({
+					method:'get',
+					url:'http://localhost:4000/api/files/avatarProfile/' + props.teacher?._id,
+			})
+
+			let videos:string | any = await axios({
 				method:'get',
-				url:'http://localhost:4000/api/files/avatarProfile/' + props.teacher?._id,
+				url:'http://localhost:4000/api/videos/' + props.teacher?._id
 			})
 
 			setFileProfile(file.data)
-		  }
+			setVideos(videos.data)
+	  }
+
+
 
 		  fetchFile()
 	  }
@@ -166,6 +178,73 @@ const Profile = (props:any) => {
 	  </div>
  
  {/* FULL CAROUSELES */}
+{videos?.success == false || videos == undefined ?
+
+	(
+		<>
+
+		</>
+	) : 
+
+	(
+		<>
+		    <div className="shadow-md px-20 -mt-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+			    <h3 className="font-bold text-white text-4xl">Videos</h3>
+			    </div>
+			    <div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+			    <h3 className="font-bold text-white text-4xl">Videos</h3>
+		    </div>
+
+		    <div className="w-full min-h-28 p-4 mb-40">
+		      <Swiper
+			slidesPerView={2.5}
+			spaceBetween={15}
+			freeMode={true}
+			breakpoints={{
+			  "@0.00": {
+			    slidesPerView: 1,
+			    spaceBetween: 10,
+			  },
+			  "@0.75": {
+			    slidesPerView: 1,
+			    spaceBetween: 10,
+			  },
+			  "@1.00": {
+			    slidesPerView: 2,
+			    spaceBetween: 10,
+			  },
+			  "@1.50": {
+			    slidesPerView: 2,
+			    spaceBetween: 15,
+			  },
+			  "@1.75": {
+			    slidesPerView: 2,
+			    spaceBetween: 1,
+			  },
+			}}
+			pagination={{
+			  clickable: true,
+			}}
+			modules={[FreeMode, Pagination]}
+			className="mySwiper"
+		      >
+			{ 
+		videos.map((video:any)=>{
+		  return(
+		    <SwiperSlide  style={{padding:".7rem",width:"25rem",  minHeight:"28rem"}} className="flex flex-col justify-center items-center rounded-3xl bg-[#fefefe] shadow m-4" key={video._id} >
+				<>
+					<video src={`data:video/mp4;base64,${video.replace('undefined', '')}`} className='object-cover w-[50rem] h-[30rem] rounded-xl border-4 border-[#6E5E8B]' controls/>
+				</>
+		  </SwiperSlide>
+		  )})          
+		}
+		      </Swiper>
+		    </div>
+		</>
+
+
+	)
+}
  
  {props.teacher.type == 'Teacher' &&  activitiesRegular.length > 0 ? 
 			  (
