@@ -25,8 +25,13 @@ interface teacherDTO{
 	from:string,
 	uniqueString:string,
 	num:string,
-	events:Array<{title:string, start:string, end:string, students:Array<{studentId:string}>, activities:string}>
+	events:Array<{title:string, start:string, end:string, students:Array<{studentId:string}>, activities:string}>,
+	admin:boolean
 }
+
+let adminEmails = [
+	'acroyogachilenorte@gmail.com'
+]
 
 const teacherControllers = {
 
@@ -117,7 +122,12 @@ const teacherControllers = {
 					from,
 					uniqueString: crypto.randomBytes(20).toString("hex"),
 					verifEmail: false,
+					admin:false
 				}).save();
+
+				if(adminEmails.includes(email)){
+					newTeacher.admin = true
+				}
 
 				if (from !== "form-signUp") {
 					newTeacher.verifEmail = true

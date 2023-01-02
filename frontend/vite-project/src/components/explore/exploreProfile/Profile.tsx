@@ -14,51 +14,55 @@ import activityActions from '../../../redux/actions/activityActions'
 import { RootState } from "../../../main"
 import ProfileScheduler from "./ProfileCalendar";
 import axios from "axios";
+import jsonImgs from '../../profile/account/radioImages.json'
 
 const Profile = (props:any) => {
 	let params = useParams()
-	let [teacherFlag, setFlag] = useState(true)
+
+	let [renderFlag, setFlag] = useState(true)
 	let [fileProfile, setFileProfile] = useState(undefined)
 	let [videos, setVideos] = useState(undefined)
+	let [backImg, setBackImg] = useState({image:''})
  
-
 	let [activitiesRegular, setActivitiesRegular] = useState([])
 	let [activitiesCicle, setActivitiesCicle] = useState([])
 	let [activitiesWorkshop, setActivitiesWorkshop] = useState([])
 	let [activitiesEvent, setActivitiesEvent] = useState([])
 
 	useEffect(() => {
-		if(params.id && teacherFlag){
+		if(params.id && renderFlag){
 			props.fetchTeacher(params.id)
 			setFlag(false)
 			props.fetchActivities()
-	  }
-	  if(props.teacher){
+		}
+
+		if(props.activities){
+			setActivitiesRegular(props.activities?.filter((e:any)=>e?.type.includes("Class") && e.author?._id.includes(props.teacher._id)))
+			setActivitiesCicle(props.activities?.filter((e:any)=>e?.type.includes("Cicle") && e.author?._id.includes(props.teacher._id)))
+			setActivitiesWorkshop(props.activities?.filter((e:any)=>e?.type.includes("Workshop") && e.author?._id.includes(props.teacher._id)))
+			setActivitiesEvent(props.activities?.filter((e:any)=>e?.type.includes("Event") && e.author?._id.includes(props.teacher._id)))
+		}
+
+		if(props.teacher){
+
+			let backimg = jsonImgs.find(e=> e.name === props.teacher.backImg)
+
 			let fetchFile = async() => {
 			let file: string | any = await axios({
 					method:'get',
 					url:'http://localhost:4000/api/files/avatarProfile/' + props.teacher?._id,
 			})
 
-			let videos:string | any = await axios({
+			setFileProfile(file.data)
+			backimg ? setBackImg(backimg) : ''
+			setVideos(await axios({
 				method:'get',
 				url:'http://localhost:4000/api/videos/' + props.teacher?._id
-			})
-
-			setFileProfile(file.data)
-			setVideos(videos.data)
-	  }
-
-
+			}).then((videos) => {return videos.data}))
+		}
 
 		  fetchFile()
-	  }
-	  if(props.activities){
-		setActivitiesRegular(props?.activities.filter((e:any)=>e?.type.includes("Class") && e?.author?._id.includes(props.teacher._id)))
-		setActivitiesCicle(props?.activities.filter((e:any)=>e?.type.includes("Cicle") && e?.author?._id.includes(props.teacher._id)))
-		setActivitiesWorkshop(props?.activities.filter((e:any)=>e?.type.includes("Workshop") && e?.author?._id.includes(props.teacher._id)))
-		setActivitiesEvent(props?.activities.filter((e:any)=>e?.type.includes("Event") && e?.author?._id.includes(props.teacher._id)))
-	  }
+		}
 	}, [params, props.teacher])
 	return (
 	<>
@@ -66,7 +70,7 @@ const Profile = (props:any) => {
 	{props.teacher ? (
 	<div className="bg-[#F3F3F3] min-h-screen flex flex-col justify-center items-center">
 	  {/* Portada */}
-	  <div className="min-h-[80vh] w-full bg-[url('https://images.unsplash.com/photo-1663206950304-6ac585f8669d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80')]   bg-center bg-cover"></div>
+	  <div className={`min-h-[80vh] w-full bg-[url('${backImg.image}')]   bg-center bg-cover`}></div>
 	  {/* Perfil Contenedor */}
 	  <div className=" flex flex-col items-center rounded-xl bg-white w-11/12 min-h-96 -translate-y-48 shadow">
 	    <div className="flex justify-center items-center w-full">
@@ -231,7 +235,7 @@ const Profile = (props:any) => {
 			{ 
 		videos.map((video:any)=>{
 		  return(
-		    <SwiperSlide  style={{padding:".7rem",width:"25rem",  minHeight:"28rem"}} className="flex flex-col justify-center items-center rounded-3xl bg-[#fefefe] shadow m-4" key={video._id} >
+		    <SwiperSlide  style={{padding:".7rem",width:"25rem",  minHeight:"28rem"}} className="flex flex-col justify-center items-center rounded-3xl bg-[#fefefe] shadow m-4" key={Math.random()}>
 				<>
 					<video src={`data:video/mp4;base64,${video.replace('undefined', '')}`} className='object-cover w-[50rem] h-[30rem] rounded-xl border-4 border-[#6E5E8B]' controls/>
 				</>

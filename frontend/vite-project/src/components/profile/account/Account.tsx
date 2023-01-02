@@ -12,17 +12,17 @@ import {connect} from 'react-redux'
 import axios from "axios";
 import { RootState } from "../../../main"
 import Scheduler from "./Calendar"
+import Video from  '../videos/Video'
+import RadioImages from "./RadioImages";
+import teacherDTO from '../../../types/teacherDTO'
+import '../../../styles/mediaqueriesAccount.css'
+import jsonImgs from './radioImages.json'
 
 //CSS
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
 
-import Video from  '../videos/Video'
-import RadioImages from "./RadioImages";
-import teacherDTO from '../../../types/teacherDTO'
-import '../../../styles/mediaqueriesAccount.css'
-import jsonImgs from './radioImages.json'
 class Account extends React.Component <any, any>{
 
 	constructor(props:any){
@@ -34,7 +34,7 @@ class Account extends React.Component <any, any>{
 			activitiesCicle:[],
 			activitiesWorkshop:[],
 			activitiesEvent:[],
-			backImg:{image:"#f3f3f3"},
+			backImg:{image:""},
 			setRender:false
 		}
 	}
@@ -45,21 +45,21 @@ class Account extends React.Component <any, any>{
 			method:'get',
 			url:'http://localhost:4000/api/files/avatarProfile/' + this.props.currentUser?._id,
 		})
-
-		let videos:string | any = await axios({
-			method:'get',
-			url:'http://localhost:4000/api/videos/' + this.props.currentUser?._id,
-		})
-		
-		this.setState({videos:videos.data})
+                //SET IMAGES
 		this.setState({file:file.data})
+		backimg ? this.setState({backImg:backimg}) : ''
 
+		//SET ACTIVITIES
 		this.setState({activitiesRegular:this.props?.activities?.filter((e:any)=>e.type.includes("Class")  && e.author?._id.includes(this.props.currentUser?._id))})
 		this.setState({activitiesCicle:this.props?.activities?.filter((e:any)=>e.type.includes("Cicle") && e.author?._id.includes(this.props.currentUser?._id))})
 		this.setState({activitiesWorkshop:this.props?.activities?.filter((e:any)=>e.type.includes("Workshop") && e.author?._id.includes(this.props.currentUser?._id))})
 		this.setState({activitiesEvent:this.props?.activities?.filter((e:any)=>e.type.includes("Event") && e.author?._id.includes(this.props.currentUser?._id))})
 
-		backimg ? this.setState({backImg:backimg}) : ''
+                //SET VIDEOS
+		this.setState({videos:await axios({
+			method:'get',
+			url:'http://localhost:4000/api/videos/' + this.props.currentUser?._id,
+		}).then((videos) => {return videos.data})})
 	}
 
 	componentDidUpdate(prevProps:any){
@@ -260,9 +260,9 @@ class Account extends React.Component <any, any>{
 						className="mySwiper"
 					      >
 						{ 
-					this.state.videos?.map((video:any)=>{
+					this.state.videos && this.state.videos.map((video:any)=>{
 					  return(
-					    <SwiperSlide  style={{padding:".7rem",width:"25rem",  minHeight:"28rem"}} className="flex flex-col justify-center items-center rounded-3xl bg-[#fefefe] shadow m-4" key={video._id} >
+					    <SwiperSlide  style={{padding:".7rem",width:"25rem",  minHeight:"28rem"}} className="flex flex-col justify-center items-center rounded-3xl bg-[#fefefe] shadow m-4" key={Math.random()} >
 							<>
 								<video src={`data:video/mp4;base64,${video.replace('undefined', '')}`} className='object-cover w-[50rem] h-[30rem] rounded-xl border-4 border-[#6E5E8B]' controls/>
 							</>

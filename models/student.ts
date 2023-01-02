@@ -17,6 +17,7 @@ interface studentDTO{
 	from:string,
 	uniqueString:string,
 	num:string,
+	admin:boolean,
 }
 
 const studentSchema = new Schema<studentDTO>({
@@ -36,6 +37,7 @@ const studentSchema = new Schema<studentDTO>({
 	from:{type:String, required:true},
 	uniqueString:{type:String, required:true},
 	num:{type:String, required:false},
+	admin:{type:Boolean, required:true}
 })
 
 export const Student = model<studentDTO>('students', studentSchema)

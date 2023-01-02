@@ -17,7 +17,8 @@ interface teacherDTO{
 	from:string,
         uniqueString:string,
 	num:string,
-	events:Array<{_id:Schema.Types.ObjectId, title:string, start:Date, end:Date, students:Array<Schema.Types.ObjectId>, activity:Schema.Types.ObjectId}>
+	events:Array<{_id:Schema.Types.ObjectId, title:string, start:Date, end:Date, students:Array<Schema.Types.ObjectId>, activity:Schema.Types.ObjectId}>,
+	admin:boolean,
 }
 
 const teacherSchema = new Schema<teacherDTO>({
@@ -43,7 +44,8 @@ const teacherSchema = new Schema<teacherDTO>({
 		end:{type:Date, required:false},
 		students:[{type:Types.ObjectId, required:false}],
 		activity:{type:Types.ObjectId, required:false}
-	}]
+	}],
+	admin:{type:Boolean, required:true}
 })
 
 export const Teacher = model<teacherDTO>('teachers', teacherSchema)

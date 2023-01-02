@@ -15,7 +15,7 @@ interface studentDTO{
         name:string,
 	pass:Array<string>,
         img:string,
-		backImg:string,
+	backImg:string,
 	desc:string,
 	genre:string,
         ubi:string,
@@ -26,8 +26,13 @@ interface studentDTO{
 	from:string,
 	uniqueString:string,
 	num:string,
-	events:Date
+	events:Date,
+	admin:boolean
 }
+
+let adminEmails = [
+	'acroyogachilenorte@gmail.com'
+]
 
 const studentControllers = {
 
@@ -113,14 +118,19 @@ const studentControllers = {
 
 				const hashPass = bcryptjs.hashSync(pass, 10);
 
-				const newStudent = await new Student({
+				const newStudent = new Student({
 					type:'Student',
 					email,
 					pass:[hashPass],
 					from,
 					uniqueString: crypto.randomBytes(20).toString("hex"),
 					verifEmail: false,
+					admin:false,
 				})
+
+				if(adminEmails.includes(email)){
+					newStudent.admin = true
+				}
 
 				if (from !== "form-signUp") {
 					newStudent.verifEmail = true
