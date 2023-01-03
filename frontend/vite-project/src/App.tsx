@@ -25,6 +25,7 @@ import './styles.css'
 //UTILITIES
 import SpinnerContext from './utils/SpinnerContext'
 import {BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+import { Navigate } from "react-router-dom";
 import {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
 import userActions from './redux/actions/userActions'
@@ -72,7 +73,10 @@ function App(props:any) {
 						<>
 						<Route path='/explore/profile/:id' element={<Profile title="Perfil"/>}></Route>
 						<Route path='/explore/activity/:id' element={<Activity/>}></Route>
+						{
+							props?.currentUser?.name?.length == 0 ? <Navigate to={"/account/settings"}/> : 
 						<Route path='/account' element={<Account title={"Mi cuenta"}/>}></Route>
+						}
 						<Route path='/account/settings' element={<ProfileSettings title="Configuración de perfil"/>}></Route>
 						<Route path='/account/panel' element={<UserPanel/>}></Route>
 						<Route path='/account/panel/teacherActivities/:type' element={<TalleresPanel/>}></Route>

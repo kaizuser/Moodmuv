@@ -151,7 +151,7 @@ const ActivityDetail = (props:any) => {
 
                 <p>
                   Ubicación:{" "}
-                  <span className="text-sm text-[#999]">{props?.activity?.location}</span>
+                  <a className="text-sm text-[#999]" href={"https://www.google.cl/maps/search/" + "Potosi 2215"}>{props?.activity?.location}</a>
                 </p>
               </div>
 	      )}
