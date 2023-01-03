@@ -4,29 +4,50 @@ import { useEffect, useState } from 'react';
 import Box from "@mui/material/Box";
 
 //UTILITIES
-import databaseActions from '../../../redux/actions/databaseActions'
+import databaseActions from '../../redux/actions/databaseActions'
 import {connect} from 'react-redux'
-import { RootState } from '../../../main';
+import { RootState } from '../../main';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function VideosInterface(props:any){
 
 	let [file, setFile] = useState(undefined)
+	let [videos, setVideos] = useState(undefined)
 
 	let navigate = useNavigate()
 
-	let uploadVideo = () => {
-		let data = new FormData()
+	useEffect(() => {
+		if(props.currentUser){
+			let getVideos = async () => {
+				let videos:string | any = await axios({
+					method:'get',
+					url:'http://localhost:4000/api/videos/' + props.currentUser?._id,
+				})
 
-		data.append('file', file[0])
+				setVideos(videos.data)
+			}
 
-		props.setMetadata(props.currentUser._id)
+			getVideos()
+		}
 
-		setTimeout(async() => {
-			await props.uploadVideo(data)
+	}, [props.currentUser])
 
-			navigate('/account/panel')
-		}, 500)
+	let uploadVideo = async () => {
+		if(videos){
+			let data = new FormData()
+
+			data.append('file', file[0])
+
+			props.setMetadata(props.currentUser._id)
+
+			setTimeout(async() => {
+				await props.uploadVideo(data, videos.length)
+
+				navigate('/account/panel')
+			}, 500)
+		}
+
 	}
 
 	return (
