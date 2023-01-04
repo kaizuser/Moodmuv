@@ -1,0 +1,10 @@
+@media (max-width:540px){
+    .section-1{
+        width:100%;
+        padding: 1rem;
+        text-align: center;
+    }
+    .text-howto{
+        text-align: center;
+    }
+}

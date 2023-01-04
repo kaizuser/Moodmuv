@@ -1,8 +1,14 @@
 @media screen  and (max-width:390px){
+    
+
     .rbc-month-row{
     }
     .rbc-event-content{
         font-size: small;
+    }
+    span[role="columnheader"], span[role="columnheader"]{
+        font-size: .6em!important;
+
     }
 }
 .rbc-month-row{
@@ -100,4 +106,8 @@ margin: auto 0;
 }
 .rbc-show-more:hover{
     color: #666!important;
+}
+span[role="columnheader"], span[role="columnheader"]{
+    font-size: .6em!important;
+
 }

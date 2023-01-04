@@ -1,5 +1,5 @@
 //BASICS
-import React from 'react'
+import React, {useRef, useEffect, useState} from 'react'
 
 //UTILITIES 
 import {connect} from 'react-redux'
@@ -8,7 +8,6 @@ import activityActions from '../../../redux/actions/activityActions'
 import Swal from 'sweetalert2'
 import { RootState } from '../../../main'
 import { useNavigate} from 'react-router-dom'
-import { useEffect } from 'react'
 
 //UTILITIES CALENDAR
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar'
@@ -23,26 +22,39 @@ import PropTypes from 'prop-types'
 //CSS 
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import "react-datepicker/dist/react-datepicker.css";
+import '../../../styles/mediaqueriesCalendar.css'
 
 function ProfileScheduler (props:any) {
+	let refe = useRef(null)
 	let navigate = useNavigate()
+	let [reload, setReload] = useState(false)
 
 	useEffect(() => {
+		
 		if(!props.teacher){
 			props.fetchTeacher(props.id)
 		}
-	}, [props.id])
+	}, [props.id, reload])
+/* 	function changeLanguage(){
+		if(refe?.current?.children[0]?.children[0]?.childNodes[1]?.innerText?.includes("January")){
+			refe?.current?.children[0]?.children[0]?.childNodes[1]?.innerText?.replace("January", "Enero")
+			setReload(!reload)
+			console.log(reload)
+			console.log(refe?.current?.children[0]?.children[0]?.childNodes[1]?.innerText)
+	}
+} */
+//changeLanguage()
 
 	let locales = {
 		'es':es_AR
 	}
 
 	let localizer = dateFnsLocalizer({format, parse, startOfWeek, getDay, locales})
-
 	return (
 		<>
-			<div className='w-full p-8 min-h-screen flex justify-center items-center flex-col'>
+			<div ref={refe} className='w-full p-8 min-h-screen flex justify-center items-center flex-col'>
 				<Calendar
+					
 					localizer={localizer}
 					events={props.teacher.events}
 					startAccessor={(event:any) => {return new Date(event.start)}}

@@ -15,7 +15,8 @@ import { RootState } from "../../../main"
 import ProfileScheduler from "./ProfileCalendar";
 import axios from "axios";
 import jsonImgs from '../../profile/account/radioImages.json'
-
+//CSS
+import '../../../styles/mediaqueriesAccount.css'
 const Profile = (props:any) => {
 	let params = useParams()
 
@@ -72,9 +73,9 @@ const Profile = (props:any) => {
 	  {/* Portada */}
 	  <div className={`min-h-[80vh] w-full bg-[url('${backImg.image}')]   bg-center bg-cover`}></div>
 	  {/* Perfil Contenedor */}
-	  <div className=" flex flex-col items-center rounded-xl bg-white w-11/12 min-h-96 -translate-y-48 shadow">
-	    <div className="flex justify-center items-center w-full">
-	      <div className="invisible flex gap-4 items-center">
+	  <div className="profile-contain flex flex-col items-center rounded-xl bg-white w-11/12 min-h-96 -translate-y-48 shadow">
+	    <div className="flex justify-center items-center w-full editar-row">
+	      <div className="invisible flex gap-4 items-center none">
 		<Link
 		  to={"/account/settings"}
 		  className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full flex gap-2 text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
@@ -98,13 +99,13 @@ const Profile = (props:any) => {
 	      </div>
 		  {/* IMAGEN  DE PERFIL */}
 	      <img
-		className="mx-4 w-40 h-40 object-cover object-center rounded-full -translate-y-16"
+		className="mx-4 w-40 h-40 object-cover object-center rounded-full -translate-y-16 profile-img"
 
 		src={`data:image/png;base64,${fileProfile}`}/* {props.teacher?.img} */
 	      />
 		  {/* REDES */}
 
-		  		<div className="flex gap-4 items-center w-[6.5rem]">
+		  		<div className="social-div flex gap-4 items-center w-[6.5rem]">
 			                {props.teacher?.media[2] && props.teacher?.media[2].includes('tiktok') && 
 						<NavLink href={props.teacher?.media[2]}>
 						<FaTiktok className="text-[#323232]"/>
@@ -128,6 +129,7 @@ const Profile = (props:any) => {
 		<p className="text-center shadow-md bg-gradient-to-t from-[#fdc41d] to-[#fbb232] p-3 py-1 rounded-3xl text-white font-bold mb-2">Profesor</p>
 	    <h2 className="font-bold text-4xl text-[#222]">{props.teacher?.name}</h2>
 	    {/* Ubicación */}
+		{ props?.teacher?.ubi !== undefined ?
 	    <div className="p-4 flex">
 	      <svg
 		xmlns="http://www.w3.org/2000/svg"
@@ -151,9 +153,10 @@ const Profile = (props:any) => {
 	      <p className="font-bold text-[#999] uppercase text-sm">
 	{props.teacher?.ubi}
 	      </p>
-	    </div>
+	    </div> : ""
+		}
 	    {/* Oficio */}
-	    { props.teacher &&
+	    { props?.teacher?.disciples.length !== 0 ?
 	    <div className="flex p-4">
 	      <svg
 		xmlns="http://www.w3.org/2000/svg"
@@ -173,7 +176,7 @@ const Profile = (props:any) => {
 				 {props.teacher?.disciples.join(" - ")}
 
 			      </p>
-	    </div>
+	    </div> : ""
 		} 
 	    <hr className="w-[95%]" />
 	    <p className="text-center lg:w-[70%] text-[#999] py-8">
@@ -192,10 +195,10 @@ const Profile = (props:any) => {
 
 	(
 		<>
-		    <div className="shadow-md px-20 -mt-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+		    <div className="cartelito2 shadow-md px-20 -mt-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 			    <h3 className="font-bold text-white text-4xl">Videos</h3>
 			    </div>
-			    <div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+			    <div className="cartelito shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 			    <h3 className="font-bold text-white text-4xl">Videos</h3>
 		    </div>
 
@@ -252,10 +255,10 @@ const Profile = (props:any) => {
  
  {props.teacher.type == 'Teacher' &&  activitiesRegular.length > 0 ? 
 			  (
-		<><div className="shadow-md px-20 -mt-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+		<><div className="cartelito2 shadow-md px-20 -mt-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 			      <h3 className="font-bold text-white text-4xl">Clases regulares</h3>
 			    </div>
-			    <div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+			    <div className="cartelito shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 			      <h3 className="font-bold text-white text-4xl">Clases regulares</h3>
 			    </div>
 				<CarouselCards activity={activitiesRegular}/>
@@ -264,7 +267,7 @@ const Profile = (props:any) => {
 		<><div className="shadow-md mt-20 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 			      <h3 className="font-bold text-white text-4xl">Taller</h3>
 			    </div>
-			    <div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+			    <div className="cartelito shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 			      <h3 className="font-bold text-white text-4xl">Taller</h3>
 			    </div>
 				<CarouselCards activity={activitiesWorkshop}/>
@@ -274,7 +277,7 @@ const Profile = (props:any) => {
 		<><div className="shadow-md mt-20 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 			      <h3 className="font-bold text-white text-4xl">Ciclos</h3>
 			    </div>
-			    <div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+			    <div className="cartelito shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 			      <h3 className="font-bold text-white text-4xl">Ciclos</h3>
 			    </div>
 				<CarouselCards activity={activitiesCicle}/>				
@@ -283,7 +286,7 @@ const Profile = (props:any) => {
 		<><div className="shadow-md mt-20 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 			      <h3 className="font-bold text-white text-4xl">Eventos</h3>
 			    </div>
-			    <div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+			    <div className="cartelito shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 			      <h3 className="font-bold text-white text-4xl">Eventos</h3>
 			    </div>
 				<CarouselCards activity={activitiesEvent}/>

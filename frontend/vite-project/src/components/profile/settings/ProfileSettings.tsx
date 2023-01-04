@@ -1,5 +1,5 @@
 //BASICS
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import "../../../styles/mediaqueriesSettings.css";
 
 //UTILITIES
@@ -18,7 +18,6 @@ import Avatar from "@mui/material/Avatar";
 import '../../../styles/mediaqueriesSettings.css'
 const ProfileSettings = (props: any) => {
   let navigate = useNavigate();
-
   //PERSONAL INFORMATION
   const { spinner, setSpinner }: any = useContext(SpinnerContext);
   const [nameValue, setName] = useState(props.currentUser?.name);
@@ -149,7 +148,7 @@ const ProfileSettings = (props: any) => {
                 />
 
                 <label
-                  htmlFor="label file-upload"
+                  htmlFor=" file-upload"
                   className="cursor-pointer text-xs text-[#007AE9]"
                 >
                   Cambiar foto de perfil

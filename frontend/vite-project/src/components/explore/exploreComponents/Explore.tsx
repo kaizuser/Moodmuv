@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 
 //INTERFACES
 import activityDTO from "../../../types/activityDTO";
-import imageExplore from '../../../assets/index.jpg'
+import imageExplore from '../../../assets/index2.jpg'
 class Explore extends React.Component<any, any> {
   constructor(props: any) {
     super(props);

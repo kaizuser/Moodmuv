@@ -1,5 +1,22 @@
 //BASICS
-import React from "react";
+import React
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+from "react";
+
+
 
 //UTILITIES
 import { FaTiktok, FaInstagram, FaFacebookSquare } from "react-icons/fa";
@@ -73,21 +90,21 @@ class Account extends React.Component <any, any>{
 		return (
 			<>
 			{" "}
-			{this.props.currentUser ? (
+			{this?.props?.currentUser ? (
 			<div className="bg-[#F3F3F3] min-h-screen flex flex-col justify-center items-center">
 			  {/* Portada */}
-			  <div className={`flex justify-center items-start h-[80vh] w-full bg-[url('${this.state?.backImg?.image}')]   bg-center bg-cover`}>
+			  <div className={`flex justify-center items-start h-[80vh] w-full bg-[url('${this?.state?.backImg?.image}')]   bg-center bg-cover`}>
 				
 	<RadioImages/>
 				
 			  </div>
 			  {/* Perfil Contenedor */}
 			  <div className="profile-contain flex flex-col items-center rounded-xl bg-white w-11/12 min-h-96 -translate-y-48 shadow">
-			    <div className="flex justify-center items-center w-full">
+			    <div className="editar-row flex justify-center items-center w-full">
 
 				  {/* EDITAR */}
 				  
-				<div className="flex gap-4 items-center">
+				<div className="boton-editar flex gap-4 items-center">
 				<Link
 				  to={"/account/settings"}
 				  className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full flex gap-2 text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
@@ -114,13 +131,14 @@ class Account extends React.Component <any, any>{
 
 			      {this.state.file?.success == false ? (
 			      <img
-				className="mx-4 w-40 h-40 object-cover object-center rounded-full -translate-y-16"
+				className="profile-img mx-4 w-40 h-40 object-cover object-center rounded-full -translate-y-16"
+				src="https://images.squarespace-cdn.com/content/v1/54b7b93ce4b0a3e130d5d232/1519987020970-8IQ7F6Z61LLBCX85A65S/icon.png?format=1000w"
 			      />
 			      ) : 
 
 			      (
 			      <img
-				className="mx-4 w-40 h-40 object-cover object-center rounded-full -translate-y-16"
+				className="profile-img mx-4 w-40 h-40 object-cover object-center rounded-full -translate-y-16"
 				src={`data:image/png;base64,${this.state.file}`}/* {this.props.currentUser?.img} */
 			      />
 			      )
@@ -129,8 +147,8 @@ class Account extends React.Component <any, any>{
 
 
 		{/* SOCIAL ICONS */}
-		<div className="flex gap-4 items-center w-[6.5rem]">
-			                {this.props.currentUser?.media[2] && this.props.currentUser?.media[2].includes('tiktok') && 
+		<div className="flex gap-4 items-center w-[6.5rem] social-div">
+			                {this?.props?.currentUser?.media[2] && this.props.currentUser?.media[2].includes('tiktok') && 
 						<NavLink href={this.props.currentUser?.media[2]}>
 						<FaTiktok className="text-[#323232]"/>
 						</NavLink>
@@ -149,11 +167,16 @@ class Account extends React.Component <any, any>{
 					}
 				</div>
 
+
+{/* ICONS */}
 			    </div>
 				{this.props.currentUser?.type === "Teacher" && <p className="text-center shadow-md bg-gradient-to-t from-[#fdc41d] to-[#fbb232] p-3 py-1 rounded-3xl text-white font-bold mb-2">Profesor</p>}
 				{this.props.currentUser?.type === "User" && <p className="text-center shadow-md bg-gradient-to-t from-cyan-500 to-blue-500  p-3 py-1 rounded-3xl text-white font-bold mb-2">Alumno</p>}
 			    <h2 className="font-bold text-4xl text-[#222]">{this.props.currentUser?.name}</h2>
 			    {/* Ubicación */}
+				{
+			this?.props?.currentUser?.ubi !== undefined ?
+
 			    <div className="p-4 flex">
 			      <svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -175,11 +198,12 @@ class Account extends React.Component <any, any>{
 				/>
 			      </svg>
 			      <p className="font-bold text-[#999] uppercase text-sm">
-			{this.props.currentUser?.ubi}
+			{this?.props?.currentUser?.ubi}
 			      </p>
-			    </div>
+			    </div> : ""
+				}
 			    {/* Oficio */}
-			    { this.props.currentUser &&
+			    { this?.props?.currentUser?.disciples.length != 0 ? 
 			    <div className="flex p-4">
 			      <svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -199,7 +223,7 @@ class Account extends React.Component <any, any>{
 				 {this.props.currentUser?.disciples.join(" - ")}
 
 			      </p>
-			    </div>
+			    </div> : ""
 				} 
 			    <hr className="w-[95%]" />
 			    <p className="text-center lg:w-[70%] text-[#999] py-8">
@@ -219,10 +243,10 @@ class Account extends React.Component <any, any>{
 
 				(
 					<>
-					    <div className="shadow-md px-20 -mt-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+					    <div className="cartelito2 shadow-md px-20 -mt-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 						    <h3 className="font-bold text-white text-4xl">Videos</h3>
 						    </div>
-						    <div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+						    <div className="cartelito shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 						    <h3 className="font-bold text-white text-4xl">Videos</h3>
 					    </div>
 
@@ -279,10 +303,10 @@ class Account extends React.Component <any, any>{
 			  
 			  {this.props.currentUser.type == 'Teacher' &&  this.state?.activitiesRegular.length > 0 ? 
 			  (
-		<><div className="shadow-md px-20 -mt-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+		<><div className="cartelito2 shadow-md px-20 -mt-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 			      <h3 className="font-bold text-white text-4xl">Clases regulares</h3>
 			    </div>
-			    <div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+			    <div className="cartelito shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 			      <h3 className="font-bold text-white text-4xl">Clases regulares</h3>
 			    </div>
 				<CarouselCards activity={this.state?.activitiesRegular}/>
@@ -291,7 +315,7 @@ class Account extends React.Component <any, any>{
 		<><div className="shadow-md mt-20 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 			      <h3 className="font-bold text-white text-4xl">Taller</h3>
 			    </div>
-			    <div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+			    <div className="cartelito shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 			      <h3 className="font-bold text-white text-4xl">Taller</h3>
 			    </div>
 				<CarouselCards activity={this.state?.activitiesWorkshop}/>
@@ -301,7 +325,7 @@ class Account extends React.Component <any, any>{
 		<><div className="shadow-md mt-20 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 			      <h3 className="font-bold text-white text-4xl">Ciclos</h3>
 			    </div>
-			    <div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+			    <div className="cartelito shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 			      <h3 className="font-bold text-white text-4xl">Ciclos</h3>
 			    </div>
 				<CarouselCards activity={this.state?.activitiesCicle}/>				
@@ -310,7 +334,7 @@ class Account extends React.Component <any, any>{
 		<><div className="shadow-md mt-20 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 			      <h3 className="font-bold text-white text-4xl">Eventos</h3>
 			    </div>
-			    <div className="shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
+			    <div className="cartelito shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 			      <h3 className="font-bold text-white text-4xl">Eventos</h3>
 			    </div>
 				<CarouselCards activity={this.state?.activitiesEvent}/>

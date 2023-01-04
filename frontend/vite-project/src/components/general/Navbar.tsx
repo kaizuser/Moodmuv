@@ -38,7 +38,8 @@ const link = ["/explore", "/payments","/aboutUs", "/howTo", "/signIn", "/activat
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
-function Example(props: any) {
+function Navbar(props: any) {
+	
 	let {spinner, setSpinner}:any = useContext(SpinnerContext)
 	let navigate = useNavigate()
 
@@ -108,7 +109,7 @@ function Example(props: any) {
 		<div className="hidden md:block sm:ml-6 w-full">
 		  <div className="flex justify-end items-center">
 		    {navigation.map((item, index) => (
-		      <div key={item.name}>
+		      <div key={item.name} >
 			{item.name == "Iniciar sesión" ? (
 			  props.currentUser?._id ? (
 	<Box sx={{ flexGrow: 0 }}>
@@ -280,6 +281,6 @@ const mapState = (state:RootState) => {
 
 const connector = connect(mapState, mapDispatch)
 
-export default connector(Example)
+export default connector(Navbar)
 
 

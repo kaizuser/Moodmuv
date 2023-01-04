@@ -18,7 +18,9 @@ import EclipseIcon from '../../assets/PanelIconos/Ellipse 138.svg'
 
 //CSS
 import '../../styles/userPanel.css'
-
+import '../../styles/mediaqueriesPanel.css'
+//ASETS
+import Bkgtest from '../../assets/Gradient.png'
 function DashboardContent(props: any) {
 	const [activityUser, setActivityUser] = useState(undefined)
 	const [videos, setVideos] = useState([])
@@ -61,15 +63,15 @@ function DashboardContent(props: any) {
 			      clinicas de videos
 			    </p>
 			  </Box>
-			  <Box className="gap-4 flex flex-wrap justify-center  w-full min-h-[50vh] bg-[#f8f8f9]">
+			  <Box className="section gap-4 flex flex-wrap justify-center  w-full min-h-[50vh] bg-[#f8f8f9]">
 			    {props.currentUser.type === "Teacher" ? (
 			      <>
 				<div
-				  className="w-[49%] rounded-md relative bg-white min-h-[50vh] shadow flex flex-col gap-8 p-4"
+				  className="section-1 w-[49%] rounded-md relative bg-white min-h-[50vh] shadow flex flex-col gap-8 p-4"
 				>
 				  <h3 className="font-bold text-sm text-[#323232]">Actividades</h3>
 				<Link to={"/account/panel/teacherActivities/Class"}>
-				  <Fade className="fade-user-panel flex gap-4 w-48 hover:bg-[#563D81] p-1 rounded-md transition duration-300 ease-in">
+				  <Fade className="fade-user-panel flex gap-4 w-48 hover:bg-[#323232] p-1 rounded-md transition duration-300 ease-in">
 				    <div className="flex gap-2 w-full items-center">
 				      <img
 					className="p-1 w-6 h-6 rounded-full border border-[#3a57e8]"
@@ -83,7 +85,7 @@ function DashboardContent(props: any) {
 				  </Fade>
 				</Link>
 				<Link to={"/account/panel/teacherActivities/Cicle"}>
-				  <Fade className="fade-user-panel flex gap-4 w-24 hover:bg-[#563D81] p-1 rounded-md transition duration-300 ease-in">
+				  <Fade className="fade-user-panel flex gap-4 w-24 hover:bg-[#323232] p-1 rounded-md transition duration-300 ease-in">
 				    <div className="flex gap-2 w-full items-center">
 				      <img
 					className="p-1 w-6 h-6 rounded-full border border-[#1aa053]"
@@ -97,7 +99,7 @@ function DashboardContent(props: any) {
 				  </Fade>
 				</Link>
 				<Link to={"/account/panel/teacherActivities/Event"}>
-				  <Fade className="fade-user-panel flex gap-4 w-44 hover:bg-[#563D81] p-1 rounded-md transition duration-300 ease-in">
+				  <Fade className="fade-user-panel flex gap-4 w-44 hover:bg-[#323232] p-1 rounded-md transition duration-300 ease-in">
 				    <div className="flex gap-2 w-full items-center">
 				      <img
 					className="p-1 w-6 h-6 rounded-full border border-[#c03221]"
@@ -111,7 +113,7 @@ function DashboardContent(props: any) {
 				  </Fade>
 				</Link>
 				<Link to={"/account/panel/teacherActivities/Workshop"}>
-				  <Fade className="fade-user-panel flex gap-4 w-32 hover:bg-[#563D81] p-1 rounded-md transition duration-300 ease-in">
+				  <Fade className="fade-user-panel flex gap-4 w-32 hover:bg-[#323232] p-1 rounded-md transition duration-300 ease-in">
 				    <div className="flex gap-2 w-full items-center">
 				      <img
 					className="p-1 w-6 h-6 rounded-full border border-[#3a57e8]"
@@ -125,25 +127,26 @@ function DashboardContent(props: any) {
 				  </Fade>
 				</Link>
 				</div>
-				<Link to="/account/panel/teacherEvents" className="w-[49%] rounded-md relative bg-white min-h-[50vh] shadow flex flex-col gap-8 p-4">
-				  <h3 className="font-bold text-sm text-[#323232]">Eventos de Calendario</h3>
-				  <Fade className="fade-user-panel flex gap-4 w-48 hover:bg-[#563D81] p-1 rounded-md transition duration-300 ease-in">
-				    <div className="flex gap-2 w-full items-center">
+				<Link to="/account/panel/teacherEvents" className={`bg-[url('${Bkgtest}')] bg-cover section-1 w-[49%] rounded-md relativez min-h-[50vh] shadow flex flex-col gap-8 p-4`}>
+				  <h3 className="font-bold text-sm text-[#fff]">Eventos de Calendario</h3>
+				  <Fade className="fade-user-panel flex gap-4 w-48 hover:bg-[#323232]  p-1 rounded-md transition  hover:text-[#323232] duration-300 ease-in">
+				    <div className="flex gap-2 w-full items-center hover:text-[#323232]">
 				      <img
-					className="p-1 w-6 h-6 rounded-full "
+					className="p-1 w-6 h-6 rounded-full hover:text-[#323232]"
 					src={EclipseIcon}
 					alt="actividades"
 				      />
-				      <p className="font-bold w-[100%] text-[12px] text-[#323232]">
+				      <p className="relative z-10 font-bold w-[100%] text-[12px] text-[#fff] hover:text-[#323232] ">
 					Eventos de calendario: {props.currentUser.events.length}
 				      </p>
 				    </div>
 				  </Fade>
+				  
 				</Link>
 				{/* VIDEOS */}
-				<Link to="/account/panel/teacherVideos" className="grow rounded-md relative bg-white h-[33vh] shadow flex flex-col gap-8 p-4">
+				<Link to="/account/panel/teacherVideos" className="section-1 grow rounded-md relative bg-white h-[33vh] shadow flex flex-col gap-8 p-4">
 				  <h3 className="font-bold text-sm text-[#323232]">Panel de videos</h3>
-				  <Fade className="fade-user-panel flex gap-4 w-44 hover:bg-[#563D81] p-1 rounded-md transition duration-300 ease-in">
+				  <Fade className="fade-user-panel flex gap-4 w-44 hover:bg-[#323232] p-1 rounded-md transition duration-300 ease-in">
 				    <div className="flex gap-2 w-full items-center">
 				      <img
 					className="p-1 w-6 h-6 rounded-full "

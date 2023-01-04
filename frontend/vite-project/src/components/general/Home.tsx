@@ -4,6 +4,9 @@ import BotonSecundario from "../designs/Buttons/SecondaryButton";
 import Why from "../designs/Why";
 import sample from "../../assets/video.mp4";
 import GridTalleres from '../designs/EventsHome'
+//STYLES
+import '../../styles/mediaqueriesTalleresSection.css'
+import '../../styles/mediaqueriesHome.css'
 const Home = ({title}:any) => {
   document.title = title
   return (

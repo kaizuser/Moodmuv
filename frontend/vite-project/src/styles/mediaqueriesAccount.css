@@ -1,4 +1,5 @@
 @media screen and (max-width: 319px) {
+
     .container-profile-image{
         flex-direction: column;
         gap:0;
@@ -6,8 +7,34 @@
     .boton-editar{
 
     }
+    .editar-row{
+        flex-direction: column!important;
+        min-height: fit-content;
+        justify-content: space-around;
+        align-items: center;
+        margin: 1rem 0;
+        gap: 1rem;
+    }
+    .profile-img{
+        width: 6rem;
+        height: 6rem;
+        transform: none;
+        -webkit-transform: none;
+        -moz-transform: none;
+        -ms-transform: none;
+        -o-transform: none;
 }
-@media screen and (min-width: 320px) {
+}
+@media screen and (min-width: 320px) and (max-width:640px) {
+
+    .editar-row{
+        flex-direction: column!important;
+        min-height: fit-content;
+        justify-content: space-around;
+        align-items: center;
+        margin: 1rem 0;
+        gap: 1rem;
+    }
     .profile-contain{
         margin-top: 5rem;
     }
@@ -18,14 +45,31 @@
         justify-content: start;
         height: 10rem;
     }
-    .container-profile-image>img{
-        position: relative;
-        top: -4rem;
+    .social-div{
+        width: fit-content;
+        height: fit-content;
     }
     .boton-editar{
-        position: relative;
         bottom: 6.5rem;
+        order: 2;
     }
+    .profile-img{
+        width: 8rem;
+        height: 8rem;
+        object-fit: cover;
+        translate: none;
+        
+        margin: none;
+        transform: none;
+        -webkit-transform: none;
+        -moz-transform: none;
+        -ms-transform: none;
+        -o-transform: none;
+        
+}
+.none{
+    display: none;
+}
 }
 @media screen and (min-width:640px) {
     .profile-contain{
@@ -46,4 +90,22 @@
 }
 @media screen and (min-width:767px) {
 
+}
+@media screen and (max-width:481px){
+    .cartelito{
+        width: 70%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .cartelito2{
+        display: none;
+}
+    .cartelito>h3{
+        display:inline;
+        text-align: center;
+        align-self: center;
+        margin: auto;
+    }
 }

@@ -1,0 +1,31 @@
+@media (max-width:821px){
+    .section-1{
+        width: 100%;
+        padding-top: 3rem;
+    }
+    .section-1>h3{
+        text-align: center;
+        width: 100%;
+        height: fit-content;
+        line-height: 1;
+    }
+}
+@media screen and (max-width:831px) {
+    .section-1:first-child{
+        flex-grow: 1;
+    }
+    .section-1:nth-child(3){
+        height: 50vh!important;
+        align-items: stretch!important;
+        align-content: stretch!important;
+        flex-grow: 1!important;
+        justify-items: center
+        align-self: stretch!important;
+    }
+    .section{
+        align-items: stretch!important;
+        align-content: stretch!important;
+        justify-items: center;
+        flex-grow: 1!important;
+    }
+}

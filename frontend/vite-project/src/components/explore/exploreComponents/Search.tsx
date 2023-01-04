@@ -4,7 +4,8 @@ import React from "react";
 import activityActions from "../../../redux/actions/activityActions";
 import {connect} from "react-redux";
 import { RootState } from "../../../main";
-
+//STYLES
+import '../../../styles/mediaqueriesExplore.css'
 function Search(props:any){
 
 

@@ -1,5 +1,5 @@
 //UTILITIES
-import {Link} from 'react-router-dom'
+import {Link, NavLink} from 'react-router-dom'
 import {useState} from 'react'
 import {connect} from 'react-redux'
 import userActions from '../../redux/actions/userActions'
@@ -36,7 +36,7 @@ const SignIn = (props:any) => {
           <p className="text-white mt-1 text-3xl font-semibold">MoodMuv</p>
           <p className="text-white mt-1 w-52">Si todavía no tienes una cuenta puedes hacerla aqui</p>
           <Link to={'/signUp'}>
-	  <span className="font-bold text-[#5FAABF] cursor-pointer">Registrate ya</span>
+	  <span className="cursor-pointer text-[#0079FF] underline">Registrate ya</span>
 
 	  </Link>
         </div>
@@ -49,7 +49,7 @@ const SignIn = (props:any) => {
         <form className="">
           <h1 className="text-gray-800 font-semibold text-2xl mb-1">Iniciar sesión</h1>
           <p className="text-sm font-normal text-gray-600 mb-7 sm:mb-2">Bienvenido otra vez!</p>
-	  <a className="registrarme font-semibold text-[#5FAABF] cursor-pointer">Quiero registrarme</a>
+	  <NavLink to={"/signup"} className="registrarme text-[#0079FF] underline cursor-pointer mb-1">Quiero registrarme</NavLink>
               <div className="flex items-center border-2 py-2 px-3 rounded mb-4 bg-[#F0EFFF]">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400 " fill="none"
                   viewBox="0 0 24 24" stroke="currentColor">
@@ -70,7 +70,7 @@ const SignIn = (props:any) => {
 		<button type="button" className="block w-full bg-indigo-600 mt-4 py-2 rounded bg-[#4D47C3] text-white font-semibold mb-2" onClick={() => signIn()}>Iniciar Sesión</button>
 		<div className='flex items-center justift-center flex-col'>
 		  <Link to={'/forgotPass'}>
-			  <span className="text-sm ml-2 hover:text-blue-500 cursor-pointer">Te olvidaste la contraseña?</span>
+			  <span className="text-sm ml-2 hover:text-blue-500 cursor-pointer text-[#0079FF] underline">Te olvidaste la contraseña?</span>
 		  </Link>
 		  <GoogleLogIn/>
 		</div>

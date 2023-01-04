@@ -1,4 +1,7 @@
 @media screen and (max-width:524px) {
+    #default-search{
+        width: 100%!important;
+    }
     .mapita{
         display:none;
     }

@@ -96,7 +96,7 @@ const SignUp = (props:any) => {
 
 		  <div className='flex justify-center items-center flex-col'>
 			  <Link to={'/signIn'}>
-				  <span className="text-sm ml-2 hover:text-blue-500 cursor-pointer">Ya tienes cuenta?</span>
+				  <span className=" text-[#0079FF]  text-sm ml-2 hover:text-blue-500 cursor-pointer underline">Ya tienes cuenta?</span>
 			  </Link>
 			  <GoogleSignUp rolValue={rolValue}/>
 
