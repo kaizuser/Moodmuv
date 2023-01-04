@@ -157,6 +157,7 @@ const ProfileSettings = (props: any) => {
                   onChange={(e: any) => setAvatarFile(e.target.files)}
                   className="hidden"
                   id="file-upload"
+		  name='file-upload'
                   type="file"
                 />
               </fieldset>

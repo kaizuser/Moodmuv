@@ -97,7 +97,7 @@ const studentControllers = {
 			res.redirect("http://localhost:5173/");
 
 		} else {
-			res.json({ success: false, response: "Unverified email." });
+			res.json({ success: false, response: "Email sin verificar" });
 		}
 	},
 
@@ -111,7 +111,7 @@ const studentControllers = {
 			if (student || teacher) {
 				res.json({
 				    success: false,
-				    message: "Email already registered. Try to login",
+				    message: "Email en uso. Intenta registrarte",
 				});
 
 			} else {
@@ -138,7 +138,7 @@ const studentControllers = {
 
 					res.json({
 					success: true,
-					message: "Your account was created succesfully"
+					message: "Tu cuenta fue creada exitosamente"
 				});
 
 				} else {
@@ -147,7 +147,7 @@ const studentControllers = {
 
 					res.json({
 						success: true,
-						message: "We sent you an email to validate your registration",
+						message: "Te enviamos un mail para validar tu cuenta",
 					});
 				}
 			}
@@ -156,7 +156,7 @@ const studentControllers = {
 
 			res.json({
 			success: false,
-			message: "Something went wrong, please try again.",
+			message: "Algo salió mal. Intentalo de nuevo",
 			error:error
 			});
 		}
