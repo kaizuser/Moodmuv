@@ -49,13 +49,11 @@ const teacherActions = {
 
 	deleteTeacher: (id:string)=>{
 		return async(dispatch:AppDispatch, getState:RootState) => {
-
 			const ans = await axios({
 				method:'delete',
 				url:'http://localhost:4000/api/teacher/' + id,
 			})
 		}
-		
 	},
 
 	modifyTeacher: (teacherData:teacherDTO) => {
@@ -201,6 +199,14 @@ const teacherActions = {
 	resetStore: () => {
 		return async (dispatch:AppDispatch, getState:RootState) => {
 			dispatch({type:'resetStore'})
+		}
+	},
+
+	//FILTER FOR ADMIN PANEL
+	
+	filterTeachers:(teachersAuxiliar:Array<teacherDTO>, searchValue:string) => {
+		return async (dispatch:AppDispatch, getState:RootState) => {
+			dispatch({type:'filterTeachers', payload:{teachersAuxiliar, searchValue}})
 		}
 	},
 

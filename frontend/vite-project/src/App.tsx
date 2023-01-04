@@ -20,6 +20,7 @@ import Spinner from './components/designs/Spinner'
 import ChangePassword from './components/general/changePassword'
 import Planes from './components/designs/Plans'
 import AboutUs from './components/designs/About us/AboutContainer'
+import AdminPanel from './components/panel/AdminPanel'
 import './styles.css'
 
 //UTILITIES
@@ -69,6 +70,7 @@ function App(props:any) {
 					<Route path='/aboutUs' element={<AboutUs/>}></Route>
 
 				        {/*Non-users cant access to these routes*/}	
+
 					{props?.currentUser && (
 						<>
 						<Route path='/explore/profile/:id' element={<Profile title="Perfil"/>}></Route>
@@ -89,6 +91,9 @@ function App(props:any) {
 						</>
 					)}
 
+					{props?.currentUser?.admin && (
+						<Route path='/account/admin' element={<AdminPanel/>}></Route>
+					)}
 				</Routes>			  
 				<Footer/>
 				</SpinnerContext.Provider>

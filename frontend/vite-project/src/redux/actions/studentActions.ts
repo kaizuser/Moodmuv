@@ -116,6 +116,14 @@ const studentActions = {
 			dispatch({type:'resetStore'})
 		}
 	},
+
+	//FILTER FOR ADMIN PANEL
+	
+	filterStudents:(studentsAuxiliar:Array<studentDTO>, searchValue:string) => {
+		return async (dispatch:AppDispatch, getState:RootState) => {
+			dispatch({type:'filterStudents', payload:{studentsAuxiliar, searchValue}})
+		}
+	},
 }
 
 export default studentActions;

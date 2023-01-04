@@ -277,7 +277,7 @@ class Account extends React.Component <any, any>{
 				)
 			}
 			  
-			  {this.props.currentUser.type == 'Teacher' &&  this.state?.activitiesRegular.length > 0 ? 
+			  {this.props.currentUser.type == 'Teacher' &&  this.state?.activitiesRegular?.length > 0 ? 
 			  (
 		<><div className="shadow-md px-20 -mt-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 			      <h3 className="font-bold text-white text-4xl">Clases regulares</h3>
@@ -287,7 +287,7 @@ class Account extends React.Component <any, any>{
 			    </div>
 				<CarouselCards activity={this.state?.activitiesRegular}/>
 				</>) : ""}				
-			  {this.props.currentUser.type == 'Teacher' &&  this.state?.activitiesWorkshop.length > 0 ?
+			  {this.props.currentUser.type == 'Teacher' &&  this.state?.activitiesWorkshop?.length > 0 ?
 		<><div className="shadow-md mt-20 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 			      <h3 className="font-bold text-white text-4xl">Taller</h3>
 			    </div>
@@ -297,7 +297,7 @@ class Account extends React.Component <any, any>{
 				<CarouselCards activity={this.state?.activitiesWorkshop}/>
 
 				</> : ""}				
-				{this.props.currentUser.type == 'Teacher' &&  this.state?.activitiesCicle.length > 0 ? 
+				{this.props.currentUser.type == 'Teacher' &&  this.state?.activitiesCicle?.length > 0 ? 
 		<><div className="shadow-md mt-20 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 			      <h3 className="font-bold text-white text-4xl">Ciclos</h3>
 			    </div>
@@ -306,7 +306,7 @@ class Account extends React.Component <any, any>{
 			    </div>
 				<CarouselCards activity={this.state?.activitiesCicle}/>				
 				</> : ""}				
-				{this.props.currentUser.type == 'Teacher' && this.state?.activitiesEvent.length > 0 ?
+				{this.props.currentUser.type == 'Teacher' && this.state?.activitiesEvent?.length > 0 ?
 		<><div className="shadow-md mt-20 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 			      <h3 className="font-bold text-white text-4xl">Eventos</h3>
 			    </div>

@@ -30,7 +30,8 @@ interface teacherDTO{
 }
 
 let adminEmails = [
-	'acroyogachilenorte@gmail.com'
+	'acroyogachilenorte@gmail.com',
+	'thiagochiesa4444@gmail.com'
 ]
 
 const teacherControllers = {
@@ -95,7 +96,7 @@ const teacherControllers = {
 			res.redirect("http://localhost:5173/");
 
 		} else {
-			res.json({ success: false, response: "Unverified email." });
+			res.json({ success: false, response: "Email sin verificar" });
 		}
 	},
 
@@ -109,7 +110,7 @@ const teacherControllers = {
 			if (teacher || student) {
 				res.json({
 				    success: false,
-				    message: "Email already registered. Try to Login",
+				    message: "Email en uso. Intenta registrarte",
 				});
 
 			} else {
@@ -137,7 +138,7 @@ const teacherControllers = {
 
 					res.json({
 					success: true,
-					message: "Your account was created succesfully"
+					message: "Tu cuenta fue creada exitosamente"
 				});
 
 				} else {
@@ -146,7 +147,7 @@ const teacherControllers = {
 
 					res.json({
 						success: true,
-						message: "We sent you an email to validate your registration",
+						message: "Te enviamos un mail para validar tu cuenta",
 					});
 				}
 			}
@@ -155,7 +156,7 @@ const teacherControllers = {
 
 			res.json({
 			success: false,
-			message: "Something went wrong, please try again.",
+			message: "Algo salio mal. Intentalo nuevamente",
 			error:error
 			});
 		}

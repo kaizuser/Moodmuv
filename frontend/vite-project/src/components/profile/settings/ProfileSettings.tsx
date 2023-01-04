@@ -149,7 +149,7 @@ const ProfileSettings = (props: any) => {
                 />
 
                 <label
-                  htmlFor="label file-upload"
+                  htmlFor="file-upload"
                   className="cursor-pointer text-xs text-[#007AE9]"
                 >
                   Cambiar foto de perfil
@@ -158,6 +158,7 @@ const ProfileSettings = (props: any) => {
                   onChange={(e: any) => setAvatarFile(e.target.files)}
                   className="hidden"
                   id="file-upload"
+		  name='file-upload'
                   type="file"
                 />
               </fieldset>

@@ -47,7 +47,7 @@ const RadioImages = (props:any) => {
             Swal.close();
             Swal.fire({
               icon: "success",
-              title: "Haz cambiado tu portada perro",
+              title: "Haz cambiado tu portada",
               showConfirmButton: false,
               timer: 1000,
             })

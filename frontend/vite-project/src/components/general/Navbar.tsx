@@ -151,6 +151,15 @@ function Example(props: any) {
 		</MenuItem>
 		  </Link>
 
+		{props.currentUser.admin && (
+		  <Link to={'/account/admin'}>
+		<MenuItem onClick={handleCloseUserMenu}>
+		    Admin
+		</MenuItem>
+		  </Link>
+		)}
+
+
 		  <Typography onClick={() => {
 				   props.logOut()
 				     setearOpenDrop()

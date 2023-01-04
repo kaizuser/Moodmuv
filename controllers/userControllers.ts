@@ -56,7 +56,7 @@ const userControllers = {
 			});
 
 		} else {
-			res.json({ success: false, message: "Please try logging in again." });
+			res.json({ success: false, message: "Intenta nuevamente" });
 		}
 	},
 
@@ -72,7 +72,7 @@ const userControllers = {
 			if (!user) {
 				res.json({
 				success: false,
-				message: "User doesn't exist, try signing up.",
+				message: "Usuario no existente. Intentalo nuevamente",
 				});
 			} 
 
@@ -116,7 +116,7 @@ const userControllers = {
 						} else {
 							res.json({
 							success: false,
-							message: "Email or password do not match. Please try again",
+							message: "El email o la contraseña no coinciden. Intentalo nuevamente",
 							});
 						}
 
@@ -124,25 +124,23 @@ const userControllers = {
 					} else {
 						res.json({
 						success: false,
-						message: "You haven't verified your email",
+						message: "No haz verificado tu email",
 						});
 					}
 
 				} else {
 					res.json({
 					success: false,
-					message: "Account not found",
+					message: "Usuario no encontrado",
 					});
 				}
 
 			} 
 
 		} catch (error) {
-			console.log(error);
-
 			res.json({
 			success: false,
-			message: "Something went wrong, please try again.",
+			message: "Algo salio mal. Intentalo nuevamente",
 			});
 		}
 	}

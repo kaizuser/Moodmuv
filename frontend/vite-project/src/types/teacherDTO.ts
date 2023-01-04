@@ -1,3 +1,5 @@
+import activityDTO from "./activityDTO"
+
 interface teacherDTO{
 	_id:string,
 	type:string,
@@ -17,6 +19,8 @@ interface teacherDTO{
         uniqueString:string,
 	num:string,
 	events:Array<{_id:string, title:string, start:Date, end:Date, students:Array<string>, activity:string}>
+	//SITUATIONAL ACTIVITIES
+	activities?:Array<activityDTO>
 }
 
 export default teacherDTO

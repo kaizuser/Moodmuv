@@ -55,6 +55,7 @@ class Explore extends React.Component<any, any> {
   };
 
   render(): React.ReactNode {
+    console.log(this.props.teachers)
     return (
       <div className="w-full min-h-screen">
         <div className="relative min-h-12 w-full flex flex-col gap-4 py-4 shadow-md justify-center items-center">

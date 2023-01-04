@@ -37,10 +37,10 @@ const Profile = (props:any) => {
 		}
 
 		if(props.activities){
-			setActivitiesRegular(props.activities?.filter((e:any)=>e?.type.includes("Class") && e.author?._id.includes(props.teacher._id)))
-			setActivitiesCicle(props.activities?.filter((e:any)=>e?.type.includes("Cicle") && e.author?._id.includes(props.teacher._id)))
-			setActivitiesWorkshop(props.activities?.filter((e:any)=>e?.type.includes("Workshop") && e.author?._id.includes(props.teacher._id)))
-			setActivitiesEvent(props.activities?.filter((e:any)=>e?.type.includes("Event") && e.author?._id.includes(props.teacher._id)))
+			setActivitiesRegular(props.activities?.filter((e:any)=>e?.type.includes("Class") && e.author?._id.includes(props?.teacher._id)))
+			setActivitiesCicle(props.activities?.filter((e:any)=>e?.type.includes("Cicle") && e.author?._id.includes(props?.teacher._id)))
+			setActivitiesWorkshop(props.activities?.filter((e:any)=>e?.type.includes("Workshop") && e.author?._id.includes(props?.teacher._id)))
+			setActivitiesEvent(props.activities?.filter((e:any)=>e?.type.includes("Event") && e.author?._id.includes(props?.teacher._id)))
 		}
 
 		if(props.teacher){
