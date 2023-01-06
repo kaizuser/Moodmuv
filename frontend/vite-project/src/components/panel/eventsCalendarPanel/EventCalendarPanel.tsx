@@ -42,7 +42,7 @@ function DashboardContent(props:any) {
 
 					<div className=''>
 
-						<div className='flex justify-center items-center flex-wrap p-5 w-screen h-auto'>
+						<div className='flex justify-center items-center flex-wrap p-5 w-full h-auto'>
 							{props?.currentUser?.events.map((event:any) => (
 									<EventCalendarPanelDetails event={event} key={event._id}/>
 							))}
@@ -61,7 +61,7 @@ function DashboardContent(props:any) {
 
 					<div className=''>
 
-						<div className='flex justify-center items-center flex-wrap p-5 w-screen h-auto'>
+						<div className='flex justify-center items-center flex-wrap p-5 w-full h-auto'>
 							{studentEvents.map((event:any) => (
 									<EventCalendarPanelDetails event={event} key={event._id}/>
 							))}

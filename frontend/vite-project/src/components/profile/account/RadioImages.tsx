@@ -51,6 +51,7 @@ const RadioImages = (props:any) => {
               showConfirmButton: false,
               timer: 1000,
             })
+            await setEditBkg(false)
 
         await props.verifyToken(localStorage.getItem("token"));
     }else{
@@ -66,14 +67,22 @@ const RadioImages = (props:any) => {
 
   const BotonGuardar = () => {
     return (
+      <div className="self-center flex justify-center items-center gap-2">
+        
+              <p 
+      onClick={()=>setEditBkg(false)}
+      className="text-white bg-[#f3f3f3] focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full flex gap-2 text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 order-2  mb-28 cursor-pointer">Cancelar</p>
       <p
         onClick={() => SaveData()}
         className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full flex gap-2 text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 order-2 self-center mb-28 cursor-pointer"
       >
         Guardar
       </p>
+
+      </div>
     );
   };
+
   return (
     !editBkg ? (
     <EditarPortada />
@@ -110,6 +119,7 @@ const RadioImages = (props:any) => {
         ))}
       </form>
       <BotonGuardar />
+      
     </div>
   )
   )

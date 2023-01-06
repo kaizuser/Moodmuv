@@ -10,6 +10,7 @@ import userActions from "../../../redux/actions/userActions";
 import { RootState } from "../../../main";
 import CardActivity from "./CardActivity";
 import CardCarousel from "../../profile/account/CarouselCardsDetails";
+import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";
 
 //INTERFACES
@@ -30,6 +31,23 @@ function DashboardContent(props: any) {
       );
     }
   }, [props.activities, props.currentUser]);
+
+  const deleteActivity = async(id) =>{
+    Swal.fire({
+			title: 'Estas seguro de eliminar esta actividad',
+			showDenyButton: true,
+			confirmButtonText: 'Confirmar',
+			denyButtonText: `Cancelar`,
+		}).then(async(result) => {
+			if (result.isConfirmed) {
+				await props.deleteActivity(id)
+				props.fetchActivities()
+
+			} else if (result.isDenied) {
+				Swal.fire('No se ha efectuado ninguna operación', '', 'info')
+			}
+		})
+  }
 
   return (
     <>
@@ -84,7 +102,7 @@ function DashboardContent(props: any) {
                       <CardCarousel activity={activity} />
 			  <div className="flex justify-between w-full text-[#999] my-2 px-2">
 				<Link to={"/explore/activity/" + activity._id } className="text-sm" onClick={props.resetStore}>Ver detalle</Link>
-				<Link to={"/"} className="text-sm">Eliminar</Link>
+				<p to={"/"} className="text-sm cursor-pointer" onClick={()=>deleteActivity(activity._id)}>Eliminar</p>
 				
 			  </div>
                     </div>
@@ -100,7 +118,9 @@ function DashboardContent(props: any) {
 const mapDispatch = {
   fetchActivities: activityActions.fetchActivities,
   verifyToken: userActions.verifyToken,
-  resetStore:activityActions.resetStore
+  resetStore:activityActions.resetStore,
+  deleteActivity:activityActions.deleteActivity,
+
 };
 
 const mapState = (state: RootState) => {

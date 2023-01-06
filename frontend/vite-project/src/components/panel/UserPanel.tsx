@@ -127,8 +127,8 @@ function DashboardContent(props: any) {
 				  </Fade>
 				</Link>
 				</div>
-				<Link to="/account/panel/teacherEvents" className={`bg-[url('${Bkgtest}')] bg-cover section-1 w-[49%] rounded-md relativez min-h-[50vh] shadow flex flex-col gap-8 p-4`}>
-				  <h3 className="font-bold text-sm text-[#fff]">Eventos de Calendario</h3>
+				<Link to="/account/panel/teacherEvents" className={`bg-white section-1 w-[49%] rounded-md relative min-h-[50vh] shadow flex flex-col gap-8 p-4`}>
+				  <h3 className="font-bold text-sm text-[#323232]">Eventos de Calendario</h3>
 				  <Fade className="fade-user-panel flex gap-4 w-48 hover:bg-[#323232]  p-1 rounded-md transition  hover:text-[#323232] duration-300 ease-in">
 				    <div className="flex gap-2 w-full items-center hover:text-[#323232]">
 				      <img
@@ -136,7 +136,7 @@ function DashboardContent(props: any) {
 					src={EclipseIcon}
 					alt="actividades"
 				      />
-				      <p className="relative z-10 font-bold w-[100%] text-[12px] text-[#fff] hover:text-[#323232] ">
+				      <p className="relative z-10 font-bold w-[100%] text-[12px] text-[#323232] hover:text-[#323232] ">
 					Eventos de calendario: {props.currentUser.events.length}
 				      </p>
 				    </div>
@@ -224,11 +224,13 @@ function DashboardContent(props: any) {
 }
 const mapDispatch = {
   fetchActivities: activityActions.fetchActivities,
+
 }
 const mapState = (state: RootState) => {
   return {
     currentUser: state.userReducer.currentUser,
     activities: state.activityReducer.activities
+
   };
 };
 

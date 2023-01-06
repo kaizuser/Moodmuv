@@ -16,7 +16,7 @@ const sendEmail = async (email:string, uniqueString:string, verify:string) => {
 		from: sender,
 		to: email,
 		subject: "Hello, friend! Let's verify your email!",
-		html: `<a href='http://localhost:4000/api/auth/${verify}/${uniqueString}'>Sigue este link para verificar tu cuenta</a>`
+		html: `<a style="background-color:black;" href='http://localhost:4000/api/auth/${verify}/${uniqueString}'>Sigue este link para verificar tu cuenta</a>`
 	}
 
 	await transporter.sendMail(mailOptions, function (error:Error, response:Response) {

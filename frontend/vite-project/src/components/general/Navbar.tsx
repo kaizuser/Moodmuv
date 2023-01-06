@@ -225,7 +225,9 @@ function Navbar(props: any) {
 	      {navigation.map((item, index) => (
 		<div key={index}>
 		{
-		  item.name == "Iniciar sesión" ? (props.currentUser?._id ? (<Disclosure.Button
+		  item.name == "Iniciar sesión" ? (props.currentUser?._id ? (
+			<>
+		  <Disclosure.Button
 		    as="a"
 		    href={"/account"}
 		    className={classNames(
@@ -237,7 +239,44 @@ function Navbar(props: any) {
 		    aria-current={item.current ? "page" : undefined}
 		  >
 		    Cuenta
-		  </Disclosure.Button>) : (<Disclosure.Button
+		  </Disclosure.Button>
+		  <Disclosure.Button
+		    as="a"
+		    href={"/account/panel"}
+		    className={classNames(
+		      item.current
+			? "bg-gradient-to-t from-[#563D81] to-[#563D81] text-white"
+			: "text-[#2C2C2C] hover:text-white",
+		      "block px-3 py-2 rounded-md text-base font-medium"
+		    )}
+		    aria-current={item.current ? "page" : undefined}
+		  >
+		    Panel
+		  </Disclosure.Button>
+		  <Disclosure.Button
+		    as="a"
+			onClick={()=>{
+				props.logOut()
+				setearOpenDrop()
+				navigate('/home')
+				window.scrollTo(0, 0);
+				props.resetStoreTeacher()
+				props.resetStoreStudent()
+				props.resetStoreActivities()
+			}}
+		    className={classNames(
+		      item.current
+			? "bg-gradient-to-t from-[#563D81] to-[#563D81] text-white cursor-pointer"
+			: "text-[#2C2C2C] hover:text-white",
+		      "block px-3 py-2 rounded-md text-base font-medium cursor-pointer"
+		    )}
+		    aria-current={item.current ? "page" : undefined}
+		  >
+		    Logout
+		  </Disclosure.Button>
+
+		  </>
+		  ) : (<Disclosure.Button
 		    as="a"
 		    href={link[navigation.indexOf(item)]}
 		    className={classNames(

@@ -52,7 +52,7 @@ function VideosInterface(props:any){
 
 	return (
 
-	<div className='py-5 px-4'>
+	<div className='py-5 px-4 min-h-screen flex flex-col'>
 	<Box className="flex w-[99.50%] min-h-[10rem] bg-[#333] rounded-b-md bg-[url('https://user-images.githubusercontent.com/91817152/203515449-37e392bc-a22e-48b9-a49d-c062443ba7c6.png')] flex flex-col justify-center items-start px-4">
 	    <h1 className="drop-shadow-md text-3xl font-medium text-[#fff] relative">
 	      Panel de videos
