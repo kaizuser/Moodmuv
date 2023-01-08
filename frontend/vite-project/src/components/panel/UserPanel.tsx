@@ -23,7 +23,6 @@ import '../../styles/mediaqueriesPanel.css'
 import Bkgtest from '../../assets/Gradient.png'
 function DashboardContent(props: any) {
 	const [activityUser, setActivityUser] = useState(undefined)
-	const [videos, setVideos] = useState([])
 
 	useEffect(()=>{
 		if(!props.activities){
@@ -33,17 +32,6 @@ function DashboardContent(props: any) {
 		if(props.activities && activityUser == undefined){
 			setActivityUser(props?.activities?.filter((activity:activityDTO) => activity?.author?._id === props?.currentUser?._id))
 		}
-
-		let fetchVideos = async () => {
-			let videos:Array<string> | any= await axios({
-				method:'get',
-				url:'http://localhost:4000/api/videos/' + props.currentUser?._id,
-			})
-
-			setVideos(videos.data)
-		}
-
-		fetchVideos()
 
 	},[props.activities])
 
@@ -154,7 +142,7 @@ function DashboardContent(props: any) {
 					alt="actividades"
 				      />
 				      <p className="font-bold text-[12px] text-[#323232]">
-					      Videos del usuario: {videos ? videos.length : '0'}
+					      Videos del usuario
 				      </p>
 				    </div>
 				  </Fade>

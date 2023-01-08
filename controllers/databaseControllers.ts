@@ -9,22 +9,22 @@ import storageFiles from '../config/storageFiles';
 const Grid = require('gridfs-stream')
 
 //INIT GRIDFS-STREAM
-let gfs:any
-let gfsb:any
-let gfsf:any
-let gfsfb:any
+let gfs_videos:any
+let gfs_videos_bucket:any
+let gfs_files:any
+let gfs_files_bucket:any
 
 mongoose.connection.once('open', () => {
 
 	//videos
-	gfsb = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {bucketName:'videos'})
-	gfs = Grid(mongoose.connection.db, mongoose.mongo)
-	gfs.collection('videos')
+	gfs_videos_bucket = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {bucketName:'videos'})
+	gfs_videos = Grid(mongoose.connection.db, mongoose.mongo)
+	gfs_videos.collection('videos')
 
 	//files
-	gfsfb = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {bucketName:'files'})
-	gfsf = Grid(mongoose.connection.db, mongoose.mongo)
-	gfsf.collection('files')
+	gfs_files_bucket = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {bucketName:'files'})
+	gfs_files = Grid(mongoose.connection.db, mongoose.mongo)
+	gfs_files.collection('files')
 })
 
 let databaseControllers = {
@@ -41,10 +41,12 @@ let databaseControllers = {
 	//GET IMAGES & VIDEOS
 
 	get_bkgImage_activity: async (req:Request, res:Response) => {
+		let id:string = req.params.id
+
 		try {
-			gfsf.files.findOne({metadata:{id:req.params.id, type:'Background image activity'}}, (err:any, file:any) => {
+			gfs_files.files.findOne({metadata:{id:id, type:'Background image activity'}}, (err:any, file:any) => {
 				if(file !== null){
-					const readstream = gfsfb.openDownloadStream(file._id)
+					const readstream = gfs_files_bucket.openDownloadStream(file._id)
 
 					let data = ''
 
@@ -65,10 +67,12 @@ let databaseControllers = {
 	},
 
 	get_avatarImage_profile: async (req:Request, res:Response) => {
+		let id:string = req.params.id
+
 		try{
-			gfsf.files.findOne({metadata:{id:req.params.id, type:'Avatar profile'}}, (err:any, file:any) => {
+			gfs_files.files.findOne({metadata:{id:id, type:'Avatar profile'}}, (err:any, file:any) => {
 				if(file !== null){
-					const readstream = gfsfb.openDownloadStream(file._id)
+					const readstream = gfs_files_bucket.openDownloadStream(file._id)
 
 					let data = ''
 
@@ -90,10 +94,12 @@ let databaseControllers = {
 	},
 
 	upload_avatarImage_profile: async(req:Request, res:Response) => {
+		let id:string = req.params.id
+
 		try {
-			gfsf.files.find({metadata:{id:req.params.id, type:'Avatar profile'}}).toArray((err:any, file:any) => {
+			gfs_files.files.find({metadata:{id:id, type:'Avatar profile'}}).toArray((err:any, file:any) => {
 				if(file !== null && file.length > 1){
-					gfsfb.delete(file[0]._id)
+					gfs_files_bucket.delete(file[0]._id)
 				}
 
 				res.json({success:true})
@@ -105,14 +111,16 @@ let databaseControllers = {
 	},
 
 	get_video: async(req:Request, res:Response) => {
+		let id:string = req.params.id
+
 		try{
-			gfs.files.find({metadata:req.params.id}).toArray(async(err:any, file:any) => {
+			gfs_videos.files.find({metadata:id}).toArray(async(err:any, file:any) => {
 				if(file !== null && file.length >= 1){
 					var dataList: Array<string> = []
 					var data:string;
 
 					for(let i = 0; i<file.length; i++){
-						var readstream = gfsb.openDownloadStream(file[i]._id)
+						var readstream = gfs_videos_bucket.openDownloadStream(file[i]._id)
 
 						await readstream.on('data', (chunk:any) => {
 							data += chunk.toString('base64')
@@ -131,7 +139,7 @@ let databaseControllers = {
 					}
 
 				} else {
-					res.json({success:false})
+					res.json([])
 				}
 			})
 
@@ -144,6 +152,108 @@ let databaseControllers = {
 		if(req.file){
 			res.json({success:true})
 		} else {
+			res.json({success:false})
+		}
+	},
+
+	deleteAllActivitiesPlusImages: async (req:Request, res:Response) => {
+		const id:string = req.params.id
+		const idList:Array<string> = req.body.idList
+
+		await Activity.deleteMany({author:id})
+
+		let chunkIds:Array<string> = []
+
+		for(let i=0; i<idList.length; i++){
+			try {
+				//DELETE BACKGROUND IMAGE ACTIVITIES
+				gfs_files.files.findOne({metadata:{id:idList[i], type:'Background image activity'}}, (err:any, file:any) => {
+					if(file){
+						gfs_files_bucket.delete(file._id)
+
+					}
+				})
+
+
+			}
+
+			catch(err){
+				//pass
+			}
+
+		}
+
+		try {
+
+			//DELETE AVATAR PROFILE
+			gfs_files.files.findOne({metadata:{id:id, type:'Avatar profile'}}, (err:any, file:any) => {
+				if(file){
+					gfs_files_bucket.delete(file._id)
+				}
+			})
+
+
+			//DELETE VIDEOS
+
+			gfs_videos.files.find({metadata:id}).toArray((err:any, files:any) => {
+				if(files){
+					files.forEach((file:any) => {
+						gfs_videos_bucket.delete(file._id)
+					})
+				}
+			})
+		}
+		
+
+		catch(err){
+			//pass
+		}
+
+		res.json({success:true})
+
+	},
+
+	deleteActivityImage: async (req:Request, res:Response) => {
+		const id:string = req.params.id
+
+		try {
+			gfs_files.files.findOne({metadata:{id:id, type:'Background image activity'}}, (err:any, file:any) => {
+				if(file){
+					try{
+						gfs_files_bucket.delete(file._id)
+					}
+					catch(err){
+						//pass
+					}
+				}
+			})
+
+			res.json({success:true})
+
+		} catch(error){
+			res.json({success:false})
+		}
+	},
+
+	deleteVideo: async (req:Request, res:Response) => {
+		let id:string = req.params.id
+
+		try {
+			gfs_videos.files.findOne({metadata:id}, (err:any, file:any) => {
+				if(file){
+					try{
+						gfs_videos_bucket.delete(file._id)
+						res.json({success:true})
+					}
+					catch(err){
+						//pass
+					}
+				}
+			})
+
+		}
+
+		catch (err){
 			res.json({success:false})
 		}
 	}

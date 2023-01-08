@@ -129,6 +129,46 @@ const userActions = {
 				//pass
 			}
 		}
+	},
+
+	deleteAllActivitiesPlusImages:(id:string, idList:Array<string>) => {
+		return async (dispatch:AppDispatch, getState:RootState) => {
+			const ans = await axios({
+				method:'delete',
+				url:'http://localhost:4000/api/deleteAllActivitiesPlusImages/' + id,
+				data:{idList}
+			})
+
+			if(ans.data.success){
+
+			}
+		}
+	},
+
+	deleteActivityImage:(id:string) => {
+		return async (dispatch:AppDispatch, getState:RootState) => {
+			const ans = await axios({
+				method:'delete',
+				url:'http://localhost:4000/api/deleteActivityImage/' + id,
+			})
+
+			if(ans.data.success){
+
+			}
+		}
+	},
+
+	deleteVideo:(id:string) => {
+		return async (dispatch:AppDispatch, getState:RootState) => {
+			const ans = await axios({
+				method:'delete',
+				url:'http://localhost:4000/api/videos/' + id,
+			})
+
+			if(ans.data.success){
+
+			}
+		}
 	}
 }
 

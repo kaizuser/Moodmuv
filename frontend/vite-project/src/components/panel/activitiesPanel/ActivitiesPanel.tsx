@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import activityActions from "../../../redux/actions/activityActions";
+import databaseActions from '../../../redux/actions/databaseActions'
 import userActions from "../../../redux/actions/userActions";
 import { RootState } from "../../../main";
 import CardActivity from "./CardActivity";
@@ -32,21 +33,22 @@ function DashboardContent(props: any) {
     }
   }, [props.activities, props.currentUser]);
 
-  const deleteActivity = async(id) =>{
+  const deleteActivity = async(id:string) =>{
     Swal.fire({
-			title: 'Estas seguro de eliminar esta actividad',
-			showDenyButton: true,
-			confirmButtonText: 'Confirmar',
-			denyButtonText: `Cancelar`,
-		}).then(async(result) => {
-			if (result.isConfirmed) {
-				await props.deleteActivity(id)
-				props.fetchActivities()
+	title: 'Estas seguro de eliminar esta actividad',
+	showDenyButton: true,
+	confirmButtonText: 'Confirmar',
+	denyButtonText: `Cancelar`,
+	}).then(async(result) => {
+	if (result.isConfirmed) {
+		await props.deleteActivityImage(id)
+		await props.deleteActivity(id)
+		props.fetchActivities()
 
-			} else if (result.isDenied) {
-				Swal.fire('No se ha efectuado ninguna operación', '', 'info')
-			}
-		})
+	} else if (result.isDenied) {
+		Swal.fire('No se ha efectuado ninguna operación', '', 'info')
+	}
+	})
   }
 
   return (
@@ -102,7 +104,7 @@ function DashboardContent(props: any) {
                       <CardCarousel activity={activity} />
 			  <div className="flex justify-between w-full text-[#999] my-2 px-2">
 				<Link to={"/explore/activity/" + activity._id } className="text-sm" onClick={props.resetStore}>Ver detalle</Link>
-				<p to={"/"} className="text-sm cursor-pointer" onClick={()=>deleteActivity(activity._id)}>Eliminar</p>
+				<p className="text-sm cursor-pointer" onClick={()=>deleteActivity(activity._id)}>Eliminar</p>
 				
 			  </div>
                     </div>
@@ -120,6 +122,7 @@ const mapDispatch = {
   verifyToken: userActions.verifyToken,
   resetStore:activityActions.resetStore,
   deleteActivity:activityActions.deleteActivity,
+  deleteActivityImage:databaseActions.deleteActivityImage,
 
 };
 

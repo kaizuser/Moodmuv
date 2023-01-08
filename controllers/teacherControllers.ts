@@ -110,7 +110,7 @@ const teacherControllers = {
 			if (teacher || student) {
 				res.json({
 				    success: false,
-				    message: "Email en uso. Intenta registrarte",
+				    message: "Email en uso. Intenta iniciar sesión",
 				});
 
 			} else {

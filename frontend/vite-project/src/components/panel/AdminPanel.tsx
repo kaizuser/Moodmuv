@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import teacherActions from "../../redux/actions/teacherActions";
 import studentActions from "../../redux/actions/studentActions";
 import activityActions from "../../redux/actions/activityActions";
+import databaseActions from '../../redux/actions/databaseActions'
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -94,7 +95,9 @@ class AdminPanel extends React.Component <any, any> {
 		}
 	}
 
-	deleteTeacher = async (id:string) => {
+	deleteTeacher = async (id:string, activityList:Array<activityDTO>) => {
+
+		let idList = activityList.map((activity:activityDTO) => activity._id)
 
 		Swal.fire({
 			title: 'Estas seguro de eliminar este usuario?',
@@ -103,6 +106,7 @@ class AdminPanel extends React.Component <any, any> {
 			denyButtonText: `Cancelar`,
 		}).then(async(result) => {
 			if (result.isConfirmed) {
+				await this.props.deleteAllActivitiesPlusImages(id, idList)
 				await this.props.deleteTeacher(id)
 				this.props.fetchTeachers()
 
@@ -139,6 +143,7 @@ class AdminPanel extends React.Component <any, any> {
 			denyButtonText: `Cancelar`,
 		}).then(async(result) => {
 			if (result.isConfirmed) {
+				await this.props.deleteActivityImage(id)
 				await this.props.deleteActivity(id)
 				this.props.fetchActivities()
 
@@ -166,13 +171,13 @@ class AdminPanel extends React.Component <any, any> {
 						</div>
 					</form>
 
-					<div className='flex sm:items-start sm:justify-center items-center justify-start flex-col sm:flex-row sm:space-x-32 min-h-screen'>
+					<div className='flex sm:items-start sm:justify-center items-center justify-start flex-col sm:flex-row sm:space-x-32 min-h-screen w-[65vw]'>
 
 					<div className='flex items-center justify-center flex-col space-y-5 mt-5 mb-12'>
 						<h2 className='font-bold text-4xl text-[#222] border-b-2'>Profesores</h2>
 						{this.props.teachers && this.props.teachers.map((teacher:teacherDTO, index:number) => (
 							<div className='flex items-center justify-center space-x-3' key={teacher._id}>
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-trash3 hover:text-[#5c4683] transition duration-300 ease-in cursor-pointer" viewBox="0 0 16 16" onClick={() => this.deleteTeacher(teacher._id)}>
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-trash3 hover:text-[#5c4683] transition duration-300 ease-in cursor-pointer" viewBox="0 0 16 16" onClick={() => this.deleteTeacher(teacher._id, this.state.activitiesList[index])}>
 								  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
 								</svg>
 
@@ -253,6 +258,8 @@ const mapDispatch = {
 	deleteActivity:activityActions.deleteActivity,
 	filterTeachers:teacherActions.filterTeachers,
 	filterStudents:studentActions.filterStudents,
+	deleteAllActivitiesPlusImages:databaseActions.deleteAllActivitiesPlusImages,
+	deleteActivityImage:databaseActions.deleteActivityImage
 }
 
 const mapState = (state:RootState) => {

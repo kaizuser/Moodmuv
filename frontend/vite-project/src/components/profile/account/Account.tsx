@@ -1,22 +1,5 @@
 //BASICS
-import React
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-from "react";
-
-
+import React from "react";
 
 //UTILITIES
 import { FaTiktok, FaInstagram, FaFacebookSquare } from "react-icons/fa";
@@ -245,7 +228,7 @@ class Account extends React.Component <any, any>{
 					<>
 					    <div className="cartelito2 shadow-md px-20 -mt-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 						    <h3 className="font-bold text-white text-4xl">Videos</h3>
-						    </div>
+					    </div>
 						    <div className="cartelito shadow-md -translate-y-12 translate-x-3 px-20 py-2 rounded-md bg-gradient-to-t from-[#563D81] to-[#6E5E8B]">
 						    <h3 className="font-bold text-white text-4xl">Videos</h3>
 					    </div>

@@ -30,9 +30,8 @@ interface studentDTO{
 	admin:boolean
 }
 
-let adminEmails = [
-	'acroyogachilenorte@gmail.com'
-]
+//let adminEmails = [
+//]
 
 const studentControllers = {
 
@@ -111,7 +110,7 @@ const studentControllers = {
 			if (student || teacher) {
 				res.json({
 				    success: false,
-				    message: "Email en uso. Intenta registrarte",
+				    message: "Email en uso. Intenta iniciar sesión",
 				});
 
 			} else {
@@ -128,9 +127,9 @@ const studentControllers = {
 					admin:false,
 				})
 
-				if(adminEmails.includes(email)){
-					newStudent.admin = true
-				}
+				//if(adminEmails.includes(email)){
+					//newStudent.admin = true
+				//}
 
 				if (from !== "form-signUp") {
 					newStudent.verifEmail = true
