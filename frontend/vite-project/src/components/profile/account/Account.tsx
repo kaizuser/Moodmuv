@@ -29,7 +29,7 @@ class Account extends React.Component <any, any>{
 		super(props)
 		this.state = {
 			file:undefined,
-			videos:undefined,
+			videos:[],
 			activitiesRegular:[],
 			activitiesCicle:[],
 			activitiesWorkshop:[],
@@ -70,6 +70,7 @@ class Account extends React.Component <any, any>{
 	}
 
 	render(): React.ReactNode {
+		console.log(this.state.videos)
 		return (
 			<>
 			{" "}
@@ -216,7 +217,7 @@ class Account extends React.Component <any, any>{
 
 			  {/* FULL CAROUSELES */}
 
-			{this.state.videos?.success == false || this.state.videos == undefined ?
+			{this.state.videos.length == 0 ?
 
 				(
 					<>

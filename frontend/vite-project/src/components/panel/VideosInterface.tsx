@@ -1,7 +1,6 @@
 //BASICS
 import React from 'react'
 import { useEffect, useState } from 'react';
-import Box from "@mui/material/Box";
 
 //UTILITIES
 import databaseActions from '../../redux/actions/databaseActions'
@@ -12,6 +11,8 @@ import axios from 'axios';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Pagination } from "swiper";
 import {List} from '@mui/material';
+import Box from "@mui/material/Box";
+import Swal from 'sweetalert2';
 
 function VideosInterface(props:any){
 
@@ -27,6 +28,7 @@ function VideosInterface(props:any){
 		})
 
 		setVideos(videos.data)
+
 	}
 
 	useEffect(() => {
@@ -50,9 +52,28 @@ function VideosInterface(props:any){
 			}, 500)
 	}
 
+
+	let deleteVideos = async () => {
+		Swal.fire({
+			title: 'Estas seguro de eliminar todos tus videos?',
+			showDenyButton: true,
+			confirmButtonText: 'Confirmar',
+			denyButtonText: `Cancelar`,
+		}).then(async(result) => {
+			if(result.isConfirmed){
+				await props.deleteVideo(props.currentUser._id)
+				navigate('/account/panel')
+			}
+
+			else if (result.isDenied) {
+				Swal.fire('No se ha efectuado ninguna operación', '', 'info')
+			}
+		})
+	}
+
 	return (
 		<>
-			{videos !== undefined && (
+			{videos !== undefined ? (
 		<div className='py-5 px-4 min-h-screen flex flex-col'>
 		<Box className="flex w-[99.50%] min-h-[10rem] bg-[#333] rounded-b-md bg-[url('https://user-images.githubusercontent.com/91817152/203515449-37e392bc-a22e-48b9-a49d-c062443ba7c6.png')] flex flex-col justify-center items-start px-4">
 		    <h1 className="drop-shadow-md text-3xl font-medium text-[#fff] relative">
@@ -106,6 +127,13 @@ function VideosInterface(props:any){
 			      </div>
 
 			{/*VIDEOS*/}
+				    {videos.length > 0 && (
+					    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash cursor-pointer hover:text-violet-500 transition duration-300 ease-in" viewBox="0 0 16 16" onClick={deleteVideos}>
+					  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+					  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+					</svg>
+				    )}
+
 
 			    <div className="w-full min-h-28 p-4 mb-40">
 			      <Swiper
@@ -146,12 +174,7 @@ function VideosInterface(props:any){
 			    <SwiperSlide  style={{padding:".7rem",width:"25rem",  minHeight:"28rem"}} className="flex flex-col justify-center items-center rounded-3xl bg-[#fefefe] shadow m-4" key={Math.random()} >
 					<>
 						<video src={`data:video/mp4;base64,${video.replace('undefined', '')}`} className='object-cover w-[50rem] h-[30rem] rounded-xl border-4 border-[#6E5E8B]' controls/>
-						<p className='text-sm cursor-pointer mt-2 text-[#999]' onClick={async() => {
-							let ans = await props.deleteVideo(props.currentUser._id)
-							setVideos(undefined)
-							getVideos()
-							}
-						}>Eliminar</p>
+				
 					</>
 			  </SwiperSlide>
 			  )})          
@@ -160,7 +183,11 @@ function VideosInterface(props:any){
 			    </div>
 			    </div>
 			</div>
-				)}
+			) : (
+				<div className='py-5 px-4 min-h-screen flex items-center justify-center'>
+					<p className='font-bold mt-4 text-[#222]'>Loading your videos</p>
+				</div>
+			)}
 
 		</>
 	)

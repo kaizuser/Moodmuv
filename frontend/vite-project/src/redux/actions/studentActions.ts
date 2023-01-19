@@ -101,7 +101,7 @@ const studentActions = {
 			} else {
 				Swal.fire({
 					icon:'error',
-					title:ans.data.message,
+					title:ans.data.message[0].message,
 					showConfirmButton:false,
 					timer:2000
 				})

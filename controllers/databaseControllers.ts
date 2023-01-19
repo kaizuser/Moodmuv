@@ -235,20 +235,18 @@ let databaseControllers = {
 		}
 	},
 
-	deleteVideo: async (req:Request, res:Response) => {
+	deleteVideos: async (req:Request, res:Response) => {
 		let id:string = req.params.id
 
 		try {
-			gfs_videos.files.findOne({metadata:id}, (err:any, file:any) => {
-				if(file){
-					try{
+			gfs_videos.files.find({metadata:id}).toArray((err:any, files:any) => {
+				if(files){
+					files.forEach((file:any) => {
 						gfs_videos_bucket.delete(file._id)
-						res.json({success:true})
-					}
-					catch(err){
-						//pass
-					}
+					})
 				}
+
+				res.json({success:true})
 			})
 
 		}
