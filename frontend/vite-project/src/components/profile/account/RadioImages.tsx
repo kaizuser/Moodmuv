@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 import userActions from "../../../redux/actions/userActions";
 
 const RadioImages = (props:any) => {
-  const [check, setCheck] = useState(null);
+  const [check, setCheck] = useState('');
   const [editBkg, setEditBkg] = useState(false);
   const getData = (dato: any) => {
     let data = {
@@ -96,7 +96,7 @@ const RadioImages = (props:any) => {
           <div className="relative flex flex-col justify-center items-center w-fit h-fit " key={e.name}>
             <img
               className={
-                e.name.includes(check)
+                e.name == check
                   ? "images-bkg-profile w-20 h-20 object-cover rounded border-4 border-[#563D81]"
                   : "w-20 h-20 object-cover rounded"
               }

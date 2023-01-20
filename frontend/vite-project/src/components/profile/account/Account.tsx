@@ -12,9 +12,7 @@ import {connect} from 'react-redux'
 import axios from "axios";
 import { RootState } from "../../../main"
 import Scheduler from "./Calendar"
-import Video from  '../videos/Video'
 import RadioImages from "./RadioImages";
-import teacherDTO from '../../../types/teacherDTO'
 import '../../../styles/mediaqueriesAccount.css'
 import jsonImgs from './radioImages.json'
 
@@ -70,7 +68,6 @@ class Account extends React.Component <any, any>{
 	}
 
 	render(): React.ReactNode {
-		console.log(this.state.videos)
 		return (
 			<>
 			{" "}

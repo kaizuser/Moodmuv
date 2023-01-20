@@ -22,7 +22,7 @@ const Profile = (props:any) => {
 
 	let [renderFlag, setFlag] = useState(true)
 	let [fileProfile, setFileProfile] = useState(undefined)
-	let [videos, setVideos] = useState(undefined)
+	let [videos, setVideos] = useState([])
 	let [backImg, setBackImg] = useState({image:''})
  
 	let [activitiesRegular, setActivitiesRegular] = useState([])
@@ -185,7 +185,7 @@ const Profile = (props:any) => {
 	  </div>
  
  {/* FULL CAROUSELES */}
-{videos?.success == false || videos == undefined ?
+		{videos.length == 0 ?
 
 	(
 		<>

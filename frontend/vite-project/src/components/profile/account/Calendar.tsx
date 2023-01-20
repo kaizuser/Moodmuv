@@ -46,7 +46,6 @@ class Scheduler extends React.Component <any,any>{
 
 		if(prevProps.activities !== this.props.activities && this.props.currentUser){
 			this.setState({activities:this.props.activities.filter((activity:activityDTO) => {return activity?.author?._id == this.props.currentUser._id})})
-			this.setState({activities:this.props.activities.filter((activity:activityDTO) => {return activity.author?._id == this.props.currentUser._id})})
 		}
 
 		let events = document.querySelectorAll(".rbc-event")
@@ -68,8 +67,8 @@ class Scheduler extends React.Component <any,any>{
 		} */
 	}
 
-	isValidDate = (date:Date | number) => {
-		return date instanceof Date && !isNaN(date)
+	isValidDate = (date:Date) => {
+		return date instanceof Date && !isNaN(date.getTime())
 	}
 
 	render(): React.ReactNode {
@@ -118,17 +117,17 @@ class Scheduler extends React.Component <any,any>{
 								})
 
 							} else {
-								let activities = {}
+								let activitiesObject:any = {}
 
 								this.state.activities.forEach((activity:activityDTO) => {
-									activities[`${activity.name}`] = activity.name
+									activitiesObject[`${activity._id}`] = activity.name
 								})
 
 								await Swal.fire({
 									title:'Selecciona la actividad a relacionar',
 									input:'select',
 									inputOptions:{
-										...activities
+										...activitiesObject
 									},
 
 									inputPlaceholder:'Selecciona una actividad',
@@ -137,7 +136,7 @@ class Scheduler extends React.Component <any,any>{
 
 									if(resultActivity.isDismissed){
 										return
-									} else if(resultActivity.value.length <= 1){
+									} else if(resultActivity.value.length < 1){
 										Swal.fire({
 											icon:'error',
 											title:'Elige una actividad',
@@ -213,17 +212,19 @@ class Scheduler extends React.Component <any,any>{
 								})
 
 
+								console.log(this.state.storedEvent)
 
 								if(this.state.storedEvent.title == undefined || this.state.storedEvent.activity == undefined){
 									return
 								}
 
-								let activity = this.state.activities.filter((activity:activityDTO) => {return activity.name === this.state.storedEvent.activity})
+								let activity = this.state.activities.filter((activity:activityDTO) => {return activity._id === this.state.storedEvent.activity})
 
 								let eventData = {
 									id:this.props.currentUser._id,
 									event:{...this.state.storedEvent, start: new Date(slot.slots[0].toString().slice(0,16) + this.state.storedEvent.start + ':00 GMT-0300'), end: new Date( slot.slots[0].toString().slice(0,16) + this.state.storedEvent.end + ':00 GMT-0300'), id:activity[0]._id}
 								}
+
 
 								this.setState({storedEvent:{}})
 

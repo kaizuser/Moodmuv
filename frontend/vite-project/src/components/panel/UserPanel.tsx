@@ -22,14 +22,14 @@ import '../../styles/mediaqueriesPanel.css'
 //ASETS
 import Bkgtest from '../../assets/Gradient.png'
 function DashboardContent(props: any) {
-	const [activityUser, setActivityUser] = useState(undefined)
+	const [activityUser, setActivityUser] = useState([])
 
 	useEffect(()=>{
 		if(!props.activities){
 			props.fetchActivities()
 		}
 
-		if(props.activities && activityUser == undefined){
+		if(props.activities){
 			setActivityUser(props?.activities?.filter((activity:activityDTO) => activity?.author?._id === props?.currentUser?._id))
 		}
 

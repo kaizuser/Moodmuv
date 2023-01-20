@@ -21,13 +21,14 @@ function DashboardContent(props:any) {
 
 		if(props.teachers && renderFlag){
 			props.teachers.map((teacher:teacherDTO) => {
-				let events = teacher.events.filter((event:any) => event.students.includes(props.currentUser._id))
-				setEvents(events!)
+				let events:any = teacher.events.filter((event:any) => event.students.includes(props.currentUser._id))
+				setEvents(events)
 				setFlag(false)
 			})
 		}
 	}, )
 
+	console.log(studentEvents)
 	return (
 		<>
 			{
