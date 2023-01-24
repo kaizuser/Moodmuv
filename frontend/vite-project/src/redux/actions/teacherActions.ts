@@ -6,7 +6,6 @@ import axios from 'axios';
 
 //INTERFACES
 import teacherDTO from '../../types/teacherDTO'
-import {log} from 'console';
 
 const teacherActions = {
     
