@@ -18,7 +18,7 @@ function Search(props:any){
 			</div>
 			    <input type="search" id="default-search" className="py-[.38rem] rounded-md shadow w-96 px-10 placeholder:text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" placeholder="Search Activities, Disciplines..." required onChange={(event) => {
 			    props.setParameters(event.target.value, 'search')
-			    props.filterActivity(props.activitiesAuxiliar, event.target.value, props.parameters[1], props.parameters[2])
+			    props.filterActivity(props.activitiesAuxiliar, event.target.value, props.parameters[1], props.parameters[2], props.parameters[3])
 			    }}/>
 		    </div>
 		</form>

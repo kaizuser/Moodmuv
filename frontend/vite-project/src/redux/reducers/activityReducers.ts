@@ -34,6 +34,10 @@ const activityReducer = (state = initialState, action:any) => {
 			filteredData = filteredData.filter((data:activityDTO) => data.format == action.payload.formatValue)
 		}
 
+		if (action.payload.typeValue !== '' && action.payload.typeValue !== 'Todos'){
+			filteredData = filteredData.filter((data:activityDTO) => data.type == action.payload.typeValue)
+		} 
+
 		return {
 			...state,
 			activities:[...filteredData]

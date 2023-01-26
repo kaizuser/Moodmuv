@@ -4,51 +4,59 @@ import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
 //UTILITIES
 import activityActions from "../../../redux/actions/activityActions";
-import {connect} from 'react-redux'
+import {connect} from "react-redux";
 import { RootState } from "../../../main";
 
-const SelectFormat = (props: any) => {
-  const disciples = [
-    {
-      id: 1,
-      name: "Todos",
-    },
+const SelectType = (props:any) => {
+	const type = [
+		{
+			id:1,
+			name:"Todos",
+			type:"Todos"
+		},
 
-    {
-      id: 2,
-      name: "Presencial",
-    },
+		{
+			id: 2,
+			name: "Taller",
+			type:'Workshop'
+		},
 
-    {
-      id: 3,
-      name: "Virtual",
-    }
-  ];
+		{
+			id:3,
+			name:'Ciclo',
+			type:'Cicle'
+		},
 
+		{
+			id:4,
+			name:'Clase',
+			type:'Class'
+		    
+		},
+
+		{
+			id:5,
+			name:'Evento',
+			type:'Event'
+		    
+		},
+	  ];
   function classNames(...classes: any): any {
     return classes.filter(Boolean).join(" ");
   }
-  const [selected, setSelected] = useState(disciples[0]);
+  const [selected, setSelected] = useState(type[0]);
+  
   return (
-    <div className="w-32">
-      <Listbox
-        value={selected}
-        onChange={(event) => {
-          setSelected(event);
-          props.setParameters(event.name, "format");
-          props.filterActivity(
-            props.activitiesAuxiliar,
-            props.parameters[0],
-            props.parameters[1],
-            event.name,
-	    props.parameters[3]
-          );
-        }}
-      >
+    <div className="w-32 ">
+	    <Listbox value={selected} onChange={(event) => {
+		    setSelected(event)
+		    props.setParameters(event.type, 'type')
+		    props.filterActivity(props.activitiesAuxiliar, props.parameters[0], props.parameters[1], props.parameters[2], event.type)
+	    }}>
         {({ open }) => (
           <>
-            <div className="relative">
-              <Listbox.Button className="py-2 relative shadow w-full cursor-default rounded-md bg-white py-2 pl-3 pr-10 text-left shadow focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+	     <div className="relative ">
+              <Listbox.Button className="py-2 relative w-full cursor-default rounded-md bg-white py-2 pl-3 pr-10 text-left shadow focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
                 <span className="flex items-center">
                   <span className="ml-3 block truncate">{selected.name}</span>
                 </span>
@@ -68,16 +76,16 @@ const SelectFormat = (props: any) => {
                 leaveTo="opacity-0"
               >
                 <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                  {disciples.map((person) => (
+                  {type.map((type) => (
                     <Listbox.Option
-                      key={person.id}
+                      key={type.id}
                       className={({ active }) =>
                         classNames(
                           active ? "text-white bg-indigo-600" : "text-gray-900",
                           "relative cursor-default select-none py-2 pl-3 pr-9"
                         )
                       }
-                      value={person}
+                      value={type}
                     >
                       {({ selected, active }) => (
                         <>
@@ -88,7 +96,7 @@ const SelectFormat = (props: any) => {
                                 "ml-3 block truncate"
                               )}
                             >
-                              {person.name}
+                              {type.name}
                             </span>
                           </div>
 
@@ -129,6 +137,6 @@ const mapState = (state:RootState) => {
 	}
 }
 
-const connector = connect(mapState, mapDispatch);
+const connector = connect(mapState, mapDispatch)
 
-export default connector(SelectFormat);
+export default connector(SelectType)

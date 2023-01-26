@@ -96,7 +96,7 @@ const SelectDisciples = (props:any) => {
 	    <Listbox value={selected} onChange={(event) => {
 		    setSelected(event)
 		    props.setParameters(event.name, 'disciples')
-		    props.filterActivity(props.activitiesAuxiliar, props.parameters[0], event.name, props.parameters[2])
+		    props.filterActivity(props.activitiesAuxiliar, props.parameters[0], event.name, props.parameters[2], props.parameters[3])
 	    }}>
         {({ open }) => (
           <>

@@ -81,9 +81,9 @@ const activityActions = {
 
 	},
 
-	filterActivity:(activitiesAuxiliar:Array<activityDTO>, searchValue:string, disciplesValue:string, formatValue:string) => {
+	filterActivity:(activitiesAuxiliar:Array<activityDTO>, searchValue:string, disciplesValue:string, formatValue:string, typeValue:string) => {
 		return async (dispatch:AppDispatch, getState:RootState) => {
-			dispatch({type:'filterActivities', payload:{activitiesAuxiliar, searchValue, disciplesValue, formatValue}})
+			dispatch({type:'filterActivities', payload:{activitiesAuxiliar, searchValue, disciplesValue, formatValue, typeValue}})
 		}
 	},
 
